@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Jekyll">
+    <link rel="canonical" href="/posts/tlaplus_part1"/>
+    <!--<link rel="canonical" href="/posts/tlaplus_part1">-->
+
+    <title>TLA+ in Practice and Theory<br>Part 1: The Principles of TLA+</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/fav/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"    href="/fav/favicon-16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="/fav/favicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"   href="/fav/favicon-60.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="/fav/favicon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/fav/favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/fav/favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/fav/favicon-180.png">
+    -->
+    <!--
+    <link rel="icon" type="image/png" href="/fav/favicon-96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/fav/favicon-192.png" sizes="192x192">
+    -->
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS & fonts -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+    <!--
+    <script data-cfasync="false" type="text/javascript" src="//use.typekit.net/pfn0abv.js"></script>
+    <script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- RSS -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+    <!-- <link rel="alternate" type="application/rss+xml" title="Ron Pressler" href="http://feeds.feedburner.com/ParallelUniverseBlog"> -->
+
+
+    <!-- Social cards -->
+    
+        <!-- Twitter -->
+<meta name="twitter:site" content="@pressron"> 
+<meta name="twitter:card" content="summary"> 
+<meta name="twitter:title" content="TLA+ in Practice and Theory<br>Part 1: The Principles of TLA+"> 
+<meta name="twitter:description" content="TLA+ is a formal specification and verification language intended to help engineers specify, design and reason about complex, real-life algorithms and software or hardware systems. We explore its motivation, application and principles of design.
+"> 
+
+<!-- OpenGraph -->
+<meta property="og:site_name" content="Ron Pressler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TLA+ in Practice and Theory<br>Part 1: The Principles of TLA+">
+<meta property="og:description" content="TLA+ is a formal specification and verification language intended to help engineers specify, design and reason about complex, real-life algorithms and software or hardware systems. We explore its motivation, application and principles of design.
+">
+<meta property="og:url" content="/posts/tlaplus_part1">
+<meta property="og:image" content="http://www.gravatar.com/avatar/d942a0d3bac0a907acfb7d78c8846d1a?s=200">
+<meta property="article:published_time" content="2017-05-25">
+
+    
+
+
+    
+
+    
+    <meta name="twitter:site" content="@pressron">
+</head>
+
+
+<body>
+	<div id="wrap">
+
+	  <!-- Navigation -->
+	  <nav id="nav">
+    
+        <div id="nav-toc">
+        </div>
+    
+	<div id="nav-list">
+		<a href="/">Home</a>
+
+		<!-- Nav pages -->
+	  
+	    
+	  
+	    
+	      <a href="/about" title="About">About</a>
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+
+    <!-- Nav links -->
+	  
+
+
+	</div>
+
+    <footer>
+
+	<!-- <span>version </span> -->
+
+</footer>
+
+</nav>
+
+
+    <!-- Icon menu -->
+	  <a id="nav-menu">
+	  	<div id="menu"></div>
+	  </a>
+
+      <!-- Header -->
+      
+        <header id="header" class="parent justify-spaceBetween">
+  <div class="inner w100 relative">
+    <span class="f-left">
+      <a href="/">
+        <h1>
+          <span>press</span>ron
+        </h1>
+      </a>
+    </span>
+    <!--
+    <span id="nav-links" class="absolute right bottom">
+	    
+	      
+	    
+	      
+	        <a href="/about" title="About">About</a>
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+
+	    
+
+
+    </span>
+    -->
+  </div>
+</header>
+
+      
+
+    <!-- Main content -->
+	  <div id="container">
+
+	  <main>
+			<article id="post-page" class="group tufte">
+	<h2>TLA<sup>+</sup> in Practice and Theory<br>Part 1: The Principles of TLA<sup>+</sup></h2>		
+	<time datetime="2017-05-25T00:00:00+03:00" class="by-line">25 May 2017</time>
+	<div class="content">
+
+		<p>This is the first installment in a four-part blog post series about TLA<sup>+</sup>. A new post will be published every Thursday.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>TLA<sup>+</sup> is a formal specification and verification language that helps engineers design, specify, reason about and verify complex, real-life algorithms and software or hardware systems. TLA<sup>+</sup> has been successfully used by Intel, Compaq and Microsoft in the design of hardware systems, and has started seeing recent use in large software systems, at Microsoft, Oracle, and most famously at Amazon, where engineers use TLA<sup>+</sup> to specify and verify many AWS services.</p>
+
+<p>I will get to explaining what a formal specification and verification language is and how it helps create better, more robust algorithms and digital systems shortly, but first I’d like to clarify the focus of this four-part blog post series on TLA<sup>+</sup>. I called this series, <em>TLA<sup>+</sup> in Practice and Theory</em>, but it will be almost all theory, where “theory” means two things — mathematical theory and design theory. While I will cover virtually all of TLA<sup>+</sup>, this is not a tutorial although it may serve to complement one. I will attempt to clarify some of the concepts that can be hard to grasp when learning TLA<sup>+</sup> — which, while very small and simple, does contain some ideas that may take a while to fully understand — but this material is by no means essential to learning TLA<sup>+</sup> or for writing good, useful specifications, nor will reading the posts will not teach you how to write good specifications; so this series is neither necessary nor sufficient for putting TLA<sup>+</sup> to good use, but I think it is both necessary and sufficient for <em>understanding</em> it.</p>
+
+<p>I hope to make you understand what TLA<sup>+</sup> is for, why it is designed in this way, and how its design and mathematical theory compare to other approaches to formal methods. Most importantly, I hope it will convey how powerful a tool is (almost) ordinary mathematics for reasoning about the systems we design and build. This series is addressed to those who are interested in formal methods or programming languages (even though TLA<sup>+</sup> is not a programming language at all) and may find TLA<sup>+</sup>’s theoretical approach and pragmatic design interesting, and to those who already know TLA<sup>+</sup> but wish to dig deeper into its theory.</p>
+
+<p>There is no shortage of good beginner tutorials on TLA<sup>+</sup>. <a href="http://lamport.azurewebsites.net/tla/hyperbook.html"><em>The TLA<sup>+</sup> Hyperbook</em></a> is a complete, thorough, hands-on tutorial written by Leslie Lamport, TLA<sup>+</sup>’s inventor, and is probably the best way to get started with TLA<sup>+</sup> if you want to start applying it in practice. You should expect to work through the hyperbook and become productive enough to specify and verify real-world systems in about two weeks. <a href="http://lamport.azurewebsites.net/tla/book.html"><em>Specifying Systems</em></a>, also by Lamport, is an older book, less hands-on but more in-depth and with a greater emphasis on theory. Both books are freely available for download. Very recently Lamport made an online <a href="http://lamport.azurewebsites.net/video/videos.html">TLA<sup>+</sup> video course</a>, that at the time of this writing is still being produced. Finally, <a href="https://learntla.com/">this short tutorial</a>, with a heavy focus on PlusCal (an alternative, pseudocode-like syntax for TLA<sup>+</sup>), is for those who are in a rush to start using TLA<sup>+</sup> within hours, and who are not interested in theory. Additional complementary learning material is the <a href="https://github.com/tlaplus/DrTLAPlus">Dr. TLA<sup>+</sup></a> series of lectures, which covers various algorithms and their specification in TLA<sup>+</sup>, and a collection of TLA<sup>+</sup> examples that you can find in <a href="https://github.com/tlaplus/Examples">this GitHub repository</a>.</p>
+
+<p>There is no shortage of papers about the theory of TLA<sup>+</sup>, either. There are nice collections of academic papers on TLA<sup>+</sup> by both <a href="http://lamport.azurewebsites.net/tla/papers.html">Leslie Lamport</a> and <a href="https://members.loria.fr/SMerz/papers.html">Stephan Merz</a>, and there are others. However, those are technical, aimed at researchers and generally assume significant prior knowledge<label for="papers" class="margin-toggle sidenote-number"></label><input type="checkbox" id="papers" class="margin-toggle" /><span class="sidenote">Another problem with scientific papers is that they are hardly read by anyone outside a very narrow sub-sub-discipline. </span>. This series is intended to be a gentler introduction to the theory of TLA<sup>+</sup> for curious practitioners (software and hardware developers) as well as academics who are more familiar with other approaches to software specification and verification.</p>
+
+<p>The next three installments in the series will be a deep dive into the language itself and the theory behind it, but the choices made in the design of the language can only be understood in context. This post will provide this necessary context in the form of a general introduction to the motivation, history and design principles of TLA<sup>+</sup>, as well as a comparison of those with other approaches.</p>
+
+<h2 id="tla-in-practice">TLA<sup>+</sup> in Practice</h2>
+
+<p>Any treatment of the theory of TLA<sup>+</sup> must begin with an overview of its practice, as the theoretical choices made in the design of TLA<sup>+</sup> were motivated, first and foremost, by the necessities of practice.</p>
+
+<p>It was a technical report called <a href="http://lamport.azurewebsites.net/tla/formal-methods-amazon.pdf"><em>Use of Formal Methods at Amazon Web Services</em></a> (<em>Communications of the ACM</em>, April 2015)<label for="more-amazon" class="margin-toggle sidenote-number"></label><input type="checkbox" id="more-amazon" class="margin-toggle" /><span class="sidenote">More in <a href="http://link.springer.com/chapter/10.1007/978-3-662-43652-3_3"><em>Why Amazon Chose TLA<sup>+</sup></em></a>, 2014, and in <a href="http://tla2012.loria.fr/contributed/newcombe-slides.pdf">these slides</a>. </span>, detailing the experience of Amazon engineers using TLA<sup>+</sup> in the design of AWS that first drew my attention to TLA<sup>+</sup><label for="empirical" class="margin-toggle sidenote-number"></label><input type="checkbox" id="empirical" class="margin-toggle" /><span class="sidenote">There is constant debate among developers as well as researchers about empirical evidence for the success of various languages, tools or programming approaches. While statistically valid, gold-standard field trials on real-world software are hard to conduct, there is a whole spectrum of weaker forms of empirical evidence, and a good, well-researched technical report is a great way to get a first impression of a technique. The report by the team at Amazon is a first-rate example of a well-made industry technical report, and I wish more industry teams would produce documents of similar quality about other software development tools, languages or techniques. </span> as a practical tool for designing and verifying complex software. Here are some excerpts from that report that will serve as an overview for the use of TLA<sup>+</sup> in industry:</p>
+
+<blockquote>
+  <p>High complexity increases the probability of human error in design, code, and operations. Errors in the core of the system could cause loss or corruption of data, or violate other interface contracts on which our customers depend. So, before launching such a service, we need to reach extremely high confidence that the core of the system is correct. We have found that the standard verification techniques in industry are necessary but not sufficient. We use deep design reviews, code reviews, static code analysis, stress testing, fault-injection testing, and many other techniques, but we still find that subtle bugs can hide in complex concurrent fault-tolerant systems.</p>
+
+  <p>… [H]uman fallibility means that some of the more subtle, dangerous bugs turn out to be errors in design; the code faithfully implements the intended design, but the design fails to correctly handle a particular ‘rare’ scenario. We have found that testing the code is inadequate as a method to find subtle errors in design.</p>
+
+  <p>… In order to find subtle bugs in a system design, it is necessary to have a precise description of that design. There are at least two major benefits to writing a precise design; the author is forced to think more clearly, which helps eliminate ‘plausible hand-waving’, and tools can be applied to check for errors in the design, even while it is being written. In contrast, conventional design documents consist of prose, static diagrams, and perhaps pseudo-code in an ad hoc untestable language. Such descriptions are far from precise; they are often ambiguous, or omit critical aspects… At the other end of the spectrum, the final executable code is unambiguous, but contains an overwhelming amount of detail. We needed to be able to capture the essence of a design in a few hundred lines of precise description. As our designs are unavoidably complex, we needed a highly expressive language, far above the level of code, but with precise semantics. That expressivity must cover real-world concurrency and fault-tolerance. And, as we wish to build services quickly, we wanted a language that is simple to learn and apply, avoiding esoteric concepts. We also very much wanted an existing ecosystem of tools. In summary, we were looking for an off-the-shelf method with high return on investment. We found what we were looking for in TLA<sup>+</sup>.</p>
+
+  <p>… In industry, formal methods have a reputation of requiring a huge amount of training and effort to verify a tiny piece of relatively straightforward code, so the return on investment is only justified in safety-critical domains such as medical systems and avionics. Our experience with TLA<sup>+</sup> has shown that perception to be quite wrong. … Engineers from entry level to Principal have been able to learn TLA<sup>+</sup> from scratch and get useful results in 2 to 3 weeks… without help or training. … Executive management is now proactively encouraging teams to write TLA<sup>+</sup> specs for new features and other significant design changes. In annual planning, managers are now allocating engineering time to use TLA<sup>+</sup>.</p>
+
+</blockquote>
+
+<p>Now that we know a little about what TLA<sup>+</sup> is used <em>for</em>, let me explain what it <em>is</em> from a practical point of view. A formal specification language, like a programming language, is a formal system (a language with precise syntactic and semantic rules), but one that focuses on <em>what</em> the program should do rather than on <em>how</em> it should do it. For example, a specification may say that a subroutine must return its input sorted — that’s the <em>what</em> — without saying <em>how</em>, meaning which algorithm is used to sort. This description should immediately raise the objection that <em>what</em> any sub-system does forms the <em>how</em> of its super-system, or in programming-speak, the <em>what</em> is the <em>how</em> of a higher abstraction layer. For example, in specifying an algorithm detailing <em>how</em> to find median element in a list, a first step can be sorting the list, even though which algorithm is used for sorting is still irrelevant.</p>
+
+<p>A versatile specification language should therefore be able to describe both the <em>what</em> and the <em>how</em>, or, better yet, describe at any desired level of detail the operation of any abstraction layer. The realization that <em>what</em> and <em>how</em> are just a relation between two abstraction levels on some spectrum is given a precise mathematical meaning through something known as an abstraction/refinement relation, which forms the very core of TLA<sup>+</sup>’s theory.</p>
+
+<p>This also suggests that a versatile specification language could <em>also</em> serve as a programming language, as it is able to describe both the <em>how</em> and the <em>what</em>. But we’ll see that the requirements of programming languages may be at odds with what we want from a specification language, so there may be good reasons not to make a specification language serve double-duty.</p>
+
+<p>There are different kinds of specification languages. Their essential differences (at least those felt by the user) are not so much due to a choice of mathematical theories so much as to differences in goal. The first kind is specification languages that are embedded in a mainstream programming language as contracts, either as part of the programming language itself or in annotations. Examples of such specification languages include <a href="http://www.openjml.org/">JML</a> for Java, <a href="https://frama-c.com/acsl.html">ACSL</a> or <a href="https://www.microsoft.com/en-us/research/project/vcc-a-verifier-for-concurrent-c/">VCC</a>  for C, <a href="https://www.microsoft.com/en-us/research/project/spec/">Spec#</a> for C#, <a href="https://en.wikipedia.org/wiki/Eiffel_(programming_language)">Eiffel</a> contracts, <a href="https://clojure.org/about/spec">clojure.spec</a>, and <a href="https://en.wikipedia.org/wiki/SPARK_(programming_language)">SPARK</a> contracts. That kind of specifications describe the intended behavior of individual program units like functions and classes, and can be used to verify the behavior of the units using tools like automatic <a href="https://en.wikipedia.org/wiki/Random_testing">randomized test generation</a>, <a href="https://en.wikipedia.org/wiki/Concolic_testing">concolic testing</a>, <a href="https://en.wikipedia.org/wiki/Model_checking">model checking</a>, automated proofs with <a href="https://en.wikipedia.org/wiki/Satisfiability_modulo_theories">SMT solvers</a> and manual proofs with proof assistants. While such specifications are very useful, they are limited in scope as they cannot easily specify global correctness properties of the program. For example, it’s hard to write — let alone verify — a code-level contract that specifies that the program must eventually respond to every user request, that the program will never respond to any request from a user with information belonging to another user, or that the database the program implements is consistent or that it can never lose data.</p>
+
+<p>Another kind of a specification language is one that is specifically designed to, or can with some effort, serve double duty as a programming language. Such languages include general-purpose proof assistants like <a href="https://isabelle.in.tum.de/">Isabelle/HOL</a> and <a href="https://coq.inria.fr/">Coq</a>, specification and proof languages more directed at software like <a href="http://why3.lri.fr/">WhyML</a>, and experimental programming languages based on dependent type theory such as <a href="http://ats-lang.sourceforge.net/">ATS</a>, <a href="https://en.wikipedia.org/wiki/Agda_(programming_language)">Agda</a>, and <a href="http://www.idris-lang.org/">Idris</a>. These languages have a very clear, unique and powerful advantage<label for="end-to-end-contracts" class="margin-toggle sidenote-number"></label><input type="checkbox" id="end-to-end-contracts" class="margin-toggle" /><span class="sidenote">There is nothing preventing contract languages from achieving the same goal in principle, but, being practical in nature, most contract languages are not designed for that task, while the languages we are now discussing are primarily used for research. </span>: they allow what’s known as end-to-end verification, namely the ability to specify and verify the behavior of a program from the highest level of global properties down to the machine instructions emitted by the compiler, ensuring that the executable conforms with the specification. This ability, however, comes at a very high cost: those languages are extremely complex, requiring months to learn and years to master. For this reason they are only used by specialists, very rarely in industry, and virtually never without the support of academic experts. To date, no one has been able to verify all interesting properties of large programs in this way. All instances of successful end-to-end verification are of relatively small programs or program components, and usually require an amount of effort that is far beyond the means of all but high-assurance software.</p>
+
+<p>Finally, there are standalone specification languages that don’t serve as complete programming languages but may (or may not) allow generation of bits of code in some programming language. Those include <a href="https://en.wikipedia.org/wiki/Z_notation">Z</a>, <a href="https://en.wikipedia.org/wiki/Vienna_Development_Method">VDM</a>, <a href="https://en.wikipedia.org/wiki/B-Method">B-method</a>, <a href="http://www.event-b.org/">Event-B</a>, <a href="http://pvs.csl.sri.com/">PVS</a>, <a href="http://www.cs.utexas.edu/users/moore/acl2/">ACL2</a>, <a href="https://www.microsoft.com/en-us/research/publication/165-abstract-state-machines-overview-project/">ASM</a>, and TLA<sup>+</sup>. Z is used by Altran UK to create high-level specifications of their software (they also make use of SPARK to specify at the code level), and the B method is used in the railway sector; PVS is used at NASA (and is actually more similar in the theory it employs to tools like Isabelle/HOL and Coq). TLA<sup>+</sup> bears a resemblance to Z, B method and ASM, although it also bears some conceptual resemblance — especially in its generality — to ACL2, PVS and Isabelle.</p>
+
+<h2 id="ideology-and-aesthetics">Ideology and Aesthetics</h2>
+
+<p>Because there is no perfect formalism <label for="formalism" class="margin-toggle sidenote-number"></label><input type="checkbox" id="formalism" class="margin-toggle" /><span class="sidenote">I will use the word <em>formalism</em> to stand for “formal system” </span> — one good for every purpose — each is constructed around a set of ideological or aesthetic choices that are important to point, so we can delineate those parts of the debate over a preferred formalism — and, as programmers know, debates over formalism are common — that are a matter of aesthetics.</p>
+
+<p>Leslie Lamport invented TLA<sup>+</sup> circa 1994, as a culmination of about two decades of work on <em>formal methods</em> — techniques that employ formal reasoning, reasoning based on the precise properties of formal systems, to analyze systems. For Lamport, who has made seminal contributions to the theories of concurrent and distributed algorithms, formal methods have always been first and foremost a practical necessity, a tool without which complex or subtle algorithms could not be designed because a complex or subtle algorithm that is not formally proven correct, is likely wrong.<label for="proof" class="margin-toggle sidenote-number"></label><input type="checkbox" id="proof" class="margin-toggle" /><span class="sidenote">There have also been <a href="https://brooker.co.za/blog/2014/03/08/model-checking.html">some famous cases of algorithms</a> that were ostensibly “proven”, but not formally — i.e., not in a formal system — that also turned out to be completely wrong, as discovered with the use of model checkers. </span> In a <a href="http://lamport.azurewebsites.net/pubs/pubs.html#proving">comment</a> about his first verification paper, written in 1977, Lamport writes of his interest in algorithm verification:</p>
+
+<blockquote>
+  <p>This has been a very practical interest. I want to verify the algorithms that I write. A method that I don’t think is practical for my everyday use doesn’t interest me.</p>
+</blockquote>
+
+<p>Lamport cares deeply about how engineers apply and think of formal methods<label for="industry" class="margin-toggle sidenote-number"></label><input type="checkbox" id="industry" class="margin-toggle" /><span class="sidenote">For examples, see <a href="http://lamport.azurewebsites.net/pubs/high-level.pdf"><em>High-Level Specifications: Lessons from Industry</em></a>, 2003 and <a href="http://lamport.azurewebsites.net/pubs/fm99.pdf"><em>TLA<sup>+</sup> Verification of Cache-Coherence Protocols</em></a>, 1999 </span>, and his theory is driven first and foremost by practicality:</p>
+
+<blockquote>
+  <p>We are motivated not by an abstract ideal of elegance, but by the practical problem of reasoning about real algorithms. Rigorous reasoning is the only way to avoid subtle errors… and we want to make reasoning as simple as possible by making the underlying formalism simple<label for="tla-paper" class="margin-toggle sidenote-number"></label><input type="checkbox" id="tla-paper" class="margin-toggle" /><span class="sidenote"><a href="http://research.microsoft.com/pubs/64074/lamport-actions.pdf"><em>The Temporal Logic of Actions</em></a>, 1994 </span>.</p>
+</blockquote>
+
+<p>Practicality is an ideal whose realization depends on carefully deciding what <em>uses</em> the formalism serves (and what uses it does not) as well as <em>who</em> is its intended audience (and who is not). TLA<sup>+</sup> was designed for engineers working in industry and for algorithm designers either in industry or academia; it is <em>not</em> designed for mathematicians, logicians or programming language theorists. It addresses the need for a specification and verification of real systems and algorithms. It is <em>not</em> intended as a programming language, nor as a tool for exploration of novel logical and mathematical ideas.</p>
+
+<p>Practicality — now with a clear audience and intended use in mind — entails two requirements: <strong>simplicity</strong>, to allow engineers to quickly learn and use the language, and <strong>scalability</strong>, to allow applying the formalism to real-world software or hardware of considerable complexity and size, as well as the nice-to-have <strong>universality</strong>, to allow applying the same formalism to the different kinds of algorithms and systems an engineer may encounter.</p>
+
+<p>But while scalability can be fairly easily tested, and universality is a mathematical property of the formalism, simplicity (as a cognitive measure) often depends on a personal aesthetic point of view. As my goal is to compare and contrast the underpinnings of TLA<sup>+</sup>’s theory with other approaches, I would like to describe an approach to program analysis which has been popular in programming language theory circles in the last few decades, to which TLA<sup>+</sup> stands in stark contrast.</p>
+
+<p>The approach to program analysis taken by programming language theory, which is also connected with the theory of functional programming, is based on two aesthetic choices grounded on a historical view and a scientific mission. The first is the (partial) identification of computation with functions<label for="history" class="margin-toggle sidenote-number"></label><input type="checkbox" id="history" class="margin-toggle" /><span class="sidenote">Prior to Turing, mathematicians were interested in the question of which <em>functions</em> are calculable — most famously Kurt Gödel and Alonzo Church. The strong influence of Church’s work on programming language theory is therefore an underlying cause for this view of algorithms to this day. While some mathematicians like <a href="https://arxiv.org/pdf/1206.3431.pdf">Émil Borel and L. E. J. Brouwer spoke of construction of mathematical objects as a sequence</a> (Borel even described a “computable real number” as a sequence in 1912), Turing was the first to give a precise definition of computation not by the functions it can compute but as the <em>process</em> that yields it, <a href="https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf">writing</a>: “The real question at issue is ‘What are the possible <em>processes</em> which can be carried out in computing…?’”, on which Robin Gandy remarks (<a href="http://dl.acm.org/citation.cfm?id=57252"><em>The confluence of ideas in 1936</em></a>, 1988) that “[t]his is significantly different from the question ‘What is a computable function?’ which other authors asked. Turing, so to speak, has pointed himself in the true direction.” </span>; the second is the attempt to unify <a href="https://en.wikipedia.org/wiki/Constructivism_(mathematics)">constructive mathematics</a> — a rethinking of mathematical practices originating in part from a strict philosophical view of mathematics  — with programming<label for="martin-lof" class="margin-toggle sidenote-number"></label><input type="checkbox" id="martin-lof" class="margin-toggle" /><span class="sidenote">While the connection between constructive mathematics and computability has been long known, I believe that the unification of constructive mathematics with <em>programming</em> as a practical goal was first due to Per Martin-Löf (<a href="http://www.cs.tufts.edu/~nr/cs257/archive/per-martin-lof/constructive-math.pdf"><em>Constructive Mathematics and Computer Programming</em></a>, 1982). </span>. That attempt has led to the conjecture that a unification of math and programming could also work the other way around, namely that it is a good idea to mathematically reason about computer programs in the same formal framework designed to program constructive mathematics. This thesis appears explicitly in the introduction of a <a href="http://leanprover.github.io/files/system.pdf">paper</a> about the Lean proof assistant, <a href="https://leanprover.github.io/about/">a tool designed</a> “to support both mathematical reasoning and reasoning about complex systems”:</p>
+
+<blockquote>
+  <p>In practice, there is not a sharp distinction between verifying a piece of mathematics and verifying the correctness of a system: formal verification requires describing hardware and software systems in mathematical terms, at which point establishing claims as to their correctness becomes a form of theorem proving. Conversely, the proof of a mathematical theorem may require a lengthy computation, in which case verifying the truth of the theorem requires verifying that the computation does what it is supposed to do.</p>
+</blockquote>
+
+<p>While the introductory words “in practice” serve as a justification, there is no actual evidence to support this thesis, which, while interesting, currently holds only <em>in theory</em>. It is a pure aesthetic choice. “Computational mathematics” is indeed very interesting, but as developers rather than logicians, we are more concerned with the opposite problem: how computation is represented mathematically rather than how math is represented computationally.</p>
+
+<p>And, there is good reason to believe that this thesis — that computational math is the right tool for mathematically reasoning about computation — is false. In constructive mathematics, the most common computational object is the constructive, or computable, <em>function</em>. Algorithmically speaking, a computable function corresponds to a sequential algorithm. But the systems and algorithms most software engineers build and want to reason about aren’t sequential, but interactive or concurrent. The kinds of algorithms that are most interesting and common in constructive mathematics are the least interesting and common in software and vice-versa. This is not to say that one cannot reason about general algorithms in such a formalism, far from it, but reasoning generally about arbitrary algorithms in a functional formalism can be <a href="http://www.disi.unige.it/person/MoggiE/ftp/ic91.pdf">quite complicated</a>, and in any event, their treatment is quite <em>different</em> from that of sequential algorithms.</p>
+
+<p>The aesthetic choice in the design of TLA<sup>+</sup> is diametrically opposite: to reason <em>precisely</em> — i.e. mathematically, for math is the language of precision — about programs, we shouldn’t use a formalism designed to express exotic math in a programming language, but quite the opposite, use <em>ordinary</em> math to express and reason about our programs, preferably in a uniform way for all kinds of algorithms; in other words, describe programs in ordinary math. Lamport <a href="http://research.microsoft.com/en-us/um/people/lamport/pubs/state-machine.pdf">writes</a>:</p>
+
+<blockquote>
+  <p>For quite a while, I’ve been disturbed by the emphasis on language in computer science… I believe that the best way to get better programs is to teach programmers how to think better. Thinking is not the ability to manipulate language; it’s the ability to manipulate concepts. Computer science should be about concepts, not languages. But how does one teach concepts without getting distracted by the language in which those concepts are expressed? My answer is to use the same language as every other branch of science and engineering — namely, mathematics.</p>
+
+  <p>… The obsession with language is a strong obstacle to any attempt at unifying different parts of computer science. When one thinks only in terms of language, linguistic differences obscure fundamental similarities.</p>
+</blockquote>
+
+<p>Lamport observes that programming languages are complex, whereas ordinary, classical math is simple. Programming languages need to be mechanically translatable to efficient machine code that interacts with hardware and operating systems, and they are used to build programs millions of lines of code long that then need to be maintained by large and ever-changing teams of engineers over many years. Such requirements place constraints on the design of programming languages that make them necessarily complex, but this complexity is not necessary for <em>reasoning</em> about specifications; specifications are orders of magnitude shorter than code, and reasoning doesn’t require the generation of an efficient executable. If it is possible to separate programming and reasoning into separate languages, each simple on its own — or, at least, as simple as possible — there may be much to be gained by such an approach.</p>
+
+<p>Lamport writes:</p>
+
+<blockquote>
+  <p>The primary goals of a programming language are efficiency of execution and ease of writing large programs. The primary goals of an algorithm language are making algorithms easier to understand and helping to check their correctness. Efficiency matters when executing a program that implements the algorithm. Algorithms are much shorter than programs, typically dozens of lines rather than thousands. An algorithm language doesn’t need complicated concepts like objects or sophisticated type systems that were developed for writing large programs.</p>
+</blockquote>
+
+<p>The difference between the two approaches — reasoning about programs within the programming language itself or reasoning about programs with ordinary math — can be explained with the following analogy. Consider an electrical engineer designing an analog circuit, and a mechanical engineer designing a contraption made of gears, pulleys and springs. They can either use the standard mathematical approach, using equations describing what the components do and how they interact, or invent an algebra of electronic components or one of mechanical components and reason directly in a language of capacitors and resistors (one capacitor plus one resistor etc.) or that of gears and springs. Lamport’s approach is analogous to the former, while the programming language theory approach is analogous to the latter.<label for="philosophy" class="margin-toggle sidenote-number"></label><input type="checkbox" id="philosophy" class="margin-toggle" /><span class="sidenote">I think that the two different aesthetic preferences can also be linked to <a href="https://pressron.wordpress.com/2016/08/30/what-we-talk-about-when-we-talk-about-computation/">two philosophical views of computation</a>. While in both views a program is a mathematical object — like a number or a relation — in Lamport’s view, it is a mathematical object that ultimately serves as a description of a physical process, while the linguistic approach sees it as a pure mathematical creation, albeit one that may be incarnated, imperfectly, in earthly devices. </span></p>
+
+<p>In addition, TLA<sup>+</sup> does not identify computation with functions in any way. Instead, it directly represent computation as a discrete  <a href="https://en.wikipedia.org/wiki/Dynamical_system">dynamical system</a>, much as ODEs are used to describe <em>continuous</em> natural phenomena. As we’ll see in parts 3 and 4 of this series, this means that in TLA<sup>+</sup> possesses a very strong form of universality. Batch, interactive, sequential, concurrent, parallel, distributed, real-time and hybrid (AKA cyber-physical: systems that interact with the physical world and have both discrete and continuous components) algorithms<label for="biology" class="margin-toggle sidenote-number"></label><input type="checkbox" id="biology" class="margin-toggle" /><span class="sidenote">And even natural computational systems like biological metabolic networks. </span>, are all expressed using the same simple formalism. In addition, all program properties that we care about — from correctness to performance — are similarly naturally expressed, and proving them, for all kinds of algorithms, is done using the same proof. While the choice for representing computation in this way is still an aesthetic one, this uniform universality for different kinds of systems and different properties suggests that it is a natural one.  Lamport writes:</p>
+
+<blockquote>
+  <p>Physicists don’t have to revise the theory of differential equations every time they study a new kind of system, and computer scientists shouldn’t have to change their formalisms when they encounter a new kind of system.</p>
+</blockquote>
+
+<p>Similarly, composition of components in TLA<sup>+</sup> is not function composition. We will explore composition in detail in part 4, but just to pique your curiosity, consider that a component imposes certain constraints on the behavior of the system, as it operates following some rules. It also interacts with its environment — be it the user, the network, the operating system or other components — on which it imposes no rules; the environment appears nondeterministic to the component. The composition of multiple components, is then the intersection of the constraints imposed by all components, or, in logic terms, the conjunction of the formulas describing them. Composition in TLA<sup>+</sup> is, therefore, simple logical conjunction (“and” or $\land$).</p>
+
+<p>Most importantly, this choice of representation takes nothing from the ability to abstract to computations to any desired level; quite the contrary — it offers very elegant abstraction.</p>
+
+<p>The linguistic approach, however, has some advantages, like the ability to do end-to-end verification. As the unified language can be mechanically compiled to an efficient executable, assuming that the compilation process is itself verified, we can be certain that no mistake has crept into the pipeline from the top-level specification all the way down to the machine instruction. It is tempting to believe that if the semantics of a programming language were well defined, and if the composition rules were simple and consistent, then we could apply formal reasoning directly to program code and easily move up and down the abstraction hierarchy in order to verify correctness of properties at different levels of abstraction. Unfortunately, this is not the case. <label for="challenges" class="margin-toggle sidenote-number"></label><input type="checkbox" id="challenges" class="margin-toggle" /><span class="sidenote">Anyone interested in program verification would do well to understand the enormous theoretical difficulties facing the endeavor that define its limitation and force the design tradeoffs made by the various approaches. In another <a href="http://blog.paralleluniverse.co/2016/07/23/correctness-and-complexity/">blog post</a> I discussed those theoretical challenges. Among them I mentioned results showing that the effort required to verify the behavior of some composition of components may not only grow exponentially with the <em>number</em> of components but also with the complexity of their internal details. This means that we cannot always hide details of implementation as we go up the abstraction hierarchy. The implication is that end-to-end verification is <em>essentially</em> hard regardless of how it’s done. </span> In practice, end-to-end verification is very expensive, and there is no sign that this will drastically change in the foreseeable future. For the time being end-to-end verification remains reserved for very specialized software, or very small, secure cores of larger systems, and thus forms its own niche. Luckily, very few software systems truly require end-to-end verification, and those that do are either small, or only require such strong guarantees of one or two small internal components.</p>
+
+<p>Giving up on a goal that cannot at the moment be affordably realized nor required by the vast majority of software is a very reasonable concession, provided we can trade it for other advantages<label for="tla-end" class="margin-toggle sidenote-number"></label><input type="checkbox" id="tla-end" class="margin-toggle" /><span class="sidenote">Actually, end-to-end verification can also be accomplished even in the simple math approach, by mechanically compiling a program to its formal mathematical representation. There have been two academic projects to do end-to-end verification in TLA<sup>+</sup> for <a href="https://link.springer.com/chapter/10.1007/978-3-319-17581-2_14">C programs</a> and for <a href="http://ieeexplore.ieee.org/document/6042069/">Java bytecode</a>. This approach to to program verification (and here I mean an actual compilable program) that is similar to the verification technique of <a href="http://www.chargueraud.org/research/2010/cfml/main.pdf"><em>characteristic formulas</em></a>, which we’ll explore a bit in part 4. However, this is not the primary focus of TLA<sup>+</sup>. </span>; those would be simplicity, universality and scalability, things that can make it applicable for a wide range of software and for a wide range of users. Of course, nothing prevents us from complementing this approach with code-level specification tools, which we can use to verify <em>local</em> correctness properties, like those of particular code units, rather than an entire system.</p>
+
+<p>Whether or not your aesthetic choices coincide with Lamport’s, I think this radically different ideology from that of programming language theory deserves consideration if it indeed leads to a more pragmatic approach to verification.</p>
+
+<h2 id="the-history-of-tla">The History of TLA<sup>+</sup></h2>
+
+<p>Leslie Lamport, best known for his major contributions to the theory of concurrent and distributed algorithms, began his work on formal methods in the late 1970s, from a pragmatic standpoint as we’ve seen. His work was roughly contemporary to that of Tony Hoare and Robin Milner, but from the very beginning took a different path from their algebraic/linguistic work on process calculi. He made some important contributions to the theory of verifying concurrent/interactive/non-terminating computations, especially to specification via refinement and to the concept of safety and liveness properties (terms he coined). Those mathematical ideas — that would serve as the foundation for TLA<sup>+</sup>  — were developed years before the formalism itself. This sets TLA<sup>+</sup> apart from the specification languages based on programming language theory, where the formalism came first and the semantics later.<label for="toctop" class="margin-toggle sidenote-number"></label><input type="checkbox" id="toctop" class="margin-toggle" /><span class="sidenote">This difference of approach runs deep in computer science, where the “concepts first” approach is preferred by the “computational school” (research of complexity theory and algorithms), and the “formalism first” approach is preferred by the “programming school” (research of programming languages). The difference can be traced back all the way to Alonzo Church and Alan Turing. Whereas the first invented a formalism and later came to believe it is sufficient to describe all computations (but never precisely defined the concept), the second thought of computation as an abstract concept first, and then later picked an arbitrary formalism to describe it so that the concept could be treated rigorously. </span></p>
+
+<p>Lamport writes that “Pnueli’s introduction of temporal logic in 1977 led to an explosion of attempts to find new logics for specifying and reasoning about concurrent systems. Everyone was looking for the silver-bullet logic that would solve the field’s problems… I was not immune to this fever.” But he became disillusioned with its practicality after seeing colleagues “spending days trying to specify a simple FIFO queue — arguing over whether the properties they listed were sufficient. I realized that, despite its aesthetic appeal, writing a specification as a conjunction of temporal properties just didn’t work in practice.”</p>
+
+<p>This led to his invention of the <a href="http://lamport.azurewebsites.net/pubs/old-tla-src.pdf">Temporal Logic of Actions</a> in the late ’80s, a logical formalism which, despite its name, tries to minimize as much as possible the use of temporal reasoning (from which it borrows some operators) and instead relies on a concept called <em>actions</em>. “TLA gave me, for the first time,” Lamport writes, “a formalism in which it was possible to write completely formal proofs without first having to add an additional layer of formal semantics.”</p>
+
+<p>During a visit to Oxford in 1991, Lamport explored the possibility of adding TLA to the Z specification language, which had been developed there. But “Tony Hoare was at Oxford, and concurrency at Oxford meant CSP. The Z community was interested only in combining Z with CSP — which is about as natural as combining predicate logic with C++. “</p>
+
+<p>So around 1993 Lamport invented TLA<sup>+</sup>, a complete formalism for specification built around TLA. <a href="https://research.microsoft.com/en-us/um/people/lamport/pubs/commentary-web.pdf">This short note</a> by Lamport is a summary of how he created TLA<sup>+</sup> in a process of <em>erasing</em> programming constructs from the formal description of algorithms, and distilling algorithms down to their mathematical essence.</p>
+
+<p>While TLA<sup>+</sup> was not originally designed with any form of mechanical verification in mind, in 1999, Yuan Yu wrote a model checker for TLA<sup>+</sup>, called TLC, and in 2008 a team at INRIA built a mechanical proof checker for TLA<sup>+</sup>, called <a href="https://tla.msr-inria.inria.fr/tlaps/content/Home.html">TLAPS</a>. In 2009, Lamport introduced PlusCal, an alternative syntax for TLA<sup>+</sup> specifications that looks like pseudocode yet is completely formal, and is automatically translated into readable TLA<sup>+</sup>. Recently, <a href="http://forsyte.at/research/apalache/">research has started</a> on building a more state-of-the-art model checker for TLA<sup>+</sup>.</p>
+
+<h2 id="the-feel-of-tla">The Feel of TLA<sup>+</sup></h2>
+
+<p>A TLA<sup>+</sup> specification describes a system at some chosen level of detail. It can be no more than a list of some global properties, a high-level description of the algorithm, a code-level description of the algorithm, or even a description of the CPU’s digital circuits as they’re computing the algorithm — whatever level or levels of abstraction you are interested in.</p>
+
+<p>Lamport writes:</p>
+
+<blockquote>
+  <p>I believe that the best language for writing specifications is mathematics. Mathematics is extremely powerful because it has the most powerful abstraction mechanism ever invented — the definition. With programming languages, one needs different language constructs for different classes of system — message passing primitives for communication systems, clock primitives for real-time systems, Riemann integrals for hybrid systems. With mathematics, no special-purpose constructs are necessary; we can define what we need.</p>
+
+  <p>… Perhaps the greatest advantage of specifying with mathematics is that it allows us to describe systems the way we want to, without being constrained by ad hoc language constructs. Mathematical manipulation of specifications can yield new insight.</p>
+</blockquote>
+
+<p>TLA<sup>+</sup> is not a programming language. It has no built-in notion of IO, no built-in notion of threads or processes, no heap, no stack — actually, no concept of memory at all — and not even subroutines<label for="pluscal" class="margin-toggle sidenote-number"></label><input type="checkbox" id="pluscal" class="margin-toggle" /><span class="sidenote">PlusCal does have processes, stacks and subroutines. </span>. And yet, any software or hardware system, and <em>almost</em> any kind of algorithm, can be written in TLA<sup>+</sup> succinctly and elegantly. By reasoning about algorithms or systems rather than programs (in part 3 we’ll explore the difference between the two) we gain power and simplicity; in exchange we give up the ability of mechanically translating an algorithm into an efficient executable<label for="extraction" class="margin-toggle sidenote-number"></label><input type="checkbox" id="extraction" class="margin-toggle" /><span class="sidenote">In principle, <em>some</em> TLA<sup>+</sup> algorithms, those specified with sufficient detail, could certainly be translated into code, although I don’t know if anyone has actually attempted that, or how useful that would be. </span>. Once you’ve specified your algorithm or system at the level or levels of abstraction that you find most important, you translate the algorithm to your chosen programming language manually. If you are designing an algorithm, the TLA<sup>+</sup> specification will closely resemble the code, or, at least, be at the same abstraction level. However, most of the time, engineers use TLA<sup>+</sup> to design and reason about complete systems, in which case the specification will be at a much higher abstraction level than the code. Lamport likens this use of TLA<sup>+</sup> to that of a <a href="https://www.wired.com/2013/01/code-bugs-programming-why-we-need-specs/">blueprint when designing a house</a><label for="blueprint" class="margin-toggle sidenote-number"></label><input type="checkbox" id="blueprint" class="margin-toggle" /><span class="sidenote">An expanded version of that article is <a href="https://cacm.acm.org/magazines/2015/4/184705-who-builds-a-house-without-drawing-blueprints/abstract">here</a> </span>.</p>
+
+<p>A system or an algorithm — at any abstraction level — is expressed in TLA<sup>+</sup> as a single logical formula (obviously, if it is non-trivial, we compose it of more manageable pieces) that can be manipulated like any mathematical formula. As scary as that may sound to programmers, the experience is very similar to programming and can be learned by programmers faster than most programming languages. It’s math that feels a lot like programming. TLA<sup>+</sup> is one of those rare combinations of simplicity, elegance, versatility and power, that, at least in me, evoked an impression similar to the one I had years ago when I learned Scheme. With the exception of its proof language — which is guided by other design goals — it is also rather minimalistic. TLA<sup>+</sup> is certainly not perfect, but to me, it feels as elegant and as finely crafted as Scheme or Standard ML.</p>
+
+<p>Computer scientists and programmers love talking about abstractions. One of my favorite things about TLA<sup>+</sup> is that it gives a precise mathematical definition to the concept of abstraction, and allows us to reason about it directly: In TLA<sup>+</sup>, the abstraction/implementation relation is expressed by the simple, familiar logical implication: $X \Rightarrow Y$ is the proposition that $X$ implements $Y$ or, conversely, that $Y$ abstracts $X$.</p>
+
+<p>Code-level specification language — whether based on contracts or on types — make a clear distinction between algorithms, expressed in the body of subroutines (e.g., a routine implementing the Quicksort), and algorithm properties (e.g., “the subroutine returns a sorted list”), expressed as contracts or types. Even contract systems or types systems that allow full use of the programming language when expressing properties (e.g. dependent types) still make this clear distinction: semantically, properties  are distinct from algorithms. TLA<sup>+</sup> makes no such distinction. The property “the algorithm sorts”, and the algorithm Quicksort are just two specifications at different levels of detail, different levels of abstraction, and $X \Rightarrow Y$ therefore also means that specification $X$ has the property $Y$.</p>
+
+<p>As I mentioned above, TLA<sup>+</sup> makes it easy to naturally express many different kinds of algorithms: sequential, interactive, concurrent, parallel, etc. There is, however, one glaring omission: while TLA<sup>+</sup> allows specifying probabilistic algorithms, the logic lacks the power to reason about them, like specifying that an algorithm yields the right answer with probability 0.75; this shortcoming, however, is probably easy to rectify in a future version of the language. It is easy to specify properties like worst-case time or space complexity, and even properties like “the system will eventually converge to one of three attractors”.</p>
+
+<p>TLA<sup>+</sup> can be seen to be made of three parts, a classification that guides the organization of the posts in this series:</p>
+
+<p>At its core is TLA — the temporal logic of actions — which is in some ways analogous to ordinary differential equations. But whereas ODEs are used to describe <em>continuous</em> <a href="https://en.wikipedia.org/wiki/Dynamical_system">dynamical systems</a>, TLA is used to describe arbitrary <em>discrete</em> dynamical systems. In addition, TLA accommodates reasoning that is useful when analyzing programs in particular, most importantly assertional reasoning and refinement, the latter is a precise mathematical definition for the concept of abstraction and implementation relationship between algorithms (e.g., a parallel mergesort implements, i.e. refines, general mergesort). While TLA incorporates some <a href="https://en.wikipedia.org/wiki/Linear_temporal_logic">linear temporal logic</a>, and despite its name, TLA’s main design objective is actually to <em>reduce</em> the reliance on temporal logic and temporal reasoning as much as possible, because while simpler than many alternatives, it is not quite “ordinary math”. We will explore TLA in depth in parts 3 and 4.</p>
+
+<p>Just like ODEs describe the evolution of a continuous system over some <a href="https://en.wikipedia.org/wiki/Phase_space">phase space</a> and the variables take values over some field, so too TLA is defined over some state space in which the state of the system (program), namely the value of the variables, is defined at any point in time. The “+” in TLA<sup>+</sup> uses a formal set theory based on ZFC to allow TLA variables to take on many kinds of values (atoms like numbers and strings, finite and infinite sequences, sets, records, and functions). We’ll go over this “static” part of TLA<sup>+</sup> in part 2.</p>
+
+<p>Finally, TLA<sup>+</sup> has a module system to allow information hiding and elaborate abstraction/implementation or equivalence relations. We’ll go over the module system and composition in part 4.</p>
+
+<p>The TLA<sup>+</sup> software package contains an IDE called “<a href="http://lamport.azurewebsites.net/tla/toolbox.html">the toolbox</a>”, a $\LaTeX$ pretty-printer, and the TLC model checker, which lets you verify properties of algorithms written in a useful subset of TLA<sup>+</sup> on restricted finite-state instances of your system at the push of a button. The proof system TLAPS, <a href="https://tla.msr-inria.inria.fr/tlaps/content/Download/Binaries.html">available as a separate download</a> but fully integrated with the toolbox, allows interactive work with the proof system for the verification of proofs. TLAPS is not a self-contained proof assistant, but rather a front-end for the TLA<sup>+</sup> proof language, which uses automated solvers and the proof assistant Isabelle as backends for discharging proof obligations. As this series focuses on the theory, I will not discuss the use of the TLA<sup>+</sup> tools, even though they are of the utmost practical importance. The learning material I linked to covers their use.</p>
+
+<p>While the TLA logic is universal (with the aforementioned exception of probabilistic algorithms), TLA<sup>+</sup> is a tool for a job, and the job is the formal specification and verification of real-world algorithms and large software systems by practitioners. Like all elegant tools, it can be used to do more, but that doesn’t mean it’s optimized for tasks it wasn’t designed to do. The ergonomics of the language as well as the current tooling means that it is not the best choice in every circumstance. For example, it can be used to mechanically prove general mathematical theorems, but interactive theorem provers designed for that particular task likely do a better job. It can also be used to specify programming languages, but lacking syntactic constructs that make it easy to embed different languages nicely<label for="embedding" class="margin-toggle sidenote-number"></label><input type="checkbox" id="embedding" class="margin-toggle" /><span class="sidenote">There aren’t any sophisticated constructs, like macros or arbitrary infix operators, that may help with shallow embedding, and there aren’t convenient quoting constructs that can help with deep embedding. How nice the result depends on the embedded language. TLA<sup>+</sup>’s own rather complex grammar is <a href="http://lamport.azurewebsites.net/tla/TLAPlus2Grammar.tla">specified in TLA<sup>+</sup></a> as a BNF grammar, and the specification looks nice. </span>, other tools may handle that task better. The limitations of the model checker and the proof system are such that for exploring numerical and statistical algorithms, I would suggest using specialized languages like Matlab, Octave or Julia. And even though the logic itself is universal, that does not mean that it is always the best formalism to derive any kind of insight about a system. Different formalisms may offer different insight.</p>
+
+<h2 id="some-misconceptions-about-tla">Some Misconceptions about TLA<sup>+</sup></h2>
+
+<p>I would like to address a few interesting misconceptions about TLA<sup>+</sup> that I found online.</p>
+
+<p>The first is that TLA<sup>+</sup> is only a tool for verifying distributed systems. It is true that these days, TLA<sup>+</sup> is mostly known in the context of distributed systems and concurrent algorithms. This has a few reasons: 1) Lamport’s algorithmic work is in concurrent and distributed algorithms, and the Balkanized nature of computer science places certain limits on the influence of ideas outside the sphere in which their originators are known. 2) Few other <em>general</em> software verification formalisms are able to handle concurrency as elegantly as TLA<sup>+</sup>, so that is just where it shines in comparison. 3) When engineers write software systems that are too complex or subtle to be obviously correct and could therefore benefit from formal verification, it is usually the case that a concurrent or distributed algorithm is involved. Nevertheless, there is nothing that intrinsically limits TLA<sup>+</sup> specifically to concurrent and distributed algorithms. In fact, TLA<sup>+</sup> has no special concurrency constructs — like message passing or even processes — at all.</p>
+
+<p>Another was made in a <a href="http://lambda-the-ultimate.org/node/5181?from=200&amp;comments_per_page=200">comment by Carl Hewitt</a>, inventor of the actor model:</p>
+
+<blockquote>
+  <p>TLA<sup>+</sup> incorrectly treats state as global, which is scientifically incorrect in addition to being disastrous for engineering.</p>
+</blockquote>
+
+<p>The error here is confusing a mathematical notation with the systems it describes. If we use math to describe the position along one dimension of $n$ particles, we might define a vector $\boldsymbol x$, with components $x_1…x_n$, each being the position (or state) of a single particle. This notation (which in TLA<sup>+</sup> is written as $x[i]$ instead of $x_i$) says absolutely nothing about the actual physical interaction of the particles. It’s just notation, and it treats state as global no more and no less than the mathematical notation of the vector $\boldsymbol x$ does. That we have a <em>notation</em> for the vector $\boldsymbol x$, does not actually mean that each particle is instantaneously aware of the position of all others. TLA<sup>+</sup> and math in general don’t “treat state as global”; they just allow denoting some global notion of state, one that the actual system described does not have.</p>
+
+<p>One may indeed ask why we’d ever want to allow the specification of non-physically realizable interaction at all, and the answer is that working in a formalism that restricts what’s <em>expressible</em> to what’s <em>physically realizable</em> would make it more complex and less general<label for="speed-of-light" class="margin-toggle sidenote-number"></label><input type="checkbox" id="speed-of-light" class="margin-toggle" /><span class="sidenote">Consider what would be required if for math to have a built-in mechanism preventing us from expressing quantities representing velocities greater than the speed of light. </span>. Another reason is that we may wish to define non-physical behavior as a high-level abstractions in order to specify and prove certain properties. For example, if we’re specifying an algorithm for distributed transaction, we would very much like to show that our system would behave <em>as if</em> distributed transactions were instantaneous. In that case, we would specify our realizable, physically realistic, algorithm, then we’d specify the non-realizable abstract behavior, and then we’d show that our low-level algorithm <em>implements</em> the high-level behavior. If we weren’t even allowed to describe the abstract behavior, we wouldn’t be able to prove that the algorithm has this desired property.</p>
+
+<p>Another (rather technical) misconception is that TLA<sup>+</sup> is “not higher order”, and therefore cannot specify some higher-order algorithms. We will get into the specifics of the formalism in the next three installments and examine its precise “order”, which would make the error of this assertion clearly apparent, but at this point I’d like to point out that the very phrasing of the claim is an example of what Lamport calls the “Whorfian syndrome” — after the <a href="https://en.wikipedia.org/wiki/Linguistic_relativity">Sapir-Whorf hypothesis</a>, which posits that the language we use shapes our thought — namely, a confusion of language with reality, or of the <a href="https://en.wikipedia.org/wiki/Signified_and_signifier">signifier with the signified</a>, or of the formalism and that which it formalizes. The term “higher-order” is a property of the formal <em>description</em> of a system, not the system itself.</p>
+
+<p>For example, the proposition “every set of natural numbers contains a minimal element” is higher-order when using a logic whose <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)">structure</a>, or domain of discourse, is the natural numbers, but is first order in a logic whose structure is the sets of ZFC set theory<label for="logic-basics" class="margin-toggle sidenote-number"></label><input type="checkbox" id="logic-basics" class="margin-toggle" /><span class="sidenote">We will cover the basics of logic in part 2 </span>. Another example is continuous dynamical systems expressed as ODEs. If we’d like to specify a system whose first derivative is itself another dynamical system, we can make use of a higher order ODE like so: $\ddot{x} = {-x}$. But dynamical systems are usually written as first-order ODEs without any loss of expressivity or convenience, and we would write that same seemingly “higher-order” system as a first-order ODE like so:</p>
+
+<script type="math/tex; mode=display">\begin{cases}
+\dot{x_1} = x_2\\
+ \dot{x_2} = {-x_1} 
+\end{cases}</script>
+
+<p>When programmers say that a program is higher-order, they mean that it is parameterized by another program. But such an interaction between two programs or algorithms is only higher-order if we choose to model interaction in our language using function composition; there are other ways of expressing such a relationship.</p>
+
+<p>Therefore, what constitutes “higher-order” vs. “first-order” depends on the domain of discourse and/or on the modes of composition. Both are features of the formalism, not of the formalized “reality”. We will see that TLA<sup>+</sup> expresses behaviors that may perhaps be higher-order in some formalisms as first-order.</p>
+
+<p>In general, Lamport has <a href="http://lamport.azurewebsites.net/pubs/lamport-verification.pdf">this</a> to say about comparing formalisms:</p>
+
+<blockquote>
+  <p>Comparisons between radically different formalisms tend to cause a great deal of confusion. Proponents of formalism A often claim that formalism B is inadequate because concepts that are fundamental to specifications written with A cannot be expressed with B. Such arguments are misleading. The purpose of a formalism is not to express specifications written in another formalism, but to specify some aspects of some class of computer systems. Specifications of the same system written with two different formalisms are likely to be formally incomparable… Arguments that compare formalisms directly, without considering how those formalisms are used to specify actual systems, are useless.</p>
+</blockquote>
+
+<p>Finally, <a href="http://lambda-the-ultimate.org/node/4922#comment-79370">this</a> was expressed in a discussion of one of Lamport’s talks:</p>
+
+<blockquote>
+  <p>Writing code in a high-level language can help one think more clearly in exactly the same way that writing natural language or drawing blueprints can… we now have programming languages, not just specification languages, which can be very useful in prototyping high-level specifications, writing executable specifications, and even evolving those into actual programs… With all due respect to Leslie Lamport, who is a great computer scientist and programmer. But he should learn Haskell.</p>
+</blockquote>
+
+<p>That misconception is interesting because the commenter’s expectation of what <em>should</em> be specified is shaped by the particular abilities of his favorite programming language (and I should note that from the level of flexible abstraction or concreteness offered by TLA<sup>+</sup>, all programming languages seem almost equally constrained in their range of expression). I challenge that commenter to specify the very important and very reasonable program properties — easily, naturally and clearly specified in TLA<sup>+</sup> — in his favorite programming language, such as: “every user request would eventually be answered by the server”, or “when constructing a response to a request by a user, no information belonging to a different user will be read from the database”, or “the transactions appear to have taken place instantaneously (i.e., they’re linearizable)”, or “the worst case complexity of this sort function is $5n \log n$”. As I already mentioned that there are some research programming languages that do allow expressing such properties, but they make their own nontrivial tradeoffs.</p>
+
+<p>Lamport has this to say on the matter:</p>
+
+<blockquote>
+  <p>[D]o we need to specify programs in a higher-level language before implementing them in a programming language? People who design PLs would say no, their languages make what the program does so obvious that no higher-level description is needed. I think the first PL for which this was believed to be true was FORTRAN. It’s not true for FORTRAN and I don’t think it’s true for any existing general-purpose PL.</p>
+</blockquote>
+
+<h2 id="conclusion-on-the-merits-of-formal-methods">Conclusion: On the Merits of Formal Methods</h2>
+
+<p>As engineers, we should use tools that help us build software that complies with requirements at the lowest cost. Formal methods and, in fact, all software verification methods — including the many forms of testing — lie on a spectrum of the effort they require and the confidence they provide, and we should pick those that match the requirements of the system we’re building. It’s too early to tell precisely how much TLA<sup>+</sup> helps to develop software in general, and exactly what problems benefit from it most, but I believe — and experience like that of Amazon seems to support that — that a large class of software systems can significantly benefit from a tool like TLA<sup>+</sup>.</p>
+
+<p>One skepticism towards formal specification is that it demands too much. Not all software requires formal specification and reasoning. There is indeed little use for a formal specification of things that are trivial or unimportant. But those parts of your software that are complex or subtle, and important, will benefit from some careful thinking, and a formal spec helps you think. An objection to formal specification even in cases that could potentially benefit from it was expressed in a comment on <a href="https://rjlipton.wordpress.com/2010/01/11/why-do-we-need-cyber-security/">this post</a>:</p>
+
+<blockquote>
+  <p>Even if you have a perfect proof that a program satisfies a specification, how do we verify that a specification is correct? … It’s hard to believe that a programmer who have trouble write a correct program in the first place can magically write perfectly correct specification. People with experiences with mathematical logics know how hard and technical it is to encode precisely what we want to prove in a logical language even for relatively simple combinatorial facts. I don’t say it’s impossible to write a correct specification, but it is much harder than writing a correct program in the first place.</p>
+</blockquote>
+
+<p>Lamport addressed such claims in a 1979 paper, <a href="http://lamport.azurewebsites.net/pubs/calendar.pdf">On the Proof of Correctness of a Calendar Program</a>, written in a response to another paper that claimed that some software — like calendar programs — is hard to specify correctly. In the paper <label for="calendar" class="margin-toggle sidenote-number"></label><input type="checkbox" id="calendar" class="margin-toggle" /><span class="sidenote">Which shows how to simply and precisely specify and prove the correctness of a calendar program </span>, Lamport addresses this very objection:</p>
+
+<blockquote>
+  <p>… We believe that if one really understands what a program should do, then he can specify it precisely in an understandable manner.</p>
+</blockquote>
+
+<p>A high-level formalism like TLA<sup>+</sup> is designed to allow a precise description of a software (or hardware) system, that allows both its assumptions as well as operation to be stated clearly and concisely enough that the correctness of the specification is far more likely than the correctness of a program. As to the question of the ability of programmers to write such specifications, if you are able to convert informal requirements to a program — which is just a formal specification at a fairly low level — and if you understand your program well enough, then you are also able to specify it formally at a higher level, in a way that shows how and why it works. Actually doing it is a matter of some relatively short training and some practice. The practical successful experience of a company like Amazon with TLA<sup>+</sup> shows that it is both useful and easy enough to use.</p>
+
+<p>Other critics may claim that the right programming  language, the right programming style (like object-oriented programming or functional programming), or the right discipline (like test-driven development) are all that’s required to create good software. In the same 1979 paper, Lamport writes:</p>
+
+<blockquote>
+  <p>Advocates of programming methodologies have tended to talk as if their methodologies automatically generate good programs. A programming methodology is no substitute for intelligent reasoning about algorithms and their complexity, and cannot by itself lead one to a good method of solution. “Structured programming” would not have helped Euclid discover his algorithm.</p>
+</blockquote>
+
+<p>The experience of Amazon has shown that using formal methods wisely can <em>supplement</em> other methodologies, and reduce the cost of development.</p>
+
+<p>At the opposite end of those who claim formal reasoning is ineffective, there are those with unrealistic expectations. The authors of Spec#, the code-level specification language for C# <a href="http://research.microsoft.com/en-us/um/people/leino/papers/krml196.pdf">report</a>:</p>
+
+<blockquote>
+  <p>[A] conclusion we have drawn from our interaction with developers is that real developers do appreciate contracts… Unfortunately, we have also seen an unreasonable seduction with static checking. When programmers see our demos, they often develop a romantic enthusiasm that does not correspond to verification reality. Post-installation depression can then set in as they encounter difficulties while trying to verify their own programs.</p>
+</blockquote>
+
+<p>Reality is <a href="http://blog.paralleluniverse.co/2016/07/23/correctness-and-complexity/">somewhere in the middle</a>: we can feasibly verify <em>some</em> properties of <em>some</em> systems, and in general, the more complex or big the program, the more tricky the property, or the more confident we wish to be in the veracity of the verification process, the more work is required. Some reasonable compromise must always be made depending on the software requirements. I believe that TLA<sup>+</sup> hits a sweet spot in the compromises it makes, and its versatility in choosing the desired level of detail or abstraction in the specification gives the user freedom to pick a useful point in terms of utility and effort. TLA<sup>+</sup> offers simplicity, universality and scalability, which it achieves by making two concessions: not being a programming language, and not trying to be a general tool for studying theory. The former largely sacrifices end-to-end verification, which is neither feasible nor necessary for virtually all ordinary software; the latter sacrifices power which is of no relevance to TLA<sup>+</sup>’s intended goal: a tool for reasoning about the behavior (especially correctness) of systems and algorithms, not the study of theory.</p>
+
+<p>In addition, TLA<sup>+</sup> nicely complements affordable code-level formal tools like static analyzers. TLA<sup>+</sup> gives up on the 100% confidence of code-level formal methods, whereas static analyzers give up on verifying complex global properties.</p>
+
+<p>Finally, specifying in TLA<sup>+</sup> is ultimately specifying with mathematics. But math does not save you from thinking; it just helps you organize your thoughts. This is true regardless of the formalism you choose to help you carefully reason about programs. The thinking is the important — and hard — part. <a href="https://channel9.msdn.com/Shows/Going+Deep/E2E-Erik-Meijer-and-Leslie-Lamport-Mathematical-Reasoning-and-Distributed-Systems#time=51m43s">In a video interview</a>, Lamport said:</p>
+
+<blockquote>
+  <p>My feeling is that people are looking for magic bullet in math, [that] there’s this wonderful thing… somehow you discover the right math and that math solves the problem for you. That’s not the way it happens. … When you understand something then you can find the math to express that understanding. The math doesn’t provide the understanding.</p>
+
+  <p>A lot of people doing the same its kind of addressing the same kind of problems that I do — specification and verification — are looking for these new math abstractions… I gave up on that hunt 20 years ago. I discovered that, for example, for proving the correctness of a concurrent algorithm there’s one basic method that works — proving an invariant. And you can package that in however many ways you want but there isn’t anything that’s going to make the proof any simpler. And so what I’ve done is just taking the method that goes as directly as possible from the problem into the math, and I have it easy because since I describe the algorithm in terms of math, it’s already in math so I don’t need any semantics… to translate from how I’m describing the algorithm into math. And so I don’t need some new fangled kinds of math to try to smooth that process.</p>
+
+  <p>… My hunch is that people will find that all these new kinds of math are not really going to solve the problem.</p>
+</blockquote>
+
+<p>A good mathematical formalism is a necessary condition for reasoning about programs, but it doesn’t make answering all questions possible, let alone easy (see correctness and complexity). It is a famous property of math that while it describes things made of very simple parts, it can ask questions that are very hard to answer.</p>
+
+<p>On top of this, every formalism introduces some “accidental complexity”, difficulties that arise from the choice of the formalism itself rather than the problem. TLA<sup>+</sup> is not immune, although it does very well on that account. Those accidental difficulties may make it harder to answer a specific kind of question. This means that we cannot have a single formalism that is best for all uses; this is true in computer science as it is true in mathematics.</p>
+
+<p>You will find that no matter what formalism you choose, the actual work is similar whether it’s in TLA<sup>+</sup> or in Coq. Being able to think mathematically, i.e., to think <em>precisely</em>, is a prerequisite to using any formalism, but that ability improves with actual work. TLA<sup>+</sup> is great for practicing mathematical thinking because it is so much simpler than other general formalisms designed to reason about programs. It helps you practice logic and mathematical thinking using the simplest possible math and simplest possible logic, letting you concentrate on the problem with as little sophisticated details of formalism as possible, all this without detracting anything from its expressivity or reasoning power. Even if you are drawn to theories like type theory and intuitionistic logic for aesthetic or maybe even pragmatic reasons, it can helps to have a grasp of formal ordinary math and classical logic before trying to grapple with those more complicated formalisms.</p>
+
+<p>In that same video interview <a href="https://channel9.msdn.com/Shows/Going+Deep/E2E-Erik-Meijer-and-Leslie-Lamport-Mathematical-Reasoning-and-Distributed-Systems#time=47m24s">Lamport says</a>:</p>
+
+<blockquote>
+  <p>Programmers have this idea that programming languages are simple but math is difficult, complicated. Which is absurd! Mathematics is so much simpler than even the simplest programming language, but people have just had fear of math instilled into them. 
+…[P]eople start using [TLA<sup>+</sup>] — it teaches them math… It makes using math as much fun as programming.</p>
+</blockquote>
+
+<p>It seems to me that, in some sense, most programming techniques and paradigms — from TDD to new programming languages — hope to reduce the programmer’s need to think. But until Turing’s dream of computers that learn to program themselves is realized, no technique will be the silver bullet that eliminates the need for careful thinking. Thinking will remain the most important part of programming. TLA<sup>+</sup> doesn’t tell you how to program; it’s a tool to help you think clearly, precisely and carefully. Chris Newcombe, who was a principal engineer at Amazon and the author of their TLA<sup>+</sup> case study <a href="https://groups.google.com/forum/#!searchin/tlaplus/most$20people%7Csort:relevance/tlaplus/ZJCi-UF31fc/Mawvwi6U1CYJ">wrote in a message on the TLA<sup>+</sup> mailing list</a>:</p>
+
+<blockquote>
+  <p>TLA<sup>+</sup> is the most valuable thing that I’ve learned in my professional career.  It has changed how I work, by giving me an immensely powerful tool to find subtle flaws in system designs. It has changed how I think, by giving me a framework for constructing new kinds of mental-models, by revealing the precise relationship between correctness properties and system designs, and by allowing me to move from ‘plausible prose’ to precise statements much earlier in the software development process.</p>
+</blockquote>
+
+<p>I could not agree more.</p>
+
+<p><em>Next week we’ll learn how TLA<sup>+</sup> uses logic to describe the state of programs, meaning their data, how formal logic can be used for specifications in general, as well as take a look at TLA<sup>+</sup>’s declarative proof language.</em></p>
+
+<p><em>I’d like to take this opportunity to announce a new subreddit devoted to discussing TLA<sup>+</sup> and related subjects: <a href="https://www.reddit.com/r/tlaplus/">/r/tlaplus</a>. The TLA<sup>+</sup> user community is still very small, but I hope that it will grow as people come to appreciate both the need for formal specification, and the utility gained from a tool as elegant and simple as TLA<sup>+</sup>.</em></p>
+
+<hr />
+
+
+	</div>
+</article>
+
+	  </main>
+
+    <!-- Pagination links -->
+    
+
+  </div>
+
+	    <!-- Footer -->
+	    <footer></footer>
+
+
+	    <!-- Script -->
+      <script type="text/javascript" src="/js/main.js"></script>
+<!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+        <script src="js/vendor/html5shiv.js"></script>
+        <![endif]-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+-->
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-99776245-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- <script>
+var _gaq=[['_setAccount','UA-99776245-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script> -->
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nav-toc').toc();
+});
+</script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
+<script type="text/javascript" src="/js/bigfoot.min.js"></script>
+
+<script type="text/javascript">
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
+</script>
+
+
+
+
+
+	</div>
+</body>
+</html>

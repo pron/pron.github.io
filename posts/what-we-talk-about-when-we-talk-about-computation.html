@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Jekyll">
+    <link rel="canonical" href="/posts/what-we-talk-about-when-we-talk-about-computation"/>
+    <!--<link rel="canonical" href="/posts/what-we-talk-about-when-we-talk-about-computation">-->
+
+    <title>What We Talk About When We Talk About Computation</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/fav/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"    href="/fav/favicon-16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="/fav/favicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"   href="/fav/favicon-60.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="/fav/favicon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/fav/favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/fav/favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/fav/favicon-180.png">
+    -->
+    <!--
+    <link rel="icon" type="image/png" href="/fav/favicon-96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/fav/favicon-192.png" sizes="192x192">
+    -->
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS & fonts -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+    <!--
+    <script data-cfasync="false" type="text/javascript" src="//use.typekit.net/pfn0abv.js"></script>
+    <script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- RSS -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+    <!-- <link rel="alternate" type="application/rss+xml" title="Ron Pressler" href="http://feeds.feedburner.com/ParallelUniverseBlog"> -->
+
+
+    <!-- Social cards -->
+    
+        <!-- Twitter -->
+<meta name="twitter:site" content="@pressron"> 
+<meta name="twitter:card" content="summary"> 
+<meta name="twitter:title" content="What We Talk About When We Talk About Computation"> 
+<meta name="twitter:description" content="Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally powerful collaborator, and are better called models of programming.
+"> 
+
+<!-- OpenGraph -->
+<meta property="og:site_name" content="Ron Pressler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What We Talk About When We Talk About Computation">
+<meta property="og:description" content="Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally powerful collaborator, and are better called models of programming.
+">
+<meta property="og:url" content="/posts/what-we-talk-about-when-we-talk-about-computation">
+<meta property="og:image" content="http://www.gravatar.com/avatar/d942a0d3bac0a907acfb7d78c8846d1a?s=200">
+<meta property="article:published_time" content="2016-08-30">
+
+    
+
+
+    
+
+    
+    <meta name="twitter:site" content="@pressron">
+</head>
+
+
+<body>
+	<div id="wrap">
+
+	  <!-- Navigation -->
+	  <nav id="nav">
+    
+        <div id="nav-toc">
+        </div>
+    
+	<div id="nav-list">
+		<a href="/">Home</a>
+
+		<!-- Nav pages -->
+	  
+	    
+	  
+	    
+	      <a href="/about" title="About">About</a>
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+
+    <!-- Nav links -->
+	  
+
+
+	</div>
+
+    <footer>
+
+	<!-- <span>version </span> -->
+
+</footer>
+
+</nav>
+
+
+    <!-- Icon menu -->
+	  <a id="nav-menu">
+	  	<div id="menu"></div>
+	  </a>
+
+      <!-- Header -->
+      
+        <header id="header" class="parent justify-spaceBetween">
+  <div class="inner w100 relative">
+    <span class="f-left">
+      <a href="/">
+        <h1>
+          <span>press</span>ron
+        </h1>
+      </a>
+    </span>
+    <!--
+    <span id="nav-links" class="absolute right bottom">
+	    
+	      
+	    
+	      
+	        <a href="/about" title="About">About</a>
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+
+	    
+
+
+    </span>
+    -->
+  </div>
+</header>
+
+      
+
+    <!-- Main content -->
+	  <div id="container">
+
+	  <main>
+			<article id="post-page" class="group tufte">
+	<h2>What We Talk About When We Talk About Computation</h2>		
+	<time datetime="2016-08-30T00:00:00+03:00" class="by-line">30 Aug 2016</time>
+	<div class="content">
+
+		<p><em>Abstract: Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally powerful collaborator, and are better called models of programming.</em></p>
+
+<h2 id="on-two-views-of-computation-in-computer-science">On Two Views of Computation in Computer Science</h2>
+
+<p>Many terms in computer science are overloaded, but none are more surprising than the term “computation” itself. I became aware of this when, while preparing for <a href="http://blog.paralleluniverse.co/2016/07/23/correctness-and-complexity/">my Curry On talk</a> about computational complexity aspects of software correctness,  I read an interesting debate about a 2012 blog post by <a href="http://scottaaronson.com/">Scott Aaronson</a>, <a href="http://www.scottaaronson.com/blog/?p=1121"><em>The Toaster-Enhanced Turing Machine</em></a>, and further echoes of it in other published writings that will be mentioned below. The issue is two fundamentally different notions of “a model of computation” as seen by computer-science theoreticians originating in two different branches of theoretical computer science, sometimes called <a href="http://cstheory.stackexchange.com/questions/1521/origins-and-applications-of-theory-a-vs-theory-b">Theory A and Theory B</a> (also <a href="http://blog.computationalcomplexity.org/2003/03/theory-and-theory-b.html">here</a>), although I prefer the categorization by Oded Goldreich, who calls them <a href="http://www.wisdom.weizmann.ac.il/~oded/tcs.html">Theory of Computation (TOC) and Theory of Programming (TOP)</a> respectively, and argues that the two are essential yet rightfully separate sub-disciplines of theoretical computer science. In the context of this discussion, the two can be narrowed more precisely to the fields of computational complexity theory and programming language theory. My goal in this post is to show that while both sides use the term “model of computation” (or even just “computation”), they each refer to something radically different. I intend to show that the difference is not a matter of aesthetics, but can be objectively and mathematically defined.</p>
+
+<p>I must take great care in writing this because, unfortunately, I lack the knowledge to make any definitive claims on the subject. However, I have been unable to find any good discussion of this topic online, and the very existence of the notes discussed below suggests that one does not exist. My contribution, therefore, is merely an attempt to start a conversation which would hopefully draw those who are more qualified to contribute actual substance. I hope that whatever errors I make are superficial and could be forgiven (though I would appreciate readers pointing them out).</p>
+
+<p>I find this subject important for two reasons: 1. I hope it would help to uncover this overloading and thus clarify debates and make them more fruitful, and 2. because I think this divide touches on the core concept of computer science, and helps delineate the two theoretical disciplines as each focusing on the very heart of computer science but from a very different point of view. I should disclose that, while by no means a researcher, my personal interests draw me more to the TOC/Theory A/complexity theory view, and believe it is the TOP side that sometimes overreaches. I hope my personal aesthetic preferences do not skew my discussion too much.</p>
+
+<h2 id="computation-models-vs-programming-models">Computation Models vs. Programming Models</h2>
+
+<p>The schism goes back to two of the earliest models of computation: Alonzo Church’s lambda calculus and Alan Turing’s automatic machine, first named “Turing machine” by none other than Church. More precisely, the schism originates in a <em>modern</em> categorization of those two models, although I believe there is some merit in projecting those interpretations back to Church and Turing themselves, who differed greatly in their personal interests. The two categories are language-based models of computation (of which Church’s lambda calculus is an example) and the machine-based models of computation (Turing machines are an example).</p>
+
+<p>The particular debate on Aaronson’s blog is over the Church-Turing thesis. There are debates over modern interpretations and extensions of the thesis in the context of physical systems, quantum computation, and the possibility of <a href="https://en.wikipedia.org/wiki/Hypercomputation">hypercomputation</a>, but this particular debate is about nothing of the sort, and purportedly applies to real-world software. The post and the entire discussion in the comments are interesting (I particularly enjoyed <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52305">this comment</a> by <a href="http://www.cs.washington.edu/people/faculty/beame">Paul Beame</a> and <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52616">this one</a> by <a href="https://itaibn.wordpress.com/">Itai Bar-Natan</a>), but here I will present a small selection.</p>
+
+<p><a href="https://www.mpi-sws.org/~neelk/">Neel Krishnaswami</a>, who represents the TOP view, <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52239">argues the following</a></p>
+
+<blockquote>
+  <p>It’s really weird that the Church-Turing thesis, which is ridiculously robust at first order, falls apart so comprehensively at higher type.</p>
+</blockquote>
+
+<p>and <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52526">continues</a>:</p>
+
+<blockquote>
+  <p>[T]he claim that all Turing-complete languages are equivalent in expressive power is <em>false</em>. It is only true when inputs and outputs are numbers (or other simple inductive type). I don’t mean false in some esoteric philosophical sense, either: I mean there are counterexamples… Note that higher-type inputs and outputs have a lot of practical applications, too… So the fact that the higher-type generalization of the Church-Turing thesis fails is of immense interest, both theoretically and practically.</p>
+</blockquote>
+
+<p>Aaronson, who represents the TOC view, <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52527">replies</a>:</p>
+
+<blockquote>
+  <p>I disagree with the idea that we can or should worry about “higher types” when formulating what the Church-Turing Thesis is supposed to mean. From the perspective of the end user, a computer program is something that takes various strings of information as input and produces other strings as output.… I’d say that, when formulating a principle as basic and enduring as the Church-Turing Thesis, we have no right to weigh it down with concepts that only make sense “internally,” within certain kinds of programming languages. … I don’t mind if someone formulates a “Higher-Type Church-Turing Thesis” and then knocks it down. But they should make it clear that their new, false thesis has nothing to do with what Turing was writing about in 1936, or with… the clearest way to understand the Church-Turing Thesis today: as a falsifiable claim about what kinds of computers can and can’t be built in physical reality.</p>
+</blockquote>
+
+<p>Krishnaswami <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52541">retorts</a>:</p>
+
+<blockquote>
+  <p>[T]he concept of type is not tied to a programming language, or indeed even to computation — they were invented before computers were! … Types serve to structure the purely mathematical concept of equality, which is the concept upon which your formalization of expressive power relies.</p>
+</blockquote>
+
+<p>To which <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52557">Aaronson answers</a>:</p>
+
+<blockquote>
+  <p>Your viewpoint — that the logicians’ abstract concept of a “type” comes prior to talking about computation — is one that’s extremely alien to my way of thinking. (If it were so, how could I have spent a whole career worrying about computation without ever needing ‘higher types’…?) For me, the notion of computation comes before types, before categories, before groups, rings, and fields, even before set theory. Computation is down at the rock bottom, along with bits and integers. Everything else, including types, comes later and is built on top.</p>
+</blockquote>
+
+<p>We can summarize the two positions in the following way: The TOP people say, “computations are programs, and programs are mathematical objects whose structure is captured by their types; the two models of computations are equivalent when asked to represent first-order functions, but diverge when asked to represent higher-order functions”. The TOC response is, put simply, “what the hell is a function?” Just as a falling apple doesn’t compute integrals — it just falls — so too Turing machines and any other machine model compute neither higher-order nor first-order functions; they compute bits. What imaginary mathematical concepts we then choose to describe those computations is a different matter altogether, one that does not affect the nature of the computation just as calculus has had no impact on the behavior of falling apples.</p>
+
+<p>To Aaronson, functions are an “imagined” concept, a human interpretation applied to a computational process (among other things). Computation itself is a <em>physical</em> process – albeit abstract, in the sense that it may have multiple physical implementations – whose idealized model may serve as the foundation for higher concepts<sup id="fnref:foundations"><a href="#fn:foundations" class="footnote">1</a></sup>. For Krishnaswami, functions and types are fundamental, primitive constructs, that are precursors to computation (which, I presume, is perceived to be a purely mathematical concept to begin with).</p>
+
+<p>This can be said to be nothing more than a different choice of foundation, where in each one the other can be encoded as a high-level abstraction. In mathematics, sometimes solving a problem requires finding the right orthonormal basis to describe its domain. Are machine models and language models two such “orthonormal bases” to describe computation — different but equal representations — or are they qualitatively and fundamentally different? Can we prove that the TOP view requires an additional “imaginative” step?</p>
+
+<p>In a <a href="http://math.andrej.com/2008/02/06/representations-of-uncomputable-and-uncountable-sets/">blog post</a>, <a href="http://www.andrej.com/">Andrej Bauer</a> discusses the importance of representation. He gives two examples. In the first, he considers the following representation of Turing machines: we represent a TM as simply 1 if it terminates on the empty tape, and as 0 if it doesn’t. In this representation, he points out, the halting problem does not exist! A <em>reasonable</em> representation, he says, is one that lets us perform the relevant operations for the represented object; in the case of a Turing machine, we would like to simulate the machine, and the aforementioned representation does not let us do that. He then gives another example. For any computable <em>or non-computable</em> function $f : X \rightarrow Y$, we could represent the input as the pair <em>(a, b)</em>, “where <em>a</em> represents x (in the original representation of <em>X</em>) and <em>b</em> represents <em>f(x)</em> in the representation of <em>Y</em>. The function <em>f</em> then becomes easily computable as the first projection: given a pair <em>(a,b)</em> representing <em>x</em>, the value <em>f(x)</em> is represented by <em>b</em>”. However, Bauer does not point out that this representation actually fulfills his condition. If <em>a</em> is some “reasonable” executable representation of a TM, and <em>b</em> is 1 or 0 dependent on whether the machine halts or not on the empty tape, the halting problem also disappears. How can we identify such a representation that actually “does all the work”? Easy – we investigate the computability of the language of legal representations. The language of representations of TMs that I presented is itself undecidable. In the comment by Bauer below, he gives a different justification for why this representation is not, in fact, reasonable, but our justification naturally generalizes to complexity, too. We may ask (and easily answer) <em>how much</em> work is done by the representation by investigating the complexity class of the language. So in addition to the question of utility, we can classify representations along the axis of their language complexity.</p>
+
+<p>We now turn this line of reasoning on representations of computation itself by asking what is the computational complexity of deciding whether a given string of bits encodes a valid (well-formed) computation in a given model? Consider some machine models: the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, <a href="https://en.wikipedia.org/wiki/Random-access_machine">random-access machine</a>, <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a>, <a href="https://en.wikipedia.org/wiki/Boolean_circuit">boolean circuits</a>, <a href="https://en.wikipedia.org/wiki/Boolean_network">boolean networks</a>, <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">neural networks</a>, <a href="https://en.wikipedia.org/wiki/P_system">P systems</a>. Now consider some language models: Church’s <a href="https://en.wikipedia.org/wiki/Lambda_calculus">untyped λ-calculus</a>, <a href="https://en.wikipedia.org/wiki/%CE%A0-calculus">π-calculus</a>, <a href="https://en.wikipedia.org/wiki/System_F">System F</a>, <a href="https://en.wikipedia.org/wiki/System_F#System_F.CF.89">System Fω</a>, <a href="https://en.wikipedia.org/wiki/Dependent_type#First_order_dependent_type_theory">System λΠ</a>. All those representations  pass Bauer’s first condition – they are directly useful for simulating computations – but they differ widely with respect to the second test, namely the complexity of deciding the language of the representation.</p>
+
+<p>For the Turing machine, if we choose to interpret a jump to a nonexistent configuration as a “halt” instruction (a rather natural interpretation), then the required complexity is zero (by that I mean that there exists a natural representation that requires no translation and no validation, i.e., every string specifies a valid machine, and every machine can be specified in that encoding). Zero is also the complexity required to validate appropriate encodings of any of the other machine models (well, maybe not P systems, but certainly lower-level biological computation models). As for Church’s untyped lambda calculus, I believe that the best we can do — if we allow variable shadowing, which complicates interpretation — is validation in linear time and logarithmic space by a PDA (the main issue is that parentheses are meaningful). But for the other language models (the typed ones; I haven’t thought about π-calculus enough), very considerable complexity and a Turing-complete system are required only to validate if a computation is well-formed (for λΠ, that validation is no longer computably tied to the length of the input; it can be larger than the complexity of the computation itself). This clearly shows that the computational model isn’t self-contained, but essentially requires a computationally powerful external collaborator: a programmer and/or a compiler. If a model requires such external work, it is not a model of <em>computation</em> but of <em>programming</em>.</p>
+
+<p>Where precisely we choose to draw the line between a programming model and a computation model may be up for some debate. Church’s untyped calculus seems to be a borderline case. But it is worth mentioning that the notion of a function doesn’t even appear in Church’s 1936 description of lambda calculus, let alone a higher-order function (while the word “variable” does appear, it is clear from context that it is only meant to intuitively communicate the operations of the rewriting rules). Computation by untyped lambda calculus in Church’s paper is reasonably described as a relatively simple rewriting system, which is a special case of a nondeterministic abstract state machine, but, of course, none of those terms existed in 1936. However, when PL theorists say “lambda calculus” today, they seem to mean something different, and use it as shorthand for lambda calculus <em>plus</em> functional denotational semantics.</p>
+
+<p>In any event, the vast complexity difference leaves no question whatsoever that, say, a Turing machine is essentially different from some typed lambda-calculus system. Like entropy, computational complexity is absolute and not subject to a point of view. It is not for me to say which words scholars should use, but when PL researchers say “computation model” when referring to one of the language systems, they mean something qualitatively different from what TOC people mean. System Fω is <em>not</em> a model of computation in the same sense that the Turing machine or digital circuits are.</p>
+
+<p>Krishnaswami <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52590">admits there is a difference</a>:</p>
+
+<blockquote>
+  <p>You’re free to think about computation as acting on bits… but for those bits to do us any good, they have to actually represent something (e.g., data structures).</p>
+</blockquote>
+
+<p>To represent anything, a system needs an observer that assigns its behavior meaning. But the observer required here isn’t the user of the computation, who, after all only cares that the screen’s pixels are lit up in an interesting way or that the airplane’s control surfaces are sent the right signals – i.e., about the bits – but the human <em>programmer</em>.</p>
+
+<p>Viewing machine models and language models as competing is a mistake that confuses computation with programming, two fundamentally different activities. This confusing presentation of machine and language models as standing in opposition to one another cannot be expressed more starkly than in <a href="https://www.quora.com/What-is-Lambda-Calculus-in-laymans-terms/answer/Robert-Harper?share=1">this somewhat trollish post</a> by <a href="http://www.cs.cmu.edu/~rwh/">Bob Harper</a>.</p>
+
+<p>I don’t wish to address every point Harper makes, but just to focus on this one:</p>
+
+<blockquote>
+  <p>The machine models have no practical uses at all… [They’re] worthless from a practical viewpoint.</p>
+</blockquote>
+
+<p>I find it curious that Harper thinks that machine models are worthless while using a physical implementation of one to form that very thought and another to type it into. He probably means that he believes they are worthless as <em>programming</em> models, but that is not what they are. To be even more precise, machine models are far from ideal programming models when the programmer is a human. But some machine models – in particular digital circuits (that are often used to model natural, cellular computation) and neural networks – are great “programming” models for a programmer of a different kind, one that is generally incapable of performing complex computation itself.</p>
+
+<p>It is true that a machine models could be “lifted” to serve as a programming model, and it is in that sense that Krishnaswami and Harper compare the two. Indeed, Krishnaswami’s <a href="http://www.scottaaronson.com/blog/?p=1121#comment-52239">“counterexamples”</a> make sense only if you treat the Turing machine as a programming model (with canonical representations of types), and even then only if you consider “computing a function” not as mapping a set of inputs to a set of outputs, but as the requirement to express an inhabitant of a certain function type (in the type theory sense). That difference between considering a function as a mapping between two sets and as an inhabitant of a function type is not just a matter of perspective: it is a matter of more computational <em>work</em>. It is a different, <em>harder</em> problem. In the type theory interpretation, the computation needs to compute the target element <em>and</em> check a proof that the element is in a certain set. Really, those are two problems, not one, and you certainly can’t fault a model for not solving a problem you didn’t ask it to solve. A machine could solve that problem (simulate type checking) if you asked it to. That a language model solves that problem “automatically” doesn’t matter if the same price (computational complexity) is paid by a collaborator. Otherwise, I could create a language model that solves all NP problems in constant time by defining my language’s type-checker to require and verify a proof certificate with every input problem, and my model would then reduce the input to “yes” in one step. No one would believe my language actually solves a hard computational problem: it simply pushes the difficulty to the collaborator. In fact, some type systems are Turing complete, so those language “computation models” could decide any decidable question in zero time. But, of course, that’s just ignoring the hidden computation that takes place in those models, and is carried out by the programmer and/or interpreter.</p>
+
+<p>In any event, this type-theoretic view, has little to do with the TOC view of computation or with the machine models’ “intended” use. In a report written in 1996, <a href="https://www.dropbox.com/s/aox8ga8uzmbjesx/toc-sp1.pdf?dl=0"><em>Theory of Computing: A Scientific Perspective</em></a>, Oded Goldreich and Avi Wigderson, write that:</p>
+
+<blockquote>
+  <p>TOC is the science of computation. It seeks to understand computational phenomena, be it natural, man made or imaginative. TOC is an independent scientific discipline of fundamental importance. Its intrinsic goals… transcend the immediate applicability to engineering and technology.</p>
+</blockquote>
+
+<p>We only need to look at the modern work on circuit complexity, the great interest in quantum computing or the celebrated work of Leslie Valiant, who studies complexity theoretical aspects of learning and evolution, to see that questions of programs written by a human programmer are far from the only concern of complexity research. It is natural, therefore, that the self-contained machine-based computational models would be more appropriate for such a discipline.</p>
+
+<p>Harper’s attack on the utility of machine models and lack of modularity is tantamount to an architect saying to a chemist, “both of our disciplines concern the arrangement of molecules, yet my discipline is superior, as yours doesn’t even have the modular notion of a room!”</p>
+
+<p>To the architect, the concept of a room is real. Indeed, it is the the material constructing it that is a detail that can change in ways that may not be essential. The walls can be made of wood, mud, concrete, glass, or even intangibly rendered by a graphics card. To the chemist, however, a room is an abstract, imaginary concept constructed by humans to describe certain large-scale configurations of molecules that are meaningful to them, and while chemistry may study steel or concrete, it may also study crystals, polymers or living cells. Debating which of those views is more correct or more useful than the other is silly.</p>
+
+<p>It is telling that Turing’s interest lay elsewhere from Church’s. When discussing what Church and Turing themselves thought of the Church-Turing thesis, Andrew Hodges, Turing’s biographer, <a href="http://www.turing.org.uk/publications/ct70.pdf">writes that</a> Turing</p>
+
+<blockquote>
+  <p>was in many ways an outsider to the rather isolated logicians’ world, having a broad grounding in applied mathematics and an interest in actual engineering.</p>
+</blockquote>
+
+<p>While Church was a logician through and through, Turing was <a href="http://www.ams.org/notices/200610/rev-hodges.pdf">interested in mathematical biology, digital circuit design and theoretical physics</a> (he even considered the ramifications of quantum mechanics on physical computation), and was a pioneer of neural networks and genetic algorithms, in addition to his work on numerical algorithms (although in 1949 he <a href="http://www.cs.tau.ac.il/~nachumd/term/EarlyProof.pdf">described</a> a program proof technique quite similar to Floyd and Hoare’s work, over two decades later).</p>
+
+<h2 id="mathematics-of-computation-and-mathematics-of-programming">Mathematics of Computation and Mathematics of Programming</h2>
+
+<p>Now that we have hopefully established the objective difference between computation and programming models and their different uses, we can read Harper’s claims more charitably as saying that machine models <em>when used as languages</em> are a bad fit for two uses that he has in mind: programming — i.e., the implementation of algorithms in real software — and algorithm specification and analysis (of human-made algorithms intended for implementation in software).</p>
+
+<p>Whether or not the typed functional programming languages based on lambda calculus and advocated by Harper are indeed superior programming languages for real-world large scale software development is, unfortunately, an <a href="https://twitter.com/lmeyerov/status/768563790719754241">unanswered empirical question</a> and far beyond the scope of this post. But as for algorithm specification, <a href="https://existentialtype.wordpress.com/2011/03/16/languages-and-machines/">Harper knows</a> that no one actually specifies algorithms directly in a TM or RAM language,</p>
+
+<p>Rather, they write what is charmingly called pidgin Algol, or pidgin C, or similar imperative programming notation. That is, they use a programming language, not a machine! As well they should. But then why the emphasis on machine models? And what does that pidgin they’re writing mean?
+He suggests:</p>
+
+<p>There is an alternative… without… reference to an underlying machine… [W]e adopt a linguistic model of computation, rather than a machine model, and life gets better! There is a wider range of options for expressing algorithms, and we simplify the story of how algorithms are to be analyzed.
+He then presents a cost-model for functional programming, the lack of which, he believes, has been the only substantial barrier to adoption by algorithm researchers. I am not at all qualified to judge the advantages and disadvantages of Harper’s proposed languages for the purpose of analyzing algorithms; they do offer rich, albeit arcane, modern-logic mathematical properties (but I don’t understand how parallel and sequential algorithms can be compared to one another in a unified notation in that framework, how concurrent algorithms are to be specified and analyzed without introducing complex concepts, and how quantum algorithms can be specified and compared with their classical counterparts; I am also not convinced that such arcane math is required for such a task).</p>
+
+<p>Harper’s criticism suffers from two errors of very different kinds. The first is a categorical error, one of confusing a foundational principle with pragmatic ergonomics. The same accusation Harper levels at machine-based theories could be directed toward Harper’s own favorite formalism, which he elucidates in <a href="https://existentialtype.wordpress.com/2011/03/27/the-holy-trinity/"><em>The Holy Trinity</em></a> (by the way, it is clear that by “computation” he means “programming”):</p>
+
+<p>If you arrive at an insight that has importance for logic, languages, and categories, then you may feel sure that you have elucidated an essential concept of computation—you have made an enduring scientific discovery.
+In practice, those who use Harper’s “computational trinitarianism” of logic, types and cateogry theory to reason about programs, also do not usually use that beautiful correspondence between programs and proofs directly, opting instead for procedural proof “tactics”, which are more convenient in practice. This, however, should be used to undermine the fundamental importance of the theory, just as the convenient use of “pidgin Algol” does not discredit the foundational utility of machine model.</p>
+
+<p>The other mistake is that the flaws Harper attributes to machine models are not flaws in the conceptual foundation of machine models at all, but with the choice of <em>particular</em>, “low level”, machine models (that are nonetheless of great fundamental importance due to the reasons I covered above) and their treatment as low-level programming languages, or “compilation targets”. Hidden in this critique is the assumption that a mental compilation of into those low-level languages is what underlies academic pseudocode. But the concept of machines does not require this compilation, and it is not true that the machines implied by this pseudocode are such low-level ones like TM or RAM.</p>
+
+<p>Indeed, in Leslie Lamport’s formal specification and verification language, TLA<sup>+</sup>, algorithms may optionally be written in a pseudocode-like language, precisely of the kind Harper rejects, and yet they are compiled – for the purpose of formal reasoning – into a mathematical formalism for describing abstract state machines, yet those machines are at least as high-level and at least as composable as Harper’s languages.</p>
+
+<p>Lamport <a href="http://research.microsoft.com/en-us/um/people/lamport/pubs/state-machine.pdf">justifies his choice of mathematical formalism</a> with words that read like a precise mirror-image of Harper’s:</p>
+
+<blockquote>
+  <p>For quite a while, I’ve been disturbed by the emphasis on language in computer science… Thinking is not the ability to manipulate language; it’s the ability to manipulate concepts. Computer science should be about concepts, not languages. … State machines… provide a uniform way to describe computation with simple mathematics. The obsession with language is a strong obstacle to any attempt at unifying different parts of computer science.</p>
+</blockquote>
+
+<p>In a <a href="http://research.microsoft.com/en-us/um/people/lamport/pubs/deroever-festschrift.pdf">short, more trollish version</a> of the same article, he writes:</p>
+
+<blockquote>
+  <p>Computer scientists collectively suffer from what I call the Whorfian syndrome — the confusion of language with reality…Many of these formalisms are said to be mathematical, having words like <em>algebra</em> and <em>calculus</em> in their names. … Despite what those who suffer from the Whorfian syndrome may believe, calling something mathematical does not confer upon it the power and simplicity of ordinary mathematics.</p>
+</blockquote>
+
+<p>Like Harper, Lamport bemoans the lack of properly defined semantics and a unified mathematical framework of academic pseudocode, but instead of a language model he offers a unified mathematical framework with clear and simple semantics, based not on treating each machine model independently as a low-level language, but on abstracting the <em>general idea</em> of a state machine to describe <em>any</em> computation model in a high-level, modular, mathematical way. This is no longer a self-contained machine model of computation but a true formalism (language), just not one based on lambda calculus or other linguistic models (like process calculi) but one designed to formalize all kinds of computations as (very) high-level machines.</p>
+
+<p>Lamport’s mathematical model, TLA, based on abstract nondeterministic state machines and relatively simple logic, that is modular, allows for direct comparison of parallel and sequential versions of an algorithm, works equally well for sequential and concurrent algorithms, and can directly and naturally describe large-scale real-world software, neural computation, genetic algorithms and quantum computation (I’m not certain about the last one). TLA surpasses even the “linguistic” dependent types in unifying the description of an algorithm with the description of its properties – properties and algorithms not only use the same syntactic terms but are actually the same (model) objects – yet it only requires mostly familiar math (what he calls <a href="https://youtu.be/iCRqE59VXT0?t=29m41s">“ordinary math; not some weird computer scientists’ math”</a>).</p>
+
+<p>Algorithm specification and analysis is absolutely crucial for humans who create computations. But while it may be the case that algorithm analysis can learn thing or two about mathematical modeling of algorithms from language models, abstract state machines seem a great fit for this task as well. In the end, however, there can be many foundational theories as well as many formalisms for programming and reasoning about programs. Arguing about their aesthetic qualities – while intellectually interesting – is not what matters. What matters is how they perform when put to various practical uses.</p>
+
+<hr />
+
+<h3 id="discussion"><a href="https://pressron.wordpress.com/2016/08/30/what-we-talk-about-when-we-talk-about-computation/#comments"><em>Discussion</em></a></h3>
+<div class="footnotes">
+  <ol>
+    <li id="fn:foundations">
+      <p>One can indeed imagine a foundation of math built on top of a machine model, say the Turing machine. The natural numbers could be <em>defined</em> as certain strings encoded on the machine’s tape, or even as the universal encoding of a machine that writes a number in unary on the tape and halts. A function could be <em>defined</em> as the encoding of a machine mapping input to output; a set could be <em>defined</em> by its characteristic function (BTW, such a foundation would be protected from paradoxes by undecidability; the physical realizability of computation serves as a natural protection from paradox).&nbsp;<a href="#fnref:foundations" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+	</div>
+</article>
+
+	  </main>
+
+    <!-- Pagination links -->
+    
+
+  </div>
+
+	    <!-- Footer -->
+	    <footer></footer>
+
+
+	    <!-- Script -->
+      <script type="text/javascript" src="/js/main.js"></script>
+<!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+        <script src="js/vendor/html5shiv.js"></script>
+        <![endif]-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+-->
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-99776245-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- <script>
+var _gaq=[['_setAccount','UA-99776245-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script> -->
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nav-toc').toc();
+});
+</script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
+<script type="text/javascript" src="/js/bigfoot.min.js"></script>
+
+<script type="text/javascript">
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
+</script>
+
+
+
+
+
+	</div>
+</body>
+</html>

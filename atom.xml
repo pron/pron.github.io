@@ -4,12 +4,42 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-05-23T16:34:41+03:00</updated>
+ <updated>2017-05-25T17:01:47+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>TLA+ in Practice and Theory<br>Part 1: The Principles of TLA+</title>
+   <link href="/posts/tlaplus_part1"/>
+   <id>/posts/tlaplus_part1</id>
+   <updated>2017-05-25T00:00:00+03:00</updated>
+   <content type="html">&lt;p&gt;This is the first installment in a four-part blog post series about TLA+. A new post will be published every Thursday.&lt;/p&gt; &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt; &lt;p&gt;TLA+ is a formal specification and verification language that helps engineers design, specify, reason about and verify complex, real-life algorithms and software or hardware systems. TLA+ has...</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>What We Talk About When We Talk About Computation</title>
+   <link href="/posts/what-we-talk-about-when-we-talk-about-computation"/>
+   <id>/posts/what-we-talk-about-when-we-talk-about-computation</id>
+   <updated>2016-08-30T00:00:00+03:00</updated>
+   <content type="html">&lt;p&gt;&lt;em&gt;Abstract: Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally...</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>Why Writing Correct Software Is Hard</title>
+   <link href="/posts/correctness-and-complexity"/>
+   <id>/posts/correctness-and-complexity</id>
+   <updated>2016-07-23T00:00:00+03:00</updated>
+   <content type="html">&lt;h2 id=&quot;-and-why-math-alone-wont-help-us&quot;&gt;… and why math (alone) won’t help us&lt;/h2&gt; &lt;p&gt;&lt;em&gt;I was very happy to speak at &lt;a href=&quot;http://curry-on.org/2016/#program&quot;&gt;Curry On&lt;/a&gt; once again. Last year, following our work with Quasar, I spoke on &lt;a href=&quot;http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/&quot;&gt;continuations vs. monads&lt;/a&gt;. This year I gave a talk about computational complexity results in software verification, a subject...</content>
+ </entry>
 
  
 
