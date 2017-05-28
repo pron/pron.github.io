@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-05-26T12:24:01+03:00</updated>
+ <updated>2017-05-28T13:06:05+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -14,7 +14,7 @@
  
 
  <entry>
-   <title>TLA+ in Practice and Theory<br>Part 1: The Principles of TLA+</title>
+   <title>TLA+ in Practice and Theory<br/>Part 1: The Principles of TLA+</title>
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+03:00</updated>
