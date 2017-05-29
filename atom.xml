@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-05-28T13:37:12+03:00</updated>
+ <updated>2017-05-29T20:01:20+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -18,7 +18,7 @@
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+03:00</updated>
-   <content type="html">&lt;p&gt;This is the first installment in a four-part blog post series about TLA+. A new post will be published every Thursday.&lt;/p&gt; &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt; &lt;p&gt;TLA+ is a formal specification and verification language that helps engineers design, specify, reason about and verify complex, real-life algorithms and software or hardware systems. TLA+ has...</content>
+   <content type="html">&lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Thinking doesn’t guarantee that we won’t make mistakes. But not thinking guarantees that we will.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Why We Should Build Software Like We Build Houses&lt;/em&gt;&lt;/p&gt; &lt;/blockquote&gt; &lt;blockquote&gt; &lt;p&gt;Thinking clearly is hard; we can use all the help we can get.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Specifying Systems&lt;/em&gt;&lt;/p&gt;...</content>
  </entry>
 
  
