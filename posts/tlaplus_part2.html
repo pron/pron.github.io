@@ -578,6 +578,14 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">16</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
 
+<p>There is another way of defining $Quotient$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&ClassOf(a, S, \_ \sim \_) \defeq \set{ b \in S : b \sim a }\\
+&Quotient(S, \_ \sim \_) \defeq \set{ ClassOf(a, S, \sim) : a \in S}
+\end{alignat} %]]></script>
+
 <p>The <code class="highlighter-rouge">FiniteSets</code> module (which is part of the TLA<sup>+</sup> standard module library), defines useful set operators, like $IsFiniteSet(S)$, which is true iff $S$ is finite, and $Cardinality(S)$, which is the number of elements in $S$ if $S$ is finite (we define $Cardinality$ ourselves <a href="#putting-it-all-together">later on</a>).</p>
 
 <h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
@@ -607,6 +615,10 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 <p>$ChooseOne$ is a useful operator, whose value is defined only if <em>exactly one</em> value matches the predicate:</p>
 
 <script type="math/tex; mode=display">ChooseOne(S, P(\_)) \defeq \CHOOSE x \in S : P(x) \land \A y \in S : P(y) \implies y = x</script>
+
+<p>Another useful operator is $AnyOf$, which picks an element from a set (and is undefined if the set is empty):</p>
+
+<script type="math/tex; mode=display">AnyOf(S) \defeq \CHOOSE x \in S : \TRUE</script>
 
 <p><script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them, so you can’t <script type="math/tex">\CHOOSE\!</script> the Russell paradox “set” because one does not exist, as it cannot be constructed using any of the set construction operations. The value of $\CHOOSE x : \A s : s \in x \equiv s \notin s$ (which says that $x$ is the set of all sets that do not contain themselves — a paradox) is, therefore, undefined, as no such set $x$ exists; the right-hand side of the <script type="math/tex">\CHOOSE\!</script> expression is false for all sets in ZFC.</p>
 
@@ -658,8 +670,10 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\THEOREM \rlap{AbelianGroup(Int, +)}\\
-&\THEOREM \A n \in Nat \setminus \set{0} : \;& \LET EqModN(a, b) \defeq a \% n = b \%n\\
-&&\IN AbelianGroup(Quotient(Int, EqModN), +)
+\\
+&\THEOREM \A n \in Nat \setminus \set{0} : \;& \LET & a \sim b \defeq a \% n = b \%n & \comment{Equality modulo $n$}\\
+&&&a \oplus b \defeq ClassOf(AnyOf(a) + AnyOf(b), Int, \sim) \; &\comment{Sum on equiv. classes}\\
+&&\rlap{\IN AbelianGroup(Quotient(Int, \sim), \oplus)}
 \end{alignat} %]]></script>
 
 <p>It is important to point out that $Nat$ is the set of <em>all</em> natural numbers, $Int$ is the set of <em>all</em> integers, and $Real$ is the set of the actual real numbers — all uncountably many of them. If we want to work with, say, 32-bit integers or 64-bit floating point numbers, we need to define them and the arithmetic operations on them. You may wonder what good are so many real numbers considering that a program can only represent a small, finite subset of them. The answer is that TLA<sup>+</sup> is not a programming language but a specification language, and it is useful to specify and reason about more than just the actual variables of your program. For example, if you’re specifying a numerical algorithm, it is easier to analyze its error if you can actually express the precise result it tries to approximate. Or if you are building a cyber-physical system — a discrete system that interacts with objects in the real world; think drone, sensor or robot — you may want to also model the system’s environment, which is easier to do by describing it as a continuous system using familiar physics equations (we will talk about cyber-physical systems in part 4).</p>
