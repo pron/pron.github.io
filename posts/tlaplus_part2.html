@@ -371,10 +371,13 @@
 
 <p>Variables that are not part of the state of a computation (we’ll learn about state in part 3), can be introduced with the quantifiers $\A$ or $\E$, or can be declared with the keyword <script type="math/tex">\CONSTANT\!</script>, in which case they are free.</p>
 
-<p>In addition, TLA<sup>+</sup> has a couple of special constructs inspired by programming languages. The construct
-<script type="math/tex">\IF p\; \THEN x\; \ELSE y</script>
-where $p$ is some logical predicate and $x$ and $y$ are values, takes the value $x$ if $p$ is <script type="math/tex">\TRUE\!</script> or the value of $y$ otherwise. The construct
-<script type="math/tex">\CASE p_1 \rightarrow e_1 \;\Box\; ...\;\Box\;p_n \rightarrow e_n ...\;\Box\; \OTHER\rightarrow e</script></p>
+<p>In addition, TLA<sup>+</sup> has a couple of special constructs inspired by programming languages. The construct</p>
+
+<script type="math/tex; mode=display">\IF p\; \THEN x\; \ELSE y</script>
+
+<p>where $p$ is some logical predicate and $x$ and $y$ are values, takes the value $x$ if $p$ is <script type="math/tex">\TRUE\!</script> or the value of $y$ otherwise. The construct</p>
+
+<script type="math/tex; mode=display">\CASE p_1 \rightarrow e_1 \;\Box\; ...\;\Box\;p_n \rightarrow e_n ...\;\Box\; \OTHER\rightarrow e</script>
 
 <p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later).</p>
 
