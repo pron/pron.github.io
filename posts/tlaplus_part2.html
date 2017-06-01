@@ -579,13 +579,14 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
 
-<p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>.  $\CHOOSE x : P(x)$, is equal to <em>some</em> value (i.e. set) satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:</p>
+<p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>. Technically, <script type="math/tex">\CHOOSE\!</script> can be added to any first-order logic and doesn’t rely in any way on our logical theory of sets, but as it is a powerful general mechanism for talking about specific values, I thought that we should first get to know the values in our theory.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
+<p>$\CHOOSE x : P(x)$, is equal to <em>some</em> value (i.e. set) satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:
+<script type="math/tex">% <![CDATA[
 \begin{alignat}{1}
 &(\E x : P(x)) \equiv\; P(\CHOOSE x : P(x) )\\
 &(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
-\end{alignat} %]]></script>
+\end{alignat} %]]></script></p>
 
 <p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script>, and therefore so can $\A$, as $(\A x : P(x)) \equiv \neg(\E x : \neg P(x))$. The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
 
