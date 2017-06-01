@@ -580,11 +580,11 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&(\E x : P(x)) &\equiv\;& P(\CHOOSE x : P(x) )\\
-&(\A x : P(x) &\equiv& Q(x)) \implies  ((\CHOOSE x : P(x)) = (\CHOOSE x : Q(x)))
+&(\E x : P(x)) \equiv\; P(\CHOOSE x : P(x) )\\
+&(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
 \end{alignat} %]]></script>
 
-<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script>, and therefore so can $\A$, as $(\A x : P(x)) \equiv \neg(\E x : \neg P(x))$. The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula $a = \CHOOSE x : \TRUE$, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script>, and therefore so can $\A$, as $(\A x : P(x)) \equiv \neg(\E x : \neg P(x))$. The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
 
 <p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$.</p>
 
