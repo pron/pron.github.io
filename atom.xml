@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-06-01T20:40:27+03:00</updated>
+ <updated>2017-06-01T21:08:29+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -28,7 +28,7 @@
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+03:00</updated>
-   <content type="html">&lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Thinking doesn’t guarantee that we won’t make mistakes. But not thinking guarantees that we will.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Why We Should Build Software Like We Build Houses&lt;/em&gt;&lt;/p&gt; &lt;/blockquote&gt; &lt;blockquote&gt; &lt;p&gt;Thinking clearly is hard; we can use all the help we can get.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Specifying Systems&lt;/em&gt;&lt;/p&gt;...</content>
+   <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. A new post will be published every Thursday. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;&lt;/em&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Thinking doesn’t guarantee that we won’t make mistakes. But not thinking guarantees that we will.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Why We Should Build Software...</content>
  </entry>
 
  
