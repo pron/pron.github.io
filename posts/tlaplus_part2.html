@@ -582,8 +582,8 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&ClassOf(a, S, \_ \sim \_) \defeq \set{ b \in S : b \sim a }\\
-&Quotient(S, \_ \sim \_) \defeq \set{ ClassOf(a, S, \sim) : a \in S}
+&ClassOf(a, S, \_ \sim \_) &\defeq \set{ b \in S : b \sim a }\\
+&Quotient(S, \_ \sim \_) &\defeq \set{ ClassOf(a, S, \sim) : a \in S}
 \end{alignat} %]]></script>
 
 <p>The <code class="highlighter-rouge">FiniteSets</code> module (which is part of the TLA<sup>+</sup> standard module library), defines useful set operators, like $IsFiniteSet(S)$, which is true iff $S$ is finite, and $Cardinality(S)$, which is the number of elements in $S$ if $S$ is finite (we define $Cardinality$ ourselves <a href="#putting-it-all-together">later on</a>).</p>
