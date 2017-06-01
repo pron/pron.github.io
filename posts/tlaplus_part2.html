@@ -696,11 +696,11 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>Equality for functions is <em>extensional</em>, meaning, for two functions, $f$ and $g$,</p>
 
-<script type="math/tex; mode=display">(f = g)\equiv (\DOMAIN f = \DOMAIN g \land \A x \in \DOMAIN f : f[x] = f[g])</script>
+<script type="math/tex; mode=display">(f = g)\equiv (\DOMAIN f = \DOMAIN g \land \A x \in \DOMAIN f : f[x] = f[x])</script>
 
 <p>We could define a specific function $double$ on the natural numbers like so,</p>
 
-<script type="math/tex; mode=display">double \defeq \CHOOSE f \in [Nat \to Nat] : \A n \in Nat : f[x] = 2*n</script>
+<script type="math/tex; mode=display">double \defeq \CHOOSE f \in [Nat \to Nat] : \A n \in Nat : f[n] = 2*n</script>
 
 <p>but that would be very cumbersome and so TLA<sup>+</sup> allows us to define it like so:</p>
 
