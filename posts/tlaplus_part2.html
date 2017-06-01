@@ -882,7 +882,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 &&\rlap{\IN Helper(seq)}
 \end{alignat} %]]></script>
 
-<p>TLA<sup>+</sup> has special syntax for finite sequence literals, also called tuples (or lists, if you like). The tuple $\seq{2, \str{hi}, [x \in N \mapsto x + 1]}​$ is simply syntax sugar for:</p>
+<p>TLA<sup>+</sup> has special syntax for finite sequence literals, also called tuples (or lists, if you like). The tuple $\seq{10, \str{hi}, [x \in N \mapsto x + 1]}$ is simply syntax sugar for:</p>
 
 <script type="math/tex; mode=display">[i \in 1..3 \mapsto \CASE i=1 \to 10 \;\Box\;  i=2 \to \str{hi} \;\Box\;  i=3 \to [x \in N \mapsto x + 1]]</script>
 
