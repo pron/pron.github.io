@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Jekyll">
+    <link rel="canonical" href="/posts/tlaplus_part2"/>
+    <!--<link rel="canonical" href="/posts/tlaplus_part2">-->
+
+    <title>TLA+ in Practice and Theory<br/>Part 2: The + in TLA+</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/fav/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"    href="/fav/favicon-16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="/fav/favicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"   href="/fav/favicon-60.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="/fav/favicon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/fav/favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/fav/favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/fav/favicon-180.png">
+    -->
+    <!--
+    <link rel="icon" type="image/png" href="/fav/favicon-96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/fav/favicon-192.png" sizes="192x192">
+    -->
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS & fonts -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+    <!--
+    <script data-cfasync="false" type="text/javascript" src="//use.typekit.net/pfn0abv.js"></script>
+    <script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- RSS -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+
+
+    <!-- Social cards -->
+    
+        <!-- Twitter -->
+<meta name="twitter:site" content="@pressron"> 
+<meta name="twitter:card" content="summary"> 
+<meta name="twitter:title" content="TLA+ in Practice and Theory<br/>Part 2: The + in TLA+"> 
+<meta name="twitter:description" content="We explore the "data logic" of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
+"> 
+
+<!-- OpenGraph -->
+<meta property="og:site_name" content="Ron Pressler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TLA+ in Practice and Theory<br/>Part 2: The + in TLA+">
+<meta property="og:description" content="We explore the "data logic" of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
+">
+<meta property="og:url" content="/posts/tlaplus_part2">
+<meta property="og:image" content="http://www.gravatar.com/avatar/c69557151e2f8331f6b1865469b694dd?s=200">
+<meta property="article:published_time" content="2017-06-01">
+
+    
+
+
+    
+
+    
+    <meta name="twitter:site" content="@pressron">
+</head>
+
+
+<body>
+	<div id="wrap">
+
+	  <!-- Navigation -->
+	  <nav id="nav">
+    
+        <div id="nav-toc">
+        </div>
+    
+	<div id="nav-list">
+		<a href="/">Home</a>
+
+		<!-- Nav pages -->
+	  
+	    
+	  
+	    
+	      <a href="/about" title="About">About</a>
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+
+    <!-- Nav links -->
+	  
+
+
+	</div>
+
+    <footer>
+
+	<!-- <span>version </span> -->
+
+</footer>
+
+</nav>
+
+
+    <!-- Icon menu -->
+	  <a id="nav-menu">
+	  	<div id="menu"></div>
+	  </a>
+
+      <!-- Header -->
+      
+        <header id="header" class="parent justify-spaceBetween">
+  <div class="inner w100 relative">
+    <span class="f-left">
+      <a href="/">
+        <h1>
+          <span>press</span>ron
+        </h1>
+      </a>
+    </span>
+    <!--
+    <span id="nav-links" class="absolute right bottom">
+	    
+	      
+	    
+	      
+	        <a href="/about" title="About">About</a>
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+
+	    
+
+
+    </span>
+    -->
+  </div>
+</header>
+
+      
+
+    <!-- Main content -->
+	  <div id="container">
+
+	  <main>
+			<article id="post-page" class=>
+	<h2>TLA<sup>+</sup> in Practice and Theory<br/>Part 2: The + in TLA<sup>+</sup></h2>		
+	<time datetime="2017-06-01T00:00:00+03:00" class="by-line">01 Jun 2017</time>
+	<div class="content">
+
+		<script type="math/tex; mode=display">\newcommand{\sc}[1]{\mathrm{\small{#1}}\;}
+\newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}}
+\newcommand{\str}[1]{``\mathsf{#1}"}
+\newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\seq}[1]{\langle #1 \rangle}
+\newcommand{\llbracket}{[\![}
+\newcommand{\rrbracket}{]\!]}
+\newcommand{\sem}[1]{\llbracket #1 \rrbracket}
+\newcommand{\H}{-\!\!\!}
+\newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!}
+\newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!}
+\newcommand{\LR}{\raise 2.5pt {\lrcorner}}
+\newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!}
+\newcommand{\defeq}{\triangleq}
+\newcommand{\E}{\exists\,}
+\newcommand{\A}{\forall\,}
+\newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,}
+\newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,}
+\newcommand{\implies}{\Rightarrow}
+\newcommand{\whileop}{\stackrel{+} -\!\!\triangleright\; }
+\newcommand{\LET}{\sc{LET}}
+\newcommand{\IN}{\sc{IN}}
+\newcommand{\RECURSIVE}{\sc{RECURSIVE}}
+\newcommand{\LAMBDA}{\sc{LAMBDA}}
+\newcommand{\IF}{\sc{IF}}
+\newcommand{\THEN}{\sc{THEN}}
+\newcommand{\ELSE}{\sc{ELSE}}
+\newcommand{\CASE}{\sc{CASE}}
+\newcommand{\OTHER}{\sc{OTHER}}
+\newcommand{\CHOOSE}{\sc{CHOOSE}}
+\newcommand{\BOOLEAN}{\sc{BOOLEAN}}
+\newcommand{\TRUE}{\sc{TRUE}}
+\newcommand{\FALSE}{\sc{FALSE}}
+\newcommand{\DOMAIN}{\sc{DOMAIN}}
+\newcommand{\EXCEPT}{\sc{EXCEPT}}
+\newcommand{\STRING}{\sc{STRING}}
+\newcommand{\MODULE}{\sc{MODULE}}
+\newcommand{\LOCAL}{\sc{LOCAL}}
+\newcommand{\INSTANCE}{\sc{INSTANCE}}
+\newcommand{\WITH}{\sc{WITH}}
+\newcommand{\EXTENDS}{\sc{EXTENDS}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\VARIABLE}{\sc{VARIABLE}}
+\newcommand{\VARIABLES}{\sc{VARIABLES}}
+\newcommand{\CONSTANT}{\sc{CONSTANT}}
+\newcommand{\CONSTANTS}{\sc{CONSTANTS}}
+\newcommand{\UNION}{\sc{UNION}}
+\newcommand{\SUBSET}{\sc{SUBSET}}
+\newcommand{\UNCHANGED}{\sc{UNCHANGED}}
+\newcommand{\ENABLED}{\sc{ENABLED}}
+\newcommand{\WF}{\text{WF}}
+\newcommand{\SF}{\text{SF}}
+\newcommand{\THEOREM}{\sc{THEOREM}}
+\newcommand{\LEMMA}{\sc{LEMMA}}
+\newcommand{\COROLLARY}{\sc{COROLLARY}}
+\newcommand{\PROPOSITION}{\sc{PROPOSITION}}
+\newcommand{\AXIOM}{\sc{AXIOM}}
+\newcommand{\PROOF}{\sc{PROOF}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\PROVE}{\sc{PROVE}}
+\newcommand{\QED}{\sc{QED}}
+\newcommand{\BY}{\sc{BY}}
+\newcommand{\DEF}{\sc{DEF}}
+\newcommand{\DEFS}{\sc{DEFS}}
+\newcommand{\OBVIOUS}{\sc{OBVIOUS}}
+\newcommand{\OMITTED}{\sc{OMITTED}}
+\newcommand{\NEW}{\sc{NEW}}
+\newcommand{\STATE}{\sc{STATE}}
+\newcommand{\ACTION}{\sc{ACTION}}
+\newcommand{\TEMPORAL}{\sc{TEMPORAL}}
+\newcommand{\USE}{\sc{USE}}
+\newcommand{\DEFINE}{\sc{DEFINE}}
+\newcommand{\SUFFICES}{\sc{SUFFICES}}
+\newcommand{\HAVE}{\sc{HAVE}}
+\newcommand{\TAKE}{\sc{TAKE}}
+\newcommand{\PICK}{\sc{PICK}}
+\newcommand{\WITNESS}{\sc{WITNESS}}
+\newcommand{\HIDE}{\sc{HIDE}}</script>
+
+<div class="epigraph">
+  <blockquote>
+
+    <p>Writing is nature’s way of letting you know how sloppy your thinking is.</p>
+
+    <p class="ep-footer">Dick Guindon</p>
+  </blockquote>
+
+  <blockquote>
+    <p>Mathematics is nature’s way of letting you know how sloppy your writing is.</p>
+
+    <p>…Formal mathematics is nature’s way of letting you know how sloppy your mathematics is.</p>
+
+    <p class="ep-footer">Leslie Lamport, <em>Specifying Systems</em></p>
+  </blockquote>
+
+</div>
+
+<p>In <a href="/posts/tlaplus_part1">part 1</a> we discussed the motivation, use and general principles guiding the design of TLA<sup>+</sup>. We now turn to study the details of the language. We begin with the language elements used to describe the static state of a computation, namely the program’s data and data operations, that form the primitive building blocks of computation. We will call this part of TLA<sup>+</sup> the <em>data logic</em>.</p>
+
+<h2 id="describing-data-and-operations-with-math">Describing Data and Operations with Math</h2>
+
+<p>TLA<sup>+</sup> uses the temporal logic of actions, TLA, to describe computation as a discrete dynamical system, which is analogous to the use of ordinary differential equations for describing continuous systems. Just like ODEs are defined over a state space, where the variables can take values in $\mathbb{R}$. The state space of TLA formulas is some logical structure (we’ll learn precisely what that means) that contains the values which TLA variables can take at any instant in time. In TLA<sup>+</sup>, sets form that structure, and the logical theory for describing elements in that structure is based on first-order-logic and Zermelo–Fraenkel set theory (ZFC) — the standard formalism of ordinary mathematics. This means that we will use formal mathematics to describe our software, or, for now, just their data structures and basic operations. “Formal” simply means working in a system (a “formal system”, or a “formalism”) with <em>precise</em> rules, both syntactic  — how expressions must be formed — and semantic — what the expressions mean.</p>
+
+<p>This static component of TLA<sup>+</sup> takes up most of the TLA<sup>+</sup> language, and if you’re new to specification languages and proof assistants, understanding it will teach you all the essentials of doing formal mathematics on a computer. But from a theoretical standpoint, it is the least interesting and least essential part of TLA<sup>+</sup> (TLA, the dynamic component is the interesting, essential part), although it is important from a design and usability perspective, as it was designed to be as easy and familiar as possible. And yet it is the most controversial aspect of TLA<sup>+</sup>. This is because Lamport chose an untyped formalism for mathematics, while most specification languages opt for a typed one.</p>
+
+<p>Aside from controversial claims (on either side of the debate) regarding metrics such as correctness or productivity, types in programming languages have advantages that, I believe, most agree on: they help compilers (especially AOT compilers) generate efficient machine code, and they help organize code, by providing some form of up-to-date documentation and encouraging a sensible focus to subroutines. They also assist tooling with automatic completion and automatic refactoring. Neither of these less-controversial advantages, however, is relevant for a specification language like TLA<sup>+</sup> because it is not compiled into an executable, and because specifications are orders of magnitude shorter than program code and so don’t benefit much from features intended to help large teams of programmers maintain large codebases. The tradeoffs typed and untyped formalisms make for <em>specification</em> languages — or math in general — are therefore different from those concerning programming languages, and are well covered in the joint, and balanced, paper by Lamport and Larry Paulson (author of the proof assistant Isabelle), <a href="http://lamport.azurewebsites.net/pubs/lamport-types.pdf"><em>Should Your Specification Language Be Typed?</em></a></p>
+
+<p>Lamport’s choice is driven by his wish for simplicity (as he sees it) for TLA<sup>+</sup>’s intended audience, namely engineers, and probably by his background as a classical mathematician. Set theory has the advantage of being familiar<sup id="fnref:standard"><a href="#fn:standard" class="footnote">1</a></sup> yet powerful, and Lamport says he believes it is indeed simpler <em>in practice</em> for engineers to use in specification of systems.</p>
+
+<p>Other specification languages may need type systems because they are intended for uses other than software or hardware specification. Lamport <a href="https://groups.google.com/d/msg/tlaplus/msLltIcexF4/4VxyyYGtDAAJ">writes</a>:</p>
+
+<blockquote>
+  <p>There’s no good reason to write a set like {1, {2,3}}, and making it impossible to write seems like a good idea. However, I’ve found that there is no simple way to make it impossible to write that set without also making it impossible to write useful sets. As this implies, Coq is not simple… That doesn’t meant that there’s anything wrong with Coq; it just means that it’s not meant for ordinary engineers. For example, if you look at a math text, you might find that the symbol + is used in a single paragraph to mean several different things. To formalize that math in TLA<sup>+</sup>, you’d have to use a different symbol for each of those different meanings. That would drive a mathematician crazy. Coq allows you to use the same symbol for all of them. So, as George Gonthier<sup id="fnref:gonthier"><a href="#fn:gonthier" class="footnote">2</a></sup> will tell you, you need something like Coq for formalizing serious math. Since system builders and algorithm designers don’t use that kind of math, they don’t need to deal with the complexity of a language like Coq.</p>
+</blockquote>
+
+<p>The static component of TLA<sup>+</sup> is a formal set theory that Lamport calls ZFM, ZF for Mathematics, which he explains in <a href="/assets/lamport-types-not-harmless.pdf">this short paper</a> (along with a comparison with typed formalisms).</p>
+
+<p>Logicians will likely find the TLA<sup>+</sup> formalism too ordinary; perhaps even dull. The mathematician G.H. Hardy once wrote<sup id="fnref:hardy"><a href="#fn:hardy" class="footnote">3</a></sup>: “The ‘real’ mathematics of the ‘real’ mathematicians… is almost wholly ‘useless’… It is the dull and elementary parts… that work for good or ill.” But TLA<sup>+</sup> is not a tool for exploring the secrets of mathematics or novel logics, but a tool for engineers to specify systems that “work”<sup id="fnref:hardy2"><a href="#fn:hardy2" class="footnote">4</a></sup>. As far as ordinary math goes, TLA<sup>+</sup> is a clear, simple and powerful formalism, with a convenient and natural syntax<sup id="fnref:set-theory"><a href="#fn:set-theory" class="footnote">5</a></sup>.</p>
+
+<p>TLA<sup>+</sup> uses formal mathematics to specify software systems. As you’ll see, it is not as scary as it may first sound to a programmer. Programming is turning informal requirements into a low-level formal specification of the software — the program. If you can do that, and if you understand why your program works, or at least, how it is supposed to work, you can also write a high-level mathematical specification. It just takes some practice. In the introduction to <em>Specifying Systems</em> Lamport writes:</p>
+
+<blockquote>
+  <p>The mathematics we use is more formal than the math you’ve grown up with… The mathematics written by most mathematicians and scientists is not really precise. It’s precise in the small, but imprecise in the large. Each equation is a precise assertion, but you have to read the accompanying words to understand how the equations relate to one another and exactly what the theorems mean. Logicians have developed ways of eliminating those words and making the mathematics completely formal and, hence, completely precise… [M]athematicians and scientists think that formal mathematics, without words, is long and tiresome. They’re wrong. Ordinary mathematics can be expressed compactly in a precise, completely formal language. It takes only about two dozen lines to define the solution to an arbitrary differential equation in the <code class="highlighter-rouge">DifferentialEquations</code> module… But few specifications need such sophisticated mathematics. Most require only simple application of a few standard mathematical concepts.</p>
+</blockquote>
+
+<p>I must remind you again that this is not a tutorial, and much of the material covered is not necessary to write good TLA<sup>+</sup> specifications. While I will cover the basics and hope that the examples in this post will give you a taste of what formal mathematical specification is and how it feels similar to programming, my emphasis is the mathematical theory and design principles behind TLA<sup>+</sup>. For good hands-on tutorials on TLA<sup>+</sup>, refer to those I mentioned in <a href="/posts/tlaplus_part1#introduction">part 1</a>.</p>
+
+<h2 id="what-is-a-logic">What Is (a) Logic?</h2>
+
+<p>TLA<sup>+</sup> uses logic to specify both algorithms and their data structures. For those of you who may be rusty on mathematical logic, here’s a review.</p>
+
+<h3 id="logic-fundamentals">Logic Fundamentals</h3>
+
+<p>Formal logic, symbolic logic, or mathematical logic, is a <em>formal system</em>, or, simply a <em>formalism</em><sup id="fnref:formalism"><a href="#fn:formalism" class="footnote">6</a></sup>. Put simply, it is a precise language to talk about things (or, at least things that are amenable to precision). It is precise because it has precise syntax and precise semantics. The syntax defines rules for how legal (<em>well formed</em>) <em>expressions</em> (strings) in the language can be formed, and the semantics defines what those expressions <em>mean</em> by connecting them to precisely defined mathematical objects. The semantics allows us to know exactly what any phrase in the language means, and the syntax allows us to manipulate phrases in such a way that we know exactly its effect on meaning.</p>
+
+<p>The syntax of the logic is made of some built-in <em>connectives</em> — usually $\land$ for <em>conjunction</em> (“and”), $\lor$ for <em>disjunction</em> (“or”), $\neg$ or sometimes $\sim$ for <em>negation</em> (“not”), $\implies$ or $\rightarrow$ for <em>implication</em> (“if-then”), $\equiv$ or $\Leftrightarrow$ for <em>equivalence</em> (if-and-only-if, or iff), a set of <em>variables</em> ($x,y,..$) — names we use to refer to objects — and a <em>signature</em>, which is a set of symbols with a specific <em>arity</em> (how many arguments the symbol takes), like <code class="highlighter-rouge">5</code> (0-ary), <code class="highlighter-rouge">=</code> (2-ary), <code class="highlighter-rouge">&lt;</code> (2-ary), <code class="highlighter-rouge">*</code> (2-ary), or <code class="highlighter-rouge">-</code> (unary minus). For example, the expression $x * 5 &lt; -y \land \neg(x &lt; 5)$  is a legal expression in the logic I’ve given as an example. The logic can also have <em>quantifiers</em>, the most common of which are the <em>universal</em> quantifier $\A$ (“for all”) and the <em>existential</em> quantifier $\E$ (“there exists”). Quantifiers usually <em>bind</em> variables. For example, $\A x … $, which means “for all objects x such that …”, or $\E x …$, which means “there exists an object x such that …”. A <em>formula</em> is a boolean-valued expression, namely one that is either true or false. Variables that appear in a formula unbound are called <em>free variables</em>. A formula that has no free variables is called a <em>sentence</em> or a <em>closed formula</em>.</p>
+
+<p>A logic also has a <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)"><em>structure</em></a>, which is the logic’s <a href="https://en.wikipedia.org/wiki/Domain_of_discourse">domain of discourse</a> — <em>what</em> the logic is talking about — which gives meaning, or <em>semantics</em> to the signature. Assigning a specific structure to a logic is called an <a href="https://en.wikipedia.org/wiki/Interpretation_(logic)"><em>interpretation</em></a>. The meaning for 0-ary symbols like <code class="highlighter-rouge">2</code> is usually called a <em>constant</em>, while the meaning of symbols of higher-arity is usually called a <em>relation</em> (e.g., the less-than relation, <code class="highlighter-rouge">&lt;</code>) or a <em>function</em><sup id="fnref:function-relation"><a href="#fn:function-relation" class="footnote">7</a></sup>. The meaning of a variable is also defined by the structure, although here the “order” of the logic matters. We’ll discuss this subject a bit later, but in first-order logic, a variable can refer any value in a collection of possible values defined by the structure; that collection is called the <a href="https://en.wikipedia.org/wiki/Universe_(mathematics)"><em>universe</em></a> of the logic.</p>
+
+<p>A <em>model</em> is the relationship between the syntax and semantics: a model of a formula is a structure that <em>satisfies</em> it, namely an assignment of values to the variables that make the formula <em>true</em> (truth is a semantic property). The usual symbol for “satisfies” is $\vDash$. On the left is a structure that makes the formula on the right true — a model of the formula. For example, the structure for our logic can be the set of integers with multiplication, negation and the less-than relation. A model for the expression $x &lt; 2$ could then be $x = -5$. The collection of all models of a formula $A$ forms its <em>formal semantics</em>, and is often written $\sem A $. I will colloquially refer to that collection of models — the semantics of a formula — simply as <em>the</em> model of the formula, and say that the model of $x &lt; 2$ is any assignment of a number less than 2 to $x$, or, more simply, all numbers less than 2. We can say that that formula <em>specifies</em> all numbers less than two. A formula that is true under all interpretations is said to be <em>valid</em>, and we write  $\vDash A$ (with no structure on the left-hand side). The formula $\TRUE$ is satisfied by all interpretations, while the formula $\FALSE$ has no model at all.</p>
+
+<p>The various logical operators interact with the model in specific ways. The model for $A \land B$ is the intersection of the model of $A$ with the model of $B$, or $\sem{A \land B} = \sem A \cap \sem B $. The model for $A \lor B$ is the union of the model of $A$ with the model of $B$, or $\sem{A \lor B} = \sem A \cup \sem B $. The model for $\neg A$ is the complement of the model for $A$, or $\sem{\neg A} = \sem{A}^c$.  These are exactly the familiar definitions of the logical operators with <a href="https://en.wikipedia.org/wiki/Venn_diagram">Venn diagrams</a>.</p>
+
+<p>When we work with a logic, we usually work within a specific <em>logical theory</em>, which is a set of formulas called <em>axioms</em>, taken to be equivalent to <script type="math/tex">\TRUE\!</script>. A model of a theory is a structure that satisfies all axioms of the theory; in other words, the theory characterizes, or specifies, a model. Often, therefore, a logic is not defined with a structure, just with a theory, which then characterizes all appropriate structures. For example, the <a href="https://en.wikipedia.org/wiki/Peano_axioms">Peano axioms</a>, are a logical theory that characterizes the natural numbers and the familiar arithmetic operations. The natural numbers we know, with the familiar arithmetic operations, are a model of Peano arithmetic.</p>
+
+<p>Of course, a logical formula, or even an entire logical theory, can have multiple interpretations over different structures. For example, the formula $x &gt; 2$ has a different model if interpreted over the real numbers than over the naturals. The sentence $\E x . x &gt; 0 \land \A y . y &gt; 0 \implies y \geq x$ is true when interpreted over the integers, but false when interpreted over the reals.</p>
+
+<p>A logic also usually has a <em>calculus</em>, a syntactic system for deriving expressions from other expressions, like <a href="https://en.wikipedia.org/wiki/Natural_deduction">natural deduction</a>. If formula $C$ can be derived by a finite number of application of deduction rules from formulas $A$ and $B$, we write $A, B \vdash C$, and say that $A$ and $B$ <em>prove</em> C or <a href="https://en.wikipedia.org/wiki/Logical_consequence"><em>entail</em></a> C, where $A$ and $B$ are the <em>assumptions</em>, and $C$ is their <em>consequence</em>. Provability is the syntactic counterpart to the semantic notion of truth. If a formula $A$ is entailed by the theory’s axioms alone, without any other assumptions, we write $\vdash A$, and say that $A$ is a <em>tautology</em>. If $\vdash A$ and $A$ is not an axiom, we say that $A$ is a <em>theorem</em>. If we want to prove the theorem $A$ but we haven’t yet done so, we call $A$ a <em>proposition</em>.</p>
+
+<p>According to the axioms of most logics, if $A, B \vdash C$ then $\vdash (A \land B) \implies C$ and vice versa. I.e., $A$ and $B$ entail, or prove, $C$ iff $A \land B$ <em>imply</em> $C$.</p>
+
+<p>There are two important axioms that shape the general properties of a logic. The first is  called the <a href="https://en.wikipedia.org/wiki/Principle_of_explosion">principle of explosion</a>, and it states that for any formula $A$, $\vdash \neg (A \land \neg A)$, or equivalently $A \vdash \neg\neg A$. The second is called the <a href="https://en.wikipedia.org/wiki/Law_of_excluded_middle">law of excluded middle</a>, and it states that for any formula $A$, $\vdash A \lor \neg A$, or equivalently, $\neg\neg A \vdash A$. A logic with both axioms is called a <a href="https://en.wikipedia.org/wiki/Classical_logic"><em>classical</em></a>, or standard, logic. A logic with the principle of explosion but without the law of excluded middle is called an <a href="https://en.wikipedia.org/wiki/Intuitionistic_logic"><em>intuitionistic</em></a>, or <em>constructive</em> logic (in which, if $A$ is known not to be false, we cannot conclude that it must be true). A logic with the law of excluded middle but without the principle of explosion is called a <a href="https://en.wikipedia.org/wiki/Paraconsistent_logic"><em>paraconsistent</em></a> logic (in which, if $A$ is true, we cannot conclude that it may not also be false). Both constructive and paraconsistent logics have interesting and useful applications. With neither axiom, we have no means of relating negated and positive statements, which is tantamount to a logic without negation at all. All logic employed in TLA<sup>+</sup> is classical.</p>
+
+<p>Note that in a classical logic (but not in a non-classical logic!), the universal and existential quantifiers can each be defined in terms of the other:</p>
+
+<script type="math/tex; mode=display">\E x . A \equiv \neg\A x . \neg A\\
+\A x. A \equiv \neg \E x. \neg A</script>
+
+<p>In short we say that $\E \equiv \neg \A \neg$ and $\A \equiv \neg \E \neg$.</p>
+
+<p>A logic, like all languages, expresses meaning. But the meaning of a logical statement is not always entirely captured by its formal semantics. The logician <a href="https://en.wikipedia.org/wiki/Gottlob_Frege">Gottlob Frege</a> pointed out that a logical statement may have two kinds of meaning: <a href="https://en.wikipedia.org/wiki/Sense_and_reference">sense and reference</a> (the latter is sometimes also called, somewhat impreciesly, <em>denotation</em>). For example, the sentence $3 &gt; 2$ has a semantic value of <script type="math/tex">\TRUE\!</script> and so <em>refers to</em> the value <script type="math/tex">\TRUE\!</script>. The sentence $2 &gt; 1$ also refers to the value <script type="math/tex">\TRUE\!</script>, and so is equivalent to $3 &gt; 2$. However, the two sentences have different <em>senses</em>, as they express different ideas (one about the relationship between 3 and 2, and the other about 2 and 1). The distinction between sense and reference is a key philosophical observation required for a full understanding of all logic (and all language, really), and some non-classical logics — in particular, intuitionistic logics — can explicitly refer to both kinds of meaning (using different notions of equivalence, one called <em>extensional</em>, and is an equivalence on reference/denotation, and the other called <em>intensional</em>, which can be seen as an equivalence on sense). But we will be dealing only with classical logic, so this important philosophical point has no practical significance.</p>
+
+<h3 id="first-order-logic-and-other-orders">First Order Logic and Other Orders</h3>
+
+<p>A <a href="https://en.wikipedia.org/wiki/First-order_logic">first-order logic</a> (or FOL) has all the regular logical connectives ($\land$, $\neg$, etc.), and the universal and existential quantifiers $\A$ and $\E$. The variables in FOL can represent values that are simple values of the universe: if the universe is the natural numbers, then a variable — either free or quantified, i.e. bound — stands for a natural number.</p>
+
+<p>In a <a href="https://en.wikipedia.org/wiki/Second-order_logic">second-order logic</a> (or SOL), a variable can either represent an element of the universe or a set of elements. It is easier to think of this set as a predicate; a predicate $p(x)$ is true iff the value $x$ is in the set $p$. So, while in FOL all predicates must be “constant” and given in the signature, in SOL we can quantify over them and say, for example, $\A_1 x . \E_2 p . \A_1 y . p(y) \equiv (y = x)$ (the symbol $\equiv$ stands for double implication, or if-and-only-if, and I’ve used subscripts to distinguish between first- and second-order quantification; often this distinction is clear from the context), or in words, “for any $x$, there exists a predicate $p$ that is true for an argument $y$ iff $y = x$”.</p>
+
+<p>Similarly, a third-order logic allows us to quantify over sets of sets of values etc. <a href="https://en.wikipedia.org/wiki/Higher-order_logic">Higher-order logic</a>, or HOL, allows us to quantify over variables of any order, and is usually used in typed formalisms only. The original concept of <a href="https://en.wikipedia.org/wiki/Type_theory">types</a> was created by Bertrand Russell precisely to distinguish order: objects of different orders are of different <em>type</em>, i.e., if our “ground” values are of type one, then sets of those are of type two, sets-of-sets are of type three etc.. Types have a syntactic as well as a semantic significance: if $x$ and $y$ are of different types, then the expression $x = y$ is not false, but rather <em>ill-formed</em>, meaning it is not a legal expression at all. Similar to the subscripts I used above, quantifiers in HOL are distinguished by types; we write $\E x : T$ (instead of $\E_{\scriptsize T} x$) meaning “there exists an $x$ of type $T$”.</p>
+
+<p>One of the most important theorems in all of logic is that in first-order logics (only!), semantic truth and syntactic provability coincide, i.e. $\vdash A$ iff $\vDash A$, or, $A$ is a tautology iff it is valid. In other words, if a formula $A$ is <em>valid</em>  — satisfied by all interpretations (that also satisfy the axioms of the theory) — then it has a proof, and vice-versa. Similarly, $A \vdash B$ iff $\sem A \vDash B$. This is <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_completeness_theorem">Gödels’ completeness theorem</a>. Note, however, that this doesn’t mean that every sentence in FOL can be proven or disproven. If your theory is rich enough, there will always be sentences that can be neither disproven nor proven (which, in the case of FOL, means that such theories will have multiple models, in some the sentence would be true and in others false). This is a consequence of yet another famous result, known as <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel’s first incompleteness theorem</a>. That theorem doesn’t apply only to FOL, but to any formalism whatsoever, as it is a direct result of the halting theorem (even though the halting theorem was proven some years later).</p>
+
+<p>As both the “static” or data logic and the temporal logic in TLA<sup>+</sup> only allow first-order formulas, we can just use the symbol $\vdash$ to mean both validity and provability (unless we want to specifically talk about a semantic structure on the left-hand side). But as the first incompleteness theorem applies to ZFC, not every TLA<sup>+</sup> sentence can be proven or disproven.</p>
+
+<p>Because TLA<sup>+</sup> allows free variables, I’d like to point out a possible source of confusion when reading formulas containing implication ($\implies$) and free variables: The formula $x &gt; 4 \implies x &gt; 2$  is a theorem, i.e., $\vdash x &gt; 4 \implies x &gt; 2$, and is satisfied by all assignments to $x$, and $ \A x : x &gt; 4 \implies x &gt; 2$ is also a theorem. On the other hand, while $\A x : x &gt; 2 \implies x &gt; 4$ is equivalent to $\FALSE$, i.e. $\vdash \neg(\A x : x &gt; 2 \implies x &gt; 4)$, the formula $x &gt; 2 \implies x &gt; 4$ does have a model: it is satisfied by all numbers that are either less than or equal to 2 or greater than 4. This means that we have to know whether we’re treating $x &gt; 2 \implies x &gt; 4$ as a proposition — equivalent to asking whether it is valid, or satisfied by <em>all</em> assignments to $x$ — which in our case is not true, or not, in which case it specifies a model. Describing the model for $A \implies B$ as we did above is not interesting, but the <em>proposition</em> $\vdash A \implies B$ from a semantic perspective is: $\vdash A \implies B$ iff $\sem A \subseteq\sem B$.</p>
+
+<p>Now, notice that the model for a FOL formula, say $x &gt; 2$, is always a set of values from the universe (in this case, all numbers greater than 2). So the model of a FOL formula is always a second-order object. But if the meaning of a formula is a set, a second-order object, then how can we write a general axiom such as $\vdash A \lor \neg A$ where $A$ stands not for a <em>specific</em> formula but for <em>any</em> formula? We can’t write $\A A . A \lor \neg A$ because we can’t quantify over formulas (which, as we’ve just seen, stand for sets, or second-order values) nor treat them as free variables for the same reason. The answer is that we don’t. We say that such an axiom is an <em>axiom schema</em> that refers to an infinite number of axioms in the logic, one for each possible formula $A$. The language used to write the schema is therefore not the logic itself, but the <em>metalogic</em>, or <em>metalanguage</em> of our logic.</p>
+
+<p>While this is fine from a theory standpoint, this is not satisfactory for a mechanical proof software. When proving a theorem, we often need to prove may intermediate steps, and we would like to be able to state and prove general lemmas which we could reuse in many proofs, and such general second-order lemmas can be very useful.</p>
+
+<p>One solution is, therefore, to adopt a higher-order logic. HOL serves as the basis for the theorem provers Isabelle/HOL and HOL Light, and more complex type theories, like the constructive theories used in Coq or Agda, are also higher-order. But keeping the logic first-order has some advantages in terms of simplicity, model checking algorithms, general theorems (if we know that a formula is first-order, it’s easier to state theorems about a formula’s meaning based on its syntactic structure) — this is more relevant for TLA, the temporal logic part of TLA<sup>+</sup>, which we’ll cover in the next installments. But it turns out that we can have our cake and eat it, too. We can keep all formulas first-order, but allow writing second-order propositions in the form $A \vdash B$, which are not in themselves formulas (and so they don’t have a model). We basically provide access to the metalanguage. This is the solution adopted by TLA<sup>+</sup>, which we’ll see later in the section about <a href="#proofs">proofs</a>.</p>
+
+<p>By the way, because I mentioned model checking, I’d like to take the opportunity to clarify what may be a certain misconception about model checkers. A model checker takes its name from the definition of “model” we’ve just learned in the context of logic. It is a program that takes a description of a logical structure, $M$ and a logical formula, $\varphi$, and <em>checks</em> that $M$ is a <em>model</em> of $\varphi$, or that $M \vDash \varphi$.</p>
+
+<p>Other than the theoretical and practical advantages of FOL, it has some theoretical disadvantages. For example, first-order theories have <a href="https://en.wikipedia.org/wiki/Non-standard_model_of_arithmetic">non-standard models</a> (e.g. there are models of the first-order Peano axioms with uncountably many numbers). However, this is not a concern at all given TLA<sup>+</sup> intended use and audience. “I’m certainly not worried,” Lamport writes, “about a bug occurring because an engineer implemented a non-standard model of the integers.<sup id="fnref:non-standard"><a href="#fn:non-standard" class="footnote">8</a></sup>”</p>
+
+<h2 id="logical-formulas-and-expressions">Logical Formulas and Expressions</h2>
+
+<p>If you’re familiar with standard mathematical notation you’ll find TLA<sup>+</sup>’s syntax intuitive and readable for the most part.</p>
+
+<p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. It has the familiar operators<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">9</a></sup>: $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\exists$ and $\forall$ are the regular first order existential and universal quantifiers. In the TLA<sup>+</sup> syntax, we write <code class="highlighter-rouge">:</code> (colon) instead of the more common single dot after a quantifier, which is used instead of parentheses to delineate the scope of the bound variables, and is read as “such that”. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>. $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
+
+<p>Variables that are not part of the state of a computation (we’ll learn about state in part 3), can be introduced with the quantifiers $\A$ or $\E$, or can be declared with the keyword <script type="math/tex">\CONSTANT\!</script>, in which case they are free.</p>
+
+<p>In addition, TLA<sup>+</sup> has a couple of special constructs inspired by programming languages. The construct
+<script type="math/tex">\IF p\; \THEN x\; \ELSE y</script>
+where $p$ is some logical predicate and $x$ and $y$ are values, takes the value $x$ if $p$ is <script type="math/tex">\TRUE\!</script> or the value of $y$ otherwise. The construct
+<script type="math/tex">\CASE p_1 \rightarrow e_1 \;\Box\; ...\;\Box\;p_n \rightarrow e_n ...\;\Box\; \OTHER\rightarrow e</script></p>
+
+<p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later).</p>
+
+<p>Because in TLA<sup>+</sup> specifications of algorithms and systems are written as formulas, it requires some ergonomics for writing long formulas in a way that makes them easy to read. Lamport devised such a scheme in <a href="http://lamport.azurewebsites.net/pubs/lamport-howtowrite.pdf"><em>How to Write a Long Formula</em></a>. It uses alignment of conjunctions and disjunctions in place of parentheses, like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat*}{1}
+& \lor a \\
+& \lor b && \land c  \\
+&& &\land d \\
+& \lor e
+\end{alignat*} %]]></script>
+
+<p>Where a, b, c and d stand for arbitrary subformulas. Note the prefix connective that starts the disjunction and conjunction lists. The implied parentheses extend from the expression following the connective starting the line until another connective (of the same kind) is encountered in some new line aligned with the opening connective. So the above means the same as the following (which is also allowed in TLA<sup>+</sup>):</p>
+
+<script type="math/tex; mode=display">(a) \lor ((b \land c) \land (d)) \lor (e)</script>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). A definition looks like so:</p>
+
+<script type="math/tex; mode=display">\text{Name} \defeq e</script>
+
+<p>Where “Name” is the definition name, and $e$ is a TLA<sup>+</sup> expression.</p>
+
+<p>Definitions can be parameterized, in which case they’re called operators:</p>
+
+<script type="math/tex; mode=display">Double(x) \defeq 2*x</script>
+
+<p>Operators are <em>not</em> functions; those have a precise meaning, and we’ll learn the distinction later. Operators can be second-order:</p>
+
+<script type="math/tex; mode=display">ApplyTwice(Op(\_), x) \defeq Op(Op(x))</script>
+
+<p>Defining some symbolic operators is also supported:</p>
+
+<script type="math/tex; mode=display">a \preceq b \defeq a \% b = 0</script>
+
+<p>We can also use symbolic names for operator arguments:</p>
+
+<script type="math/tex; mode=display">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
+
+<p>(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
+
+<p>Recursive operators are also allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+&\RECURSIVE\; Fact(\text{_})\\
+&Fact(n) \defeq \IF n \leq 1 \;\THEN 1\; \ELSE n*Fact(n-1)
+\end{align*} %]]></script>
+
+<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">10</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
+
+<p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
+&& y \defeq x * a\\
+&\rlap{\;\IN y * b}
+\end{alignat} %]]></script>
+
+<p><script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
+
+<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope, so this is not allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&x \defeq 3\\
+&Foo(x) \defeq x + 1
+\end{align} %]]></script>
+
+<p>and neither is this:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{Foo(x) \defeq} \\
+&\phantom{XX}&\LET Bar(x) = x + 1 \\
+&& \IN x * 2
+\end{alignat} %]]></script>
+
+<p>But this is allowed because $x$ is not in scope when $Foo$ is defined:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&Foo(x) \defeq x + 1\\
+&x \defeq 3
+\end{align} %]]></script>
+
+<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a first-order logic over set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">11</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
+
+<script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
+
+<p>This could, however, be easily achieved with functions, as we’ll see later.</p>
+
+<p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn <a href="#constants">later</a>, as well as in the <a href="#proofs">proof language</a>.</p>
+
+<h2 id="sets">Sets</h2>
+
+<p>The data logic in TLA<sup>+</sup> is based on <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ZFC set theory</a>, so all values in TLA<sup>+</sup> are formally sets. Even the number 1 is a set, <script type="math/tex">\TRUE\!</script> is a set, and the function $\tan$ is a set. But as we’ll see later, how those values are encoded as sets is hidden, and their internal structure is inaccessible to us that it may as well not exist at all, and we can safely treat them as primitive values.</p>
+
+<p>When working with set theory, we usually use first-order logic. However, as the values of the universe are sets, the expressivity of the logic is similar to that of higher-order logic<sup id="fnref:class"><a href="#fn:class" class="footnote">12</a></sup>. In fact, FOL over ZFC is considered the “standard” formal system for (ordinary) mathematics.</p>
+
+<h3 id="set-fundamentals">Set Fundamentals</h3>
+
+<p>The constant $\set{}$ is the empty set, and there are two binary relations that are defined for all sets: $\in$ is the membership relation, and $=$ is equality, where sets are equal by extensionality, i.e., iff they have the same elements.</p>
+
+<p>Sets can be constructed only in accordance with the axioms of ZFC<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">13</a></sup>:</p>
+
+<p>If $a$ and $b$ are sets, then $\set{a, b}$ is another set (axiom of pairing).</p>
+
+<p>If $S$ is a set and $P$ is some predicate, then $\set{x \in S : P(x)}$ is a set containing all members of $S$ that satisfy $P$ (axiom of specification/separation). For example, $\set{n \in Nat : n \% 2 = 0}$ is the set of even natural numbers. Note that a colon is used instead of the more common <code class="highlighter-rouge">|</code> in the set comprehension expression.</p>
+
+<p>If $S$ is a set and $F$ some expression then $\set{F(x) :  x \in S}$ is a set, constructed by replacing each member of $S$ with its image under the operator $F$ (axiom of replacement)<sup id="fnref:ambig"><a href="#fn:ambig" class="footnote">14</a></sup>. For example, $\set{2*n : n \in Nat}$ is also the set of even natural numbers.</p>
+
+<p>If $S$ is a set, then $\UNION S$ is a set containing all members of the members of $S$ (axiom of union). E.g. $\UNION \set{\set{1, 2}, \set{2, 3}} = \set{1, 2, 3}$.</p>
+
+<p>If $S$ is a set, then $\SUBSET S$ is the <a href="https://en.wikipedia.org/wiki/Power_set">power set</a> of $S$, namely the set of all subsets of $S$ (axiom of power set). For example, $\SUBSET \set{1,2,3} = \set{\set{}, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$.</p>
+
+<p>Quantifiers can (and usually do) appear bounded (e.g. $\forall x \in S : …$), in which case they satisfy the following:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{2}
+&(\A x \in S : P(x)) & \equiv\; & (\A x : x \in S \implies P(x)) \\
+&(\E x \in S : P(x))  & \equiv\; & (\E x : x \in S \land P(x))
+\end{alignat} %]]></script>
+
+<p>TLA<sup>+</sup> has the usual set operators $\cup$ (union), $\cap$ (intersection), $\subseteq$ (subset or equal), $\subset$ (strict subset), \ (set difference) etc., all trivially defined using the fundamental operations above.</p>
+
+<p>The set <script type="math/tex">\BOOLEAN\! \defeq \set{\TRUE\!,\FALSE\!}</script> is built-in. TLA<sup>+</sup> does not distinguish between the elements of the set <script type="math/tex">\BOOLEAN\!</script> and logical truth values. So, for example, <script type="math/tex">% <![CDATA[
+\A p \in \BOOLEAN\!: p \lor (5 < 6) %]]></script> is true, one can write $(3 &lt; 4) = (8 &gt; 2)$, using $=$ instead of $\equiv$  even though the latter is a logical connective while the former is a relation on sets, and $(1 &gt; 0) \in \BOOLEAN$ is true. A formula (and a predicate) is, therefore, any boolean-valued expression.</p>
+
+<p>Let’s see some examples of TLA<sup>+</sup> definitions using sets. Here is an example of a useful operator that states that there exists one and only one member of a set satisfying some predicate:</p>
+
+<script type="math/tex; mode=display">ExistsOne(S, P(\_)) \defeq \E x \in S : P(x) \land \A y \in S : P(y) \implies y = x</script>
+
+<p>(this is a common pattern in logic to express a unique value; a value is unique iff two variables referring to it must be equal).</p>
+
+<p>Now let’s define some richer mathematical concepts. We’ll define a <em>proset</em> — a set with a <a href="https://en.wikipedia.org/wiki/Preorder">preorder</a> — a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set"><em>poset</em></a> — a partially-ordered set — and a <a href="https://en.wikipedia.org/wiki/Total_order">totally-ordered</a> set:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&Proset(S, \_\preceq\_) \defeq & \land \A a \in S : a \preceq a & \comment{Reflexivity}\\
+&&\land \A a, b, c \in S : (a \preceq b \land b\preceq c) \implies a \preceq c  \phantom{XX}& \comment{Transitivity}\\
+\\
+&Poset(S, \_\preceq\_) \defeq & \land Proset(S, \preceq )\\
+&&\land \A a, b \in S : (a \preceq b \land b\preceq a) \implies a = b & \comment{Antisymmetry}\\
+\\
+&Toset(S, \_\preceq\_) \defeq & \land Poset(S, \preceq)\\
+&&\land \forall a, b \in S : a \preceq b \lor b\preceq a& \comment{Totality}\\
+\end{alignat} %]]></script>
+
+<p>And here are some important algebraic structures, the <a href="https://en.wikipedia.org/wiki/Semigroup">semigroup</a>, the <a href="https://en.wikipedia.org/wiki/Monoid">monoid</a> and the <a href="https://en.wikipedia.org/wiki/Group_(mathematics)">group</a><sup id="fnref:cdot"><a href="#fn:cdot" class="footnote">15</a></sup>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\nested{
+&Semigroup(S, \_ \cdot \_) \defeq &\land \A a, b \in S : a \cdot b \in S & \comment{Closure}\\
+&&\land \A a, b, c \in S : (a \cdot b )\cdot c =   a \cdot (b \cdot c)\;\;& \comment{Associativity}\\
+}\\
+&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\nested{
+&Monoid(M, \_\cdot\_) \defeq & \land Semigroup(M, \cdot)\\
+&& \land \E id \in M : \A a \in M : & \land  id \cdot a = a \land a \cdot id = a \;\;&\comment{Identity element}\\
+}\\
+\\
+&\nested{
+&Group(G, \_\cdot\_) \defeq \;& \land Monoid(G, \cdot)\\
+&& \land \E id \in G : \A a \in G : & \land id \cdot a = a \land a \cdot id = a \\
+&&& \land \E b \in G : a \cdot b = id \land b \cdot a = id \;\;&\comment{Inverse element}\\
+}\\
+\\
+&\nested{
+&AbelianGroup(G, \_\cdot\_) \defeq & \land Group(G, \_ \cdot \_)\\
+&&\land \A a, b \in G : a \cdot b = b \cdot a & \;\;\comment{Commutativity}
+}\\
+\end{alignat} %]]></script>
+
+<p>I could have defined $Group$ directly in terms of $Semigroup$, as we must repeat the identity condition (or use a construct we haven’t yet learned), but I wanted to emphasize that a group is a monoid. That the identity element is unique is a theorem we will formally state and prove later.</p>
+
+<p>Finally, the <a href="https://en.wikipedia.org/wiki/Equivalence_class">quotient set</a> of a set $S$ contains its equivalence classes with respect to an equivalence $\sim$ (often written <script type="math/tex">S /\!\sim</script>) and can be defined like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&Quotient(S, \_ \sim \_) \defeq \{x \in \SUBSET S: &\land x \neq \set{}\\
+&&\land \A a,b \in x : a \sim b\\
+&&\land \A a \in S :(\E b \in x : a \sim b) \implies a \in x\}
+\end{alignat} %]]></script>
+
+<p>The first conjunct says that $x$ — a member of the quotient — must not be empty, the second says that all members of $x$ are equivalent, and the third conjunct says that $x$ is maximal, i.e., contains <em>all</em> members of $S$ that are equivalent to those in $x$; therefore $x$ is an equivalence class.</p>
+
+<p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">16</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
+
+<p>The <code class="highlighter-rouge">FiniteSets</code> module (which is part of the TLA<sup>+</sup> standard module library), defines useful set operators, like $IsFiniteSet(S)$, which is true iff $S$ is finite, and $Cardinality(S)$, which is the number of elements in $S$ if $S$ is finite (we define $Cardinality$ ourselves <a href="#putting-it-all-together">later on</a>).</p>
+
+<h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
+
+<p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>.  $\CHOOSE x : P(x)$, is equal to <em>some</em> value (i.e. set) satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&(\E x : P(x)) &\equiv\;& P(\CHOOSE x : P(x) )\\
+&(\A x : P(x) &\equiv& Q(x)) \implies  ((\CHOOSE x : P(x)) = (\CHOOSE x : Q(x)))
+\end{alignat} %]]></script>
+
+<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script>, and therefore so can $\A$, as $(\A x : P(x)) \equiv \neg(\E x : \neg P(x))$. The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula $a = \CHOOSE x : \TRUE$, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+
+<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$.</p>
+
+<p>Like the quantifiers, <script type="math/tex">\CHOOSE\!</script> usually appears bounded, as in, $\CHOOSE x \in S : P(x)$, which is shorthand for $.\CHOOSE x :  x \in S \land P(x)$</p>
+
+<p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value  — could be 42, could be $\set{3, \set{4, 5}}$ — which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
+
+<p>When an undefined value is part of an expression that always yields a boolean value (like expressions involving $\in$ or $=$, which are defined on all sets), the value of that expression is some indeterminable <script type="math/tex">\BOOLEAN\!</script>; for example: $3  \in (\CHOOSE x \in \set{} : x &gt; 0)$. In such cases I will also say that the value of the formula is undefined even though it is known to be a <script type="math/tex">\BOOLEAN\!</script>, because the logic says nothing about whether that value is <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>. We can similarly use the word “undefined” loosely to refer to an  indeterminable value in general, even if we do know it is a member of some set.</p>
+
+<p>$ChooseOne$ is a useful operator, whose value is defined only if <em>exactly one</em> value matches the predicate:</p>
+
+<script type="math/tex; mode=display">ChooseOne(S, P(\_)) \defeq \CHOOSE x \in S : P(x) \land \A y \in S : P(y) \implies y = x</script>
+
+<p><script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them, so you can’t <script type="math/tex">\CHOOSE\!</script> the Russell paradox “set” because one does not exist, as it cannot be constructed using any of the set construction operations. The value of $\CHOOSE x : \A s : s \in x \equiv s \notin s$ (which says that $x$ is the set of all sets that do not contain themselves — a paradox) is, therefore, undefined, as no such set $x$ exists; the right-hand side of the <script type="math/tex">\CHOOSE\!</script> expression is false for all sets in ZFC.</p>
+
+<p>It is important to emphasize yet again that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">17</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It “statically” describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE x \in S : x &gt; 0$ means “<em>some</em> positive element in the set S”, not “<em>find</em> a positive element in the set S”.</p>
+
+<h3 id="some-important-sets">Some Important Sets</h3>
+
+<p>STRING is another built-in set, which is the set of all finite character strings. Strings are <em>sequences</em> of characters (we’ll cover sequences in the next section), and characters are primitive values with an opaque encoding (TLA<sup>+</sup> has no syntax for character literals).</p>
+
+<p>The modules <code class="highlighter-rouge">Naturals</code>, <code class="highlighter-rouge">Integers</code>, and <code class="highlighter-rouge">Reals</code> define the sets $Nat$ ($\mathbb{N}$), $Int$ ($\mathbb{Z}$), and $Real$ ($\mathbb{R}$) respectively, with $Nat \subset Int \subset Real$, along with the familiar arithmetic operators, order relations ($\leq$) etc.. Importing the public definitions from a module is done with the <script type="math/tex">\EXTENDS\!</script> statement, as in $\EXTENDS Naturals$. You can’t use arithmetic operators in a TLA<sup>+</sup> specification (the numeric literals are built-in) unless you import one of those modules that defines them.</p>
+
+<p>The special syntax $a .. b$ defines the set $\set{n \in Nat : n \geq a \land n \leq b}$, so $2..5 = \set{2,3,4,5}$. TLA<sup>+</sup> currently has no special syntax for complex numbers or matrices.</p>
+
+<p>In set theory, all values are encoded as some set (so the number 1 is somehow encoded as a set). However, TLA<sup>+</sup> lets us hide encodings within modules so that their details do not escape the module boundary and appear to external modules as primitives (we will cover modules in part 4), and so the value of $1 \in 2$ or of $1 = \str{hi}$ is undefined (i.e., indeterminable). Because equality (and membership) is defined on all sets to have a boolean value we know that $1 = \str{hi}$ must be some boolean, namely, either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>, but we have no way of determining which. In a typed formalism, the expression $1 = \str{hi}$ is simply illegal (ill-formed); in a dynamically-typed programming language it evaluates to false. But in TLA<sup>+</sup> it is simply nonsensical — we cannot assign it any meaning, i.e. a value<sup id="fnref:tlc-nonsense"><a href="#fn:tlc-nonsense" class="footnote">18</a></sup> — like the english expression “Thursday is purple”, which is grammatically legal, or well-formed, yet carries no well-accepted meaning. If you’d like to revisit the tradeoffs of this choice, I’ll refer you to the two papers I linked to above<sup id="fnref:typed-untyped"><a href="#fn:typed-untyped" class="footnote">19</a></sup>.</p>
+
+<p>As a result, we don’t know whether the set $\set{1, \str{hi}}$ contains one or two elements because we cannot know if 1 is equal to “hi” or not as we don’t know how “hi” is encoded  (TLC forbids such a set altogether, as its elements are incomparable). So what do we do if we want to have a set that contains the values 0, 1, and UNKNOWN? We use <script type="math/tex">\CHOOSE\!</script> to define UNKNOWN like so:</p>
+
+<script type="math/tex; mode=display">\text{UNKNOWN} \defeq \CHOOSE x : x \notin \set{0, 1}</script>
+
+<p>and then we can write the set $\set{0, 1, \text{UNKNOWN}}$, now known to contain three elements.</p>
+
+<p>Division for real numbers (defined in the <code class="highlighter-rouge">Reals</code> module) could be defined like so:</p>
+
+<script type="math/tex; mode=display">a / b \defeq \CHOOSE c \in Real : a = b*c</script>
+
+<p>This definition immediately tells us, by the meaning of the <script type="math/tex">\CHOOSE\!</script> operator, that $1/0$ is undefined<sup id="fnref:div"><a href="#fn:div" class="footnote">20</a></sup>, in the very precise sense explained in our discussion of <script type="math/tex">\CHOOSE\!</script>.</p>
+
+<p>With numbers, arithmetic operations and the order relation on numbers we can start doing some more concrete math. We’ll begin with something simple: a definition of the operator $Prime$, which is a predicate saying whether a number is prime (other definitions are also possible):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&Divides(p, n) \defeq \E q \in Int : p * q = n\\
+&Prime(n) \defeq n > 1 \land\A p \in Nat : Divides(p, n) \implies p = n \lor p = 1
+\end{align} %]]></script>
+
+<p>Now let’s define the GCD operator, the greatest common divisor of two natural numbers:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&DivisorsOf(n) \defeq \set{ p \in Int: Divides(p, n)}\\
+&SetMax(S) \defeq \CHOOSE x\in S : \A y \in S : x \geq y\\
+&GCD(m, n) \defeq SetMax(DivisorsOf(m) \cap DivisorsOf(n))
+\end{alignat} %]]></script>
+
+<p>Notice how straightforward is the GCD definition: first we define what a divisor is; then we define what <em>the divisors</em> of a number are. The common divisors are then just the intersection of the two numbers’ divisors, and the GCD is the greatest among them.</p>
+
+<p>We can use the sets we’ve seen and some definitions we made above to state a couple of interesting theorems:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\THEOREM \rlap{AbelianGroup(Int, +)}\\
+&\THEOREM \A n \in Nat \setminus \set{0} : \;& \LET EqModN(a, b) \defeq a \% n = b \%n\\
+&&\IN AbelianGroup(Quotient(Int, EqModN), +)
+\end{alignat} %]]></script>
+
+<p>It is important to point out that $Nat$ is the set of <em>all</em> natural numbers, $Int$ is the set of <em>all</em> integers, and $Real$ is the set of the actual real numbers — all uncountably many of them. If we want to work with, say, 32-bit integers or 64-bit floating point numbers, we need to define them and the arithmetic operations on them. You may wonder what good are so many real numbers considering that a program can only represent a small, finite subset of them. The answer is that TLA<sup>+</sup> is not a programming language but a specification language, and it is useful to specify and reason about more than just the actual variables of your program. For example, if you’re specifying a numerical algorithm, it is easier to analyze its error if you can actually express the precise result it tries to approximate. Or if you are building a cyber-physical system — a discrete system that interacts with objects in the real world; think drone, sensor or robot — you may want to also model the system’s environment, which is easier to do by describing it as a continuous system using familiar physics equations (we will talk about cyber-physical systems in part 4).</p>
+
+<h2 id="functions-sequences-and-records">Functions, Sequences and Records</h2>
+
+<p>Most interesting objects we deal with both in mathematics and programming are not normally thought of as sets. TLA<sup>+</sup> lets us cleanly express standard mathematical and programming objects.</p>
+
+<h3 id="functions">Functions</h3>
+
+<p>Usually, a <a href="https://en.wikipedia.org/wiki/Function_(mathematics)">function</a> is defined to be a one-valued relation, where a relation is a set of pairs — in other words, a function is defined by its <a href="https://en.wikipedia.org/wiki/Graph_of_a_function">graph</a> — but in TLA<sup>+</sup> functions are not defined as sets of pairs but as primitives (meaning that, like numbers, their encoding as sets is unknown, or opaque<sup id="fnref:not-pairs"><a href="#fn:not-pairs" class="footnote">21</a></sup>). In fact, it is pairs that are actually functions in TLA<sup>+</sup> as they’re a special case of sequences, which are in turn a special case of functions, as we’ll see. In any event, functions in TLA<sup>+</sup> are not computations; they have no dynamic behavior and no computational complexity. They are just values in the state space of algorithms. Programmers may best think of them as associative arrays, albeit possibly infinite in size.</p>
+
+<p>If $A$ and $B$ are sets, $[A \to B]$ is the set of all functions from $A$ to $B$. Function application is denoted with square brackets ($f[x]$) to syntactically differentiate it from operator “application” (really, substitution). Unlike an operator, whose arguments can be any value in the universe or even other operators, every function has a domain — a set — which is obtained with the <script type="math/tex">\DOMAIN\!</script> operator like so $\A f \in [A \to B] : \DOMAIN f = A$. Because a function has a set domain, we cannot have a function whose parameter can be <em>any</em> set or even any function (as we can with operators), because that would make the domain of the function “too large to be a set”, namely, a proper class, which doesn’t exist in ZFC.</p>
+
+<p>Functions are (first-order) objects in our logic — they are just (opaque) sets themselves — while operators are not (they are second-order objects, or objects in the metalanguage). We can therefore quantify over functions as we do over any other values, as in $\A f \in [A \to B] : … $ Because a function’s encoding as a set is opaque, statements like $3 \in f$, for some function $f$, are undefined and nonsensical.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Image_(mathematics)">image</a> of a function can be defined as:</p>
+
+<script type="math/tex; mode=display">Image(f) \defeq \set{ f[x] :  x \in \DOMAIN f}</script>
+
+<p>Equality for functions is <em>extensional</em>, meaning, for two functions, $f$ and $g$,</p>
+
+<script type="math/tex; mode=display">(f = g)\equiv (\DOMAIN f = \DOMAIN g \land \A x \in \DOMAIN f : f[x] = f[g])</script>
+
+<p>We could define a specific function $double$ on the natural numbers like so,</p>
+
+<script type="math/tex; mode=display">double \defeq \CHOOSE f \in [Nat \to Nat] : \A n \in Nat : f[x] = 2*n</script>
+
+<p>but that would be very cumbersome and so TLA<sup>+</sup> allows us to define it like so:</p>
+
+<script type="math/tex; mode=display">double \defeq [n \in Nat \mapsto 2*n]</script>
+
+<p>or like so,</p>
+
+<script type="math/tex; mode=display">double[n \in Nat] \defeq 2*n</script>
+
+<p>The latter form is syntactic sugar for</p>
+
+<script type="math/tex; mode=display">double \defeq\CHOOSE f : f = [n \in Nat \mapsto 2*n]</script>
+
+<p>Because of this, functions defined in this form can be recursive:</p>
+
+<script type="math/tex; mode=display">fact[n \in Nat] \defeq \IF n \leq 1 \; \THEN 1\; \ELSE n*fact[n-1]</script>
+
+<p>as this is just shorthand for</p>
+
+<script type="math/tex; mode=display">fact \defeq \CHOOSE f : f = [n \in Nat \mapsto \IF\; n \leq 1 \; \THEN 1\; \ELSE n*f[n-1]]</script>
+
+<p>which defines $fact$ as a <a href="https://en.wikipedia.org/wiki/Fixed_point_(mathematics)">fixed-point</a> (or fixpoint). To see that more clearly, we can define:</p>
+
+<script type="math/tex; mode=display">Fixpoint(F(\_)) \defeq  \CHOOSE x : x = F(x)</script>
+
+<p>and then:</p>
+
+<script type="math/tex; mode=display">fact \defeq Fixpoint(\LAMBDA f : [n \in Nat \mapsto \IF n \leq 1 \;\THEN 1 \;\ELSE n * f[n-1]])</script>
+
+<p>Note that recursive functions, because they are really specified as fixpoints, may turn out to be undefined if the fixpoint does not exist, as in the following case:</p>
+
+<script type="math/tex; mode=display">f[n \in Nat] \defeq 1 + f[n]</script>
+
+<p>So when using recursive function definitions in proofs, you may need to prove that they define actual functions by showing that they indeed match a value for every value in their domain (or in CS speak, that they’re <em>total</em>).</p>
+
+<p>Functions can be defined on any set (including sets of functions) and “return” any value, including other functions, so we can define the “higher-order” function:</p>
+
+<script type="math/tex; mode=display">add[x \in Nat] \defeq [y \in Nat \mapsto y + x]</script>
+
+<p>and then,</p>
+
+<script type="math/tex; mode=display">inc \defeq add[1]</script>
+
+<p>Formally, however, unlike in typed formalisms, functions such as $add$ are not really higher-order in TLA<sup>+</sup>, as all functions — all values really — have the same type; they are all values in the universe of sets.</p>
+
+<p>We are now in a position to define a few <a href="https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection">common important properties of functions</a>: <em>injection</em> (a one-to-one mapping), <em>surjection</em> (an onto mapping) and <em>bijection</em>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&Injection(f) &\defeq \A x,y \in \DOMAIN f : x \neq y \implies f[x] \neq f[y]\\
+&Surjection(f, S)  &\defeq \A y \in S : \E x \in \DOMAIN f : f[x] = y\\
+&Bijection(f, S) &\defeq Surjection(f, S) \land Injection(f)\\
+\end{alignat} %]]></script>
+
+<p>Where the variable $S$ represents the function’s codomain. Note that we could have also defined $Injection$ as <script type="math/tex">\A y \in Image(f) : ExistsOne(\DOMAIN f, \LAMBDA x : f[x] = y)</script>.</p>
+
+<p>Now let’s define a function composition operator (I will use the $\bullet$ operator because $\circ$, the common symbol for function composition, is normally used in TLA<sup>+</sup> for sequence concatenation):</p>
+
+<script type="math/tex; mode=display">g \bullet f \defeq [x \in \DOMAIN f \mapsto g[f[x]]]</script>
+
+<p>Note that $g \bullet f$ is only defined if $f$ and $g$ are composable, meaning $Image(f) \subseteq \DOMAIN g$ — remember, there is no such thing as a partial function in ordinary math, at least not in the same sense as in programming. If we want function composition that works like that of partial functions in programming, we could define:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{2}
+&g \star f \defeq &\;& \LET Preimage(h, S) \defeq \set{x \in \DOMAIN h : h[x] \in S}\\
+&&&\IN [(x \in \DOMAIN f \cap Preimage(g, Image(f))) \mapsto g[f[x]]]
+\end{alignat} %]]></script>
+
+<p>Unlike $g \bullet f$,  $g \star f$ is <em>always</em> a function, but it is not necessarily a function on <script type="math/tex">\DOMAIN f</script> but potentially only on a subset of it, and it may even be the empty function (the function on the empty set, one that is undefined for any argument) if $Image(f) \cap \DOMAIN g = \set{}$.</p>
+
+<p>The following operator defines an identity function on an arbitrary set:</p>
+
+<script type="math/tex; mode=display">Identity(S) \defeq [x \in S \mapsto x]</script>
+
+<p>The following is a theorem about $Identity$:</p>
+
+<script type="math/tex; mode=display">\A S : \A x \in S : Identity(S)[x] = x</script>
+
+<p>Let’s also define an $Inverse$ operator for the inverse of any invertible function (the definition says: for any $y$ in the function’s image we pick an $x$ in the domain that is mapped to $y$, provided that $x$ is the only point that maps to $y$):</p>
+
+<script type="math/tex; mode=display">Inverse(f) \defeq [y \in Image(f) \mapsto ChooseOne(\DOMAIN f , \LAMBDA x:  f[x] = y)]</script>
+
+<p>A function is invertible if for every element in its codomain, there is one and only one element in its domain that is mapped to it, or in other words, if it is a bijection. We would like to state that as a general theorem about functions, but here we have a problem: the collection of all functions is not a set (but a proper class), so we cannot write $\A f \in Function : …$ (unlike in typed functional languages, where the type <code class="highlighter-rouge">forall a b. a → b</code> denotes all functions). However, we can define the predicate $Fn$, with a seemingly silly definition, which is true iff its argument is any function:</p>
+
+<script type="math/tex; mode=display">Fn(f) \defeq f = [x \in \DOMAIN f \mapsto f[x]]</script>
+
+<p>The following is, then, a theorem:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+\A S, f : Fn(f) \land Bijection(f, S) \implies & \land Inverse(f) \bullet f  = Identity(\DOMAIN f)\\
+&\land f \bullet Inverse(f) = Identity(S)
+\end{alignat} %]]></script>
+
+<p>as is:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+\A f : Fn(f) \land Injection(f) \implies & \land Inverse(f) \bullet f  = Identity(\DOMAIN f)\\
+&\land f \bullet Inverse(f) = Identity(Image(f))
+\end{alignat} %]]></script>
+
+<p>We can manipulate functions in all sorts of ways. For example, if $inc$ is the function defined above that increments every natural number by one, we can, of course, define the following:</p>
+
+<script type="math/tex; mode=display">g \defeq [x \in Nat \mapsto \IF x \geq 1 \land x \leq 2 \;\THEN inc[x]*10  \;\ELSE inc[x]]</script>
+
+<p>But the <script type="math/tex">\EXCEPT\!</script> construct, which allows us to “change” specific function values, makes it easier:</p>
+
+<script type="math/tex; mode=display">g \defeq [inc \;\EXCEPT ![1] = inc[1]*10,\; ![2] = inc[2]*10]</script>
+
+<p>The above could also be written as:</p>
+
+<script type="math/tex; mode=display">g \defeq [inc \;\EXCEPT ![1] = @*10,\; ![2] = @*10]</script>
+
+<p>where $@$ refers to the original function’s value at that point.</p>
+
+<p>We also have syntactic sugar to define and apply functions with multiple parameters. We’ll talk about it once we’ve learned about tuples.</p>
+
+<p>Now let’s use functions and one of the sets we’ve seen to formally define some more important mathematical concepts<sup id="fnref:calculus"><a href="#fn:calculus" class="footnote">22</a></sup>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&RealFunction \defeq \UNION \set{[S \to Real] : S \in \SUBSET Real}\\
+&AbsoluteValue \defeq \IF a > 0 \;\THEN a \;\ELSE {-a}\phantom{XXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&OpenBall(a, e) \defeq \set{x \in Real : AbsoluteValue(x - a) < e}\\
+&PosReal \defeq \set{x \in Real : x > 0}\\
+&\nested{
+&Limit(f, a) \defeq \;& \rlap{\CHOOSE l \in Real : \;\comment{This is the famous $(\epsilon, \delta)$ definition of the limit}} \\
+&&\phantom{XX} & \A e \in PosReal : \E d \in PosReal : \\
+&&&\phantom{XX}\A x \in OpenBall(a , d) \setminus \set{a} : f[x] \in OpenBall(l, e)
+}\\
+&\nested{
+&Derivative(f, a) \defeq \;& \LET e \defeq \CHOOSE e \in PosReal : OpenBall(a, e) \subseteq \DOMAIN f\\
+&&\IN Limit([x \in OpenBall(a , e) \setminus \set{a} \mapsto (f[x] -f[a])/(x - a)], a)
+}
+\end{alignat} %]]></script>
+
+<p>It is as easy to define non-computable functions as it is to define computable ones. Here is an example of a non-computable function:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{dirichlet[x \in Real] \defeq} \\
+&\phantom{XX}& \LET & IsRational(z) \defeq \exists p\in Int, q\in Nat \setminus \set{0} : z = p/q\\
+&& \IN&\IF IsRational(x) \;\THEN 1 \;\ELSE 0
+\end{alignat} %]]></script>
+
+<p>As is, by the way, this one, even though at first it seems so simple and natural:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
+
+<p>While we can define any computable function (and many non-computable ones, too), those functions are <em>not</em> how we describe <em>computations</em> in TLA<sup>+</sup>. Unlike in specification languages based on functional programming, computations in TLA<sup>+</sup> are not functions but dynamical systems (like ODEs). Instead, we use functions as data structures (associative arrays) or, like operators, as the primitive operations of our computations. For example, when we write a high-level specification and don’t wish to model the dynamic behavior of say, the factorial subroutine, but would rather consider it a primitive operation, we specify it as a function.</p>
+
+<h3 id="sequences-and-tuples">Sequences and Tuples</h3>
+
+<p>A sequence is a finite or infinite ordered list of values. In TLA<sup>+</sup>, sequences are defined as functions on some prefix of $Nat \setminus \set{0}$, and so use 1-based indexing as is the usual practice in math, but not in most programming languages, where 0-based indexing is common.</p>
+
+<p>The sequence of all even numbers in ascending order is just $[n \in Nat \setminus \set{0} \mapsto 2 * (n - 1)]$, and the sequence of all even numbers between 2 and 199 is $[n \in 1..100\mapsto 2 * n]$.</p>
+
+<p>The <code class="highlighter-rouge">Sequences</code> module contains several useful definitions for working with sequences. $Seq(S)$ is the set of all finite sequences over the set $S$ (the set of infinite sequences is just $[Nat\setminus\set{0} \to S]$), and is defined like so:</p>
+
+<script type="math/tex; mode=display">Seq(S) \defeq \UNION \set{[1..n \to S] : n \in Nat}</script>
+
+<p>The $Len(s)$ operator is the length of a sequence (which can be defined as $\CHOOSE n \in Nat : \DOMAIN s = 1..n$); the $\circ$ operator concatenates two sequences, the $Append(seq, x)$ operator appends the value $x$ to the end of the sequence $seq$, $Head(seq)$ operator is the first element in the sequence ($seq[1]$) and $Tail(seq)$ is the tail ($[i \in 1..Len(seq)-1 \mapsto seq[i+1]]$). $SubSeq(seq, i, j)$ is the subsequence of $seq$ between $i$ and $j$ inclusive, and <script type="math/tex">SelectSeq(seq, P(\_))</script> is the sequence filtered to contain only those elements $x$ such that $P(x)$ is true.</p>
+
+<p>As strings are just sequences of characters, the the <code class="highlighter-rouge">Sequences</code> module’s $\circ$ operator also concatenates strings, $SubSeq$ selects a substring etc..</p>
+
+<p>Defining the familiar <code class="highlighter-rouge">map</code> operation from functional programming on sequences is easy:</p>
+
+<script type="math/tex; mode=display">Map(F(\_), seq) \defeq [i \in \DOMAIN seq \mapsto F(seq[i])]</script>
+
+<p><code class="highlighter-rouge">flatmap</code> requires a bit more work and the use of a recursive operator (the inner helper operator is required as TLA<sup>+</sup> does not allow recursive operators with operator parameters):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&FlatMap(F(\_), seq) \defeq \;& \LET & \RECURSIVE Helper(\_)\\
+&&&Helper(s) \defeq \IF Len(s) = 0 \;&\THEN \seq{} \\
+&&&&\ELSE F(Head(s)) \circ Helper(Tail(s))\phantom{XXXXXXXX}\\
+&&\rlap{\IN Helper(seq)}
+\end{alignat} %]]></script>
+
+<p>TLA<sup>+</sup> has special syntax for finite sequence literals, also called tuples (or lists, if you like). The tuple $\seq{2, \str{hi}, [x \in N \mapsto x + 1]}​$ is simply syntax sugar for:</p>
+
+<script type="math/tex; mode=display">[i \in 1..3 \mapsto \CASE i=1 \to 10 \;\Box\;  i=2 \to \str{hi} \;\Box\;  i=3 \to [x \in N \mapsto x + 1]]</script>
+
+<p>If $A$ and $B$ are sets, then $A \times B$ is their <a href="https://en.wikipedia.org/wiki/Cartesian_product"><em>Cartesian product</em></a>, $\set{\seq{a, b} : a \in A , b \in B}$. Similarly, $A \times B \times C = \set{\seq{a, b, c} : a \in A , b \in B, c \in C}$ etc.</p>
+
+<p>For convenience, tuples can be used as quantified variables: instead of $\E pair \in A \times B : pair[1] &gt; pair[2]$, we can write $\E \seq{a, b} \in A \times B : a &gt; b$.</p>
+
+<p>Functions that take multiple parameters are syntactic sugar defined in terms of tuples. We can write:</p>
+
+<script type="math/tex; mode=display">[x \in Nat, y\in \STRING \mapsto x + Len(y)]</script>
+
+<p>which is just syntax sugar for</p>
+
+<script type="math/tex; mode=display">[\seq{x, y} \in Nat \times \STRING \mapsto x + Len(y)]</script>
+
+<p>and, similarly, we can define the same function as</p>
+
+<script type="math/tex; mode=display">foo[x \in Nat, y \in \STRING\!] \defeq x + Len(y)</script>
+
+<p>We can apply such functions with the expression $foo[3, \str{hi}]$, which is just syntactic sugar for $f[\seq{3, \str{hi}}]$.</p>
+
+<h3 id="records">Records</h3>
+
+<p>The record $r \defeq [a \mapsto 10, b \mapsto 20, c \mapsto 30]$ is syntax sugar for the function $[f \in \set{\str{a}, \str{b}, \str{c}} \mapsto \CASE\;f=\str{a} \to 10 \;\Box\;  f=\str{b} \to 20 \;\Box\;  f=\str{c} \rightarrow 30]$, and $r.a$ is syntax sugar for $r[\str{a}]$. <script type="math/tex">\EXCEPT\!</script> also has special syntax for records, so a record that is equal to $r$ but whose “field” $b$ is 200, could be created with $[r \;\EXCEPT !.b = 200]$ (or with $[r \;\EXCEPT !.b = @*10]$). Finally, we have special syntax for sets of records:</p>
+
+<script type="math/tex; mode=display">[name: \STRING\!, id : Nat]</script>
+
+<p>is the set of all records with the fields $name$ and $id$, whose $name$ field is a string and whose $id$ is a natural number.</p>
+
+<h3 id="operators-vs-values">Operators vs. Values</h3>
+
+<p>Should you express mathematical functions as TLA<sup>+</sup> functions or as operators? Similarly, should you express relations as sets of pairs or as binary operators? That’s entirely up to you. Expressing them as objects in the theory, i.e. as functions or sets, “reifies” them allowing to <script type="math/tex">\CHOOSE\!</script> them or quantify over them, which may or may not be necessary in your specification. Using operators may be more convenient in terms of syntax (e.g. $x \preceq y$ looks nicer than $\seq{x,y} \in OrderRel$). Sometimes, the choice is dictated by the capabilities of the tools you’d like to use in verifying your specification. For example, the mechanical proof system TLAPS currently does not support recursive operator definitions, but it does support recursive functions (which are just syntax sugar for <script type="math/tex">\CHOOSE\!</script>)<sup id="fnref:tlaps-recursive"><a href="#fn:tlaps-recursive" class="footnote">23</a></sup>. Also, operators can express things that functions simply can’t. For example, the sequence length operator or the set cardinality operator (which we’ll see later) could not have been defined as functions because they’re not functions in set-theory, as their domain is not a set but “too many” sets (i.e. a collection, a <em>class</em> that is cannot be constructed as a set in ZFC).</p>
+
+<h2 id="constants">Constants</h2>
+
+<p>In addition to definitions, we may also declare <em>constants</em>. They are values (i.e. sets) or operators that are not given a definition, but we may specify assumptions that they must satisfy. One way to think about constants is as unknowns; yet another is to think of them as analogous to type parameters of polymorphic definitions in typed programming languages. In part 4 we’ll see how those constants can be seen as an input or parameters when we learn of modules and module instantiation.</p>
+
+<p>The name <em>constant</em> means that the declared value/operator is not a temporal one — we’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>.</p>
+
+<p>Constants are introduced with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them are introduced with the keyword <script type="math/tex">\ASSUME\!</script>. For example:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS M, N}\\
+&\ASSUME & \land M \in Nat\\
+&&\land N \in Nat
+\end{alignat} %]]></script>
+
+<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
+
+<p>Now let’s look at a more interesting example:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANTS S, \_ \preceq \_\\
+&\ASSUME Poset(S, \preceq)
+\end{alignat} %]]></script>
+
+<p>We can think of $S$ as a type parameter that has a partial order relation defined on it, similar to a typeclass in some functional programming languages, or interfaces in object-oriented ones.</p>
+
+<p>From a formal logic perspective, constants are just free variables. However, as constants can be not only values but also operators, they are technically free second-order variables. The reason is that we can write something like the following (we’ll introduce the <script type="math/tex">\THEOREM\!</script> construct when we talk about <a href="#proofs">proofs</a>, but its meaning should be intuitive here):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANTS C, D, F(\_)\\
+&\THEOREM (C = D) \implies (F(C) = F(D))
+\end{alignat} %]]></script>
+
+<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>However, TLA<sup>+</sup> does not define an equality relation over those second-order objects (i.e., operators). Writing,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANT F(\_), G(\_) \\
+&\ASSUME F = G
+\end{alignat} %]]></script>
+
+<p>is a syntax error. One must write $\ASSUME \A x : F(x) = G(x)$.</p>
+
+<p>Constants are one way in which TLA<sup>+</sup> allows us to state second-order propositions even though it is a first-order logic. We’ll say a more about that in the section on proofs.</p>
+
+<h2 id="putting-it-all-together">Putting it All Together</h2>
+
+<p>Now let’s use everything we’ve seen to define the $Cardinality(S)$ operator, which is the number of elements in the finite set $S$ (the operator is provided by the standard module <code class="highlighter-rouge">FiniteSets</code>).</p>
+
+<p>We can use a computer-sciency definition using recursion, based on the observation that the cardinality of a finite set is 1 plus the cardinality of the set after removing an arbitrary element from it:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\RECURSIVE Cardinality(\_)}\\
+&Cardinality(s) \defeq &
+&\;\IF s = \set{} \;& \rlap{\THEN 0} \\
+&&&& \ELSE & \LET & x \defeq \CHOOSE x \in s : \TRUE \\
+&&&&&\IN &\rlap{1+Cardinality(s \setminus \set{x})}
+ \end{alignat} %]]></script>
+
+<p>We can also opt for a more “mathematical” definition. We’ll define cardinality by finding a bijection from a range of natural numbers to the set.</p>
+
+<script type="math/tex; mode=display">Cardinality(s) \defeq \CHOOSE n \in Nat : \E f \in [1..n \to s] : Bijection(f, s)</script>
+
+<p>We can show off some other TLA<sup>+</sup> features by using the following mathematical definition, which finds the largest natural number $n$ such that there is injection (a one-to-one mapping) from $1..n$ to $s$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXXXX}\\
+&\rlap{Cardinality(s) \defeq }\phantom{aaa}\\
+&&\LET & \rlap{TheLargestSuch(S, \_\succ\_, P(\_)) \defeq}
+\\ &&&\phantom{XX} \CHOOSE x\in S : P(x) \land \A y\in S : y \succ x \implies \neg P(y)\\
+&&\IN\rlap{TheLargestSuch(Nat, >,\LAMBDA n: \E f \in [1..n \to s]: Injection(f))}
+ \end{alignat} %]]></script>
+
+<p>What do we do with all this? We use TLA<sup>+</sup> values to define the data of our program at any step of its execution, and the primitive operations that our computation can perform in one step. Data structures can be easily defined using the objects we learned: Arrays and lists can be modeled as sequences; structures can be modeled as records; maps can be modeled as functions, and sets as, well, sets.</p>
+
+<p>What about things like the heap and the stack? What about processes or threads? In TLA<sup>+</sup>, you choose the level of abstraction. If you wish, you could model memory at a low level, as an array containing bytes (say, as natural numbers between 0 and 255) and write definitions for memory allocation and deallocation operations like <code class="highlighter-rouge">malloc</code> and <code class="highlighter-rouge">free</code>, as well as definitions that take care of encoding and decoding constructs like strings, arrays, floating point numbers etc. to and from bytes. In most circumstances, however, you’re more likely to choose to model those constructs purely abstractly without worrying about their memory layout, or you could choose to find some middle ground where memory is allocated and deallocated in objects, but without worrying about lower-level representation, instead modeling interesting techniques for dealing with shared pointers like <a href="https://en.wikipedia.org/wiki/Separation_logic">separation logic</a>. As to processes, we’ll see how those are modeled in part 3.</p>
+
+<p>What good are the non-computable functions or operators (like $Inverse$ or $dirichlet$) we’ve seen when specifying real software systems? For that matter, even when a definition is computable, it may not suggest a feasible (<a href="https://en.wikipedia.org/wiki/Cobham%27s_thesis">tractable</a>) way of computing it, which is just as bad. As we’ll see in part 3 and 4, such definitions can be convenient abstract representations of actual executable algorithms. They specify the <em>what</em> rather than the <em>how</em> of our program or some small part of it, and we can then choose to define the <em>how</em> and verify that it conforms to the <em>what</em>, or choose to leave things at that, and not worry about an implementation.</p>
+
+<p>For example, when specifying some elaborate algorithm that relies on a sorting function, we may know that we already have an efficient library subroutine for sorting and we’re not interested in the details of its implementation. So instead of specifying the sorting subroutine as an algorithm or defining it in a way that mimics an efficient implementation, we may choose to simply define its behavior:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+& Permutations(seq) \defeq\;& \LET &N \defeq Len(seq)\\
+	&&&PermsOfNums\defeq\set{ f \in [1..N \to 1..N] : Injection(f)}\\
+	&&\rlap{\IN \set{seq \bullet perm : perm \in PermsOfNums}}\\
+\\
+&\rlap{Ordered(seq, \_\preceq\_)  \defeq \A i,j \in 1..Len(seq) : i < j \implies seq[i] \preceq seq[j]}\\
+\\
+&\rlap{Sort(seq, \_\preceq\_)  \defeq \CHOOSE out \in Permutations(seq) : Ordered(out, \preceq) }
+\end{alignat} %]]></script>
+
+<p>To make things more concrete, let’s consider a specification of linked lists. Say we decide to model the list as linked nodes, but we choose not to go into the detail of actual pointer arithmetic, and so we will not model memory directly.</p>
+
+<p>Even though it is not necessary in TLA<sup>+</sup>, we can begin by specifying the “type” of our linked list node, where by type I mean the general structure of the node (without getting into memory layout). The elements of our list can be any members of the set $S$.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANT S\\
+&\RECURSIVE Node\\
+&\text{NULL} \defeq \CHOOSE x : x \notin Node\\
+&Node \defeq [elem : S, next: Node \cup \set{\text{NULL}}]
+\end{alignat} %]]></script>
+
+<p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in Node$ is just another proposition, like $a + b = 0$.</p>
+
+<p>Now, let’s define a view that presents a linked list as a sequence. For simplicity, let’s assume we only allow finite lists. Remember, a finite sequence is just a function of some 1..n:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&\phantom{XXXXXXXXX}\\
+&\RECURSIVE LenList(\_) \\
+&LenList(ll) \defeq \IF ll = \text{NULL} \;\THEN 0 \;\ELSE 1 + LenList(ll.next)\\
+&\\
+&\nested{
+&ListAsSeq(ll) \defeq &\;& \LET & \RECURSIVE View(\_, \_)\\
+&&&&View (i, node)\defeq \IF i = 1 \;&\THEN l.elem \\
+&&&&&\ELSE View(i-1, l.next) \\
+&&&\IN \rlap{[i \in 1..LenList(ll) \mapsto View(i, ll)]}
+}\\
+&\\
+&\nested{
+&\rlap{\RECURSIVE SeqAsList(\_)} \\
+& SeqAsList(s) \defeq \IF s = \seq{}\;&\THEN \text{NULL}
+\\ &&\ELSE [elem \mapsto s[1], next \mapsto SeqAsList(Tail(s))]
+}
+\end{alignat} %]]></script>
+
+<p>The operators $ListAsSeq$<sup id="fnref:listasseq"><a href="#fn:listasseq" class="footnote">24</a></sup> and $SeqAsList$ allow us to move between two levels of abstractions and write a theorem like</p>
+
+<script type="math/tex; mode=display">\THEOREM \A  s \in Seq(S) : s = ListAsSeq(SeqAsList(s))</script>
+
+<p>We could then prove the theorem or check it on a finite model in the model checker to verify that our concrete implementation of lists behaves like an abstract sequence. This is  a very simple form of something called a refinement relation between specifications; in particular, this is a <em>data</em> refinement, as it pertains to a data structure. In parts 3 and 4 we’ll see what refinement means exactly, as well as how we can use refinement relations of algorithms.</p>
+
+<p>I hope that it is now clear why I opened by saying that this is the least essential part of TLA<sup>+</sup>: any other system for defining data and operations on it would do. For example we could have used HOL instead of ZFC, for a slightly different set of tradeoffs, although when it comes to actual work, the similarities would be greater than the differences; after all, math is math. The interesting — and unique — power of TLA<sup>+</sup> comes from TLA, the logic used to define algorithms, which we’ll cover in the upcoming installments. Nevertheless, the data formalism chosen by TLA<sup>+</sup> is one that is both powerful and relatively familiar to engineers, most of whom learned about sets and functions in a discrete math course.</p>
+
+<p>In fact, this system is powerful enough that we don’t really need anything else. We could define computations as as discrete dynamical processes that change state in time by modeling (discrete) time as the index of an infinite sequence<sup id="fnref:kleene"><a href="#fn:kleene" class="footnote">25</a></sup>. However, this is not the path taken by TLA<sup>+</sup>, which offers a more structured and convenient way of describing algorithms and computations using the temporal logic of actions.</p>
+
+<h2 id="proofs">Proofs</h2>
+
+<p>The most important skill when using TLA<sup>+</sup> (or any other specification language) is the ability to express your ideas precisely in the language of mathematics. If there is an automatic verification tool for your language of choice — like the TLC model checker for TLA<sup>+</sup> — this is often all you need. However, the most important capability of logic after serving as a precise language, is the ability to use syntactic manipulation rules — often called deduction rules or proof calculus — to write proofs, using the syntax of the logic to arrive at truth.</p>
+
+<p>The TLA<sup>+</sup> proof language is more readable than any I’ve seen, so I will cover its main features, as they’re important from a design, if not theory, perspective. The proof language is a relatively late addition to TLA<sup>+</sup>, added in 2008, along with an early version of TLAPS, the mechanical proof system. The design principles of the proof language, with comparisons to other proof languages, is covered in its <a href="https://members.loria.fr/SMerz/papers/keappa2008.pdf">introduction paper</a>. Details of usage are covered in detail in section 7 of the <a href="http://lamport.azurewebsites.net/tla/tla2-guide.pdf">TLA<sup>+</sup>2 Preliminary Guide</a>, and a good tutorial, which includes the use of the mechanical proof system, is found in “The TLA<sup>+</sup> Proof Track” of the <a href="http://lamport.azurewebsites.net/tla/hyperbook.html">hyperbook</a>. More information about TLAPS can be found on <a href="https://tla.msr-inria.inria.fr/tlaps/content/Home.html">its website</a>. TLAPS can mechanically verify a useful subset of TLA<sup>+</sup> proofs and specifications. TLAPS is not a standalone proof assistant, but a frontend, which uses multiple automated solvers and the <a href="https://www.cl.cam.ac.uk/research/hvg/Isabelle/">Isabelle proof assistant</a> as backends. You may be interested in reading some of the papers explaining TLAPS’s operation <a href="https://tla.msr-inria.inria.fr/tlaps/content/Documentation/Publications.html">here</a> and <a href="https://members.loria.fr/SMerz/papers.html">here</a>. An interesting real-world specification of a real-time OS kernel scheduler has recently <a href="https://members.loria.fr/SMerz/papers/abz2016-pharos.pdf">been mechanically proven with TLAPS</a>.</p>
+
+<p>In practice, when writing real specifications, you’ll find that using the model-checker has a much higher return-on-investment than writing proofs (by an order of magnitude). Not only does the model checker save you a great deal of effort, but you can only prove things that are true, and very often, you’ll make assertions that are wrong. The model checker will let you know exactly <em>why</em> it is that your assertions are wrong; struggling with a proof may lead you to your mistake, but only after considerable effort.</p>
+
+<p>Nevertheless, sometimes you may find it useful to write a proof. TLA<sup>+</sup> has a rich structured and declarative proof language, based on Lamport’s interesting ideas for a structured proof system that assists both in the readability and the rigor of mathematical proofs. The system is detailed in <a href="http://lamport.azurewebsites.net/pubs/proof.pdf"><em>How to write a 21st century proof</em></a> (with an older discussion in <a href="http://lamport.azurewebsites.net/pubs/lamport-how-to-write.pdf"><em>How to Write a Proof</em></a>), which is an interesting read regardless of whether or not you’re interested in TLA<sup>+</sup>. Lamport first gave a talk explaining his ideas on structured proofs in 1991. <a href="http://lamport.azurewebsites.net/pubs/pubs.html#lamport-how-to-write">It was not well received</a>:</p>
+
+<blockquote>
+  <p>Lots of people jumped on me for trying to take the fun out of mathematics.  The strength of their reaction indicates that I hit a nerve. Perhaps they really do think it’s fun having to recreate the proofs themselves if they want to know whether a theorem in a published paper is actually correct, and to have to struggle to figure out why a particular step in the proof is supposed to hold.</p>
+</blockquote>
+
+<p><a href="http://lamport.azurewebsites.net/pubs/pubs.html#proof">Twenty years later</a>, attitudes have changed, although not practice:</p>
+
+<blockquote>
+  <p>The talk was received much more calmly than my earlier one, and the mathematicians were open to considering that I might have something interesting to say about writing proofs. Perhaps in the last 20 years I have learned to be more persuasive, or perhaps the mathematicians in the audience had just grown older and calmer. In any case, they were still not ready to try changing how they write their own proofs.</p>
+</blockquote>
+
+<p>TLA<sup>+</sup>’s proof language is rich with constructs designed to make it easier for people to read and write proofs, and can be learned in a day or two once you know TLA<sup>+</sup>. The proof language deviates somewhat from the relative minimalism that characterizes the rest of TLA<sup>+</sup>, and focuses more on readability that evokes prose proofs as much as possible, using a wide selection of keywords — over 25 — many of which are synonyms and syntactic sugar. I will not cover them all, but just highlight the core elements.</p>
+
+<p>The paper introducing the proof language<sup id="fnref:tlaps-paper"><a href="#fn:tlaps-paper" class="footnote">26</a></sup> reads:</p>
+
+<blockquote>
+  <p>The goal of the language is to make proofs easy to read and write for someone with no knowledge of how the proofs are being checked. This leads to a mostly declarative language, built around the uses and proofs of assertions rather than around the application of proof-search tactics.</p>
+</blockquote>
+
+<p>While formal proofs are some sequence (or a tree) of applications of the logic’s deduction rules, writing proofs in this way is untenable, as the deduction rules are too primitive, and each moves you forward towards the goal too slowly. So mechanical proof assistants often have a higher-level proof languages. Some, like Coq, have an imperative proof language, where a proof is constructed by chaining <em>tactics</em>. You can think of tactics as macros for the primitive deduction rules. Others, like TLA<sup>+</sup> have a declarative proof language (and Isabelle has both imperative and declarative proof languages). Declarative proofs are designed to be easily readable by humans, and resemble how humans write proofs. At every step of the proof they only list those facts — axioms, other lemmas or theorems, and previous proof steps — required to prove the current statement, without explaining <em>how</em>. They basically list the input and the output for some chain of deduction steps, leaving the actual steps for the tool to figure out. This, however, means that there is a difference between a <em>legal</em> proof and a <em>useful</em> proof. For example, the following is (probably) a formal proof in TLA<sup>+</sup></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{2}
+&\rlap{\THEOREM FermatsLastTheorem \triangleq} \\
+&&\phantom{aaaaaaaaaaaaaa}\neg\exists a,b,c,n \in Nat \setminus{0}: n > 2 \land a^n + b^n = c^n
+\\
+&\rlap{\PROOF \BY PeanoAxioms}
+\end{alignat} %]]></script>
+
+<p>but, of course, it will convince no mathematician and certainly not the mechanical proof system, which cannot deduce the steps from the input to the output. This, however:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{2}
+&\rlap{\THEOREM GoldbachConjecture \triangleq} \\
+&\phantom{aaaaa}\forall n \in Nat : n > 2 &&\land n \%2 = 0\Rightarrow \\ &&&\exists p,q \in Nat : IsPrime(p) \land IsPrime(q) \land p + q = n
+\\
+&\rlap{\PROOF \BY PeanoAxioms}
+\end{alignat} %]]></script>
+
+<p>may or may not be a valid proof, because we don’t know whether Goldbach’s conjecture is a theorem or not, and if it is, whether or not the Peano axioms suffice to prove it.</p>
+
+<p>A useful proof is one that can be relatively easily verified either by a human reader and/or by the mechanical proof system. This happens when it is obvious how proof goal (theorem/lemma or a proof step) is entailed by the facts listed as its proof. What “obvious” means depends, of course, on the capabilities of the person or algorithm verifying the proof, where “verification” ultimately means becoming convinced (perhaps even supplying a formal certificate — the long chain of primitive deduction rules connecting the assumptions to the consequence) that the goal is indeed entailed by the facts listed.</p>
+
+<p>The TLA<sup>+</sup> proof language does not presuppose any specific capabilities on the part of the verifier, be it human or mechanical, instead allowing hierarchically refining every proof step by making it into a proof goal of its own and recursively breaking it down into another, hopefully simpler, series of proof steps, and so on until finally we get proof steps that are each obvious enough for the verifier. This is the idea behind Lamport’s structured hierarchical proofs.</p>
+
+<p>At any point in a TLA<sup>+</sup> proof, there is a current <em>proof obligation</em>, which claims that a proof <em>goal</em> is entailed by a set of facts (other theorems axioms or proof steps) and definitions called a <em>context</em>. A <em>proof goal</em> is anything that requires proof. It can be a theorem introduced with the <script type="math/tex">\THEOREM\!</script> keyword (or one of its synonyms <script type="math/tex">\LEMMA\!</script>, <script type="math/tex">\COROLLARY\!</script>, <script type="math/tex">\PROPOSITION\!</script>), or, recursively, a proof step of one. A (declarative) proof is either omitted (with the <script type="math/tex">\OMITTED\!</script> clause), stated to be <script type="math/tex">\OBVIOUS\!</script> if it is a direct result of logical deduction rules and other built-in axioms that don’t require further assumptions, or supplied in a <script type="math/tex">\BY\!</script> (or, optionally, <script type="math/tex">\PROOF \BY\!</script>) clause, which lists all facts from which the obligation can be deduced as well as any definitions that the obligation depends on and must be examined (“expanded”).</p>
+
+<p>A theorem can be stated in two ways. It can be a logical proposition given as a formula (like $\A r, s, t : r \subseteq s \land s \subseteq t \implies r \subseteq t$ or the above statement of Fermet’s Last Theorem), or as a more powerful, more general <script type="math/tex">\ASSUME\!/\PROVE\!</script> pair, where the <script type="math/tex">\ASSUME\!</script> clause lists some assumptions that, if true, would entail the consequence in the <script type="math/tex">\PROVE\!</script> clause. The <script type="math/tex">\ASSUME\!/\PROVE\!</script> pair basically means <script type="math/tex">\text{($\ASSUME$ clause)} \vdash (\text{$\PROVE$ clause})</script>. For example:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\THEOREM ModusPonens \defeq &\;&  \ASSUME & \NEW P, \NEW Q, \\
+&&&&P, P \implies Q\\
+&&&\PROVE Q && \\
+&\rlap{\phantom{AA}\PROOF\OBVIOUS}
+\end{alignat} %]]></script>
+
+<p>or:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\THEOREM ImplicationIntr \defeq} \\
+&  \phantom{AAA} &\ASSUME & \rlap{\NEW P, \NEW Q,} \\
+&&&\ASSUME &P\\
+&&&\PROVE &Q\\
+&&\rlap{\PROVE P \implies Q} \\
+&\rlap{\phantom{AA}\OBVIOUS}
+\end{alignat} %]]></script>
+
+<p>The keyword <script type="math/tex">\NEW\!</script> introduces a new variables, as in “let P be any…”. <script type="math/tex">\NEW\!</script> by itself is shorthand for <script type="math/tex">\NEW \CONSTANT\!</script>, or just <script type="math/tex">\CONSTANT\!</script>, signifying that the variable is a constant rather than a temporal one that can refer to different values at different times in an algorithm; this is a <script type="math/tex">\CONSTANT\!</script> in the exact sense as we learned above in the section <a href="#constants"><em>Constants</em></a>. If unbounded, it means any value or any (non-temporal) operator or formula. It is a second-order free variable. $\ASSUME A \;\PROVE B$ is a proposition but it is not a TLA<sup>+</sup> formula; it doesn’t have a model in the TLA<sup>+</sup> logic, so the formulas of the logic are still all first-order. See the discussion to follow, as well as in the section <a href="#first-order-logic-and-other-orders"><em>First Order Logic and Other Orders</em></a>, for the reasoning behind this design.</p>
+
+<p>For example, the following theorem demonstrates a bounded <script type="math/tex">\NEW\!</script>, as well as introducing parameterized formulas:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\THEOREM ForallIntr \defeq}\\
+& \phantom{AA} &  \ASSUME & \rlap{\NEW P(\_), \NEW S,} \\
+&&&&\ASSUME &\NEW x \in S\\
+&&&&\PROVE &P(x)\\
+&&\rlap{\PROVE \A x \in S : P(x)} && \\
+&\rlap{\phantom{A}\OBVIOUS}
+\end{alignat} %]]></script>
+
+<p>Note how we assume the existence of a theorem (a true proposition) in the nested <script type="math/tex">\ASSUME\!/\PROVE\!</script>.</p>
+
+<p>The ability to write second-order theorems is important in a proof system, as it allows the user to make general, reusable lemmas for use in proofs. For example, an important theorem (exported by the <code class="highlighter-rouge">NaturalsInduction</code> module provided with TLAPS) that can be used in many circumstances is the following, which defines induction over the naturals:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\THEOREM NatInduction \defeq}\\
+& \phantom{AA} &  \ASSUME & \rlap{\NEW P(\_),} \\
+&&&P(0),\\
+&&&\A n \in Nat : P(n) \implies P(n+1)\\
+&&\rlap{\PROVE \A n \in Nat : P(n)}
+\end{alignat} %]]></script>
+
+<p>Instead of $\A n \in Nat : P(n) \implies P(n+1)$ above, we could have used the nested $\ASSUME \NEW n \in Nat, P(n) \;\PROVE P(n+1)$.</p>
+
+<p>We can then use that theorem to prove the following (silly) one:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\THEOREM & \ASSUME & \NEW x \in Nat\\
+&&\PROVE & x=0 \lor x-1 \geq 0\\
+&\rlap{\phantom{AA}\BY NatInduction}
+\end{alignat} %]]></script>
+
+<p>(<script type="math/tex">\OBVIOUS\!</script> would have sufficed in this case, both for a human reader as well as for TLAPS, and we could have stated the theorem more simply as the formula $\forall x \in Nat : x = 0 \lor x - 1 \geq 0$). Notice there is no need to actually define an operator of the form $P(n)$; it is automatically inferred from the formula $x = 0 \lor x - 1 \geq 0$ that it can be understood as an operator parameterized by $x$.</p>
+
+<p>Theorems of the kind we’ve seen can be introduced as axioms to define deduction rules for new logical connectives (for example, for something like <a href="https://en.wikipedia.org/wiki/Separation_logic">separation logic</a>). However, built-in axioms cannot be removed (so we can’t remove the law of excluded middle as an axiom to ensure our reasoning is constructive). Axioms are declared with the keyword <script type="math/tex">\AXIOM\!</script> or with <script type="math/tex">\ASSUME\!</script>, the construct we covered in the section about <a href="#constants">constants</a>.</p>
+
+<p>While TLAPS has been designed to be fully backend-agnostic, when using it you may sometimes find it necessary to use specific solver features. For example, $\BY  Z3$ can tell TLAPS to use the <a href="https://github.com/Z3Prover/z3">Z3 SMT solver</a> to discharge (verify) the particular proof, and you can even — although it’s not recommended and you’re unlikely to need it in practice — make use of Isabelle tactics. In fact, the proof of the $NatInduction$ theorem above provided with TLAPS is $\BY IsaM(\str{(intro\;natInduct, auto)})$.</p>
+
+<p>Let’s look at an example that requires expanding a definition in the proof. The TLAPS solvers are powerful enough to prove the following theorems about the the algebraic structures we defined in the section <a href="#set-fundamentals">Set Fundamentals</a> directly from their definition, without any added assistance:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&\phantom{XXXXXXXXXXXXXXXXX}\\
+&\rlap{\THEOREM UniqueIdentity \defeq}\\
+&\phantom{XXXXXX}&\rlap{\ASSUME \NEW M, \NEW \_ \cdot \_, Monoid(M, \cdot)}\\
+&&\PROVE \A x, y \in M: & \land \A a \in M :  x \cdot a = a \land a \cdot x = a\\
+&&&\land \A a \in M :  y \cdot a = a \land a \cdot y = a\\
+&&\phantom{XXXXX}\rlap{\implies x = y}\\
+&\phantom{XX}\rlap{\BY \DEF Monoid}
+
+\\
+\\
+&\nested{
+&\rlap{\THEOREM UniqueInverse \defeq}\\
+&\phantom{XXXXXX}&\ASSUME  &\rlap{\NEW G, \NEW \_ \cdot \_, Group(G, \cdot),}\\
+&&&\NEW id \in G, \A a \in G : id \cdot a = a \land a \cdot id = a\\
+&&\PROVE & \A a,b,c \in G : (a \cdot b = id \land b \cdot a = id \land a \cdot c = id) \implies b = c\\
+&\phantom{XX}\rlap{\BY \DEF Group, Monoid, Semigroup}
+\\
+}
+\end{alignat} %]]></script>
+
+<p>$\BY \DEF Monoid$ says that the proof relies on the content of the definition of $Monoid$, as no facts are used nor any definitions expanded unless we explicitly say so (inside long proofs — which we’ll get to right away — there are ergonomic constructs designed to save us repetitive mentions of facts or definitions in multiple proof steps). The second theorem requires examining the inner definitions of $Monoid$ and $Semigroup$ used in the definition of $Group$, as it requires the associativity property, defined in $Semigroup$.</p>
+
+<p>More interesting theorems cannot be proven satisfactorily with a single <script type="math/tex">\BY\!</script> clause, and must be broken down into smaller proof steps. Each proof step states a proposition and  requires proof (or <script type="math/tex">\OMITTED\!</script>) with a <script type="math/tex">\BY\!</script> clause, or, recursively, by a nested series of proof steps, thus forming a tree-like hierarchy. Every step is labeled with “$\seq{depth}name.$”, where <em>depth</em> is the depth of the step in the hierarchy, and <em>name</em> is an optional label for the step, usually just the index of the step in the sequence. A named step can be referenced as a fact in a <script type="math/tex">\BY\!</script> clause as if it were a named theorem. Every sequence of proof steps, at any level of the tree, must end with a <script type="math/tex">\QED\!</script> step, whose goal is the parent proposition of the sequence, known as the <em>current goal</em>. Here’s an example of a proof structure:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\THEOREM ...} \\
+&\phantom{AA} & \rlap{\seq{1}1.\;... \BY ...}\\
+&& \seq{1}2.\;\rlap{...} \\
+&&&& \seq{2}1.\;\rlap{... \BY...}\\
+&&&& \seq{2}2.\;\rlap{... \BY...}\\
+&&&& \seq{2}3.\;\rlap{\QED \BY...}\\
+&& \seq{1} 3.\;\rlap{...}\\
+&&&& \seq{2}1.&\;... \\
+&&&&&\seq{3}1.\;... \BY...\\
+&&&&&\seq{3}2.\;\QED \BY...\\
+&&&& \seq{2}2.\;\rlap{... \BY...}\\
+&&&&\seq{2}3.\;\rlap{\QED \BY...}\\
+&& \rlap{\seq{1} 4.\;\QED \BY...}\\
+\end{alignat} %]]></script>
+
+<p>Note that a proof may contain multiple steps with the same name (e.g. $\seq{2}1, \seq{2}2, \seq{2}3.$ all appear twice in the outline above), however, there can be no ambiguity when referencing steps, as you can only reference steps appearing previously in the same sequence or in higher levels of the hierarchy. The idea of a hierarchical proof is that each nested sequence provides the details of how its goal (i.e., parent) is proven, until the leaf nodes are obvious enough. If, as a reader, you’re not interested in the details or the step is obvious enough without the more detailed steps, you can collapse the tree in the TLA<sup>+</sup> Toolbox. This hierarchical structure results in very readable proofs, as you can easily grasp the outline of the proof, and then delve deeper for more detail if you like.</p>
+
+<p>The proof language has some constructs that allow for a more natural expression of the proof (similar to common techniques in prose proofs), or to improve readability. Instead of listing the set of facts and definitions that are supposed to entail the goal, the keyword <script type="math/tex">\USE\!</script> introduces facts and definitions that are then implicitly added to all subsequent steps in the same step sequence. The matching <script type="math/tex">\HIDE\!</script> keyword does the opposite, removing implicit facts from consideration. Because <script type="math/tex">\USE\!</script> doesn’t introduce a proposition, it is usually written in an unnamed step (e.g. $\seq{2}$ as opposed to, say, $\seq{2}5$), as there’s never a reason to reference it.</p>
+
+<p>A more interesting ergonomic construct is <script type="math/tex">\SUFFICES\!</script>. Say that assuming <em>A</em>, we want to prove <em>C</em>, and that we could do that by first proving $A \vdash B$ and then $B \vdash C$. Sometimes it is more convenient (to guide the reader in the intent of the proof) to first prove $B \vdash C$ and only then  $A \vdash B$. In a prose proof, we usually say “suffices to prove <em>B</em> because…” and then move on to proving <em>B</em>. We can do the same in TLA<sup>+</sup> with the <script type="math/tex">\SUFFICES\!</script> construct. When used in an unnamed step, it changes the current goal as seen in the example below, taken from the hyperbook, which demonstrates the use of <script type="math/tex">\SUFFICES\!</script> as well as gives you a sense of what a real proof looks like. The example proves some theorems that can be mechanically checked by TLAPS about the GCD operator we defined above in the section <a href="#some-important-sets">Some Important Sets</a><sup id="fnref:GCD"><a href="#fn:GCD" class="footnote">27</a></sup>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\THEOREM \A m,n \in Nat \setminus\set{0} : GCD(m,n) = GCD(n, m)}\\
+& \phantom{AA}\rlap{\BY\DEF GCD}\\
+\\& \rlap{\THEOREM \A m \in Nat \setminus \set{0} : GCD(m, m) = m}\\
+&\phantom{AA}&&\seq{1}\; \SUFFICES & \ASSUME & \rlap{\NEW m \in Nat \setminus \set{0}} \\
+&&&&\PROVE & \rlap{GCD(m,m) = m}\\
+&&&\rlap{\phantom{A}\OBVIOUS}\\
+&&&\seq{1}1.\;\rlap{Divides(m, m)}\\
+&&&\rlap{\phantom{A}\BY \DEF Divides}\\
+&&&\seq{1}2.\; \rlap{\A i \in Nat : Divides(i, m) \implies i \leq m}\\
+&&&\phantom{A}\rlap{\BY \DEF Divides}\\
+&&&\seq{1}\; \QED\\
+&&&\phantom{A} \rlap{\BY \seq{1}1, \seq{1} 2 \;\DEF GCD, SetMax, DivisorOf}\\
+\\
+&\rlap{\THEOREM \A m,n \in Nat \setminus\set{0} :  n > m \implies GCD(m, n) = GCD(m, m-n)}\\
+&&&\seq{1}\; \SUFFICES & \ASSUME & \rlap{\NEW m \in Nat \setminus \set{0}, \NEW n \in Nat \setminus \set{0},} \\
+&&&&&n > m\\
+&&&&\PROVE & \rlap{GCD(m,n) = GCD(n, n-m)}\\
+&&&\phantom{A}\OBVIOUS\\
+&&&\seq{1}\;\rlap{\A i \in Int : Divides(i,m) \land Divides(i,n) \equiv Divides(i,m) \land Divides(i, n-m)}\\
+&&&\rlap{\phantom{A} \BY\DEF Divides}\\
+&&&\seq{1}\;\QED\\
+&&&\rlap{\phantom{A}\BY \DEF GCD, SetMax, DivisorOf}\\
+\end{alignat} %]]></script>
+
+<p>The <script type="math/tex">\CASE\!</script> construct helps writing a proof by cases. For example, instead of:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\seq{1}1.\;& \rlap{\A n \in Int : P(n)}\\
+&&\seq{2}1.\;&\ASSUME n \geq 0 \;\PROVE P(n)\\
+&&&...\\
+&&\seq{2}2.&\ASSUME n < 0 \;\PROVE P(n)\\
+&&&...\\
+&&\seq{2}3. &\rlap{\QED} \\
+&&&\rlap{\BY \seq{2}1, \seq{2}2}\\
+\end{alignat} %]]></script>
+
+<p>you can write:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\seq{2}1. \;& \rlap{\A n \in Int : P(n)}\\
+&&\seq{2}1.\;&\CASE n \geq 0\\
+&&&...\\
+&&\seq{2}2.&\CASE n < 0 \\
+&&&...\\
+&&\seq{2}3. &\rlap{\QED} \\
+&&&\rlap{\BY\seq{2}1, \seq{2}2}\\
+\end{alignat} %]]></script>
+
+<p>Finally, let’s take a look at the <script type="math/tex">\PICK\!</script> construct. If we have an assumption of the form $\exists x : P(x)$ we can use it by <script type="math/tex">\PICK\!</script>ing a fresh variable $x$ for which $P(x)$ is assumed (it works similarly to $\NEW x, P(x)$). Here is an example adapted from the TLAPS documentation. In addition to <script type="math/tex">\PICK\!</script>, it makes use of <script type="math/tex">\SUFFICES\!</script> and also demonstrates a proof of contradiction<sup id="fnref:contra"><a href="#fn:contra" class="footnote">28</a></sup>:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXXXXXXXXXXXXXX}\\
+&\rlap{\THEOREM \neg\E x \in Nat : x + 1 = 0} \\
+&\phantom{AA}& \seq{1} \;&\SUFFICES & \ASSUME \E x \in Nat : x + 1 = 0\\
+&&&&\rlap{\PROVE  \FALSE}\\
+&&\phantom{A} \rlap{\OBVIOUS}\\
+&&\rlap{\comment{Goal is now $\FALSE\!$, i.e., a contradiction}}\\
+&& \rlap{\comment{The assumption $\E x \in Nat : x + 1 = 0$ is now in the implied list of facts}}\\
+&& \rlap{\seq{1}\;\PICK u \in Nat : u = -1} \\
+&&& \seq{2}1.\;\rlap{\A n \in Nat: n+1=0 \implies n = -1}\\
+&&&\rlap{\phantom{aa}\OBVIOUS}\\
+&&& \seq{2}2.\;\rlap{\QED \BY \seq{2}1}\\
+&&\rlap{\comment{We now have $u \in Nat : u = -1$ in the implied list of facts}}\\
+&& \rlap{\seq{1}\;\QED\BY {-1} \notin Nat}\\
+\end{alignat} %]]></script>
+
+<p>There are quite a few other constructs that capture common proof techniques; you can find a list of them <a href="https://tla.msr-inria.inria.fr/tlaps/content/Documentation/Tutorial/Other_proof_constructs.html">here</a> (as you can see, their meaning is precisely defined by the more basic constructs we’ve covered). There are also constructs that allow adding local definitions to a proof, a scheme that allows naming and referencing parts of formulas, and a convenient syntax for writing proofs by a sequence of equalities or inequalities.</p>
+
+<p>For an example of the last, if TLAPS weren’t able to prove the theorem $UniqueInverse$ automatically — or if the proof, although obvious to the mechanical prover, is not obvious to the human reader — we could help the system or the reader by writing the following detailed proof, where $@$ refers to the right-hand side of the relation mentioned in the previous step:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\THEOREM UniqueInverse \defeq}\\
+&\phantom{XXXXXX}&\ASSUME  &\rlap{\NEW G, \NEW \_ \cdot \_, Group(G, \cdot),}\\
+&&&\NEW id \in G, \A a \in G : id \cdot a = a \land a \cdot id = a\\
+&&\PROVE & \A a,b,c \in G : (a \cdot b = id \land b \cdot a = id \land a \cdot c = id) \implies b = c\\
+&\nested{
+&\phantom{XX}\;&\seq{1} \;\SUFFICES & \ASSUME & \NEW a \in G, \NEW b \in G, \NEW c \in G, \\
+&&&&a \cdot b = id, b \cdot a = id, a \cdot c = id\\
+&&&\PROVE &b = c\\
+&&\phantom{XXX} \rlap{\OBVIOUS}
+}\\
+\nested{
+&\phantom{XX}\;&\seq{1}\; b &= b \cdot id \;\;\;& \OBVIOUS\\
+&&\seq{1}\; @ &= b \cdot (a \cdot c) \;\;& \OBVIOUS\\
+&&\seq{1}\; @ &= (b \cdot a) \cdot c \;\;& \BY \DEF Group, Monoid, Semigroup\\
+&&\seq{1}\; @ &= c & \OBVIOUS\\
+&&\seq{1}\; \rlap{\QED} &&\OBVIOUS
+}
+\end{alignat} %]]></script>
+
+<p>The appendix of <a href="http://lamport.azurewebsites.net/pubs/proof.pdf"><em>How to write a 21st century proof</em></a> contains a full, mechanically verified, TLA<sup>+</sup> proof of a simple theorem in calculus along with all necessary definitions.</p>
+
+<p>While TLA<sup>+</sup> <em>can</em> be used to prove general mathematical theorems, it was not designed for that task. Mathematicians interested in formal proofs would be better served by tools designed for that task, like Isabelle or Coq. Engineers who choose to write formal proofs are encouraged not to waste their time on proving mathematical theorems, but to either use the library of proven mathematical theorems supplied with TLAPS or to merely state a mathematical theorem and omit the proof. They should concentrate on proving the correctness of their algorithms or system designs. In part 3 we’ll see how that’s done.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Using formal math to precisely define objects and their properties is pretty straightforward, can be learned easily by engineers, and doing that forms the core of the work in TLA<sup>+</sup>, and, in fact, in any specification language or proof assistant.</p>
+
+<p>You’ll usually use TLC, the TLA<sup>+</sup> model checker to automatically verify your assertions. Formal proofs, on the other hand, are rather laborious — especially if we want them to be mechanically checked — even when written in a relatively nice proof language like that of TLA<sup>+</sup>, and even when SMT solvers are used by TLAPS to carry some of the burden.</p>
+
+<p>While we haven’t even begun exploring any of the interesting theory of TLA<sup>+</sup>, this installment covered nearly all of its syntax; in fact, we’ve covered almost all definitions in the standard module library, too. The entire logic for defining dynamical systems contains just a handful of additional operators — $’$, $\Box$, <script type="math/tex">\ENABLED\!</script>, and $\EE$ — applied to the data logic we’ve learned.</p>
+
+<p><em>Next week we’ll look at how TLA<sup>+</sup> models algorithms and their properties mathematically, and at the proof techniques that work best in verifying algorithms.</em></p>
+
+<p><em>If you find TLA<sup>+</sup> and formal methods in general interesting, I invite you to visit and participate in the new <a href="https://www.reddit.com/r/tlaplus/">/r/tlaplus</a> on Reddit.</em></p>
+
+<hr />
+<div class="footnotes">
+  <ol>
+    <li id="fn:standard">
+      <p>While there are several set theories, ZFC is considered “standard”, whereas there are many type theories that differ from each other either in subtle or profound ways, none of which has become standard.&nbsp;<a href="#fnref:standard" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:gonthier">
+      <p><a href="https://en.wikipedia.org/wiki/Georges_Gonthier">George Gonthier</a> is a leading practitioner in formal mathematics and one of the Coq veterans who helped design the TLA<sup>+</sup> proof system.&nbsp;<a href="#fnref:gonthier" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:hardy">
+      <p>G.H. Hardy, <a href="https://www.math.ualberta.ca/mss/misc/A%20Mathematician%27s%20Apology.pdf"><em>A Mathematician’s Apology</em></a>, 1940&nbsp;<a href="#fnref:hardy" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:hardy2">
+      <p>Then again, Hardy took pride in his own “useless” field of number theory because, he believed, it would never have any “warlike” uses.&nbsp;<a href="#fnref:hardy2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:set-theory">
+      <p>I’ve seen some online discussions where working programmers discuss the foundation of logic and mathematics with the same opinionated vigor they argue over Haskell vs. Python, and I just want to say this: If you think the choice of a mathematical foundation can significantly affect the way you specify and reason about real, physically realizable systems, then you misunderstand something basic about the whole subject of mathematical foundations. All foundations must agree on any physically observable prediction, and no foundation provides magic proof techniques that make it superior to others, certainly as far as the work of us programmers is concerned.&nbsp;<a href="#fnref:set-theory" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:formalism">
+      <p>Not to be confused with <a href="https://en.wikipedia.org/wiki/Formalism_(philosophy_of_mathematics)">Formalism</a>, a <a href="https://en.wikipedia.org/wiki/Finitism">finitist</a> philosophy of mathematics.&nbsp;<a href="#fnref:formalism" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:function-relation">
+      <p>A function is just a relation with one implicit arity, so <code class="highlighter-rouge">*</code>, which is a 2-ary function, could also be given as a 3-ary relation, <code class="highlighter-rouge">multiplies(a,b,c)</code>, that says whether <code class="highlighter-rouge">c</code> is the result of multiplying <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>&nbsp;<a href="#fnref:function-relation" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:non-standard">
+      <p>That would be impossible, due to the physical limitations of computation.&nbsp;<a href="#fnref:non-standard" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:ASCII">
+      <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv$, <code class="highlighter-rouge">-&gt;</code> for $\to$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto$, <code class="highlighter-rouge">==</code> for $\triangleq$, <code class="highlighter-rouge">\A</code> for $\forall$, <code class="highlighter-rouge">\E</code> for $\exists$, <code class="highlighter-rouge">[]</code> for $\Box$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond$, « for $\langle$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle$,  <code class="highlighter-rouge">\o</code> for $\circ$ etc.. $\LaTeX$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall$ or <code class="highlighter-rouge">\neg</code> for $\neg$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful.&nbsp;<a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:lambda">
+      <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later.&nbsp;<a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:substitution">
+      <p>For more on this, see Lamport’s <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf">Substitution: Syntactic versus Semantic</a>&nbsp;<a href="#fnref:substitution" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:class">
+      <p>If you’re wondering what the model of a FOL+ZFC formula is, as the models of FOL formulas are always second-order objects, and yet sets are already our first-order object, then that model is called a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)">class</a>. Many classes, like the universe of ZFC (i.e., the model of the formula $x = x$), are not formal sets, meaning they cannot be constructed by the axioms of ZFC. A class that is not a (formal) set is called a <em>proper class</em>.&nbsp;<a href="#fnref:class" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:paradox">
+      <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by the facts that a set cannot contain elements of different order (so $\set{1, \set{2, 3}}$ is not a valid set), i.e. different types.&nbsp;<a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:ambig">
+      <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning.&nbsp;<a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:cdot">
+      <p>Actually, the $\cdot$ operator is already taken in TLA<sup>+</sup> (for action composition), so you’d need to choose a different operator.&nbsp;<a href="#fnref:cdot" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tlc-finite">
+      <p>Provided that evaluating the expression does not require enumerating an infinite set, but TLC allows overriding set definitions so that you may refer to infinite sets in your specification, but evaluate them on finite subsets.&nbsp;<a href="#fnref:tlc-finite" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:some">
+      <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name.&nbsp;<a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tlc-nonsense">
+      <p>Attempting to evaluate the expression in the TLC model checker results in an error.&nbsp;<a href="#fnref:tlc-nonsense" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:typed-untyped">
+      <p>Lamport and Paulson’s <a href="http://lamport.azurewebsites.net/pubs/lamport-types.pdf"><em>Should Your Specification Language Be Typed?</em></a> and Lamport’s <a href="/assets/lamport-types-not-harmless.pdf"><em>Types Are Not Harmless</em></a>.&nbsp;<a href="#fnref:typed-untyped" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:div">
+      <p>While it doesn’t matter in practice — as it has no bad consequences — the definition allows us to deduce that $0/0$ is some indeterminate real number, as there are many numbers $c$ that satisfy the equation on the left-hand side. If that bothers you, it can be fixed by defining division as $ChooseOne(Real,\; \LAMBDA c : a = b*c)$. Also, the second rule in the definition of <script type="math/tex">\CHOOSE\!</script> (right-uniqueness) allows us to deduce that $1/0 = 2/0$. If that bothers you, there is a somewhat more complex definition that makes such a deduction impossible.&nbsp;<a href="#fnref:div" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:not-pairs">
+      <p>And so $\seq{-1, 1} \in [x \in Int \mapsto x^2]$ is undefined rather than <script type="math/tex">\TRUE\!</script>.&nbsp;<a href="#fnref:not-pairs" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:calculus">
+      <p>If we wanted to do actual calculus, we’d be less sloppy, and define continuity and differentiability, so we could assert that a limit or a derivative actually exists (as our $Limit$ and $Derivative$ operators are undefined if the function is dicontinuous or not differentiable at point $a$). To see how that’s done, see page 22 of Leslie Lamport’s <a href="http://lamport.azurewebsites.net/pubs/proof.pdf"><em>How to Write a 21st Century Proof</em></a>.&nbsp;<a href="#fnref:calculus" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tlaps-recursive">
+      <p>This is not as big a limitation as it may sound, as recursive operators can usually be expressed as non-recursive operators with a recursive function defined in a <script type="math/tex">\LET\!</script> clause.&nbsp;<a href="#fnref:tlaps-recursive" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:listasseq">
+      <p>There are other, shorter ways of writing $ListAsSeq$, but I wanted to showcase some more TLA<sup>+</sup> features.&nbsp;<a href="#fnref:listasseq" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:kleene">
+      <p>And we could then define <a href="https://en.wikipedia.org/wiki/Kleene%27s_T_predicate">Kleene’s T predicate</a>.&nbsp;<a href="#fnref:kleene" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tlaps-paper">
+      <p>Kaustuv Chaudhuri, Damien Doligez, Leslie Lamport, Stephan Merz, <a href="https://members.loria.fr/SMerz/papers/keappa2008.pdf"><em>A TLA<sup>+</sup> Proof System</em></a>, 2008&nbsp;<a href="#fnref:tlaps-paper" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:GCD">
+      <p>The theorems are later used in the book to prove the correctness of Euclid’s algorithm for computing the GCD. We will talk about Euclid’s algorithm in part 3.&nbsp;<a href="#fnref:GCD" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:contra">
+      <p>Note to all pedantic intuitionists: I wrote <em>of</em> contradiction; not <em>by</em> contradiction.&nbsp;<a href="#fnref:contra" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+	</div>
+</article>
+
+	  </main>
+
+    <!-- Pagination links -->
+    
+
+  </div>
+
+	    <!-- Footer -->
+	    <footer></footer>
+
+
+	    <!-- Script -->
+      <script type="text/javascript" src="/js/main.js"></script>
+<!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+        <script src="js/vendor/html5shiv.js"></script>
+        <![endif]-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+-->
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-99776245-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- <script>
+var _gaq=[['_setAccount','UA-99776245-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script> -->
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nav-toc').toc();
+});
+</script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
+<script type="text/javascript" src="/js/bigfoot.min.js"></script>
+
+<script type="text/javascript">
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
+</script>
+
+
+
+
+
+	</div>
+</body>
+</html>

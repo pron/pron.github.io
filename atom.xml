@@ -4,12 +4,22 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-05-29T20:01:20+03:00</updated>
+ <updated>2017-06-01T15:52:07+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>TLA+ in Practice and Theory<br/>Part 2: The + in TLA+</title>
+   <link href="/posts/tlaplus_part2"/>
+   <id>/posts/tlaplus_part2</id>
+   <updated>2017-06-01T00:00:00+03:00</updated>
+   <content type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;\newcommand{\sc}[1]{\mathrm{\small{#1}}\;} \newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}} \newcommand{\str}[1]{``\mathsf{#1}&quot;} \newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}} \newcommand{\set}[1]{\{#1\}} \newcommand{\seq}[1]{\langle #1 \rangle} \newcommand{\llbracket}{[\![} \newcommand{\rrbracket}{]\!]} \newcommand{\sem}[1]{\llbracket #1 \rrbracket} \newcommand{\H}{-\!\!\!} \newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!} \newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!} \newcommand{\LR}{\raise 2.5pt {\lrcorner}} \newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!} \newcommand{\defeq}{\triangleq} \newcommand{\E}{\exists\,} \newcommand{\A}{\forall\,} \newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,} \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,} \newcommand{\implies}{\Rightarrow} \newcommand{\whileop}{\stackrel{+} -\!\!\triangleright\; } \newcommand{\LET}{\sc{LET}} \newcommand{\IN}{\sc{IN}} \newcommand{\RECURSIVE}{\sc{RECURSIVE}} \newcommand{\LAMBDA}{\sc{LAMBDA}} \newcommand{\IF}{\sc{IF}} \newcommand{\THEN}{\sc{THEN}} \newcommand{\ELSE}{\sc{ELSE}} \newcommand{\CASE}{\sc{CASE}} \newcommand{\OTHER}{\sc{OTHER}} \newcommand{\CHOOSE}{\sc{CHOOSE}} \newcommand{\BOOLEAN}{\sc{BOOLEAN}} \newcommand{\TRUE}{\sc{TRUE}} \newcommand{\FALSE}{\sc{FALSE}}...</content>
+ </entry>
 
  
 
