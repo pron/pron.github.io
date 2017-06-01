@@ -844,7 +844,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>A sequence is a finite or infinite ordered list of values. In TLA<sup>+</sup>, sequences are defined as functions on some prefix of $Nat \setminus \set{0}$, and so use 1-based indexing as is the usual practice in math, but not in most programming languages, where 0-based indexing is common.</p>
 
-<p>The sequence of all even numbers in ascending order is just $[n \in Nat \setminus \set{0} \mapsto 2 * (n - 1)]$, and the sequence of all even numbers between 2 and 199 is $[n \in 1..100\mapsto 2 * n]$.</p>
+<p>The sequence of all even numbers in ascending order is just $[n \in Nat \setminus \set{0} \mapsto 2 * (n - 1)]$, and the sequence of all even numbers between 2 and 200 is $[n \in 1..100\mapsto 2 * n]$.</p>
 
 <p>The <code class="highlighter-rouge">Sequences</code> module contains several useful definitions for working with sequences. $Seq(S)$ is the set of all finite sequences over the set $S$ (the set of infinite sequences is just $[Nat\setminus\set{0} \to S]$), and is defined like so:</p>
 
