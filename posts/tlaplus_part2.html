@@ -379,7 +379,7 @@
 
 <script type="math/tex; mode=display">\CASE p_1 \rightarrow e_1 \;\Box\; ...\;\Box\;p_n \rightarrow e_n ...\;\Box\; \OTHER\rightarrow e</script>
 
-<p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later).</p>
+<p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later). If more than one predicate is true, the value of the expression would be one of them, but the language does not commit to which. Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> are defined in terms of the <script type="math/tex">\CHOOSE\!</script> operator we’ll see later.</p>
 
 <p>Because in TLA<sup>+</sup> specifications of algorithms and systems are written as formulas, it requires some ergonomics for writing long formulas in a way that makes them easy to read. Lamport devised such a scheme in <a href="http://lamport.azurewebsites.net/pubs/lamport-howtowrite.pdf"><em>How to Write a Long Formula</em></a>. It uses alignment of conjunctions and disjunctions in place of parentheses, like so:</p>
 
@@ -590,6 +590,8 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 \end{alignat} %]]></script>
 
 <p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+
+<p>Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script>. See <em>Specifying Systems</em>, p. 298 for the precise definitions.</p>
 
 <p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$.</p>
 
