@@ -578,7 +578,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">16</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
 
-<p>There is another way of defining $Quotient$:</p>
+<p>There are often many equivalent ways of defining mathematical concepts. For example, here is another way of defining $Quotient$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -606,7 +606,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$.</p>
 
-<p>Like the quantifiers, <script type="math/tex">\CHOOSE\!</script> usually appears bounded, as in, $\CHOOSE x \in S : P(x)$, which is shorthand for $.\CHOOSE x :  x \in S \land P(x)$</p>
+<p>Like the quantifiers, <script type="math/tex">\CHOOSE\!</script> usually appears bounded, as in, $\CHOOSE x \in S : P(x)$, which is shorthand for $\CHOOSE x :  x \in S \land P(x)$.</p>
 
 <p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value  — could be 42, could be $\set{3, \set{4, 5}}$ — which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
 
