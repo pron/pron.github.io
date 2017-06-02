@@ -197,6 +197,7 @@
 \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,}
 \newcommand{\implies}{\Rightarrow}
 \newcommand{\whileop}{\stackrel{+} -\!\!\triangleright\; }
+\renewcommand{\Diamond}{ {\Large \diamond} }
 \newcommand{\LET}{\sc{LET}}
 \newcommand{\IN}{\sc{IN}}
 \newcommand{\RECURSIVE}{\sc{RECURSIVE}}
@@ -866,7 +867,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>The $Len(s)$ operator is the length of a sequence (which can be defined as $\CHOOSE n \in Nat : \DOMAIN s = 1..n$); the $\circ$ operator concatenates two sequences, the $Append(seq, x)$ operator appends the value $x$ to the end of the sequence $seq$, $Head(seq)$ operator is the first element in the sequence ($seq[1]$) and $Tail(seq)$ is the tail ($[i \in 1..Len(seq)-1 \mapsto seq[i+1]]$). $SubSeq(seq, i, j)$ is the subsequence of $seq$ between $i$ and $j$ inclusive, and <script type="math/tex">SelectSeq(seq, P(\_))</script> is the sequence filtered to contain only those elements $x$ such that $P(x)$ is true.</p>
 
-<p>As strings are just sequences of characters, the the <code class="highlighter-rouge">Sequences</code> module’s $\circ$ operator also concatenates strings, $SubSeq$ selects a substring etc..</p>
+<p>As strings are just sequences of characters, the <code class="highlighter-rouge">Sequences</code> module’s $\circ$ operator also concatenates strings, $SubSeq$ selects a substring etc..</p>
 
 <p>Defining the familiar <code class="highlighter-rouge">map</code> operation from functional programming on sequences is easy:</p>
 
@@ -1186,7 +1187,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>While TLAPS has been designed to be fully backend-agnostic, when using it you may sometimes find it necessary to use specific solver features. For example, $\BY  Z3$ can tell TLAPS to use the <a href="https://github.com/Z3Prover/z3">Z3 SMT solver</a> to discharge (verify) the particular proof, and you can even — although it’s not recommended and you’re unlikely to need it in practice — make use of Isabelle tactics. In fact, the proof of the $NatInduction$ theorem above provided with TLAPS is $\BY IsaM(\str{(intro\;natInduct, auto)})$.</p>
 
-<p>Let’s look at an example that requires expanding a definition in the proof. The TLAPS solvers are powerful enough to prove the following theorems about the the algebraic structures we defined in the section <a href="#set-fundamentals">Set Fundamentals</a> directly from their definition, without any added assistance:</p>
+<p>Let’s look at an example that requires expanding a definition in the proof. The TLAPS solvers are powerful enough to prove the following theorems about the algebraic structures we defined in the section <a href="#set-fundamentals">Set Fundamentals</a> directly from their definition, without any added assistance:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
