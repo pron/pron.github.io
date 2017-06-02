@@ -824,7 +824,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &RealFunction \defeq \UNION \set{[S \to Real] : S \in \SUBSET Real}\\
-&AbsoluteValue(a) \defeq \IF a > 0 \;\THEN a \;\ELSE {-a}\phantom{XXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&AbsoluteValue(a) \defeq \IF a \geq 0 \;\THEN a \;\ELSE {-a}\phantom{XXXXXXXXXXXXXXXXXXXXXXXXX}\\
 &OpenBall(a, e) \defeq \set{x \in Real : AbsoluteValue(x - a) < e}\\
 &PosReal \defeq \set{x \in Real : x > 0}\\
 &\nested{
