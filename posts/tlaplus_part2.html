@@ -909,9 +909,12 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <h3 id="records">Records</h3>
 
-<p>The record $r \defeq [a \mapsto 10, b \mapsto 20, c \mapsto 30]$ is syntax sugar for the function $[f \in \set{\str{a}, \str{b}, \str{c}} \mapsto \CASE\;f=\str{a} \to 10 \;\Box\;  f=\str{b} \to 20 \;\Box\;  f=\str{c} \rightarrow 30]$, and $r.a$ is syntax sugar for $r[\str{a}]$. <script type="math/tex">\EXCEPT\!</script> also has special syntax for records, so a record that is equal to $r$ but whose “field” $b$ is 200, could be created with $[r \;\EXCEPT !.b = 200]$ (or with $[r \;\EXCEPT !.b = @*10]$). Finally, we have special syntax for sets of records:</p>
+<p>The record</p>
 
-<script type="math/tex; mode=display">[name: \STRING\!, id : Nat]</script>
+<script type="math/tex; mode=display">r \defeq [a \mapsto 10, b \mapsto 20, c \mapsto 30]</script>
+
+<p>is syntax sugar for the function $[f \in \set{\str{a}, \str{b}, \str{c}} \mapsto \CASE\;f=\str{a} \to 10 \;\Box\;  f=\str{b} \to 20 \;\Box\;  f=\str{c} \rightarrow 30]$, and $r.a$ is syntax sugar for $r[\str{a}]$. <script type="math/tex">\EXCEPT\!</script> also has special syntax for records, so a record that is equal to $r$ but whose “field” $b$ is 200, could be created with $[r \;\EXCEPT !.b = 200]$ (or with $[r \;\EXCEPT !.b = @*10]$). Finally, we have special syntax for sets of records:
+<script type="math/tex">[name: \STRING\!, id : Nat]</script></p>
 
 <p>is the set of all records with the fields $name$ and $id$, whose $name$ field is a string and whose $id$ is a natural number.</p>
 
