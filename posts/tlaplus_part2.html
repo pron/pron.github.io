@@ -361,7 +361,7 @@
 
 <p>Now, notice that the model for a FOL formula, say $x &gt; 2$, is always a set of values from the universe (in this case, all numbers greater than 2). So the model of a FOL formula is always a second-order object. But if the meaning of a formula is a set, a second-order object, then how can we write a general axiom such as $\vdash A \lor \neg A$ where $A$ stands not for a <em>specific</em> formula but for <em>any</em> formula? We can’t write $\A A . A \lor \neg A$ because we can’t quantify over formulas (which, as we’ve just seen, stand for sets, or second-order values) nor treat them as free variables for the same reason. The answer is that we don’t. We say that such an axiom is an <em>axiom schema</em> that refers to an infinite number of axioms in the logic, one for each possible formula $A$. The language used to write the schema is therefore not the logic itself, but the <em>metalogic</em>, or <em>metalanguage</em> of our logic.</p>
 
-<p>While this is fine from a theory standpoint, this is not satisfactory for a mechanical proof software. When proving a theorem, we often need to prove may intermediate steps, and we would like to be able to state and prove general lemmas which we could reuse in many proofs, and such general second-order lemmas can be very useful.</p>
+<p>While this is fine from a theory standpoint, this is not satisfactory for a mechanical proof software. When proving a theorem, we often need to prove many intermediate steps, and we would like to be able to state and prove general lemmas which we could reuse in many proofs, and such general second-order lemmas can be very useful.</p>
 
 <p>One solution is, therefore, to adopt a higher-order logic. HOL serves as the basis for the theorem provers Isabelle/HOL and HOL Light, and more arcane type theories, like the constructive theories used in Coq or Agda, are also higher-order. But keeping the logic first-order has some advantages in terms of simplicity, model checking algorithms, general theorems (if we know that a formula is first-order, it’s easier to state theorems about a formula’s meaning based on its syntactic structure) — the last one is more relevant for TLA, the temporal logic part of TLA<sup>+</sup>, which we’ll cover in the next installments. But it turns out that we can have our cake and eat it, too. We can keep all formulas first-order, but allow writing second-order propositions in the form $A \vdash B$, which are not in themselves formulas (and so they don’t have a model). We basically provide access to the metalanguage. This is the solution adopted by TLA<sup>+</sup>, which we’ll see later in the section about <a href="#proofs">proofs</a>.</p>
 
@@ -905,7 +905,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <script type="math/tex; mode=display">foo[x \in Nat, y \in \STRING\!] \defeq x + Len(y)</script>
 
-<p>We can apply such functions with the expression $foo[3, \str{hi}]$, which is just syntactic sugar for $f[\seq{3, \str{hi}}]$.</p>
+<p>We can apply such functions with the expression $foo[3, \str{hi}]$, which is just syntactic sugar for $foo[\seq{3, \str{hi}}]$.</p>
 
 <h3 id="records">Records</h3>
 
@@ -1041,7 +1041,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in Node$ is just another proposition, like $a + b = 0$.</p>
 
-<p>Now, let’s define a view that presents a linked list as a sequence. For simplicity, let’s assume we only allow finite lists. Remember, a finite sequence is just a function of some 1..n:</p>
+<p>Now, let’s define a view that presents a linked list as a sequence. For simplicity, let’s assume we only allow finite lists. Remember, a finite sequence is just a function of some $1..n$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
