@@ -395,13 +395,13 @@
 <p>but this does not describe an algorithm, in TLA<sup>+</sup>; it is just another mathematical definition of the greatest common divisor, and not a very good one, as it is unclear that the greatest common divisor is the object being defined. Rather, this is Euclid’s algorithm in TLA<sup>+</sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{2}
+\begin{alignat}{1}
 &\rlap{\CONSTANTS M, N} \\
 &\rlap{\VARIABLES x, y}\\
 \\
-&Init &&\defeq && \land\; && \rlap{x = M \land y = N}\\
-& Next &&\defeq && \land\;&& x > y && \land\; && x' = x - y &&\;\land\; && y' = y\\
-&&&&& \land\;&& x < y && \land\; && x' =x &&\;\land\; && y' = y-x\\
+&Init &\defeq \;& \rlap{x = M \land y = N}\\
+& Next &\defeq & \lor\;& x > y & \land\; & x' = x - y &\;\land\; & y' = y\\
+&&& \lor\;& x < y & \land\; & x' =x &\;\land\; & y' = y-x\\
 \end{alignat} %]]></script>
 
 <p>assuming that we treat either $x$ or $y$ as the “output” once the algorithm terminates (there are some missing details here, like how $Init$ and $Next$ are combined to form a single formula, as well an important detail of how termination is modeled, but this is “morally” correct, and, in fact, all you need to try the algorithm in the TLC model checker).</p>
