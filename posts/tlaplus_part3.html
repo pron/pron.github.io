@@ -973,7 +973,7 @@
 <p>We can now refine yet again our definition of an algorithm, and say that an algorithm in TLA — or, at least a <em>realizable</em> algorithm — is anything that can be specified by a formula of the form</p>
 
 <p><script type="math/tex">\EE w : Init \land \Box[Next]_v \land Fairness</script>
-where $v$ is a tuple of temporal variables, and $w$ is a tuple of a subset of those variables. Of course, each of the components can be absent (and often the temporal quantifier is absent). This is called the <em>normal form</em> of a TLA formula. Such a formula is guaranteed<sup id="fnref:machine-closed-fairness"><a href="#fn:machine-closed-fairness" class="footnote">22</a></sup> to be machine-closed.</p>
+where $v$ is a tuple of temporal variables, and $w$ is a tuple of a subset of those variables. Of course, each of the components can be absent (and often the temporal quantifier is absent). This is called the <em>normal form</em> of a TLA formula. Such a formula is guaranteed to be machine-closed, provided that $Fairness$ is a conjunction of a finite number of $\WF/\SF(A)$ forms, where $A \implies Next$<sup id="fnref:fairness-closed"><a href="#fn:fairness-closed" class="footnote">22</a></sup>.</p>
 
 <p>One can ask why we would want to allow non-machine closed specification at all. For example, in formulas that specify algorithms — namely those that contain actions rather than just state predicates — we could syntactically allow only the use of <script type="math/tex">\WF\!</script>/<script type="math/tex">\SF\!</script> and no other liveness property. Lamport and others answer this question in a <a href="http://lamport.azurewebsites.net/pubs/abadi-preserving.pdf">short note</a>, and say that it is often beneficial and elegant to specify an algorithm at a high-level that doesn’t need to be realizable in code, where, in order to show how the algorithm works, we may want to pretend that it can see into the future. Only lower-level specifications, those that could be directly translated into program code need to be machine closed, and, of course, we may want to show how a low level, machine closed specification implements a high level, non machine closed one (general relations between algorithms will be covered in part 4).</p>
 
@@ -2010,8 +2010,8 @@ y[i] := x[(i - 1) mod N]
     <li id="fn:angelic">
       <p>The term was coined by Tony Hoare.&nbsp;<a href="#fnref:angelic" class="reversefootnote">&#8617;</a></p>
     </li>
-    <li id="fn:machine-closed-fairness">
-      <p>To be precise, machine-closure is guaranteed when $Fairness$ is a conjunction of a finite number of $\WF/\SF(A)$ where $A \implies Next$.&nbsp;<a href="#fnref:machine-closed-fairness" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:fairness-closed">
+      <p>To see why this is a necessary condition, consider our running example with $\land \Box(t = 10 \implies x = 100) \land \WF_t(t’ = t + 1)$.&nbsp;<a href="#fnref:fairness-closed" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:mc1">
       <p>Or even temporal formulas at all, as the model checker supports checking specifications given as two separate $Init$ and $Next$ formulas, as well as verify safety invariants given only as $P$ instead of $\Box P$, so there’s even no need to know about $\Box$ and $[]_e$.&nbsp;<a href="#fnref:mc1" class="reversefootnote">&#8617;</a></p>
