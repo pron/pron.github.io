@@ -1126,10 +1126,13 @@ C \defeq \;& \IF x \% 2 = 0  \;& \THEN& x' = x/2\\
 &&\ELSE& x' = 3*x + 1
 \end{alignat} %]]></script>
 
-<p>or as
-<script type="math/tex">C \defeq x' = \IF x \% 2 = 0  \;\THEN x/2 \;\ELSE 3*x + 1</script>
-We can now write the <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz conjecture</a> in TLA<sup>+</sup>:
-<script type="math/tex">\A n \in Nat \setminus\set{0} : (x=n \land \Box[C]_x \land \WF_x(C)) \implies \Diamond(x = 1)</script></p>
+<p>or as</p>
+
+<script type="math/tex; mode=display">C \defeq x' = \IF x \% 2 = 0  \;\THEN x/2 \;\ELSE 3*x + 1</script>
+
+<p>We can now write the <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz conjecture</a> in TLA<sup>+</sup>:</p>
+
+<script type="math/tex; mode=display">\A n \in Nat \setminus\set{0} : (x=n \land \Box[C]_x \land \WF_x(C)) \implies \Diamond(x = 1)</script>
 
 <p>A property akin to (simple) type correctness in typed programming languages is modeled in TLA<sup>+</sup> as a simple invariant (a state predicate that is asserted to hold in every state). Most TLA<sup>+</sup> specifications contain a definition that looks like:</p>
 
