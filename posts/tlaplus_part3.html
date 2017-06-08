@@ -638,7 +638,7 @@
 
 <p>then $A$ could be read as “if $x$ is even in the current state, then in the next state, $x$ could be either $\frac{x}{2}$ or $-\frac{x}{2}$”. $A$ specifies a next state only if $x$ is currently even, so, in this case, $\ENABLED A \equiv x \%2 =0$.</p>
 
-<p>For the sake of completeness, I will mention the action composition operator, $\cdot$ , even though it is unsupported by any of the TLA<sup>+</sup> tools, and its use is discouraged. If $A$ and $B$ are actions, then $A \cdot B$ is the action that is true for the transition $s \rightharpoonup t$ iff there exists a state $u$ such that $A$ is true for $s \rightharpoonup r$ and $B$ is true for $u \rightharpoonup t$; basically, it’s an $A$ step followed by $B$ step rolled into a single transition.</p>
+<p>For the sake of completeness, I will mention the action composition operator, $\cdot$ , even though it is unsupported by any of the TLA<sup>+</sup> tools, and its use is discouraged. If $A$ and $B$ are actions, then $A \cdot B$ is the action that is true for the transition $s \rightharpoonup t$ iff there exists a state $u$ such that $A$ is true for $s \rightharpoonup u$ and $B$ is true for $u \rightharpoonup t$; basically, it’s an $A$ step followed by $B$ step rolled into a single transition.</p>
 
 <p>So far we’ve been talking about expression, but now have the basic components to start talking about formulas. If $F$ is a formula and $\sigma$ is a behavior, we will write $\sigma \vDash F$ if $F$ is true for the behavior, or $\sigma$ <em>satisfies</em> F. The meaning, or semantics of $F$ (which we write as $\sem F$)  is all behaviors $\sigma$ such that $\sigma \vDash F$. I will denote — unlike in the previous section — the (i+1)’th state of $\sigma$ as $\sigma_i$, so $\sigma = \sigma_0 \to \sigma_1 \to \sigma_2 \to …$ Also, $\sigma^{+n} = \sigma_n \to \sigma_{n+1} \to …$, namely the <em>suffix</em> of $\sigma$, with its first $n$ states removed.</p>
 
@@ -819,7 +819,7 @@
 
 <p>but it would be nice to be able to tell whether a formula is a “proper” algorithm or not.</p>
 
-<p>We could separate algorithms and properties into two separate semantic and possibly syntactic categories. Indeed, this is precisely the road taken by specification languages such as Coq, which use dependent types for specification: arbitrary nondeterminism is allows only in types. This is pretty much required from programming languages that need to be able to compile programs — but not specifications of their properties — into efficient machine code, so it makes sense for the syntax rules to impose this constraint on descriptions of algorithms (namely, the body of the program).</p>
+<p>We could separate algorithms and properties into two separate semantic and possibly syntactic categories. Indeed, this is precisely the road taken by specification languages such as Coq, which use dependent types for specification: arbitrary nondeterminism is allowed only in types. This is pretty much required from programming languages that need to be able to compile programs — but not specifications of their properties — into efficient machine code, so it makes sense for the syntax rules to impose this constraint on descriptions of algorithms (namely, the body of the program).</p>
 
 <p>But from a specification language designed for reasoning, not programming this would require a complicated formalism whereas we want simplicity, and it would also make the important ability of showing that one algorithm implements another much more complicated if not nearly impossible.</p>
 
