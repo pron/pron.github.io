@@ -1051,8 +1051,8 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 &\\
 &\nested{
 &ListAsSeq(ll) \defeq &\;& \LET & \RECURSIVE View(\_, \_)\\
-&&&&View (i, node)\defeq \IF i = 1 \;&\THEN l.elem \\
-&&&&&\ELSE View(i-1, l.next) \\
+&&&&View (i, node)\defeq \IF i = 1 \;&\THEN node.elem \\
+&&&&&\ELSE View(i-1, node.next) \\
 &&&\IN \rlap{[i \in 1..LenList(ll) \mapsto View(i, ll)]}
 }\\
 &\\
