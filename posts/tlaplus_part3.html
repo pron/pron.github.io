@@ -1405,8 +1405,9 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>Notice how $A \implies Next$ and $B \implies Next$, and so our fairness condition $\WF_{vars}(A) \land \WF_{vars}(B)$ satisfies the condition given in the section <a href="#machine-closure-and-fairness">Machine Closure and Fairness</a> that guarantees that our specification is machine-closed.</p>
 
-<p>It is often the case that we have multiple instances of processes (or machines) each running the same program. We can model that like so:
-<script type="math/tex">% <![CDATA[
+<p>It is often the case that we have multiple instances of processes (or machines) each running the same program. We can model that like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\VARIABLES state\\
 & Processes \defeq 1..10\\
@@ -1415,7 +1416,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 &Next \defeq \E p \in Processes : Run(p)\\
 &Fairness \defeq \A p \in Processes : \WF_{state}(Run(p)) \\
 & Spec  \defeq  Init \land \Box[Next]_{state} \land Fairness
-\end{alignat} %]]></script></p>
+\end{alignat} %]]></script>
 
 <p>Note how the existential quantifier is used to nondeterministically select one of the processes. This works because actions are transition predicates. Let’s see that with a concrete example:</p>
 
