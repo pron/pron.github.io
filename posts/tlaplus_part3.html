@@ -927,7 +927,7 @@
 <p>It doesn’t matter even if we write our formula like so:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{2}
+\begin{alignat}{1}
 &\land \rlap{t = 0 \land x \in Nat}\\
 &\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
 &\land \Box(t = 10 \implies x = 100)
@@ -936,7 +936,7 @@
 <p>However, we can reclaim the power to see the future if we change the $\Box$ in the last conjunct, a safety property, into a $\Diamond$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{2}
+\begin{alignat}{1}
 &\land \rlap{t = 0 \land x \in Nat}\\
 &\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
 &\land \Diamond(t = 10 \land x = 100)
@@ -947,6 +947,26 @@
 <p>What we’d want is to make sure that the liveness property does not interfere with the machine property, which implies that every finite prefix of any behavior <em>that satisfies the machine property</em> can be extended so that it satisfies the liveness property. If we denote the set of behaviors that comprise the machine property as $M$ and the liveness property as $L$, we would like it so that $L$ would not specify any safety property (i.e. a closed set) not already implied by $M$. What we want is that $\overline{M \cap L} = M$. If that condition holds, we say that the pair, $\seq{M, L}$ is <em>machine closed</em>, or that $L$ is machine closed with respect to $M$ (or simply that $L$ is machine closed, if it is clear which machine property we’re talking about). A liveness property that is machine closed with respect to its machine property, is also called a <em>fairness property</em>.</p>
 
 <p>A liveness property specifies what must eventually happen. A fairness property must do so in a way that does not dictate precisely what states are allowed at any specific time. The way this is achieved is by having the liveness property specify only that the algorithm moves forwards — makes progress — without specifying any targets it must progress towards. This can be intuitively thought about as specifying the job of the operating system and/or the CPU. Fairness can be thought of as the assumptions we make about how the OS schedules our program. Indeed, when we write a program, we operate under the assumption that it will be scheduled by an OS, but we also assume that the OS will treat our program fairly, and guarantee that it makes progress if it can. In TLA, if we care about liveness and want to prove what our program will eventually do, we must make this assumption explicit, and if our program is multi-threaded, we must state our assumptions about how multiple threads are scheduled (we will see how to model threads/processes in the next section). Both the algorithm and the scheduler can still make nondeterministic choices, but machine closure dictates that those choices can in no way be restricted by what has not yet happened, i.e., we allow nondeterminism, but not <em>angelic</em> nondeterminism. Fairness just guarantees progress.</p>
+
+<p>Note that machine-closure is no longer a property of the model of an algorithm — a set of behaviors — but of how that algorithm is written as an intersection of safety and liveness properties. Indeed, two formulas can be equivalent, yet one would be machine-closed and the other won’t. The non-machine-closed specification we saw above,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\land \rlap{t = 0 \land x \in Nat}\\
+&\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
+&\land \Diamond(t = 10 \land x = 100)
+\end{alignat} %]]></script>
+
+<p>is equivalent to this machine-closed one:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\land \rlap{t = 0 \land x = 0}\\
+&\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
+&\land \Diamond(t = 10 \land x = 100)
+\end{alignat} %]]></script>
+
+<p>This is to be expected, because the problem of angelic nondeterminism demonstrates that a set of behaviors is not enough to fully capture the concept of an algorithm.</p>
 
 <p>But how do we know that our liveness property is a fairness property and that our specification is machine-closed? The answer is that we don’t in general, but TLA<sup>+</sup> has two built-in fairness operators, and if our liveness property is a conjunction of those operators, then we’re guaranteed that it’s machine-closed. The operators, <script type="math/tex">\WF\!</script> for <em>weak fairness</em> and <script type="math/tex">\SF\!</script> for <em>strong fairness</em> take an action $A$ as an argument, and ensure that it will eventually occur if it is enabled “often enough”. They only differ in what “often enough” means.</p>
 
@@ -977,7 +997,7 @@ where $v$ is a tuple of temporal variables, and $w$ is a tuple of a subset of th
 
 <p>One can ask why we would want to allow non-machine closed specification at all. For example, in formulas that specify algorithms — namely those that contain actions rather than just state predicates — we could syntactically allow only the use of <script type="math/tex">\WF\!</script>/<script type="math/tex">\SF\!</script> and no other liveness property. Lamport and others answer this question in a <a href="http://lamport.azurewebsites.net/pubs/abadi-preserving.pdf">short note</a>, and say that it is often beneficial and elegant to specify an algorithm at a high-level that doesn’t need to be realizable in code, where, in order to show how the algorithm works, we may want to pretend that it can see into the future. Only lower-level specifications, those that could be directly translated into program code need to be machine closed, and, of course, we may want to show how a low level, machine closed specification implements a high level, non machine closed one (general relations between algorithms will be covered in part 4).</p>
 
-<p>But if we want some way to tell syntactically whether or not we’re specifying realizable algorithms, at least we’ve now isolated our problems to liveness properties and offered a simple sufficient condition for realizability — use only <script type="math/tex">\WF\!</script>/<script type="math/tex">\SF\!</script> as liveness conditions.</p>
+<p>But if we want some way to tell syntactically whether or not we’re specifying realizable algorithms, at least we’ve now isolated our problems to liveness properties and offered a simple sufficient condition for realizability — use only <script type="math/tex">\WF\!</script>/<script type="math/tex">\SF\!</script> as liveness conditions (and actions that imply $Next$, but that comes naturally in most cases, as we’ll see in the section about concurrency).</p>
 
 <p>There is another quirk involving liveness with existential quantification, that I find interesting. Consider the following specification:</p>
 
