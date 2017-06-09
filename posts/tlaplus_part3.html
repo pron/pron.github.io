@@ -1594,11 +1594,11 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 &&&\land \rlap{A0=A \land done = \FALSE}\\
 &Next &\defeq \;& \rlap{\IF U \neq \set{}\;\THEN}\\
 &&&\phantom{XX}&\land\rlap{\E \seq{a, b} \in U:}\\
-&&&&&\phantom{XX}&\land \;&\rlap{\IF a < b} \\
-&&&&&&&\phantom{XX}&\THEN& \land \E pivot \in a..b-1 : A' \in Partitions(A, pivot, a, b) \\
-&&&&&&&&& \land U' = (U \setminus \set{\seq{a,b}}) \cup \set{\seq{a, pivot}, \seq{pivot+1, b}} \\
-&&&&&&&&\ELSE & \land \UNCHANGED A\\
-&&&&&&&&&\land U' = U \setminus\set{\seq{a, b}}\\
+&&&&&\phantom{XX}&\rlap{\IF a < b} \\
+&&&&&&\phantom{XX}&\THEN& \land \E pivot \in a..b-1 : A' \in Partitions(A, pivot, a, b) \\
+&&&&&&&& \land U' = (U \setminus \set{\seq{a,b}}) \cup \set{\seq{a, pivot}, \seq{pivot+1, b}} \\
+&&&&&&&\ELSE & \land \UNCHANGED A\\
+&&&&&&&&\land U' = U \setminus\set{\seq{a, b}}\\
 &&&&\rlap{\land \;\UNCHANGED \seq{A0, done}}\\
 &&&\rlap{\ELSE done' = \TRUE \land \UNCHANGED \seq{A, A0, U}}\\
 &\rlap{QuickSort \defeq Init \land \Box[Next]_{vars} \land \WF_{vars}(Next)}\\
