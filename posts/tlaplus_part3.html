@@ -1537,7 +1537,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>While I won’t describe how to write a large, complex specification (in part 1 I listed some resources containing tutorials and examples) — and so you’ll have to take my word, and Amazon’s technical report I mentioned in part 1, that TLA<sup>+</sup> specifications scale very gracefully to large, complex systems — I do want to show a couple of more complex example than the ones we’ve seen, algorithms that actually do something interesting. Being able to easily read and understand these specifications does take a bit of practice, but my intention here is just to give a sense of how a real program can be described as a logical formula</p>
 
-<p>I’ve chosen two examples given by Lamport, both of sorting algorithms. The specifications will make use of some of the definitions we’ve defined in part 2, such as $Permutations$, $Ordered$ and $Image$. We’ll assume that both specifications are preceded by the following declarations and definitions, which establish that $S$ is some set with a partial order defined on it:</p>
+<p>I’ve chosen two examples given by Lamport, both of sorting algorithms. The specifications will make use of some of the definitions we’ve defined in part 2, such as $Toset$, $Permutations$, $Ordered$ and $Image$. We’ll assume that both specifications are preceded by the following declarations and definitions, which establish that $S$ is some set with a partial order defined on it:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
