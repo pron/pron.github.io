@@ -948,25 +948,7 @@
 
 <p>A liveness property specifies what must eventually happen. A fairness property must do so in a way that does not dictate precisely what states are allowed at any specific time. The way this is achieved is by having the liveness property specify only that the algorithm moves forwards — makes progress — without specifying any targets it must progress towards. This can be intuitively thought about as specifying the job of the operating system and/or the CPU. Fairness can be thought of as the assumptions we make about how the OS schedules our program. Indeed, when we write a program, we operate under the assumption that it will be scheduled by an OS, but we also assume that the OS will treat our program fairly, and guarantee that it makes progress if it can. In TLA, if we care about liveness and want to prove what our program will eventually do, we must make this assumption explicit, and if our program is multi-threaded, we must state our assumptions about how multiple threads are scheduled (we will see how to model threads/processes in the next section). Both the algorithm and the scheduler can still make nondeterministic choices, but machine closure dictates that those choices can in no way be restricted by what has not yet happened, i.e., we allow nondeterminism, but not <em>angelic</em> nondeterminism. Fairness just guarantees progress.</p>
 
-<p>Note that machine-closure is no longer a property of the model of an algorithm — a set of behaviors — but of how that algorithm is written as an intersection of safety and liveness properties. Indeed, two formulas can be equivalent, yet one would be machine-closed and the other won’t. The non-machine-closed specification we saw above,</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\land \rlap{t = 0 \land x \in Nat}\\
-&\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
-&\land \Diamond(t = 10 \land x = 100)
-\end{alignat} %]]></script>
-
-<p>is equivalent to this machine-closed one:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\land \rlap{t = 0 \land x = 0}\\
-&\land \Box[t' = t +1 \land x' = x + 10]_{\seq{t, x}}\\
-&\land \Diamond(t = 10 \land x = 100)
-\end{alignat} %]]></script>
-
-<p>This is to be expected, because the problem of angelic nondeterminism demonstrates that a set of behaviors is not enough to fully capture the concept of an algorithm.</p>
+<p>Note that machine-closure is no longer a property of the model of an algorithm — a set of behaviors — but of how that algorithm is written as an intersection of safety and liveness properties. Indeed, two formulas can be equivalent, yet one would be machine-closed and the other won’t. If we replace $x \in Nat$ with $x = 0$ in the initial condition of the specification above, we’ll get one that’s equivalent to it (i.e., admits the very same set of behaviors), yet is now machine-closed, as the liveness property no longer places additional restrictions on the safety property. This is to be expected, because the problem of angelic nondeterminism demonstrates that a set of behaviors is not enough to fully capture the concept of an algorithm.</p>
 
 <p>But how do we know that our liveness property is a fairness property and that our specification is machine-closed? The answer is that we don’t in general, but TLA<sup>+</sup> has two built-in fairness operators, and if our liveness property is a conjunction of those operators, then we’re guaranteed that it’s machine-closed. The operators, <script type="math/tex">\WF\!</script> for <em>weak fairness</em> and <script type="math/tex">\SF\!</script> for <em>strong fairness</em> take an action $A$ as an argument, and ensure that it will eventually occur if it is enabled “often enough”. They only differ in what “often enough” means.</p>
 
