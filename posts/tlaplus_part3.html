@@ -573,7 +573,7 @@
 
 <p>Both programs generate the same two possible traces: $\set{a \to b, a \to c}$, so they are similar in some sense, yet they are clearly different in another. This means that an algorithm cannot be uniquely defined by its set of possible traces, and we will therefore need some other — more complicated — notion of equivalence<sup id="fnref:similarity"><a href="#fn:similarity" class="footnote">12</a></sup>. After all, a definition of any kind of mathematical object must include a notion of equivalence that defines when two objects of that kind are the same.</p>
 
-<p>This leaves us with representing a computation as a sequence of states or a sequence of states <em>and</em> events. We note that a sequence of states and events $s_1 \xrightarrow{e_1} s_2 \xrightarrow{e_2} s_3…$ can be easily represented as this sequence of states alone: $\seq{s_1, -} \to \seq{s_2, e_1} \to \seq{s_3, e_2}…$ So we’ll pick the simpler option, use a sequence of states. This is also nicely analogous to continuous systems, which are also functions from time to state.</p>
+<p>This leaves us with representing a computation as a sequence of states or a sequence of states <em>and</em> events. We note that a sequence of states and events $s_1 \xrightarrow{e_1} s_2 \xrightarrow{e_2} s_3…$ can be easily represented as this sequence of states alone: $\seq{s_1, -} \to \seq{s_2, e_1} \to \seq{s_3, e_2}\ldots$ So we’ll pick the simpler option, use a sequence of states. This is also nicely analogous to continuous systems, which are also functions from time to state.</p>
 
 <h3 id="the-standard-model">The Standard Model</h3>
 
@@ -887,7 +887,7 @@
 
 <p>These rules ensure the following: <strong>every TLA formula is invariant under stuttering</strong>, and therefore cannot distinguish between two behaviors that are stuttering-equivalent.</p>
 
-<p>This solves our first problem. Let’s revisit our clocks and fix their definition so that they’re valid TLA by placing the actions inside $[…]_e$:</p>
+<p>This solves our first problem. Let’s revisit our clocks and fix their definition so that they’re valid TLA by placing the actions inside $[\ldots]_e$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -1010,7 +1010,7 @@ where $v$ is a tuple of temporal variables, and $w$ is a tuple of a subset of th
 <script type="math/tex; mode=display">% <![CDATA[
 m = 0 \land \Box[m < 1000 \land m' = m + 1]_m %]]></script>
 
-<p>To see why, recall that equivalence on behaviors is stuttering-invariant, so a behavior that stutters and then resumes incrementing, e.g. $\seq{1, 2, 2, 2, 3, …}$, is equivalent to one that doesn’t stutter, e.g. $\seq{1, 2, 3, …}$, unless the stuttering goes on indefinitely. So the formula allows $m$ to be incremented as long as it’s &lt; 1000, but doesn’t require it to; it may stop incrementing at any value less than 1000.</p>
+<p>To see why, recall that equivalence on behaviors is stuttering-invariant, so a behavior that stutters and then resumes incrementing, e.g. $\seq{1, 2, 2, 2, 3, \ldots}$, is equivalent to one that doesn’t stutter, e.g. $\seq{1, 2, 3, \ldots}$, unless the stuttering goes on indefinitely. So the formula allows $m$ to be incremented as long as it’s &lt; 1000, but doesn’t require it to; it may stop incrementing at any value less than 1000.</p>
 
 <p>A specification that only allows hidden (i.e., of a bound temporal variable) deterministic choice from a finite set at every step is said to have <em>finite invisible nondeterminism</em>, or FIN. Like machine closure, FIN is a necessary condition for an important result regarding the existence of something called a refinement mapping, which we’ll learn about in part 4 .</p>
 
@@ -1349,7 +1349,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 & \rlap{\comment{The followng are some informal steps containing expressions that aren't well-formed in TLA}}\\
 &\equiv&
 \Box(&\land NextX \lor x' =x\\
-&&&\land NextY \lor y' = y)&& \comment{Because of the definition of $[...]_x$ and $[...]_y$}\\
+&&&\land NextY \lor y' = y)&& \comment{Because of the definition of $[\ldots]_x$ and $[\ldots]_y$}\\
 &\equiv& \Box(&\lor NextX \land NextY && \comment{Because of propositional logic equivalence}\\
 &&&\lor NextX \land y' = y\\
 &&&\lor NextY \land x' = x\\
@@ -1398,9 +1398,9 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&Init \defeq ...\\
-&A \defeq ...\\
-&B \defeq ...\\
+&Init \defeq \ldots\\
+&A \defeq \ldots\\
+&B \defeq \ldots\\
 &Next \defeq A \lor B\\
 & Spec  \defeq  Init \land \Box[Next]_{vars} \land \WF_{vars}(A) \land \WF_{vars}(B)
 \end{alignat} %]]></script>
@@ -1413,8 +1413,8 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 \begin{alignat}{1}
 &\VARIABLES state\\
 & Processes \defeq 1..10\\
-&Init \defeq state = [p \in Processes \mapsto\; ...] \\
-&Run(self) \defeq ...\\
+&Init \defeq state = [p \in Processes \mapsto\; \ldots] \\
+&Run(self) \defeq \ldots\\
 &Next \defeq \E p \in Processes : Run(p)\\
 &Fairness \defeq \A p \in Processes : \WF_{state}(Run(p)) \\
 & Spec  \defeq  Init \land \Box[Next]_{state} \land Fairness
@@ -1714,7 +1714,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 \begin{alignat}{1}
 &P(c) \defeq & \land c = c1 &\implies Assertion1\\
 &&\land c = c2 & \implies Assertion 2\\
-&& ...\\
+&& \ldots\\
 &&\land c = \str{done} & \implies PartialCorrectness\\
 \end{alignat} %]]></script>
 
@@ -1755,11 +1755,11 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 &&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
 & \rlap{\THEOREM Spec \implies \Box P}\\
 &\phantom{AA}&\seq{1}1.\;& Inv \implies P\\
-&&&...\\
+&&&\ldots\\
 &&\seq{1}2. &\rlap{Init \implies Inv}\\
-&&&...\\
+&&&\ldots\\
 &&\seq{1}3.&\rlap{Inv \land [Next]_{vars} \implies Inv'}\\
-&&&...\\
+&&&\ldots\\
 
 &&\seq{1}\; \rlap{\QED}\\
 &&\phantom{A} \rlap{\BY \seq{1}1, \seq{1}2,  \seq{1}3, PTL \;\DEF Spec}\\
