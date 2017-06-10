@@ -698,6 +698,8 @@
 
 <p>and reversing the direction of all implications.</p>
 
+<p>TLA has another rarely used temporal operator, $\whileop$, which we’ll cover in part 4.</p>
+
 <p>Finally, just as in addition to declaring free ordinary, i.e. rigid, or constant variables with a <script type="math/tex">\CONSTANT\!</script> declaration, we can also introduce bounded ordinary variables with the quantifiers $\A$ and $\E$, so to in addition to declaring free temporal variables with <script type="math/tex">\VARIABLE\!</script>, we can introduce bounded, or quantified, temporal variables with temporal quantifiers.</p>
 
 <p>The <em>existential temporal quantifier</em>, $\EE$, is the temporal analog of regular existential quantification. $\EE x : F$ , where $x$ is a temporal variable, basically says, “there exists some <em>temporal</em> assignment of $x$ such that $F$”; instead of a single value for $x$, it asserts the existence of a value for $x$ in each state of the behavior.</p>
@@ -709,9 +711,7 @@
 \frac{F[t/v]}{\EE v : F}  \;\;(\EE\!\text{I}) & \phantom{XXXXX} & \frac{F \implies G \;\;\;(v\text{ is not free in G})}{(\EE v : F) \implies G} \;\;(\EE\!\text{E})
 \end{alignat} %]]></script>
 
-<p>TLA also has the dual <em>universal</em> temporal quantifier, $\AA x : F\defeq \neg\EE x: \neg F$. T</p>
-
-<p>he existential temporal quantifier is used to hide internal state; we will talk a lot about that in part 4. The universal temporal quantifier is hardly ever used.</p>
+<p>There is also the dual <em>universal</em> temporal quantifier, $\AA x : F\defeq \neg\EE x: \neg F$. The existential temporal quantifier is used to hide internal state; we will talk a lot about that in part 4. The universal temporal quantifier is hardly ever used.</p>
 
 <p>As with the ordinary quantifiers, tuples of variables can also be used with a temporal quantifier, so I will usually write $\EE v : …$ to denote the general form of the existential temporal quantifier with some tuple of variables. Unlike ordinary quantifiers, however, the TLA<sup>+</sup> syntax does not support bounded temporal quantification (e.g. $\EE x \in Int : F$ is illegal).</p>
 
