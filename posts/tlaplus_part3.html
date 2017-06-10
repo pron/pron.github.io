@@ -383,10 +383,11 @@
 
 <p>TLA itself does not specify how data and primitive operations on it are defined, but only concerns itself with describing the dynamic behavior of a program, assuming we have some way of defining data and data operations. TLA therefore requires a “data language” or a “data logic”. In part 2 we saw the data logic provided by TLA<sup>+</sup>.</p>
 
-<p>Let’s now look at how Euclid’s algorithm is expressed in TLA<sup>+</sup>. Note that we could use Euclid’s algorithm to <em>define</em> a GCD operator as we learned in part 2, like so:</p>
+<p>Let’s now look at how Euclid’s algorithm is expressed in TLA<sup>+</sup>. Note that we could use Euclid’s algorithm to define a GCD operator as we learned in part 2, like so:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{2}
+&\rlap{\RECURSIVE GCD(\_, \_)}\\
 &GCD(m, n) \defeq \;& \CASE &\; m = n &\to\;& m\\
 &&\Box &\; m > n &\to& GCD(m-n, n)\\
 &&\Box &\; m < n &\to& GCD(m, n - m)\\
