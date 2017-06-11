@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-06-11T10:56:33+03:00</updated>
+ <updated>2017-06-11T12:44:01+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -38,7 +38,7 @@
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+03:00</updated>
-   <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. A new post will be published every Thursday. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;part 3&lt;/a&gt;&lt;/em&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Thinking doesn’t guarantee that we won’t make mistakes. But not thinking guarantees that we will.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;Leslie Lamport, &lt;em&gt;Why We...</content>
+   <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. A new post will be published every Thursday. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;part 3&lt;/a&gt;&lt;/em&gt;&lt;/p&gt; &lt;p&gt;&lt;em&gt;If you find TLA+ and formal methods in general interesting, I invite you to visit and participate in the new &lt;a href=&quot;https://www.reddit.com/r/tlaplus/&quot;&gt;/r/tlaplus&lt;/a&gt; on...</content>
  </entry>
 
  
