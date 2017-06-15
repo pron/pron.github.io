@@ -1273,13 +1273,15 @@ TypeOK \defeq & \land x \in Int \\
 
 <p>Note how we restrict $Fact3$ to a single computation on a single input by conjoining it with $N = n$, which restricts $Fact3$’s initial condition $N \in Nat$.</p>
 
-<p>Even though that’s sufficient, let’s do something a little more general (but probably less useful — my intent is to show the power of the formalism, not to teach best practices), that captures the exact definition of complexity:
-<script type="math/tex">\begin{alignat}{0}
-BigO(f) \defeq \set{g \in [Nat  \to Nat] : \E c \in Nat : \A k \in Nat : g[k] \leq c * f[k]}\\
+<p>Even though that’s sufficient, let’s do something a little more general (but probably less useful — my intent is to show the power of the formalism, not to teach best practices), that captures the exact definition of complexity:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&BigO(f) \defeq \set{g \in [Nat  \to Nat] : \E c \in Nat : \A k \in Nat : g[k] \leq c * f[k]}\\
 \\
-Complexity(CompClass, Alg, Input, InputSize(\_),measure) \defeq \\
-\phantom{XX}\E f \in CompClass : \A x \in Input : Alg(x) \implies \Box(measure \leq f[InputSize(x)])
-\end{alignat}</script></p>
+&Complexity(CompClass, Alg, Input, InputSize(\_),measure) \defeq \\
+&\phantom{XX}\E f \in CompClass : \A x \in Input : Alg(x) \implies \Box(measure \leq f[InputSize(x)])
+\end{alignat} %]]></script>
 
 <p>Then, to express the fact that the space complexity of $Fact3$ is exponential (the size of the input is the logarithm of the integer argument), we can write:</p>
 
