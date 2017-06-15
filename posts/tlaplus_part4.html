@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Jekyll">
+    <link rel="canonical" href="/posts/tlaplus_part4"/>
+    <!--<link rel="canonical" href="/posts/tlaplus_part4">-->
+
+    <title>TLA+ in Practice and Theory<br/>Part 4: Order in TLA+</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/fav/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"    href="/fav/favicon-16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="/fav/favicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"   href="/fav/favicon-60.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="/fav/favicon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/fav/favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/fav/favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/fav/favicon-180.png">
+    -->
+    <!--
+    <link rel="icon" type="image/png" href="/fav/favicon-96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/fav/favicon-192.png" sizes="192x192">
+    -->
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS & fonts -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+    <!--
+    <script data-cfasync="false" type="text/javascript" src="//use.typekit.net/pfn0abv.js"></script>
+    <script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- RSS -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+
+
+    <!-- Social cards -->
+    
+        <!-- Twitter -->
+<meta name="twitter:site" content="@pressron"> 
+<meta name="twitter:card" content="summary"> 
+<meta name="twitter:title" content="TLA+ in Practice and Theory<br/>Part 4: Order in TLA+"> 
+<meta name="twitter:description" content="We learn how to encapsulate and compose TLA+ specifications, of the precise mathematical definition of abstraction, and compare TLA+'s notion of abstraction with those of other formalisms. Plus some various cool stuff.
+"> 
+
+<!-- OpenGraph -->
+<meta property="og:site_name" content="Ron Pressler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TLA+ in Practice and Theory<br/>Part 4: Order in TLA+">
+<meta property="og:description" content="We learn how to encapsulate and compose TLA+ specifications, of the precise mathematical definition of abstraction, and compare TLA+'s notion of abstraction with those of other formalisms. Plus some various cool stuff.
+">
+<meta property="og:url" content="/posts/tlaplus_part4">
+<meta property="og:image" content="http://www.gravatar.com/avatar/c69557151e2f8331f6b1865469b694dd?s=200">
+<meta property="article:published_time" content="2017-06-15">
+
+    
+
+
+    
+
+    
+    <meta name="twitter:site" content="@pressron">
+</head>
+
+
+<body>
+	<div id="wrap">
+
+	  <!-- Navigation -->
+	  <nav id="nav">
+    
+        <div id="nav-toc">
+        </div>
+    
+	<div id="nav-list">
+		<a href="/">Home</a>
+
+		<!-- Nav pages -->
+	  
+	    
+	  
+	    
+	      <a href="/about" title="About">About</a>
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+
+    <!-- Nav links -->
+	  
+
+
+	</div>
+
+    <footer>
+
+	<!-- <span>version </span> -->
+
+</footer>
+
+</nav>
+
+
+    <!-- Icon menu -->
+	  <a id="nav-menu">
+	  	<div id="menu"></div>
+	  </a>
+
+      <!-- Header -->
+      
+        <header id="header" class="parent justify-spaceBetween">
+  <div class="inner w100 relative">
+    <span class="f-left">
+      <a href="/">
+        <h1>
+          <span>press</span>ron
+        </h1>
+      </a>
+    </span>
+    <!--
+    <span id="nav-links" class="absolute right bottom">
+	    
+	      
+	    
+	      
+	        <a href="/about" title="About">About</a>
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+
+	    
+
+
+    </span>
+    -->
+  </div>
+</header>
+
+      
+
+    <!-- Main content -->
+	  <div id="container">
+
+	  <main>
+			<article id="post-page" class=>
+	<h2>TLA<sup>+</sup> in Practice and Theory<br/>Part 4: Order in TLA<sup>+</sup></h2>		
+	<time datetime="2017-06-15T00:00:00+03:00" class="by-line">15 Jun 2017</time>
+	<div class="content">
+
+		<script type="math/tex; mode=display">\newcommand{\sc}[1]{\mathrm{\small{#1}}\;}
+\newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}}
+\newcommand{\str}[1]{``\mathsf{#1}\!"}
+\newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\seq}[1]{\langle #1 \rangle}
+\newcommand{\llbracket}{[\![}
+\newcommand{\rrbracket}{]\!]}
+\newcommand{\sem}[1]{\llbracket #1 \rrbracket}
+\newcommand{\H}{-\!\!\!}
+\newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!}
+\newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!}
+\newcommand{\LR}{\raise 2.5pt {\lrcorner}}
+\newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!}
+\newcommand{\defeq}{\triangleq}
+\newcommand{\E}{\exists\,}
+\newcommand{\A}{\forall\,}
+\newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,}
+\newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,}
+\newcommand{\implies}{\Rightarrow}
+\newcommand{\whileop}{\overset{+}{-}\!\!\triangleright\; }
+\let\savedBox=\Box
+\renewcommand{\Box}{\raise1mu{\small \square} }
+\renewcommand{\Diamond}{ {\Large \diamond} }
+\newcommand{\LET}{\sc{LET}}
+\newcommand{\IN}{\sc{IN}}
+\newcommand{\RECURSIVE}{\sc{RECURSIVE}}
+\newcommand{\LAMBDA}{\sc{LAMBDA}}
+\newcommand{\IF}{\sc{IF}}
+\newcommand{\THEN}{\sc{THEN}}
+\newcommand{\ELSE}{\sc{ELSE}}
+\newcommand{\CASE}{\sc{CASE}}
+\newcommand{\OTHER}{\sc{OTHER}}
+\newcommand{\CHOOSE}{\sc{CHOOSE}}
+\newcommand{\BOOLEAN}{\sc{BOOLEAN}}
+\newcommand{\TRUE}{\sc{TRUE}}
+\newcommand{\FALSE}{\sc{FALSE}}
+\newcommand{\DOMAIN}{\sc{DOMAIN}}
+\newcommand{\EXCEPT}{\sc{EXCEPT}}
+\newcommand{\STRING}{\sc{STRING}}
+\newcommand{\MODULE}{\sc{MODULE}}
+\newcommand{\LOCAL}{\sc{LOCAL}}
+\newcommand{\INSTANCE}{\sc{INSTANCE}}
+\newcommand{\WITH}{\sc{WITH}}
+\newcommand{\EXTENDS}{\sc{EXTENDS}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\VARIABLE}{\sc{VARIABLE}}
+\newcommand{\VARIABLES}{\sc{VARIABLES}}
+\newcommand{\CONSTANT}{\sc{CONSTANT}}
+\newcommand{\CONSTANTS}{\sc{CONSTANTS}}
+\newcommand{\UNION}{\sc{UNION}}
+\newcommand{\SUBSET}{\sc{SUBSET}}
+\newcommand{\UNCHANGED}{\sc{UNCHANGED}}
+\newcommand{\ENABLED}{\sc{ENABLED}}
+\newcommand{\WF}{\text{WF}}
+\newcommand{\SF}{\text{SF}}
+\newcommand{\THEOREM}{\sc{THEOREM}}
+\newcommand{\LEMMA}{\sc{LEMMA}}
+\newcommand{\COROLLARY}{\sc{COROLLARY}}
+\newcommand{\PROPOSITION}{\sc{PROPOSITION}}
+\newcommand{\AXIOM}{\sc{AXIOM}}
+\newcommand{\PROOF}{\sc{PROOF}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\PROVE}{\sc{PROVE}}
+\newcommand{\QED}{\sc{QED}}
+\newcommand{\BY}{\sc{BY}}
+\newcommand{\DEF}{\sc{DEF}}
+\newcommand{\DEFS}{\sc{DEFS}}
+\newcommand{\OBVIOUS}{\sc{OBVIOUS}}
+\newcommand{\OMITTED}{\sc{OMITTED}}
+\newcommand{\NEW}{\sc{NEW}}
+\newcommand{\STATE}{\sc{STATE}}
+\newcommand{\ACTION}{\sc{ACTION}}
+\newcommand{\TEMPORAL}{\sc{TEMPORAL}}
+\newcommand{\USE}{\sc{USE}}
+\newcommand{\DEFINE}{\sc{DEFINE}}
+\newcommand{\SUFFICES}{\sc{SUFFICES}}
+\newcommand{\HAVE}{\sc{HAVE}}
+\newcommand{\TAKE}{\sc{TAKE}}
+\newcommand{\PICK}{\sc{PICK}}
+\newcommand{\WITNESS}{\sc{WITNESS}}
+\newcommand{\HIDE}{\sc{HIDE}}</script>
+
+<p><em>This is the last installment in the series. <a href="/posts/tlaplus_part1">Part 1</a>, <a href="/posts/tlaplus_part2">Part 2</a>, <a href="/posts/tlaplus_part3">Part 3</a></em></p>
+
+<p><em>If you find TLA<sup>+</sup> and formal methods in general interesting, I invite you to visit and participate in the new <a href="https://www.reddit.com/r/tlaplus/">/r/tlaplus</a> on Reddit.</em></p>
+
+<p>In part 3 we saw how TLA, the temporal logic of actions serves as a universal mathematical framework for reasoning about discrete dynamical systems, much like ordinary differential equations are a framework for specifying and reasoning about continuous systems. Now, in our final installment in the series, we will mostly focus on those capabilities of TLA<sup>+</sup> that are unique to the needs of reasoning about <em>engineered</em> discrete systems in general, and software in particular. We will discuss encapsulation, instantiation and information hiding, see how they can be used for composition and specifying open systems (think libraries), and introduce important notions of equivalence and order relations between algorithms.</p>
+
+<p>In this post, as in part 3, I will sometimes use the word “set” loosely (as in a set of states or a set of behaviors) to mean any collection, rather than set in the ZFC set-theory sense. I wish to remind you yet again that, while comprehensive, this series is a deep-dive into the theory of TLA<sup>+</sup> rather than a tutorial. Understanding of subjects we cover is not necessary to write good TLA<sup>+</sup> specifications.</p>
+
+<h2 id="encapsulation">Encapsulation</h2>
+
+<p>An important ability in programming is encapsulation, or modularity, which allows us to hide internal implementation details of components. Encapsulation can also serve as an important form of abstraction, letting us instantiate components with different parameters. In mathematics, encapsulation is not as important as in programming because mathematical theorems tend to be relatively short. While software specifications are not as large as programs, they can be far more elaborate than theorems used by mathematicians<sup id="fnref:narrow-wide"><a href="#fn:narrow-wide" class="footnote">1</a></sup>, and so requires encapsulation. Encapsulation together with parameterized instantiation of components is also important from a theoretical perspective as a means to study composition in software.</p>
+
+<h3 id="modules">Modules</h3>
+
+<p>Before we move on with the theory, we will cover the last missing technical detail of TLA<sup>+</sup>, the means by which encapsulation is achieved: the module system. Every TLA<sup>+</sup> definition or declaration must reside inside a <em>module</em>. A module serves as (parameterized) namespace for the definitions, constant and variable declarations, and theorems and axioms it contain.</p>
+
+<p>Modules are enclosed like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\;\;\MODULE Foo \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR\\
+\\
+&\phantom{XXXX}\comment{$\ldots$ definitions $\ldots$}\\
+\\
+&\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\LR
+\end{alignat} %]]></script>
+
+<p>and can be nested to any depth. All definitions and declarations in an enclosing module made prior to a nested module are imported into the inner module.</p>
+
+<p>Every name (definition or declaration) in a module is <em>exported</em> — i.e., made accessible to other modules — by default, unless prefaced by the keyword <script type="math/tex">\LOCAL\!</script>.</p>
+
+<p>The first (and only first) line in a module may be (and often is) $\EXTENDS M1, M2, \ldots$ where $M1, M2,\ldots$ are modules. It imports all exported symbols from those modules as if they were all defined in the the extending module.</p>
+
+<p>A module can be <em>instantiated</em> once or multiple times within another module. Every <em>declaration</em> — constant or variable, i.e. a free ordinary or temporal variable — in the instantiated module is treated as a parameter and must be assigned in a <script type="math/tex">\WITH\!</script> clause:</p>
+
+<script type="math/tex; mode=display">MyFoo \triangleq \INSTANCE Foo \;\WITH d_1 \leftarrow e_1, \ldots, d_n \leftarrow e_n</script>
+
+<p>where $d_1 \ldots d_n$ are the declarations in the $Foo$ module, and $e_1 \ldots e_n$ are the meanings given to them. If a symbol with the same name is already defined or declared in the scope where <script type="math/tex">\INSTANCE\!</script> is written, it need not be mentioned explicitly in the <script type="math/tex">\WITH\!</script> clause but is assigned by default to the symbol with same name in the instanting scope.</p>
+
+<p>A module can’t be instantiated without all of its declarations assigned (it is a syntax error). Assignment substitutes the given meaning in place of the declarations. Like parameterized definitions (operators), instantiation is substitution, only at a module level. From a logic perspective, instantiation binds the free variables in the instantiated module (although it may bind them to free variables in the instantiating module, thus leaving them free).</p>
+
+<p>Once a module is instantiated, its definitions can be accessed with the instance name followed by !, as in $MyFoo!Ordered(\ldots)$ (infix operator can be referenced like so: $MyFoo!\preceq(a, b)$). For each definition in $MyFoo$, $MyFoo!Def$ means the same as $Def$ inside $Foo$, except with all of the declarations of $Foo$ replaced by the meaning given to them in the <script type="math/tex">\WITH\!</script> clause (or implicitly). For brevity in the discussion, if module $Foo$ contains some definition $X$, we may sometimes call the definition after the substitution, $\overline{X}$, instead of $MyInstance!X$.</p>
+
+<p>For example, in part 3 we defined “polymorphic” sorting algorithms that had the constants $S$ and <script type="math/tex">\_ \preceq \_</script> declared. If the $QuickSort$ algorithm resides in the $QS$ module, then we can instantiate the module like this (assuming that the temporal variables $A, A0, done$ are declared in the instantiating module, and are therefore substituted implicitly):</p>
+
+<script type="math/tex; mode=display">IntegerQS \triangleq \INSTANCE QS \;\WITH S \leftarrow Int, \preceq \leftarrow \leq</script>
+
+<p>Then, $IntegerQS!QuickSort$ will be a sorting algorithm for sequences of integers.</p>
+
+<p>We can also instantiate a module inside a parameterized definition, like so:</p>
+
+<script type="math/tex; mode=display">IntQS(\_ \preceq \_) \triangleq \INSTANCE QS \;\WITH S \leftarrow Int</script>
+
+<p>and then $IntQS(\leq)!QuickSort$ sorts in ascending order, while $IntQs(\geq)!QuickSort$ sorts in descending order. Note how we don’t need to write $\WITH \ldots, \preceq \leftarrow \preceq$, as the name $\preceq$ exists in the scope of the <script type="math/tex">\INSTANCE\!</script> construct, in this case as an argument of the operator $IntQS$.</p>
+
+<p>We could then write the theorem:</p>
+
+<script type="math/tex; mode=display">\THEOREM IntQs(\geq)!QuickSort \implies \Box(done \implies Ordered(A, \geq))</script>
+
+<p>Whereas $M1 \defeq \INSTANCE M \ldots$ creates a <em>named</em> instance — $M1$ — of the module $M$, we can also create <em>unnamed</em> instances simply with $\INSTANCE M \ldots$ This has the effect of importing all the definitions and declarations in $M$ into the instantiating module (with their assigned meanings given in the <script type="math/tex">\WITH\!</script> clause or implicitly), and they can then be accessed without qualification. This, in a sense, turns the instantiating module itself into an instance of the instantiated module. $\LOCAL \INSTANCE M \ldots$ has the same effect, except that the symbols of $M$ become local in the instantiating module, and are not exported. Of course, a module can only be instantiated anonymously once within another module, otherwise the names imported by its multiple instantiations would clash.</p>
+
+<p>Unnamed <script type="math/tex">\INSTANCE\!</script> is similar to <script type="math/tex">\EXTENDS\!</script>, except that <script type="math/tex">\INSTANCE\!</script> requires that all declarations in the instantiated module be assigned (or re-declared), whereas <script type="math/tex">\EXTENDS\!</script> imports all declarations as if they were declared in the extending module (for example, if the instantiated module contains $\CONSTANT C$, then the result of <script type="math/tex">\EXTENDS\!</script> would be as if $\CONSTANT C$ had been declared in the instantiating module, while <script type="math/tex">\INSTANCE\!</script> requires that $C$ be already declared or defined in the instantiating module). Also, <script type="math/tex">\EXTENDS\!</script> does not support substitution, and it allows naming multiple modules at once.</p>
+
+<p>Because module names can only be mentioned in a <script type="math/tex">\MODULE\!</script>, <script type="math/tex">\EXTENDS\!</script>, or <script type="math/tex">\INSTANCE\!</script> clause, and nothing but a module name can appear in those constructs, there is no possibility of confusing module names with other names (definitions, declarations), so TLA<sup>+</sup> allows using the same name for a module and for a definition or a declaration.</p>
+
+<p>Modules are not first-class objects in TLA<sup>+</sup> in the sense that they cannot be passed as arguments to operators like ML modules or objects in object-oriented programming languages. However, the pattern,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\;\;\MODULE M1M2 \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H  \H\H\H \H\H \H\H \H\!\H \UR}\\
+&\;&\LOCAL \INSTANCE M1\\
+&&\INSTANCE M2\\
+&\rlap{\LL\H\H\H\H\H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\LR}\\
+\\
+&\rlap{MyM2 \defeq \INSTANCE M1M2}
+\end{alignat} %]]></script>
+
+<p>is very much analogous to (the illegal) $MyM2 \defeq \INSTANCE  M2(M1)$, presuming that the “signatures” of $M1$ and $M2$ match, namely that $M1$ exports the names required by $M2$’s declarations.</p>
+
+<p>Modules can be used to abstract away encoding (“implementation”) details of mathematical objects. Here’s a (very) contrived example that abstractly defines vectors without specifying any particular encoding:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\;\;\MODULE VectorSpace \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\LOCAL \INSTANCE Naturals\;\; \comment{Like $\EXTENDS$, but imported symbols aren't exported}\\
+&\;\;&\CONSTANT Dim, S\\
+&&\CONSTANTS ConsVector(seq), Elem(v, i)\\
+&& \CONSTANTS ElemPlus(\_,\_), ElemMinus(\_,\_)\\
+&&\ASSUME \A a,b \in S : ElemPlus(a, b) = ElemPlus(b, a)\\
+&&\ASSUME \A a,b,c \in S : ElemPlus(a, b) = c  \equiv ElemMinus(c, a) = b\\
+\\
+&&\comment{The vector space}\\
+&&VS\defeq \set{ConsVector(seq) : seq \in [1..Dim \to S]}\\
+&&\comment{Vector addition}\\
+&&v1 \mathbin{++} v2 \defeq ConsVector([i \in 1..Dim \mapsto ElemPlus(Elem(v1,i), Elem(v2,i))])\\
+&&\comment{Vector subtraction}\\
+&&v1\mathbin{--} v2 \defeq ConsVector([i \in 1..Dim \mapsto ElemMinus(Elem(v1,i), Elem(v2,i))])\\
+\\
+&&\THEOREM \A u,v,w \in VS : (u \mathbin{++} v = w) \equiv (w \mathbin{--}v = u)\\
+&&\;\;\PROOF\ldots
+\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>Now we’ll declare a $Vector3D$ module that extends $VectorSpace$ by using an unnamed instantiation of $VectorSpace$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H\H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\;\;\MODULE Vector3D \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&& \CONSTANTS ElemPlus(\_,\_), ElemMinus(\_,\_)\\
+&\;&\LOCAL ConsVector1(seq) \defeq [x \mapsto seq[1], y \mapsto seq[2], z \mapsto seq[3]]\\
+&&\LOCAL Elem1(v, i) \defeq \CASE i = 1 \to v.x \;\Box\; i = 2 \to v.y \;\Box\;i=3 \to v.z\\
+&&\\
+&&\comment{Export $``$opaque" operators}\\
+&&  ConsVector(seq) \defeq ConsVector1(seq)\\
+&& Elem(v, i) \defeq Elem1(v, i)\\
+&&\\
+&&\INSTANCE VectorSpace \;\WITH Dim \leftarrow 3\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>The module assigns the dimension as well as the construction and destruction operations — that, for whatever reason, use a record to encode the 3D vector — but does leaves element addition/subtraction free constants. When $Vector3D$ is instantiated, they will need to be assigned.</p>
+
+<p>The module hides the encoding of the vector. If we instantiate it, like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\EXTENDS Reals\\
+&V3D \defeq \INSTANCE Vector3d \;\WITH S \leftarrow Real, ElemPlus \leftarrow +, ElemMinus \leftarrow -
+\end{alignat} %]]></script>
+
+<p>and then construct a 3D vector, $v \defeq V3D!ConsVector(\seq{4.5, 1.6, -18.99})$, we cannot use $v.x$ because the encoding is hidden from us (in other words, the $Vector3D$ does not export any theorem that says that its vectors are records in the set $[x : S, y : S, z : S]$)<sup id="fnref:encoding"><a href="#fn:encoding" class="footnote">2</a></sup>. In addition, because we’ve hid $ConsVector$ and $Elem$’s definition inside <script type="math/tex">\LOCAL\!</script> operators, the details of the definitions cannot be examined by proofs with <script type="math/tex">\BY \DEF\!</script>.</p>
+
+<p>If a module $Foo$ contains $\ASSUME A$ (for some assumption $A$) and a $\THEOREM T$ and is instantiated with $MyFoo \defeq \INSTANCE Foo \;\WITH \ldots$, then $MyFoo!T$ would refer to the theorem $\ASSUME \overline{A} \;\PROVE \overline{T}$ (remember, $\overline{A}$ and $\overline{T}$ denote $A$ and $T$ after the substitutions supplied in the <script type="math/tex">\WITH\!</script> clause). In other words, all assumptions in a module are added as its theorem’s assumptions when instantiated. That’s because the theorems in a module depends on all assumptions in the module, which they treat as axioms.</p>
+
+<p>It is the assignment of temporal meaning to temporal variable declarations that will serve as the basis for the theoretical discussion that will follow. The next two sections cover some technical corner cases of substitution. If you only care about the big picture, you may skip them and go directly to the <a href="#composition">chapter on composition</a>.</p>
+
+<h3 id="substitutivity-of-operators">Substitutivity of Operators</h3>
+
+<p>There is the technical matter of giving a temporal meaning (an expression that involves a temporal variable) to constant declarations. A <em>constant module</em> is a module where all declarations are constants (i.e., it does not declare any temporal variables), and all its definitions are <em>constant-level</em>, meaning that they do not make use of the prime operator or any temporal operator. If a module $M$ is <em>not</em> a constant module, its constant declarations can only be assigned a constant meaning — not a variable, state function or a temporal formula — and its operator declarations must be assigned a constant-level meaning. However, if a module <em>is</em> a constant module, then its constants may be given non-constant meaning, provided that the meanings assigned to its operator declarations are <em>Leibniz</em>, or <em>substitutive</em>, as I’ll explain. Consider the following module:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\;\;\MODULE M \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&\;\;&\CONSTANTS C, D, F(\_)\\
+&&\THEOREM (C = D) \implies (F(C) = F(D))
+\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>The module is constant and the theorem is valid (i.e., it is a tautology), but if we were to instantiate the module like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\VARIABLES x, y\\
+&Prime(e) \triangleq e'\\
+&\INSTANCE M \;\WITH C \leftarrow x, D \leftarrow y, F \leftarrow Prime
+\end{alignat} %]]></script>
+
+<p>The meaning of the theorem would be $(x = y) \implies (x’ = y’)$ which is false, and we cannot allow a theorem to become false when we substitute its free variables.</p>
+
+<p>An operator $F$ is said to be <em>Leibniz</em> (<em>substitutive</em>) iff $e = f \implies F(e) = F(f)$ (similarly for operators of higher arity). All builtin TLA<sup>+</sup> operators are Leibniz except for prime and the temporal operators, and all constant-level user-defined operators are Leibniz.</p>
+
+<p>A non-constant operator may be Leibniz, too, for example:
+<script type="math/tex">G(a) \triangleq x' = [x \;\EXCEPT ![a] = y']</script></p>
+
+<p>For an operator to be non-Leibniz, one of its parameters must appear in the definition as an argument of a non-Leibniz operator like prime.</p>
+
+<h3 id="the-distributivity-of-substitution">The Distributivity of Substitution</h3>
+
+<p>We now get to another nuance in TLA<sup>+</sup>, which is of very minor importance in practice but as we’re diving deep into the theory of TLA<sup>+</sup>, we should explore its darkest corners (but feel free to skip this section). This nuance, however, sheds some light about the mathematical manipulation of programs in general.</p>
+
+<p>We ask whether or not the substitution operation, or “barring”, is <em>distributive</em> over the various logical operations. Let me explain what I mean with an example. Suppose we have the following module:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\;\;\MODULE M \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&\;\;&\CONSTANTS \ldots\\
+&&\VARIABLES \ldots
+\\
+&& A \defeq \ldots\\
+&& B \defeq \ldots\\
+&& C \defeq A \land B\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>which we then instantiate with</p>
+
+<script type="math/tex; mode=display">M \defeq \INSTANCE M \;\WITH \ldots</script>
+
+<p>We ask, is $M!A \land M!B$ equivalent to $M!C$? In other words, is $\overline{A} \land \overline{B} \equiv \overline{A \land B}$? If so, we say that substitution, or barring, <em>distributes</em> over $\land$.</p>
+
+<p>In <a href="http://lamport.azurewebsites.net/pubs/lamport-actions.pdf"><em>The Temporal Logic of Actions</em></a> Lamport points out that barring distributes over most TLA operations. For example, $\overline{\Box(F \lor G)} \equiv \Box(\overline F \lor \overline G)$ for any formulas $F$ and $G$. Indeed, for the normal form of algorithm specification, <script type="math/tex">\overline{Init \land\Box[Next]_v \land Fairness} \equiv \overline{Init} \land\Box[\overline{Next}]_{\overline{v}} \land {\overline{Fairness}}</script>.</p>
+
+<p>However, substitution may not distribute into the fairness conditions that make up $Fairness$. I.e. <script type="math/tex">\overline{\WF_v(A)}</script> may not be equivalent to <script type="math/tex">\WF_{\overline{v}}(\overline{A})</script>. The reason is that the weak and strong fairness operators <script type="math/tex">\WF\!</script> and <script type="math/tex">\SF\!</script> are defined in terms of the <script type="math/tex">\ENABLED\!</script> operator. <script type="math/tex">\ENABLED\!</script> is special in that it is a state predicate but is defined using two states ($\ENABLED A$ is true in state $s$ iff there exists <em>some</em> state $t$ such that the transition $s \rightharpoonup t$ satisfies the action $A$), and it is not the case that <script type="math/tex">\overline{\ENABLED \seq{A}_v}</script> is always equivalent to <script type="math/tex">\ENABLED \seq{\overline A}_{\overline{v}}</script>.</p>
+
+<p>For example, if $A \defeq (x’ = x) \land (y’ \neq y)$ and $v \defeq \seq{x , y}$, then <script type="math/tex">\ENABLED \seq{A}_v</script> is always true (as there always exists a possible next state regardless of the current values of $x$ and $y$), and so it is equivalent to <script type="math/tex">\TRUE\!</script>. If our substitution is $\overline x = z$ and $\overline y = z$, then  <script type="math/tex">\overline{\ENABLED \seq{A}_v} \equiv \overline \TRUE \equiv \TRUE</script>, but <script type="math/tex">\ENABLED \seq{\overline A}_{\overline{v}} \equiv \ENABLED \seq{(z' = z) \land (z' \neq z)}_z</script> which is always false. This happens because the primed variables are no longer free in the substituted formula, and the substitution that binds them may place constraints on them. So barring does not distribute over <script type="math/tex">\ENABLED\!</script> and the fairness operators defined using it.</p>
+
+<p>This is a technical subtlety but not a problem in practice, as we can compute <script type="math/tex">\overline{\ENABLED \seq{A}_v}</script> from <script type="math/tex">\ENABLED \seq{A}_v</script> by means other than blindly substituting all variables; it’s easy to compute a state predicate that’s equivalent to <script type="math/tex">\ENABLED \seq{A}_v</script> but doesn’t mention primed variables.</p>
+
+<p>Let’s place this case in a specification, and analyze the consequences. The example would also demonstrate why we <em>must</em> define <script type="math/tex">\overline{\ENABLED \seq{A}_v}</script> such that it is still <script type="math/tex">\TRUE\!</script> in the case above, rather than define it to be equal to <script type="math/tex">\ENABLED \seq{\overline A}_{\overline{v}}</script>; in other words, it will help understand why barring must not distribute over <script type="math/tex">\ENABLED\!</script>. Consider the following nested modules (and note that module $Inner$ contains the free temporal variable $x$ as it’s defined in an enclosing module prior to $Inner$’s definition):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\;\;\MODULE Outer \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&\;&\VARIABLE x\\
+&\nested{
+\;&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\;\;\MODULE Inner \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&\;&\rlap{\VARIABLE y}\\
+\\
+&&\rlap{S \defeq \set{0, 1}}\\
+&&Init &\defeq x \in S \land y \in S\\
+&&Next &\defeq x' \in S \land y' \in S \land x' \neq y'\\
+&&Spec &\defeq Init \land \Box[Next]_{\seq{x,y}} \land \WF_{\seq{x,y}}(Next)\\
+\\
+&&\rlap{\THEOREM P \defeq Spec \implies \Diamond(x \neq y)}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H\H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+}\\
+\\
+&\;&I \defeq \INSTANCE Inner \;\WITH y \leftarrow x\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>If we look at module $Inner$ in isolation, then obviously $P$ is a theorem. But what about module $Outer$’s $I!Spec$? What behaviors does it specify? If the fairness condition didn’t exist, then behaviors where both $x$ and $y$ start up equal to each other and stutter forever would satisfy the specification. But the we do have a fairness condition, so <a href="/tlaplus_part3.html#machine-closure-and-fairness">recall</a> its definition:</p>
+
+<script type="math/tex; mode=display">\WF_e(A)\defeq  \Diamond \Box \ENABLED \seq{A}_e \implies \Box\Diamond \seq{A}_e</script>
+
+<p>It means that <em>if</em> the action is continuously enabled <em>then</em> it must occur infinitely often. One thing is certain: the action $Next$ cannot occur infinitely often — nor can it occur even once — in $I!Spec$. If barring distributed over <script type="math/tex">\ENABLED\!</script>, then <script type="math/tex">\overline{\ENABLED \seq{Next}_{\seq{x,y}}}</script> would be equivalent to <script type="math/tex">\ENABLED \seq{\overline{Next}}_{\overline{\seq{x,y}}}</script>, which, as we saw in the discussion above, is always false in our “barred” formula, $I!Spec$. But if that were the case, then <script type="math/tex">\WF_{\seq{x,y}}(Next)</script> would be true (an implication is true when its left operand is false), which would make $I!Spec$ true even though the $Next$ action can never occur; a stuttering behavior where $x$ and $y$ are constant would satisfy it. This is clearly not what we want, and worse, if that were so, then $I!P$ is not a theorem because a behavior where $x$ and $y$ are always equal cannot eventually reach a state where they’re different. We cannot accept a situation where substitution of free variables turns a theorem false.</p>
+
+<p>However, if <script type="math/tex">\overline{\ENABLED \seq{Next}_{\seq{x,y}}}</script>  is defined to be true in this case as in the discussion above (and indeed it is), then the fairness condition <script type="math/tex">\WF_{\seq{x,y}}(Next)</script> would become equivalent (by its definition) to <script type="math/tex">\Box\Diamond\seq{Next}_{\seq{x,y}}</script>, which is equivalent to <script type="math/tex">\FALSE\!</script> in $I!Spec$, as $Next$ cannot occur. And if it’s equivalent to <script type="math/tex">\FALSE\!</script>, then so is $I!Spec$. And if $I!Spec$ is <script type="math/tex">\FALSE\!</script>, then $I!P$ is <a href="https://en.wikipedia.org/wiki/Vacuous_truth">vacuously true</a>, because <script type="math/tex">\FALSE\!</script> implies anything. All of $I!Spec$’s behavior eventually reach the impossible state where $x \neq x$ because there are none!</p>
+
+<p>Also note that $Spec$ is machine-closed, yet $I!Spec$ isn’t because it is the liveness property that becomes false and makes the entire formula $\FALSE!$ — clearly a very strong safety property (we are not allowed to do anything). Substitution can, therefore, turn a machine-closed specification into a non-machine-closed one, which is yet another reason why we want to allow expressing non-machine-closed specifications.</p>
+
+<p>This annoyance of substitution not being distributive over <script type="math/tex">\ENABLED\!</script> led Lamport to observe that substitution in general does not distribute over common programming constructs (like sequential composition) in his short note, <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf"><em>Substitution: Syntactic versus Semantic</em></a>.</p>
+
+<h2 id="composition">Composition</h2>
+
+<p>Engineered systems are often made of components. Describing each component separately, and then the method of their composition is how engineers tackle complexity. Even when a system is made of a single component, it interacts with its environment — the user, the physical world (through sensors and actuators), or other systems — which may be thought of as another component. In this chapter, we’ll learn how to model interaction and composition of components. While TLA can elegantly model arbitrary forms of composition, in the next chapter we’ll see that its powerful “first-class” representation of abstraction, makes composition an unnecessary complication in practice.</p>
+
+<h3 id="model-based-specifications-and-information-hiding">Model-Based Specifications and Information Hiding</h3>
+
+<p>How do we specify how a system or a component interacts with its environment or with other component? In other words, how do we specify an <em>interface</em>?</p>
+
+<p>Let’s consider the following, very abstract, very mathematical specification of a stack. But, first, as a technical mathematical necessity I’ll explain later, we’ll define an operator that can be used to specify a set by some properties; it selects some “smallest” set that satisfies the property $C$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&Least(C(\_)) \defeq \CHOOSE T : &\land C(T) \\
+&&\land \A U \in \SUBSET T : C(U) \implies U = T
+\end{alignat} %]]></script>
+
+<p>Now, the stack:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H \H\H \H\H \H\H \H\H \H\;\;\MODULE Stack \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H\UR}\\
+&\;\;&\nested{
+&\CONSTANTS & X,&\comment{The set of elements}\\
+&&\text{EMPTY}, &\comment{The $``$null" stack}\\
+&&push,pop,top\phantom{X}& \comment{Stack operations}\\
+}\\
+\\
+&&\rlap{\LOCAL StackT(U) \defeq} \\
+&&&\land \rlap{\text{EMPTY} \in U}\\
+&&&\land \rlap{\A x \in X, s \in U : push[s, x] \in U}\\
+&&&\land\rlap{\A x \in X, s \in U : push[s,x] \neq \text{EMPTY}}\\
+&&\rlap{Stack\defeq Least(StackT)}\\
+\\
+&&\AXIOM A1 \defeq& \land push &\in [Stack \times X \to Stack \setminus \set{\text{EMPTY}}] \\
+&&& \land pop &\in [Stack \setminus \set{\text{EMPTY}} \to Stack] \\
+&&& \land top &\in [Stack \setminus \set{\text{EMPTY}} \to X] \\
+&&\AXIOM A2 \defeq &\rlap{\A x \in X, s \in Stack : top[push[s, x]] = x}\\
+&&\AXIOM A3 \defeq &\rlap{\A x \in X, s \in Stack : pop[push[s, x]] = s}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>What’s going on here? We define $Stack$ as the “type” of stacks by defining its algebraic structure: a stack can be $\text{EMPTY}$, all stacks can be constructed by pushing elements, and $\text{EMPTY}$ cannot be a result of a push operation.</p>
+
+<p>This description should be very familiar to people who use typed functional programming languages, as it is precisely how algebraic data types are defined. Axiom <em>A1</em> (remember that <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script>) specifies the “type” of the stack operations (defined as  functions), and axioms <em>A2</em> and <em>A3</em> specify the relationships among the three stack operations. 
+The specification captures precisely what it means to be a stack without saying anything about <em>how</em> one is implemented. It’s true that the specification uses functions rather than algorithms in the TLA sense, but I chose that only to make the specification be recognizable to those who are familiar with algebraic specifications in typed functional languages. Axiomatic specification of algorithms in TLA<sup>+</sup> could also be done by using temporal formulas in the axioms.</p>
+
+<p>This stack specification is an example of an <em>algebraic</em> specification, which, in turn, is a special case of an <em>axiomatic</em> specification. Axiomatic specifications specify the external behavior of some system or data structure — its interface — as a list of properties is must satisfy. This approach seems very elegant at first sight, very abstract, very mathematical. But see if you can specify a FIFO queue in that way; or a B-Tree; or a concurrent B-Tree. It is very hard for people who are not logicians to figure out how to specify a system as a list of axioms. For example, the use of $Least$ is necessary to exclude infinite stacks, something which may not be obvious to non-logicians.</p>
+
+<p>Here’s what Lamport <a href="http://lamport.azurewebsites.net/pubs/lamport-verification.pdf">says</a> about axiomatic specifications:</p>
+
+<blockquote>
+  <p>The lesson I learned from the specification work of the early ’80s is that axiomatic specifications don’t work. The idea of specifying a system by writing down all the properties it satisfies seems perfect. We just list what the system must and must not do, and we have a completely abstract specification. It sounds wonderful; it just doesn’t work in practice.</p>
+
+  <p>After writing down a list of properties, it is very hard to figure out what one has written. It is hard to decide what additional properties are and are not implied by the list. As a result, it becomes impossible to tell whether a specification says all that it should about a system. With perseverance, one can write an axiomatic specification of a simple queue and convince oneself that it is correct. The task is hopeless for systems with any significant degree of complexity.</p>
+</blockquote>
+
+<p>What works in practice — at least for engineers who are not logicians — is specifying by example. We write a specification of a particular, simple, implementation of a stack, and say that a stack is anything that exposes the same behavior. This approach is called <em>model-based</em> specification. In order for it to work, we need to hide the implementation details of the model because other implementations are not required to mimic those; hiding information is a cornerstone of abstraction.</p>
+
+<p>Here is a model-based specification of a stack (this time we will use algorithms):
+<script type="math/tex">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&&\phantom{XXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H\H\H \H \H\H \H\H \H\;\;\MODULE InternalStack \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H\UR}\\
+&& \rlap{\EXTENDS Sequences}\\
+&\;\;&\rlap{\CONSTANTS X\;\;\comment{The set of elements}}\\
+&&\rlap{\VARIABLES buf, in, out}\\
+&&\rlap{vars \defeq \seq{buf, in, out}}\\
+\\
+&&\rlap{NOTHING \defeq \CHOOSE x : x \notin X} \\
+\\
+&& Init &\defeq buf \in \seq{} \land in = NOTHING \land out = NOTHING\\
+&&Push &\defeq in' \in X \land buf' = \seq{in'} \circ buf \land \UNCHANGED out\\
+&&Pop &\defeq buf \neq \seq{} \land out' = Head(buf) \land buf' = Tail(buf) \land \UNCHANGED in\\
+&&Top &\defeq buf \neq \seq{} \land out' = Head(buf) \land buf' = Tail(buf) \land \UNCHANGED \seq{in, buf}\\
+\\
+&&\rlap{IStack\defeq Init \land \Box[Push \lor Pop \lor Top]_{vars}}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script></p>
+
+<p>However, we’re only interested in how $Push$, $Pop$ and $Top$ interact with the $in$ and $out$ variables. A stack implementation need not necessarily maintain a $buf$ variable containing a sequence of elements. To use our specification as one describing an interface we must hide the internal implementation detail of our model implementation, namely $buf$. This is done using module instantiation and temporal existential quantification like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H\H\H\H\H\H\H\H \H\H \H\H\H\H\H\H\H\H\H\H\H \H \H\H \H\H \H\;\;\MODULE Stack \H\H\H\H \H\H \H\H \H\H \H\H \H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H\UR}\\
+&\;\;&\rlap{\CONSTANT X \;\;\comment{The set of elements}}\\
+&&\rlap{\VARIABLES in, out}\\
+\\
+&&\comment{No $\WITH$  because $buf$ is bound as a param}\\
+&&\LOCAL Internal(buf) \defeq  \INSTANCE InternalStack \\
+\\
+&&Stack \defeq \EE buf : Internal(buf)!IStack\\
+&\rlap{\LL\H\H\H\H\H\H\H\H\H\H\H\H\H  \H\H \H\H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>If we have a specification $MyStack$, the statement $MyStack \implies Stack$ means that $MyStack$ <em>implements</em> $Stack$. We will take a close look of what it means for an algorithm to implement another later, but now I’ll explain how $\EE$ works to hide the $buf$ variable.</p>
+
+<p>In <a href="/posts/tlaplus_part3#temporal-formulas">part 3</a> we briefly encountered existential temporal quantification, $\EE x : F$ as saying that “there exists a temporal variable $x$ that may take a different value at each state such that $F$”. However, it’s easier to think of $\EE x : F$ as “$F$ with $x$ hidden”. This is similar to regular existential quantification in first-order logic where, for example, $\E y \in Int : y * 2 = x$ uses a hidden variable $y$ to say something about the free variable $x$. The bound variable $y$  is no longer part of the model at all, which only speaks of the free variable $x$. This is true for temporal quantification as well.</p>
+
+<p>Note that hiding $buf$ in $Stack \defeq \EE buf : Internal(buf)!IStack$ must be done in a different module from <code class="highlighter-rouge">InternalStack</code>, one that does <em>not</em> declare $buf$ as a free variable in a <script type="math/tex">\VARIABLES\!</script> clause, because TLA<sup>+</sup> does not allow re-defining any names.</p>
+
+<h3 id="open-system-specifications">Open System Specifications</h3>
+
+<p>Our specifications describe a system’s behavior as it interacts with its environment. If formula $M$ describes how the system behaves, and $E$ describes how the environment does, then the full specification — expressed as a composition — is $E \land M$ (remember the equivalence between IO and concurrency we’ve seen in part 3, and that, in practice, it’s simpler to just write a single formula with nondeterminism that expresses the environment; but we’re talking theory here). An <em>open-system</em> specification describes the contract between the system and the environment — think specification of a library.</p>
+
+<p>The system part, $M$, of the conjoined specification is insufficient as an open system specification because the correctness of $E \land M$ depends on the behavior of $E$ as well; $M$ by itself would assert that the system can behave correctly no matter what the environment does, in other words, it would take $E$ as $\TRUE$, meaning full determinism that allows any sort of interaction with the system. Sometimes, this may be acceptable, as with our stack example above. But sometimes we’d want to specify a library or a system that only guarantees correct behavior if external components — be they other systems or other parts of the program — interact with it in a certain way. We would like to specify just what the system expects or assumes of the environment in order to function correctly rather than the system plus the environment as a whole. Such specifications are also called <em>rely-guarantee</em> or <em>assume-guarantee</em>, signifying the contract that under so and so assumptions, the system can make such and such guarantees. Such a contract requires that the system behave correctly only if the environment acts as expected.</p>
+
+<p>We could use $E \implies M$ as the contract<sup id="fnref:proposition"><a href="#fn:proposition" class="footnote">3</a></sup>. However, the contract $E \implies M$ is too lenient on the system. Consider a server that receives requests in the form of even numbers, and returns their value divided by two. If the request does not contain an even number, the system makes no guarantees on the outcome. We could specify $E$ and $M$ like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&a \div b \triangleq \CHOOSE c \in Int : c * b = a\\
+&Evens \triangleq \set{ n \in Int : n \%2 = 0}\\
+\\
+&\VARIABLES in, out\\
+&E \triangleq in \in Evens \land \Box[in' \in Evens \land \UNCHANGED out]_{in}\\
+&M \triangleq \Box[in \in Evens \land out' = in \div 2 \land \UNCHANGED in]_{out}
+\end{alignat} %]]></script>
+
+<p>The specification $E \implies M$ appears to say what we want, but not quite. Suppose that in its first nine steps the environment sends the system even numbers, but in the tenth step the environment sends us an odd number. This would mean that for that behavior, the formula $E$ is false, and so the system may exhibit <em>any</em> behavior for which the formula $M$ is false. For example, set $y$ to 33.125 in the <em>second</em> step! This is not what we want. We want to say that $M$ would behave correctly <em>as long as</em> $E$ does, i.e., up until the step $E$ starts misbehaving.</p>
+
+<p>The special temporal operator $\whileop$ says that if $F \whileop G$, then $G$ would not “become false” before $F$ does. Our open system specification would, therefore, be $E \whileop M$.</p>
+
+<p>In practice, however, simple implication (i.e. $E \implies M$) would suffice, because it is very hard to write a specification for $M$ — let alone a realizable, machine-closed one — that knows in advance that it may misbehave if the environment will misbehave sometime in the future.</p>
+
+<h3 id="composing-specifications">Composing Specifications</h3>
+
+<p>In part 3 we saw some examples of specifications composed by the conjunction of their formulas. Those examples were of parallel composition, but we can compose specifications in many different ways.</p>
+
+<p>Mathematical theories sometimes involve cumbersome constructions whose intent is just to show they are theoretically possible, and at the same time unnecessary. Turing machines are an example of that. Once their universality has been established with some tedious constructions, that construction need not be repeated, and computer scientists are free to refer to Python programs as Turing machines without writing a Python compiler to TM. We will follow a similar route. I will show how TLA<sup>+</sup> can support compositions that emulate programming language constructs only to later show why they are unnecessary.</p>
+
+<p>Ever since structured programming became popular, subroutines have been the primary form of decomposing programs in all mainstream programming languages and in almost all programming languages in general<sup id="fnref:turing-subroutines"><a href="#fn:turing-subroutines" class="footnote">4</a></sup>. We can write specifications as a composition of subroutines by writing some definitions that express the meaning of a subroutine. Those constructs — in particular, the $Subroutine$ operator — are far more complex than anything you’re ever likely to  encounter in a real TLA<sup>+</sup> specification, but their importance lies only in showing that such compositions <em>can</em> be expressed.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H\H\H\H\H \H\H \H\H\H\H\H\H\H\H\H\H\H \H \H\H \H\H \H\;\;\MODULE Subroutines \H\H\H\H \H\H \H\H \H\H \H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H\UR}\\
+
+&\;\;&\nested{
+&\VARIABLES & sub, &\comment{The active subroutine}\\
+&&args, & \comment{Arguments for a subroutine call}\\
+&& retval, \;& \comment{The return value from subroutine call}\\
+&& pc& \comment{The program counter for the main subroutine}\\
+}\\
+&&control \defeq \seq{sub, args, retval, pc}\\
+\\
+&&\LOCAL Main \defeq \str{main} \\
+&&ReturnValue(r)\defeq r' = retval\\
+&&NoCall\defeq \UNCHANGED \seq{sub, args, retval}\\
+\\
+&&Label(c) \defeq sub = Main \land\; pc = c\\
+&&Goto(c)\defeq Label(c)' \land NoCall\\
+\\
+&&\nested{
+& \rlap{Call(subname, a, retpc)\defeq }\\
+&\phantom{XX}&\land sub' = subname\\
+&&\land pc' = retpc\\
+&&\land args' = a\\
+&&\land \UNCHANGED retval\\
+&&\land \UNCHANGED a\\
+}\\
+\\
+&&\nested{
+&\rlap{\comment{$Spec$ must assign the control vars in $\WITH$ if they're used internally}}\\
+& \rlap{Subroutine(Name, Spec(\_), Args(\_, \_), Done(\_), Return(\_))\defeq}\\
+&\phantom{XX}&\Box(&\rlap{sub = Name \implies }\\
+&&&\phantom{XX}&\EE v : & \land \rlap{Args(args, v) \land Spec(v)} \\
+&&&&&\land \Box[&\land  sub = Name \land Done(v) \\
+&&&&&&\land retval' = Return(v)\\
+&&&&&&\land sub' =Main\\
+&&&&&&\land \rlap{\UNCHANGED \seq{pc, args}]_{control})}\\
+}\\
+&\rlap{\LL\H\H\H\H\H\H\H\H\H\H\H\H\H  \H\H \H\H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>We can now use those definitions to encapsulate modules as subroutines and call them:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H\H\H\H\H \H\H \H\H\H\H\H\H\H\H\H\H\H \H \H\H \H\H \H\;\;\MODULE Fast \H\H\H\H \H\H \H\H \H\H \H  \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H\UR}\\
+&\;&\rlap{\EXTENDS Subroutines, Naturals}\\
+\\
+&&\nested{
+&\rlap {FactSub \defeq\;\comment{Encapsulate $Fact1$ in a subroutine} } \\
+&\phantom{XX}&\LET & \rlap{Fact1(v) \defeq \INSTANCE Fact1\;\WITH N \leftarrow v.N, i \leftarrow v.i, f \leftarrow v.f}\\
+&&&Args(args,v) &\defeq v.N = args\\
+&&&Done(v) &\defeq v.i \geq v.N\\
+&&&Return(v) &\defeq v.f\\
+&&\IN &\rlap{Subroutine(\str{fact}, Fact1!Fact1, Args, Done, Return)}\\
+}\\
+
+\\
+&&\nested{
+\rlap{\comment{Our algorithm}}\\
+&Init & \defeq \rlap{Label(\str{a}) \land x = 2}\\
+&Next &\defeq \;&\land  Label(\str{a}) &\implies \;& Call(\str{fact}, x, \str{b})\\
+&&&\land  Label(\str{b}) & \implies &\land ReturnValue(x)\\
+&&&&&\land Goto(\str{a})\\
+\\
+&\rlap{\comment{To add a subroutine to the spec, we simply conjoin it}}\\
+&Spec &\defeq \rlap{ Init \land \Box[Next]_x \land FactSub}\\
+}\\
+&\rlap{\LL\H\H\H\H\H\H\H\H\H\H\H\H\H  \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>It is an easy matter to add support for recursion by simulating a stack; PlusCal does exactly that.</p>
+
+<p>In fact, if $a$ and $b$ are some syntactic constructs — <em>program terms</em> — in some deterministic programming language, however they’re combined — be it as subroutines, sequentially as in $a; b$, in parallel ($a$ || $b$), as rules in some declarative language — then their composition can be expressed in TLA<sup>+</sup> as:</p>
+
+<script type="math/tex; mode=display">\EE w : F(C_a, F_a, w) \land F(C_b, F_b, w) \land Composer(w)</script>
+
+<p>where $F_a$ and $F_b$ are formulas specifying the two components, $w$ is a tuple of variables used in the composition, $F$ is an operator that defines the composition, and $C_a$ and $C_b$ are constants (one reason constants may be necessary is that $\land$ is commutative, and the composition used — e.g. $a;b$ — may not be).</p>
+
+<p>This ability means that, at least in principle, we should be able to extract from a program, written in some programming language, a TLA formula that specifies it exactly, by direct transformation on the syntax. The TLA formula — or rather, its simple semantics — would then constitute a semantics for the program. This translation from program to a logic formula in some program logic is called the <a href="http://www.chargueraud.org/research/2010/cfml/main.pdf">characteristic formula</a> approach<sup id="fnref:tla-compile"><a href="#fn:tla-compile" class="footnote">5</a></sup>.</p>
+
+<p>However, given the need for the constants $C_a$ and $C_b$, I am not certain that such a translation would be regarded as <em>compositional</em> by programming-language theorists, as the term $a$ may be represented in two different programs as $F({C_a}_1, F_a)$ and $F({C_a}_2, F_a)$, i.e., with two different constants. Without the constants, the target logic would need to have the same mechanisms of composing terms (sequence, parallel, function application, rule etc.) as that of the language, while TLA can be universal. Because of its applicability to both sequential and interactive or concurrent algorithms, and because of its ability to easily express rich abstraction/refinement and equivalence relations, TLA can be a particularly suitable logic for this approach.</p>
+
+<p>I promised a solution to the <a href="(/posts/tlaplus_part3)#plotkins-parallel-or">“parallel or” problem from part 3</a>. The composition presented there assumed that the given specifications have no fairness condition, for if they did, $Spec0$ could require that if its next-state action were enabled, then it must eventually be taken, yet our composition would terminate — i.e. would not take any further $Spec0$ steps — if $Spec1$ terminates first. In order to accommodate specifications with fairness conditions, we could still, however, write a composition of the kind described here, that counteracts the fairness conditions of the two specifications:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{ParallelOr(Spec0, state0, Spec1, state1) \defeq}\\
+&\phantom{XX}&\LET & \rlap{Alternator(s) \defeq}\\
+&&&\phantom{XX}& \land \rlap{s = 0}\\
+&&&&\land \Box[&\lor s = 0 \land s' = 1 \land state0' \neq state0 \land state1' = state1\\
+&&&&&\lor s = 1 \land s' = 0 \land state0' = state0 \land state1' \neq state1]_{\seq{s, state0, state1}}\\
+&&&\rlap{AntiFairness(Spec, x, s) \defeq Spec \lor \Diamond\Box(s \neq x)}\\
+&&\IN \rlap{\EE s : AntiFairness(Spec0, 0, s) \land AntiFairness(Spec1, 1, s) \land Alternator(s)}
+\end{alignat} %]]></script>
+
+<p>This, indeed, solves the problem as stated, but perhaps not entirely satisfactorily. A $ParallelOr$ specification would indeed terminate iff any of its two given specs terminate, but if $Spec1$ terminates first, and so the second disjunct of $AntiFairness$ for $Spec0$ is true, then $Spec0$ could be ignored completely, and $state0$ could take any values whatsoever. We may wish to create a stronger composition that truly interleaves the two specifications until one of them terminates. To do that — Stephan Merz showed me this solution — we can use the $\whileop$ operator we learned in the section <a href="#open-system-specifications">Open System Specifications</a> to define $AntiFairness$:</p>
+
+<script type="math/tex; mode=display">AntiFairness(Spec, x, s) \defeq \Box\Diamond(s = x) \whileop Spec</script>
+
+<p>Now $AntiFairness$ states that its operand $Spec$ must hold <em>as long as</em> the alternator would eventually execute another step of $Spec$ (by setting $s$ to $Spec$’s index; either 0 or 1 in our case). The above formula can be read as, “as long as $s$ will eventually be equal to $x$, $Spec$ must hold.”</p>
+
+<p>To understand why simple logical conjunction is a universal mechanism of composition<sup id="fnref:det-comp"><a href="#fn:det-comp" class="footnote">6</a></sup>, like many things in TLA, it is helpful to think of nondeterminism. The specification of a component imposes certain constraints on the behavior of the system. But a component also interacts with its environment — the user, the network, the operating system or other components — on which the component generally imposes no constraints (except, possibly, as requirement for its correct behavior, as we’ve seen when discussing <a href="#open-system-specifications">open system specifications</a>). To the component, the environment appears nondeterministic. The composition of multiple components is, therefore, the intersection of the constraints imposed by all components, or, in logic terms, the conjunction of the formulas describing them. A conjunction of formulas — an intersection of their behavior — represents the combined constraints imposed by them, and forms a decrease in the total nondeterminism of the specification, as we specify the behavior of more of its parts. This observation becomes obvious and precise when we learn, in the next chapter, that there is a partial-order relation on TLA specifications defined by their nondeterminism — where “bigger” is more abstract or less deterministic — and, in fact, they form a boolean lattice (almost). The least deterministic (“biggest”) specification that still determines both $A$ and $B$ (i.e., “smaller” than both $A$ and $B$) is their <em>meet</em>, $A \land B$. This is just a semantic way of expressing this simple deduction:
+<script type="math/tex">Spec \implies A, Spec \implies B \vdash Spec \implies A \land B</script></p>
+
+<p>It should not bother you or offend your aesthetic sensibilities that we need to do things that appear low-level to a programmer, like simulating a stack, as the entire mechanism can be hidden inside a module and thus completely abstracted. In fact, there is never a need to actually write a specification composed so finely. The whole point of this section was to demonstrate that TLA<sup>+</sup> can represent the low-level mechanisms of programming languages; what matters now that we know it <em>can</em> be done, is demonstrating that it need not be done. As we’ll now see, we can equivalently and much more easily specify one component at a time, abstracting all others.</p>
+
+<h2 id="equivalence-abstraction-and-implementation">Equivalence, Abstraction and Implementation</h2>
+
+<h3 id="equality-and-equivalence">Equality and Equivalence</h3>
+
+<p>In every mathematical theory that defines some object, an equality relation is of the utmost importance, as you don’t really define an object uniquely unless you also say when two descriptions in your theory refer to the same one. The objects TLA is concerned with are discrete dynamical systems, and so we must define when two of them are equal. As we’ve learned, a TLA in formula specifies a set of behaviors. Two algorithms are equivalent, then, iff their respective sets of behaviors are equal<sup id="fnref:machine-closed"><a href="#fn:machine-closed" class="footnote">7</a></sup>. At the logic (i.e. syntax) level, two formulas denote the same set of behaviors iff they are <em>logically</em> equivalent (i.e., one is true iff the other is true), which is denoted by the simple logical connective $\equiv$ , called “if-and-only-if” or “equivalent”.</p>
+
+<p>TLA’s equality is a very strong form of equivalence. We might sometimes care about weaker forms of equivalence. For example, we can give different significance to different parts of the algorithm’s state. We can say that an algorithm’s behavior is a sequence of states, where each state is a pair of <em>visible</em> state and <em>hidden</em> state, and that two algorithms are equivalent if the set of <em>observable</em> behaviors they denote — when only the observable part of the state is taken into account — are the same. You can think of this as a <em>projection</em> of behavior along some dimension that only captures the observable state.</p>
+
+<p>For example, in part 3 <a href="/posts/tlaplus_part3#level-of-detail">we saw</a> three specifications of algorithms computing the factorial function, and I mentioned that $Fact1$ and $Fact3$ are equivalent, i.e. they’re the same algorithm, only $Fact3$ has more detail (the stack). Let’s see how. We’ll assume that each specification is defined in its own module, named $Fact1$, $Fact2$, and $Fact3$ respectively. In a separate module, we can then write:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES N, f, i}\\
+\\
+&Fact1 & \defeq \INSTANCE Fact1 \\
+&Fact3(pc, stack) & \defeq \INSTANCE Fact3
+\end{alignat} %]]></script>
+
+<p>Then,</p>
+
+<script type="math/tex; mode=display">\THEOREM Fact1!Fact1 \equiv \EE pc, stack : Fact3(pc, stack)!Fact3</script>
+
+<p>Meaning that $Fact1$ and $Fact3$ are equivalent if we disregard (hide) $Fact3$’s variables $pc$ and $stack$, considering them the hidden part of the state, and the variables $N$, $f$ and $i$ the visible part of the state (which we leave free). This is a stronger statement than $Fact3 \implies Fact1$. In ordinary (non-modal) logic, too, if $G$ is a formula with two free variables, $x$ and $y$ (and so, for clarity, we’ll write $G(x,y)$) and $F$ is a formula with just the free variable $x$ (so we’ll write $F(x)$), then,</p>
+
+<script type="math/tex; mode=display">F(x) \equiv \E y : G(x, y) \vdash G(x, y) \implies F(x)</script>
+
+<p>but the entailment doesn’t work in the other direction (consider the case <script type="math/tex">F(x) = \TRUE\!</script>).</p>
+
+<p>We might care about even weaker forms of equivalence. A common form of weak equivalence, relevant for sequential programs and is central in the theory of pure functional programs is <em>extensional</em> equality, which says that two programs are equivalent if they produce (or “reduce to”, in PL-theory parlance) equal outputs for equal inputs. It is an equivalence that mimics the notion of equality of functions<sup id="fnref:fp"><a href="#fn:fp" class="footnote">8</a></sup>. If we treat computations as behaviors, as we do in TLA, the functional form of extensional equality compares just the initial (input) and final (output) states by hiding all intermediate states.</p>
+
+<p>First I’ll show how this can be done by changing the original specifications a bit; later I’ll show how this can be done without any changes.</p>
+
+<p>Here are the two specification, modified by the addition of a new variable, $out$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}\\
+&\nested{
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE Fact1 \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+\\
+&\;&\rlap{\VARIABLES N, i, f, out}\\
+\\
+&&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
+\\
+&&Fact1 & \defeq & \land N \in Nat \land \rlap{f = 1 \land i = 2 \land out = \text{NOTHING}} \\
+&&&&\land \Box[\IF i \leq N \;&\THEN & f' = f*i \land i'=i+1 \land \UNCHANGED \seq{out, N}\\
+&&&&&\ELSE & out' = f\land \UNCHANGED \seq{f, i, N }]_{\seq{f, i , out, N}}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
+}
+\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE Fact2 \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+\\
+&\;&\rlap{\VARIABLES N, i, f, out}\\
+\\
+&&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
+\\
+&&Fact2 & \defeq & \land \rlap{N \in Nat \land f = 1 \land i = N \land out = \text{NOTHING}}\\
+&&&&\land \Box[\IF i > 1 \;&\THEN & f' = f*i \land i'=i-1 \land \UNCHANGED \seq{out, N}\\
+&&&&&\ELSE & out' = f \land \UNCHANGED \seq{f, i, N}]_{\seq{f, i, out, N}}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
+\end{alignat} %]]></script>
+
+<p>Now we’ll establish the extensional equivalence of $Fact1$ and $Fact2$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXXXXXXXXXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE FactAlg \H\H\H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\H\H\H  \H\H \H\H \H\H \H\!\H \UR}\\
+&\;&\VARIABLES N, out\\
+\\
+&&Fact1(i, f) \defeq \INSTANCE Fact1\\
+&&Fact2(i, f) \defeq \INSTANCE Fact2\\
+\\
+&&\THEOREM (\EE i, f: Fact1(i,f)!Fact1) \equiv (\EE i, f: Fact2(i,f)!Fact2)\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
+\end{alignat} %]]></script>
+
+<p>By hiding variables $i​$ and $f​$ we’re still just projecting the states onto a lower dimension, but because we are left only with $N​$ — which never changes — and $out​$ which changes only at the last step, we get a projection with stuttering steps, which is equivalent to the following algorithm with a single  step:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES N, out}\\
+&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
+&&\IN N \in Nat \land\Box[out' = fact[N]]_{\seq{N, out}}
+\end{alignat} %]]></script>
+
+<p>We can even extend this kind of extensional view to nonterminating computations. Remember the complicated subroutine construction we’ve seen? Well, when hiding the control variables with</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\VARIABLE x\\
+& FastWithSub(sub, args, retval, pc) \defeq \INSTANCE Fast\\
+& Fast1 \defeq\EE sub, args, retval, pc : FastWithSub(sub, args, retval, pc)
+\end{alignat} %]]></script>
+
+<p>our algorithm is equivalent to:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLE x}\\
+&Fast \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
+&&\IN x = 2 \land\Box[x' = fact[x]]_x
+\end{alignat} %]]></script>
+
+<p>This is very important because it means that we are mathematically justified in replacing subroutines with functions that represent them extensionally if we’re not interested in the dynamics of the subroutine. If you’re interested in the theory of programming languages, this gives us a very precise relationship between denotational and operational semantics. We can regard the factorial completely denotationally, as a function, or operationally, as an algorithm or a subroutine, and the relationship between the two is exactly an equivalence with hidden state. Later we’ll see that this is a special case of abstraction/refinement relation.</p>
+
+<p>We can take equivalence even further. Consider the following two specifications:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE M1 \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&\;&\rlap{\VARIABLE x}\\
+&&Spec1 & \defeq x \in \set{\str{A}, \str{B}} \land \Box[x' = (\IF x = \str{A} \THEN \str{B} \;\ELSE \str{A})]_x\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\H\H\H\H\H\LR}\\
+\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE M2 \H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+&\;&\rlap{\VARIABLE x}\\
+&&Spec2 & \defeq x \in \set{0, 1} \land \Box[x' = 1- x]_x\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\H\H\H\H\H\LR}\\
+\end{alignat} %]]></script>
+
+<p>These two algorithms are clearly not equal, but they are also equivalent in a very clear sense. Here are their respective state diagrams (every state also leads to itself because of stuttering invariance):</p>
+
+<div class="centered">
+<div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-0eb9c351920412d915d001065621c8b7" width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00">
+<title>graphviz-0eb9c351920412d915d001065621c8b7</title>
+<desc>
+    digraph {
+      rankdir=LR;
+      a -&gt; b
+      a -&gt; a
+      b -&gt; b
+      b -&gt; a
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 58)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-58 148,-58 148,4 -4,4" />
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-18" rx="27" ry="18" />
+<text text-anchor="middle" x="27" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- a&#45;&gt;a -->
+<g id="edge2" class="edge">
+<title>a&#45;&gt;a</title>
+<path fill="none" stroke="#000000" d="M11.7729,-33.1666C7.1587,-43.6641 12.2344,-54 27,-54 36.9207,-54 42.4671,-49.3342 43.6394,-43.0884" />
+<polygon fill="#000000" stroke="#000000" points="47.1015,-42.5736 42.2271,-33.1666 40.1713,-43.5601 47.1015,-42.5736" />
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<ellipse fill="none" stroke="#000000" cx="117" cy="-18" rx="27" ry="18" />
+<text text-anchor="middle" x="117" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- a&#45;&gt;b -->
+<g id="edge1" class="edge">
+<title>a&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M52.5497,-11.8449C61.4801,-11.2634 71.6762,-11.1082 81.2822,-11.3793" />
+<polygon fill="#000000" stroke="#000000" points="81.2372,-14.8808 91.3865,-11.8408 81.5566,-7.8881 81.2372,-14.8808" />
+</g>
+<!-- b&#45;&gt;a -->
+<g id="edge4" class="edge">
+<title>b&#45;&gt;a</title>
+<path fill="none" stroke="#000000" d="M91.3865,-24.1592C82.45,-24.7387 72.2523,-24.8919 62.6491,-24.6188" />
+<polygon fill="#000000" stroke="#000000" points="62.6997,-21.1175 52.5497,-24.1551 62.3786,-28.1101 62.6997,-21.1175" />
+</g>
+<!-- b&#45;&gt;b -->
+<g id="edge3" class="edge">
+<title>b&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M101.7729,-33.1666C97.1587,-43.6641 102.2344,-54 117,-54 126.9207,-54 132.4671,-49.3342 133.6394,-43.0884" />
+<polygon fill="#000000" stroke="#000000" points="137.1015,-42.5736 132.2271,-33.1666 130.1713,-43.5601 137.1015,-42.5736" />
+</g>
+</g>
+</svg>
+</div> <div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-195af7d7abab407f394a7080f3714d32" width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00">
+<title>graphviz-195af7d7abab407f394a7080f3714d32</title>
+<desc>
+    digraph {
+      rankdir=LR;
+      a[label=&quot;0&quot;]
+      b[label=&quot;1&quot;]
+      a -&gt; b
+      a -&gt; a
+      b -&gt; b
+      b -&gt; a
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 58)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-58 148,-58 148,4 -4,4" />
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-18" rx="27" ry="18" />
+<text text-anchor="middle" x="27" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">0</text>
+</g>
+<!-- a&#45;&gt;a -->
+<g id="edge2" class="edge">
+<title>a&#45;&gt;a</title>
+<path fill="none" stroke="#000000" d="M11.7729,-33.1666C7.1587,-43.6641 12.2344,-54 27,-54 36.9207,-54 42.4671,-49.3342 43.6394,-43.0884" />
+<polygon fill="#000000" stroke="#000000" points="47.1015,-42.5736 42.2271,-33.1666 40.1713,-43.5601 47.1015,-42.5736" />
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<ellipse fill="none" stroke="#000000" cx="117" cy="-18" rx="27" ry="18" />
+<text text-anchor="middle" x="117" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">1</text>
+</g>
+<!-- a&#45;&gt;b -->
+<g id="edge1" class="edge">
+<title>a&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M52.5497,-11.8449C61.4801,-11.2634 71.6762,-11.1082 81.2822,-11.3793" />
+<polygon fill="#000000" stroke="#000000" points="81.2372,-14.8808 91.3865,-11.8408 81.5566,-7.8881 81.2372,-14.8808" />
+</g>
+<!-- b&#45;&gt;a -->
+<g id="edge4" class="edge">
+<title>b&#45;&gt;a</title>
+<path fill="none" stroke="#000000" d="M91.3865,-24.1592C82.45,-24.7387 72.2523,-24.8919 62.6491,-24.6188" />
+<polygon fill="#000000" stroke="#000000" points="62.6997,-21.1175 52.5497,-24.1551 62.3786,-28.1101 62.6997,-21.1175" />
+</g>
+<!-- b&#45;&gt;b -->
+<g id="edge3" class="edge">
+<title>b&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M101.7729,-33.1666C97.1587,-43.6641 102.2344,-54 117,-54 126.9207,-54 132.4671,-49.3342 133.6394,-43.0884" />
+<polygon fill="#000000" stroke="#000000" points="137.1015,-42.5736 132.2271,-33.1666 130.1713,-43.5601 137.1015,-42.5736" />
+</g>
+</g>
+</svg>
+</div>
+</div>
+
+<p>The two algorithms only differ in the <em>values</em> of their states — also called <em>labels</em> in the theory of program analysis — but the structure of their state transitions is identical.</p>
+
+<p>We can express their equivalence like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\VARIABLE x\\
+&M1\defeq \INSTANCE M1\\
+&M2 \defeq \INSTANCE M2 \;\WITH  x \leftarrow \IF x = \str{A} \THEN 0 \;\ELSE 1\\
+\\
+&\THEOREM M1!Spec1 \equiv M2!Spec2
+\end{alignat} %]]></script>
+
+<p>This equivalence is the equality of $Spec1$ and $\overline{Spec2}$, under a mapping of the states. In this case, the mapping is 1-1 and onto, i.e. a bijection, but it doesn’t have to be. Let’s go back to our factorials and do things a little differently this time. We’ll now specify the $FactAlg$ module like this:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE FactAlg \H\H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+&\;&\rlap{\VARIABLES N, out}\\
+&&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
+&&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
+&&&\IN N \in Nat \land out = \text{NOTHING} \land\Box[out' = fact[N]]_{\seq{N, out}}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
+\end{alignat} %]]></script>
+
+<p>And we’ll go back to our original definition of $Fact1$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&\phantom{XXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H \H \H \H \H \H \H \H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE Fact1 \H\H\H\H \H\H \H\H \H\H \H\H\H \H \H \H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+&\;&\rlap{\VARIABLES N, i, f}\\
+&&vars \rlap{\defeq \seq{f, i , N}}\\
+\\
+&&Fact1 & \defeq & \land N \in Nat \land \rlap{f = 1 \land i = 2} \\
+&&&&\land \Box[\IF i \leq N \;&\THEN & f' = f*i \land i'=i+1 \land \UNCHANGED N\\
+&&&&&\ELSE & \UNCHANGED vars]_{vars}\\
+\\
+&&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
+&&\rlap{Done \defeq i > N}\\
+&&\rlap{FA \defeq \INSTANCE FactAlg \;\WITH out \leftarrow \IF Done \;\THEN f \;\ELSE \text{NOTHING}}\\
+\\
+&&\rlap{\THEOREM Fact1 \implies FA!FactAlg}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
+\end{alignat} %]]></script>
+
+<p>We can do something nearly identical with $Fact2$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&&&\phantom{XXXXXXXXXX}\\
+&\rlap{\UL\H\H \H\H \H\H \H \H \H \H \H \H \H \H \H\H \H\H\H \H\H \H\H \H\H \H\H\H \H\H \H\;\;\MODULE Fact2 \H\H\H\H \H\H \H\H \H\H \H\H\H \H \H \H \H\H \H\H \H\H \H\H \H\H \H\!\H \UR}\\
+&&\rlap{\EXTENDS Naturals}\\
+&\;&\rlap{\VARIABLES N, i, f}\\
+&&vars \rlap{\defeq \seq{f, i , N}}\\
+\\
+&&Fact2 & \defeq & \land \rlap{N \in Nat \land f = 1 \land i = N} \\
+&&&&\land \Box[\IF i > 1 \;&\THEN & f' = f*i \land i'=i-1 \land \UNCHANGED N\\
+&&&&&\ELSE & \UNCHANGED \seq{f, i , N}]_{vars}\\
+\\
+&&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
+&&\rlap{Done \defeq i < 1}\\
+&&\rlap{FA \defeq \INSTANCE FactAlg \;\WITH out \leftarrow \IF Done \;\THEN f \;\ELSE \text{NOTHING}}\\
+\\
+&&\rlap{\THEOREM Fact2 \implies FA!FactAlg}\\
+&\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
+\end{alignat} %]]></script>
+
+<p>Instead of hiding variables in $Fact1$ and $Fact2$, we used a mapping of states, only this time, unlike in our example of the two-state machines, the mapping is <em>contractive</em>; multiple states of $Fact1$ (and $Fact2$) are mapped to a single state of $FactAlg$. The ability to replace hiding (i.e., temporal existential quantification) with a substitution, or a state mapping is related to an important theorem we’ll get to shortly.</p>
+
+<h3 id="abstraction-and-refinement">Abstraction and Refinement</h3>
+
+<p>We’ve talked about what it means for algorithms to be equivalent to one another, and we’ve seen how we can define coarse or fine equivalence relations using hiding or substitution. But it is very common in computer science to speak of an algorithm <em>implementing</em> some interface, or of a type or an interface being an <em>abstraction</em>. TLA allows us to speak precisely about those concepts, and so we will give precise meaning to the familiar intuitive notions of implementation and abstraction.</p>
+
+<p>There are many ways we think of abstraction. We can think of it as a distillation of the important features of some system, or we can think of it as identifying commonalities in a set of things and factoring them out, or we can think of them as a screen hiding irrelevant detail. There are probably other ways people think of when they talk of abstraction, but mathematically we can describe them all  — as they all mean the same thing — as a superset. There are red apples, red cars and other red things, and the abstract notion of redness can be represented as a set that includes them all. Of course, nothing stops us from having another set of apples of all colors, representing the essence of “appleness”, or a set of all small things etc. An abstraction abstracts many things — called <em>instances</em> of the abstraction — and a thing can be abstracted by many abstractions. There are even sub-abstractions — red apples — that have their own instances (red apples of all sizes) and their own sub-abstractions (small red apples). A sub-abstraction, as well as an instance, is always more specific, provides more details, than its abstraction.</p>
+
+<p>When we talk of algorithms and programs, we call an instance of an abstraction an <em>implementation</em>. We will also use another name that is common in program analysis: <em>refinement</em>. As we’ve seen in part 3, TLA makes no distinction between an algorithm and an algorithm property (i.e. a set of algorithms), so we will use the terms implementation and refinement interchangeably.</p>
+
+<p>An algorithm, algorithm property, or any discrete system $A$, is an <em>implementation</em> or a <em>refinement</em> of a system $B$ iff the set of behaviors of $A$ is a subset of that of $B$. In which case we say that $B$ is an abstraction of $A$; sometimes people also call $B$ a <em>specification</em> of $A$, but I will not use that word as it may be confusing.</p>
+
+<p>The abstraction/refinement relation in TLA defines a partial order on the universe of behaviors. Indeed that universe forms a bounded <a href="https://en.wikipedia.org/wiki/Lattice_(order)">lattice</a>, with refinement being set inclusion. Syntactically, the bottom element is <script type="math/tex">\FALSE\!</script>, top is <script type="math/tex">\TRUE\!</script>, and the join and meet are just $\lor$ and $\land$ respectively. In short, it forms a <a href="https://en.wikipedia.org/wiki/Boolean_algebra_(structure)">boolean algebra</a><sup id="fnref:boolean"><a href="#fn:boolean" class="footnote">9</a></sup>.</p>
+
+<p>The refinement relation, $A$ implements $B$ (or $A$’s set of behaviors is a subset of $B$’s) is represented by simple logical implication, $\implies$. Even if little in the previous paragraph made sense to you, you can appreciate that $\implies$ is a “less than” order relation in boolean algebra: look at <a href="https://en.wikipedia.org/wiki/Material_conditional#Truth_table">its truth table</a> with 0 as false and 1 as true, and see that it is the same as $\leq$.</p>
+
+<p>For example, a web service that emits values of type <code class="highlighter-rouge">int</code> can be represented as $x \in Int \land \Box[x’ \in Int]_x$ (or just $\Box(x \in Int)$), which then forms an abstraction for a service that emits <em>incrementing</em> integer values. Indeed:</p>
+
+<script type="math/tex; mode=display">(x =0 \land \Box[x' = x + 1]_x) \implies (x \in Int \land \Box[x' \in Int]_x)</script>
+
+<p>And, as we’ve seen in part 3, a clock that displays both the hour and the minute is a refinement of a clock that just displays the hour.</p>
+
+<p>As we’ve done with equivalence, we can say that an algorithm’s behavior has a visible part and a hidden part, and that algorithm $A$ is a refinement of $B$ if the visible behaviors of $A$ form a subset of those of $B$. Hiding detail — with the temporal existential quantifier — is quite a general form of abstraction.</p>
+
+<p>If the algorithms/systems are represented by formulas $F$ and $G$, in TLA the abstraction/refinement relation becomes:</p>
+
+<script type="math/tex; mode=display">(\EE w : F) \implies (\EE v : G)</script>
+
+<p>where $w$ is a tuple of those variables in $F$ we wish to hide, and $v$ is a tuple of the variables of $G$ we want to hide. As with any existential quantification in a logic that permits free variables, the statement above is logically equivalent to:</p>
+
+<script type="math/tex; mode=display">F \implies (\EE v : G)</script>
+
+<p>In general $(\EE v : \Psi) \implies \Phi$ is eqivalent to $\Psi \implies \Phi$, provided that the variables $v$ do not appear free in $\Phi$. Intuitively, if the existence alone of appropriate values is enough to imply the right-hand side then so does every concrete satisfying assignment; e.g., the proposition $(\E x : x &gt; 0 \land y \geq x) \implies y &gt; 0$ is equivalent to the proposition $x &gt; 0 \land y \geq x \implies y \geq 0$. Using the same ordinary logic analogy, it is easy to see that the converse does not hold, i.e., $\Psi \implies (\EE w : \Phi)$ is <em>not</em> equivalent to $\Psi \implies \Phi$.</p>
+
+<p>To give the above formula a more concrete meaning, recall our discussion of model-based specification. We state that a specification $MyStack$ implements a stack, as specified by our model, with the proposition:</p>
+
+<script type="math/tex; mode=display">MyStack \implies (\EE buf : IStack)</script>
+
+<p>This is obviously something we are interested in verifying, but how do we do that? Unfortunately, the TLC model checker cannot check formulas containing temporal quantification. The problem is, in general, co-NP-hard <em>in the number of states</em>, which is big to begin with, although an algorithm that is efficient in practice may be found. Proving it directly is also hard.</p>
+
+<p>But recall that in the <a href="#equality-and-equivalence">previous section</a> we saw how an equivalence with hidden variables (extensional equivalence of factorial algorithms) could also be expressed using substitution. The model checker <em>can</em> check formulas of the form $F \implies \overline{G}$, and as both $F$ and $G$ are presumably written as state machines in normal form and specify successor state step-by-step, <em>proving</em> such a mapping is not as hard as proving implication that uses states hidden with a temporal quantifier. In 1988, Martín Abadi and Leslie Lamport published an important result about that very idea in their paper, <a href="http://lamport.azurewebsites.net/pubs/abadi-existence.pdf"><em>The Existence of Refinement Mappings</em></a> (1991).</p>
+
+<p>A function from $F$’s states to $G$’s states is called a <em>refinement mapping</em>. Unfortunately, even if $F$ implements $G$ in the sense above — namely that the visible portion of $F$’s behaviors is a subset of $G$’s — such a mapping does not always exist. Consider some examples:</p>
+
+<ul>
+  <li>Algorithm $B$ computes a running average of input numbers that flow into the system one by one. $B$ does so by maintaining a (hidden, internal) growing sequence of all inputs and emitting their average. But an algorithm $A$ exhibiting the same visible behavior — emitting a running average — is not required to maintain such a list, and, instead, can make do with (internally) keeping a running sum and count. There is no mapping from $A$’s state of a sum and a count to $B$’s state of a list of all previously observed numbers, as the latter requires more information.</li>
+  <li>Algorithm $B$ emits a sequence of ten nondeterministically chosen numbers. $B$ does so by (internally) nondeterministically choosing a sequence of ten numbers in the initial state, and then emitting them one by one. Algorithm $A$ could exhibit the same visible behavior by nondeterministically choosing a number at each state. There is no mapping from the state of $A$, that only has the currently emitted value, to that of $B$, containing all future outputs.</li>
+  <li>Algorithm $B$ specifies an hour clock, but internally keeps track of minutes, too, while algorithm $A$ only emits the time in hours. Both have the same visible external behavior, but $B$ “runs slower”. There is no function mapping $A$’s state — which changes only once an hour — to the multiple states representing that same hour in $B$.</li>
+</ul>
+
+<p>Abadi and Lamport proved that if $A$ is machine-closed, $B$ has finite invisible nondeterminism (both discussed in part 3), plus another condition on $B$ that we didn’t cover, then there exists a refinement mapping from $A$ to $B$, or from a modified version of $A$ that contains auxiliary variables — either <em>history</em> or <em>prophecy</em> variables — to $B$, where a history variable records the history of the state (or a part of the state) and a prophecy variable nondeterministically chooses the <em>future</em> states. In other words, the theorem is that the addition of history and/or prophecy variables is enough to guarantee a refinement mapping for any abstraction/refinement.</p>
+
+<p>Consider the following algorithm that emits ten nondeterministically chosen numbers:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES n, x}\\
+&\rlap{vars \defeq \seq{n,x}}\\
+&Init &\defeq & \land n = 9\\
+&&&\land x \in Int\\
+& Next & \defeq & \land n > 0 \\
+&&&\land n' = n - 1 \\
+&&&\land x' \in Int\\
+&Spec &\defeq \;& Init \land \Box[Next]_{vars}
+\end{alignat} %]]></script>
+
+<p>Here is the algorithm with an added history variable, $h$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES n, x}\\
+&\rlap{\VARIABLE h}\\
+&\rlap{vars \defeq \seq{n,x}}\\
+&Init &\defeq & \land n = 9\\
+&&&\land x \in Int\\
+&&&\land h = \seq{x}\\
+& Next & \defeq & \land n > 0 \\
+&&&\land n' = n - 1 \\
+&&&\land x' \in Int\\
+&&&\land h' = Append(h, x)\\
+&Spec &\defeq \;& Init \land \Box[Next]_{\seq{vars, h}}
+\end{alignat} %]]></script>
+
+<p>And here it is with an added prophecy variable, $p​$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES n, x}\\
+&\rlap{\VARIABLE p}\\
+&\rlap{vars \defeq \seq{n,x}}\\
+&Init &\defeq & \land n = 9\\
+&&&\land x \in Int\\
+&&&\land p \in [1..n \to Int] \\
+& Next & \defeq & \land n > 0 \\
+&&&\land n' = n - 1 \\
+&&&\land x' = Head(p)\\
+&&&\land p' = Tail(p)\\
+&Spec &\defeq \;& Init \land \Box[Next]_{\seq{vars, p}}
+\end{alignat} %]]></script>
+
+<p>But how do we prove that adding the auxiliary variables does not restrict $F$’s behaviors, and that our refinement mapping is <em>sound</em>? We need to prove that <script type="math/tex">F \implies \EE aux : F\_aux</script> which brings us back to the original problem.</p>
+
+<p>The situation with history variables is simple because if <script type="math/tex">F\_h</script> is $F$ with a history variable added, and we define</p>
+
+<script type="math/tex; mode=display">H \defeq h = vars \land \Box[h' = Append(h, vars)]_{\seq{vars, h}}</script>
+
+<p>(where $vars$ is the tuple of variables in $F$) then:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+& F\_h & \equiv & F \land H
+&\implies & \EE h : (F \land  H)\\
+&&&& \equiv & F \land \EE h :   H\\
+&&&& \equiv & F \land \TRUE \; \comment{Because the action in $H$ is always enabled}\\
+&&&&\equiv &F
+\end{alignat} %]]></script>
+
+<p>But unfortunately, this simple decomposition cannot be done for prophecy variables. Lamport and Stephan Merz recently published <a href="https://arxiv.org/pdf/1703.05121.pdf"><em>Auxiliary Variables in TLA<sup>+</sup></em></a> which gives syntactic rules for using prophecy variables that are proven to be sound (i.e., don’t restrict behaviors).</p>
+
+<p>Refinement mapping is a very powerful verification technique not only in theory, but also in practice. It is sometimes beneficial to specify an algorithm at several levels of detail, say, $A$, $B$ and $C$, with $A$ being the most detailed (refined) and $C$ the most abstract, and then verify that for some property $P$, $C \implies P$. Because $A \implies B \implies C$, we learn that $A \implies P$, and $A$ is specified at a level that is close enough to code to be readily implemented.</p>
+
+<h3 id="the-meaning-of-abstraction">The Meaning of Abstraction</h3>
+
+<p>The equivalences and abstraction/refinement relations we’ve seen mean that there is rarely a need to compose specifications. A component can more easily be specified in isolation, with simple abstractions standing in for its cooperator components.</p>
+
+<p>The definition of a refinement/abstraction relation in TLA<sup>+</sup>, $B \implies A$, is that the behaviors of $B$ are all behaviors of $A$. One way to look at it is that algorithm $B$ implements abstraction $A$ if all of $B$’s behaviors are allowed by $A$ or, conversely, that $B$ never exhibits a behavior that is forbidden by $A$. Looking at it from another perspective, abstraction — like input and concurrency — is just nondeterminism. $A$ is a nondeterministic descriptions of all algorithms that implement it.</p>
+
+<p>An abstraction, then, is a description with less detail, or more nondeterminism, but one that fully delineates the possible behaviors of implementations. It’s a conservative approximation, one that helps reasoning by being on the one hand simpler than its concrete instances, and on the other, sound with respect to them, meaning a property that’s true for the abstraction must be true for all implementations.</p>
+
+<p>It is therefore clear that we do not want to limit the how far our abstractions stray from physical realizability, as the more abstract they become, the easier it is to prove things about them. On the other hand, we want flexibility to lower our abstractions arbitrarily, to make sure that what we want to verify is still true for them. We want our abstractions just concrete enough for the properties we’re interested in verifying are true, but not lower. The ability to ignore detail flexibly and selectively — which is at the very core of TLA<sup>+</sup>’s design — is of the utmost important in formal methods. The cost of verifying the correctness of a program — be it with automatic tools or manually — grows very rapidly with the addition of detail.</p>
+
+<p>In the next section I’ll mention an even more general description of abstraction than TLA’s, employing something called Galois connections. It is perhaps the most general concept, one which does not rely on any specific description of computation and encompasses all other particular notions of abstraction, but the general principle holds: abstraction is nondeterminism.</p>
+
+<p>Once you understand this, it becomes easy to see that the very application of a (sound) mathematical description of reality is an abstraction — in this very sense — of reality, or that reality is a refinement of the description. The question of how closely should the mathematical framework match reality becomes merely one of asking at which level of abstraction do we wish to think.</p>
+
+<h2 id="other-notions-of-equivalence-and-order">Other Notions of Equivalence and Order</h2>
+
+<p>There are other notions of equivalence and order (abstraction/refinement) on programs and algorithms in academic literature. I will mention a few of them, and show their relationship to TLA.</p>
+
+<h3 id="process-algebras">Process Algebras</h3>
+
+<p>Around the same time Lamport and others were working on specifying systems using temporal logic, others were working on an algebraic, programming-language-like approaches called process calculi or process algebras, most notable among them were Robin Milner and Tony Hoare.</p>
+
+<p>In a programming language one usually doesn’t mention the program’s state, only the actions it performs. If we want to reason about algorithms in a pseudo-programming language like a process algebra, we also need notions of equivalence and order, but things may get complicated when we don’t wish to mention state. Comparing traces of events alone (I will not call them actions to not confuse with TLA actions) for equality or inclusion yields an imprecise equivalence. For example, the following two state machines share the same set of action traces, $\set{a \to b, a \to c}$, and yet are clearly very different:</p>
+
+<div class="centered">
+<div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-5bf5b9798cfeeea080dea52f3603f98f" width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00">
+<title>graphviz-5bf5b9798cfeeea080dea52f3603f98f</title>
+<desc>
+    digraph {
+      node [label=&quot;&quot;]
+      A -&gt; B[label=&quot;a&quot;]
+      B -&gt; C[label=&quot;b&quot;]
+      B -&gt; D[label=&quot;c&quot;]
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 212)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-212 130,-212 130,4 -4,4" />
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="#000000" cx="63" cy="-190" rx="27" ry="18" />
+</g>
+<!-- B -->
+<g id="node2" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="#000000" cx="63" cy="-104" rx="27" ry="18" />
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A&#45;&gt;B</title>
+<path fill="none" stroke="#000000" d="M63,-171.7616C63,-160.3597 63,-145.4342 63,-132.494" />
+<polygon fill="#000000" stroke="#000000" points="66.5001,-132.2121 63,-122.2121 59.5001,-132.2121 66.5001,-132.2121" />
+<text text-anchor="middle" x="66.1069" y="-142.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- C -->
+<g id="node3" class="node">
+<title>C</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-18" rx="27" ry="18" />
+</g>
+<!-- B&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>B&#45;&gt;C</title>
+<path fill="none" stroke="#000000" d="M55.7149,-86.5966C50.6889,-74.5902 43.9107,-58.3977 38.2018,-44.76" />
+<polygon fill="#000000" stroke="#000000" points="41.3643,-43.2504 34.2743,-35.3775 34.9072,-45.9534 41.3643,-43.2504" />
+<text text-anchor="middle" x="51.5" y="-56.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- D -->
+<g id="node4" class="node">
+<title>D</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-18" rx="27" ry="18" />
+</g>
+<!-- B&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>B&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M70.2851,-86.5966C75.3111,-74.5902 82.0893,-58.3977 87.7982,-44.76" />
+<polygon fill="#000000" stroke="#000000" points="91.0928,-45.9534 91.7257,-35.3775 84.6357,-43.2504 91.0928,-45.9534" />
+<text text-anchor="middle" x="86.1069" y="-56.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+</g>
+</svg>
+</div> <div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-14409dd279faa5533672a0ac8a0a1bc4" width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00">
+<title>graphviz-14409dd279faa5533672a0ac8a0a1bc4</title>
+<desc>
+
+    digraph {
+      node [label=&quot;&quot;]
+      A -&gt; B[label=&quot;a&quot;]
+      A -&gt; C[label=&quot;a&quot;]
+      C -&gt; D[label=&quot;c&quot;]
+      B -&gt; E[label=&quot;b&quot;]
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 212)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-212 130,-212 130,4 -4,4" />
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="#000000" cx="62" cy="-190" rx="27" ry="18" />
+</g>
+<!-- B -->
+<g id="node2" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-104" rx="27" ry="18" />
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A&#45;&gt;B</title>
+<path fill="none" stroke="#000000" d="M54.9172,-172.5966C50.0309,-160.5902 43.4409,-144.3977 37.8907,-130.76" />
+<polygon fill="#000000" stroke="#000000" points="41.0837,-129.3205 34.0722,-121.3775 34.6,-131.9592 41.0837,-129.3205" />
+<text text-anchor="middle" x="50.1069" y="-142.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- C -->
+<g id="node3" class="node">
+<title>C</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-104" rx="27" ry="18" />
+</g>
+<!-- A&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>A&#45;&gt;C</title>
+<path fill="none" stroke="#000000" d="M69.4875,-172.5966C74.6531,-160.5902 81.6196,-144.3977 87.487,-130.76" />
+<polygon fill="#000000" stroke="#000000" points="90.7866,-131.9467 91.5236,-121.3775 84.3564,-129.1802 90.7866,-131.9467" />
+<text text-anchor="middle" x="85.1069" y="-142.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- E -->
+<g id="node5" class="node">
+<title>E</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-18" rx="27" ry="18" />
+</g>
+<!-- B&#45;&gt;E -->
+<g id="edge4" class="edge">
+<title>B&#45;&gt;E</title>
+<path fill="none" stroke="#000000" d="M27,-85.7616C27,-74.3597 27,-59.4342 27,-46.494" />
+<polygon fill="#000000" stroke="#000000" points="30.5001,-46.2121 27,-36.2121 23.5001,-46.2121 30.5001,-46.2121" />
+<text text-anchor="middle" x="30.5" y="-56.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- D -->
+<g id="node4" class="node">
+<title>D</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-18" rx="27" ry="18" />
+</g>
+<!-- C&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>C&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M99,-85.7616C99,-74.3597 99,-59.4342 99,-46.494" />
+<polygon fill="#000000" stroke="#000000" points="102.5001,-46.2121 99,-36.2121 95.5001,-46.2121 102.5001,-46.2121" />
+<text text-anchor="middle" x="102.1069" y="-56.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+</g>
+</svg>
+</div>
+</div>
+
+<p>The order relation suggested by Milner to represent implementation is called <a href="https://en.wikipedia.org/wiki/Simulation_preorder">simulation</a>. Given two event-labeled state machines, $P$ and $Q$, a <em>simulation</em> over $\seq{P, Q}$ is a relation $R \subseteq P \times Q$, such that for every $\seq{p, q} \in R$, if $p$ is an initial state of $P$ then $q$ is an initial state of $Q$, and if $p \xrightarrow{a} p’$ then  $q \xrightarrow{a} q’$ and $\seq{p’, q’} \in R$. If such a relation exists, we say that $Q$ simulates $P$, or that $P$ is <em>similar</em> to $Q$. Intuitively, we can think of simulation as a game: $Q$ simulates $P$ if for every move taken by $P$, $Q$ can match it with the same move.</p>
+
+<p>Simulation can be used to define an equivalence called bisimulation: if both $R$ and $R^{-1}$ (the relation with its pairs reversed) are simulations, then $R$ is said to be a <em>bisimulation</em>. If there exists a bisimulation between systems $P$ and $Q$, they are said to be <em>bisimilar</em>. Using our game analogy, $P$ and $Q$ are bisimilar if at every turn, no matter which goes first, the other can match the move. Note that if $P$ simulates $Q$ and $Q$ simulates $P$, then they are not necessarily bisimilar, as bisimilarity requires that the same relation and its inverse are simulations. This is why simulation is a <a href="https://en.wikipedia.org/wiki/Preorder"><em>preorder</em></a> rather than a partial order, as it is not antisymmetric — if two processes simulate one another, they are not necessarily equivalent.</p>
+
+<p>Milner’s simulation relation is sometimes also called <em>forward simulation</em>, and a dual notion can be defined as follows: a relation $R \subseteq P \times Q$ is a <em>backward simulation</em> if for every $\seq{p’, q’} \in R$, if $p \xrightarrow{a} p’$ then  there exists a $q$ such that $q \xrightarrow{a} q’$ and $\seq{p, q} \in R$.</p>
+
+<p>Consider the following three state machines:</p>
+
+<div class="centered">
+<div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-7117998575ff3530a0684d2cbfb49c8c" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
+<title>graphviz-7117998575ff3530a0684d2cbfb49c8c</title>
+<desc>
+    digraph {
+      label=&quot;M1&quot;;
+      rankdir=BT;
+      A -&gt; B[label=&quot;a&quot;];
+      A -&gt; C[label=&quot;b&quot;];
+      B -&gt; D[label=&quot;c&quot;];
+      C -&gt; D[label=&quot;d&quot;];
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
+<text text-anchor="middle" x="63" y="-6.8" font-family="Times,serif" font-size="14.00" fill="#000000">M1</text>
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="#000000" cx="63" cy="-40" rx="27" ry="18" />
+<text text-anchor="middle" x="63" y="-35.8" font-family="Times,serif" font-size="14.00" fill="#000000">A</text>
+</g>
+<!-- B -->
+<g id="node2" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="27" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">B</text>
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A&#45;&gt;B</title>
+<path fill="none" stroke="#000000" d="M55.7149,-57.4034C50.6889,-69.4098 43.9107,-85.6023 38.2018,-99.24" />
+<polygon fill="#000000" stroke="#000000" points="34.9072,-98.0466 34.2743,-108.6225 41.3643,-100.7496 34.9072,-98.0466" />
+<text text-anchor="middle" x="51.1069" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- C -->
+<g id="node3" class="node">
+<title>C</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="99" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">C</text>
+</g>
+<!-- A&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>A&#45;&gt;C</title>
+<path fill="none" stroke="#000000" d="M70.2851,-57.4034C75.3111,-69.4098 82.0893,-85.6023 87.7982,-99.24" />
+<polygon fill="#000000" stroke="#000000" points="84.6357,-100.7496 91.7257,-108.6225 91.0928,-98.0466 84.6357,-100.7496" />
+<text text-anchor="middle" x="86.5" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- D -->
+<g id="node4" class="node">
+<title>D</title>
+<ellipse fill="none" stroke="#000000" cx="62" cy="-212" rx="27" ry="18" />
+<text text-anchor="middle" x="62" y="-207.8" font-family="Times,serif" font-size="14.00" fill="#000000">D</text>
+</g>
+<!-- B&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>B&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M34.0828,-143.4034C38.9691,-155.4098 45.5591,-171.6023 51.1093,-185.24" />
+<polygon fill="#000000" stroke="#000000" points="47.9163,-186.6795 54.9278,-194.6225 54.4,-184.0408 47.9163,-186.6795" />
+<text text-anchor="middle" x="50.1069" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- C&#45;&gt;D -->
+<g id="edge4" class="edge">
+<title>C&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M91.5125,-143.4034C86.3469,-155.4098 79.3804,-171.6023 73.513,-185.24" />
+<polygon fill="#000000" stroke="#000000" points="70.2134,-184.0533 69.4764,-194.6225 76.6436,-186.8198 70.2134,-184.0533" />
+<text text-anchor="middle" x="85.5" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">d</text>
+</g>
+</g>
+</svg>
+</div> <div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-353b3a0fb03e64cbb361b8dfacc06291" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
+<title>graphviz-353b3a0fb03e64cbb361b8dfacc06291</title>
+<desc>
+
+    digraph {
+      label=&quot;M2&quot;;
+      rankdir=BT;
+      D1[label=&lt;D&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;1&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
+      D2[label=&lt;D&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;2&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
+      A -&gt; B[label=&quot;a&quot;];
+      A -&gt; C[label=&quot;b&quot;];
+      B -&gt; D2[label=&quot;c&quot;];
+      C -&gt; D1[label=&quot;d&quot;];
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
+<text text-anchor="middle" x="63" y="-6.8" font-family="Times,serif" font-size="14.00" fill="#000000">M2</text>
+<!-- D1 -->
+<g id="node1" class="node">
+<title>D1</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-212" rx="27" ry="18" />
+<text text-anchor="start" x="91.9448" y="-208.8" font-family="Times,serif" font-size="14.00" fill="#000000">D</text>
+<text text-anchor="start" x="102.0552" y="-208.8" font-family="Times,serif" baseline-shift="sub" font-size="8.00" fill="#000000">1</text>
+</g>
+<!-- D2 -->
+<g id="node2" class="node">
+<title>D2</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-212" rx="27" ry="18" />
+<text text-anchor="start" x="19.9448" y="-208.8" font-family="Times,serif" font-size="14.00" fill="#000000">D</text>
+<text text-anchor="start" x="30.0552" y="-208.8" font-family="Times,serif" baseline-shift="sub" font-size="8.00" fill="#000000">2</text>
+</g>
+<!-- A -->
+<g id="node3" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="#000000" cx="62" cy="-40" rx="27" ry="18" />
+<text text-anchor="middle" x="62" y="-35.8" font-family="Times,serif" font-size="14.00" fill="#000000">A</text>
+</g>
+<!-- B -->
+<g id="node4" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="27" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">B</text>
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A&#45;&gt;B</title>
+<path fill="none" stroke="#000000" d="M54.9172,-57.4034C50.0309,-69.4098 43.4409,-85.6023 37.8907,-99.24" />
+<polygon fill="#000000" stroke="#000000" points="34.6,-98.0408 34.0722,-108.6225 41.0837,-100.6795 34.6,-98.0408" />
+<text text-anchor="middle" x="49.1069" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- C -->
+<g id="node5" class="node">
+<title>C</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="99" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">C</text>
+</g>
+<!-- A&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>A&#45;&gt;C</title>
+<path fill="none" stroke="#000000" d="M69.4875,-57.4034C74.6531,-69.4098 81.6196,-85.6023 87.487,-99.24" />
+<polygon fill="#000000" stroke="#000000" points="84.3564,-100.8198 91.5236,-108.6225 90.7866,-98.0533 84.3564,-100.8198" />
+<text text-anchor="middle" x="85.5" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- B&#45;&gt;D2 -->
+<g id="edge3" class="edge">
+<title>B&#45;&gt;D2</title>
+<path fill="none" stroke="#000000" d="M27,-144.2384C27,-155.6403 27,-170.5658 27,-183.506" />
+<polygon fill="#000000" stroke="#000000" points="23.5001,-183.7879 27,-193.7879 30.5001,-183.7879 23.5001,-183.7879" />
+<text text-anchor="middle" x="30.1069" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- C&#45;&gt;D1 -->
+<g id="edge4" class="edge">
+<title>C&#45;&gt;D1</title>
+<path fill="none" stroke="#000000" d="M99,-144.2384C99,-155.6403 99,-170.5658 99,-183.506" />
+<polygon fill="#000000" stroke="#000000" points="95.5001,-183.7879 99,-193.7879 102.5001,-183.7879 95.5001,-183.7879" />
+<text text-anchor="middle" x="102.5" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">d</text>
+</g>
+</g>
+</svg>
+</div> <div class="graphviz-wrapper">
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %3 Pages: 1 -->
+<svg role="img" aria-label="graphviz-93f33a776df94c2035294e9015e056b6" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
+<title>graphviz-93f33a776df94c2035294e9015e056b6</title>
+<desc>
+
+    digraph {
+      label=&quot;M3&quot;;
+      rankdir=BT;
+      A1[label=&lt;A&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;1&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
+      A2[label=&lt;A&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;2&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
+      A1 -&gt; B[label=&quot;a&quot;];
+      A2 -&gt; C[label=&quot;b&quot;];
+      B -&gt; D[label=&quot;c&quot;];
+      C -&gt; D[label=&quot;d&quot;];
+    }
+</desc>
+
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
+<title>%3</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
+<text text-anchor="middle" x="63" y="-6.8" font-family="Times,serif" font-size="14.00" fill="#000000">M3</text>
+<!-- A1 -->
+<g id="node1" class="node">
+<title>A1</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-40" rx="27" ry="18" />
+<text text-anchor="start" x="19.9448" y="-36.8" font-family="Times,serif" font-size="14.00" fill="#000000">A</text>
+<text text-anchor="start" x="30.0552" y="-36.8" font-family="Times,serif" baseline-shift="sub" font-size="8.00" fill="#000000">1</text>
+</g>
+<!-- B -->
+<g id="node3" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="27" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">B</text>
+</g>
+<!-- A1&#45;&gt;B -->
+<g id="edge1" class="edge">
+<title>A1&#45;&gt;B</title>
+<path fill="none" stroke="#000000" d="M27,-58.2384C27,-69.6403 27,-84.5658 27,-97.506" />
+<polygon fill="#000000" stroke="#000000" points="23.5001,-97.7879 27,-107.7879 30.5001,-97.7879 23.5001,-97.7879" />
+<text text-anchor="middle" x="30.1069" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- A2 -->
+<g id="node2" class="node">
+<title>A2</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-40" rx="27" ry="18" />
+<text text-anchor="start" x="91.9448" y="-36.8" font-family="Times,serif" font-size="14.00" fill="#000000">A</text>
+<text text-anchor="start" x="102.0552" y="-36.8" font-family="Times,serif" baseline-shift="sub" font-size="8.00" fill="#000000">2</text>
+</g>
+<!-- C -->
+<g id="node4" class="node">
+<title>C</title>
+<ellipse fill="none" stroke="#000000" cx="99" cy="-126" rx="27" ry="18" />
+<text text-anchor="middle" x="99" y="-121.8" font-family="Times,serif" font-size="14.00" fill="#000000">C</text>
+</g>
+<!-- A2&#45;&gt;C -->
+<g id="edge2" class="edge">
+<title>A2&#45;&gt;C</title>
+<path fill="none" stroke="#000000" d="M99,-58.2384C99,-69.6403 99,-84.5658 99,-97.506" />
+<polygon fill="#000000" stroke="#000000" points="95.5001,-97.7879 99,-107.7879 102.5001,-97.7879 95.5001,-97.7879" />
+<text text-anchor="middle" x="102.5" y="-78.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- D -->
+<g id="node5" class="node">
+<title>D</title>
+<ellipse fill="none" stroke="#000000" cx="62" cy="-212" rx="27" ry="18" />
+<text text-anchor="middle" x="62" y="-207.8" font-family="Times,serif" font-size="14.00" fill="#000000">D</text>
+</g>
+<!-- B&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>B&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M34.0828,-143.4034C38.9691,-155.4098 45.5591,-171.6023 51.1093,-185.24" />
+<polygon fill="#000000" stroke="#000000" points="47.9163,-186.6795 54.9278,-194.6225 54.4,-184.0408 47.9163,-186.6795" />
+<text text-anchor="middle" x="50.1069" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- C&#45;&gt;D -->
+<g id="edge4" class="edge">
+<title>C&#45;&gt;D</title>
+<path fill="none" stroke="#000000" d="M91.5125,-143.4034C86.3469,-155.4098 79.3804,-171.6023 73.513,-185.24" />
+<polygon fill="#000000" stroke="#000000" points="70.2134,-184.0533 69.4764,-194.6225 76.6436,-186.8198 70.2134,-184.0533" />
+<text text-anchor="middle" x="85.5" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">d</text>
+</g>
+</g>
+</svg>
+</div>
+</div>
+
+<p>M1 simulates both M2 and M3. M2 forward-simulates M1 (in fact, they are bisimilar) but does not backward-simulate it, and M3 does not forward-simulate M1 but it does backward-simulates it.</p>
+
+<p>How are these relations related to those of TLA? $M2 \implies \overline{M1}$ and $M3 \implies \overline{M1}$  under the refinement mappings that map states $D_1$ and $D_2$ to $D$ and $A_1$ and $A_2$ to $A$, respectively. But what about the other direction? Note that M2 is exactly M1 with a history variable added (a single state in M1 corresponds to multiple states in M2 iff it can have different histories), so $M1_h \implies M2$ (in fact, they are equivalent), and M3 is exactly M1 with a prophecy variable added (a single state in M1 corresponds to multiple states in M3 iff it can have different futures), so $M1_p \implies M3$. Forward simulation, then, corresponds to the addition of a history variable (if necessary), and backward simulation corresponds to the addition of a prophecy variable.</p>
+
+<p>TLA manages to be simpler than simulation relations — as those require some structural analysis of the processes rather than just defining relation on their traces — because it mentions state explicitly.</p>
+
+<h3 id="categorical-algorithms-and-refinement-calculus">Categorical Algorithms and Refinement Calculus</h3>
+
+<p>Another approach for defining equivalence relations over algorithms can be found in the 2010 paper, <a href="https://arxiv.org/pdf/math/0602053.pdf"><em>Towards a Definition of an Algorithm</em></a>, by Noson Yanofsky. The paper is quite readable, but I’ll quickly go over the salient details. Yanofsky defines an algorithm to be an equivalence class on programs. In the paper, he uses a pseudo-programming language that is made of a tree whose nodes are the primitive operations in the definition of <a href="https://en.wikipedia.org/wiki/Primitive_recursive_function">primitive recursive functions</a>, and calls those trees <em>programs</em>. Those programs compute (primitive-recursive) functions. He then defines a <a href="https://en.wikipedia.org/wiki/Multigraph">multigraph</a> of objects that are similar to states, except they don’t represent intermediate stages of computation, but inputs and outputs. The programs are the edges of the graph, connecting inputs to outputs.</p>
+
+<p>He then notes that the multigraph is transitive: if there is a program $f$ connecting node $a$ to node $b$, and program $g$ from node $b$ to node $c$, then there must be a program $f \circ g$ from $a$ to $c$. However, this multigraph is not a <a href="https://en.wikipedia.org/wiki/Category_(mathematics)">category</a> because it is not associative: the two programs $h \circ (g \circ f)$ and $(h \circ g) \circ f$ are represented by edges connecting the same node, but as the two programs (i.e., trees) are not the same, the two edges are distinct. He then goes on to define a series of equivalence relations on programs (trees) which he says preserve their essence, and shows that if we take a quotient of the program graph with respect to the equivalence relations, we get a category of algorithms.</p>
+
+<p>Yanofsky’s approach only covers equivalence, not order, but the three concentric equivalence relations he defines — on programs, algorithms and functions — essentially create an order consisting of exactly three tiers. Programs refine algorithms, and algorithms refine functions, but there is no general order relation that puts all three levels on some continuous spectrum, as seen in this image from the paper:</p>
+
+<p><img src="/img/algorithms_and_functions.png" alt="Programs, Algorithms and Functions" width="75%" /></p>
+
+<p>The reason Yanofsky needs to define programs structurally (or intensionally), and only then algorithms as a quotient of programs with respect to structural equivalence, rather than extensionally, by how they behave, is due to the original sin of those approaches that view programs (or algorithms) as denoting functions rather than discrete dynamical processes<sup id="fnref:sin"><a href="#fn:sin" class="footnote">10</a></sup>.</p>
+
+<p>A similarly structural approach, but one that does create an order relation on programs, is Ralph-Johan Back’s refinement calculus and Joakim von Wright’s refinement algebra. The idea behind <a href="https://en.wikipedia.org/wiki/Refinement_calculus">refinement calculus</a> is defining some transformations that make a program more refined or abstract. <a href="http://www.sciencedirect.com/science/article/pii/S0167642304000127">Refinement algebra</a> is surprisingly similar to the ideas we’ve seen in TLA, only expressed as an algebra rather than a logic, and it does not extend to concurrent algorithms. Back and von Wright wrote <a href="http://lara.epfl.ch/w/_media/sav08:backwright98refinementcalculus.pdf">a book</a> together about their approach that is freely available online. Refinement algebra/calculus is similar in some ways to TLA (sometimes very similar), but is less universal and more complicated; on the other hand, it can — at least in principle — be applied directly to programs written in a programming language. This is another example of how much expressive power a simple formalism like TLA can gain by giving up on attempting to directly talk about programming languages.</p>
+
+<h3 id="types">Types</h3>
+
+<p>Typed programming languages have not one but two notions of implementation order: subtypes and type inhabitants (instances). A type is an abstraction of both its subtypes as well as its concrete instances; conversely a subtype is a refinement of its supertypes, and a value is a refinement of its type. While we can create any hierarchy of abstraction relations using subtypes, we cannot directly show that one <em>program</em> — a type inhabitant — implements another, even in formalisms with dependent types; a program is a leaf in the order relation. If our types are rich enough, we can simulate such a relation by writing our algorithm at the type level, only then it is no longer a program but a type. Moreover, this abstraction/refinement relation is necessarily <a href="https://en.wikipedia.org/wiki/Denotational_semantics"><em>denotational</em></a><sup id="fnref:denotation"><a href="#fn:denotation" class="footnote">11</a></sup>, and the denotation usually does not fully capture the behavior of the program. To demonstrate stronger abstraction/refinement relations that include <a href="https://en.wikipedia.org/wiki/Operational_semantics"><em>operational</em></a> details, we must write programs in ways that expose those operational details denotationally (break apart the computation and express it using monads, thus assigning denotations to each step of the computation), rather than in the natural way. Equivalence in those formalisms is similarly complicated.</p>
+
+<p>TLA makes no such distinctions between types (properties) and their inhabitants (algorithms). Both are just formulas  — or, semantically, sets of behaviors — and are part of the same abstraction/refinement partial lattice, that of implication (or set inclusion). There are just different levels of detail.</p>
+
+<p>The semantics of TLA is too simple to allow making any useful distinction between denotation and operation, but as we’ve seen, it is a simple matter to hide any detail we deem irrelevant for the sake of a particular abstraction/refinement relation and choose the precise level of detail for the sake of comparisons, one of which may correspond exactly to the level of detail provided by your programming language of choice, be it SQL, Java, assembly, or digital circuits</p>
+
+<p>Of course, types are normally used for the more difficult task of specifying an actual runnable program, and they can potentially be used for some advanced techniques such as proof-carrying code. The distinction between types and their inhabitant programs is necessitated by the need to ensure programs are sufficiently detailed to be compilable to efficient executables. Types also have benefits beyond specification (for which, I believe, other approaches such as contracts are more appropriate) such as assisting with tooling, maintenance and code organization.</p>
+
+<h3 id="galois-connections">Galois Connections</h3>
+
+<p>All specific definitions of abstraction/implementations we’ve seen — TLA refinements, process simulations, subtyping and type inhabitants — are encompassed by the very general, very abstract concept of a <a href="https://en.wikipedia.org/wiki/Galois_connection">Galois connection</a>. A clear introduction to abstraction relations as Galois connections can be found in <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.16.4564&amp;rep=rep1&amp;type=pdf"><em>Binary Relations for Abstraction and Refinement</em></a> by David A. Schmidt. The discussion in the paper (except for the last part, which specifically deals with temporal logic) is completely detached from any particular formalism, and helps to think of programs abstractly and mathematically, detached from their expression in any particular formalism. Another introduction to Galois connections and their power, although less in the context of algorithms, can be found in Peter Smith’s, <a href="http://www.logicmatters.net/resources/pdfs/Galois.pdf"><em>The Galois Connection between Syntax and Semantics</em></a>. I will not attempt to discuss Galois connections in any depth, just quickly define them and show their relevance to the subject of abstraction and refinement in the context of TLA.</p>
+
+<p>If $\mathcal{P} = \seq{P, \preceq}$ and $\mathcal{Q} = \seq{Q, \sqsubseteq}$ are posets (partially ordered sets), and <script type="math/tex">f_* : P \to Q</script>, <script type="math/tex">f^* : Q \to P</script>, are functions, then the pair <script type="math/tex">\seq{f_*, f^*}</script> is a <em>Galois connection</em> if for all <script type="math/tex">p \in P, q \in Q</script>:  <script type="math/tex">f_*(p) \sqsubseteq q</script> iff <script type="math/tex">p \preceq f^*(q)</script>. <script type="math/tex">f_*</script> is then called the lower, or left, adjoint (of the connection), and <script type="math/tex">f^*</script> the upper, or right, adjoint. <script type="math/tex">f_*</script> and <script type="math/tex">f^*</script> uniquely determine each other; setting one forces the other.</p>
+
+<p>In the context of TLA, if we have a refinement mapping such that $F \implies \overline{G}$, we can call that mapping, when seen as a function on complete behaviors, $f$. We then we take $P$ and $Q$ to be the <em>powersets</em><sup id="fnref:notsets"><a href="#fn:notsets" class="footnote">12</a></sup> of the behaviors of $F$ and $G$ respectively, and define <script type="math/tex">f_*</script> as a function on sets, such that it applies $f$ element-wise to every behavior in the a set. <script type="math/tex">f_*</script> is then a function from $P$ to $Q$, mapping the elements of $P$  — subsets of the behaviors of $F$ — to elements of $Q$ — subsets of $G$’s behaviors. We define <script type="math/tex">f^*</script> to be the preimage of $f$. We get a Galois connection if we take the partial orders on both posets as just set inclusion.</p>
+
+<p>Galois connections serve as the basis for <a href="https://en.wikipedia.org/wiki/Abstract_interpretation">abstract interpretation</a>, a central concept in the theory of program analysis, developed by Patrick and Radhia Cousot in the 1970s. In TLA terms, abstract interpretation is a process by which the more abstract specification, $G$, is automatically generated from the more concrete one, $F$. Abstract interpretation places different kinds of programs semantics on a spectrum of abstraction, from behaviors to functional denotational semantics. Many ideas in program analysis, including type checking, model checking and deductive proofs can all be viewed as forms of abstract interpretation. In TLA<sup>+</sup> this idea is made explicit and formally manipulable, though less general.</p>
+
+<p>TLA manages to express equivalence and order extensionally — based on what the program does, not how it is constructed — rather than structurally, like the process calculi, refinement calculus and Yanofsky’s categories. And yet, unlike types, TLA is able to express arbitrary level of detail because of two features: it treats algorithms as denoting behaviors rather than functions, and it explicitly models state. The structural refinement calculus/algebra is similar in its expressiveness as far as sequential algorithms are concerned.</p>
+
+<h2 id="parameterization-vs-nondeterminism">Parameterization vs. Nondeterminism</h2>
+
+<p>In part 1 I mentioned a claim made that TLA<sup>+</sup> is not higher-order, suggesting it has cannot easily describe higher-order algorithms. While I think that by this point it should be clear how universal TLA<sup>+</sup> is, the point is still worth revisiting, if only to discuss what Lamport calls the “Whorfian syndrome” — the confusion of language with reality.</p>
+
+<p>Whether a program is “higher-order” or not is not a property of what it does, but how it is described; in other words, higher-orderness is a property of a formalism, not of reality. Just as continuous dynamical systems that are themselves modified by other dynamical systems are usually not expressed as higher-order ODEs but as first-order ODEs of a higher state dimension, so too whether or not algorithms that are modified by other algorithms are expressed as higher-order constructs depends on the formalism, and in TLA, every composition of algorithms can be expressed as a conjunction of formulas (and adding variables, possibly hidden, to describe the state of each component; i.e., increasing the dimension of the state).</p>
+
+<p>Let’s consider higher-order functions, in the functional programming sense. A higher-order function in is a program (subroutine) that is parameterized by another program. We’ve seen how that could be expressed using a conjunction of formulas, but before we get back to that we’ll look at abstracting the “higher-order” parameter as a function — which is justified by an abstraction relation.</p>
+
+<p>Here is one formulation of the flatmap operation familiar to functional programmers. Normally wouldn’t specify such a simple operation as an algorithm but rather abstract it as a function or operator, but this is just for the sake of discussion:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS S, T}\\
+&\rlap{\VARIABLES x, y}\\
+\\
+& Flatmap(f, s) \defeq  x = s \land y = \seq{} \land\Box[& x\neq \seq{} \land y' = y \circ f[Head(x)] \land x' = Tail(x)]_{\seq{x, y}}\\
+\end{alignat} %]]></script>
+
+<p>(we could have made $f$ a parameter of the module itself, with $\CONSTANT f$ and $\ASSUME f \in [S \to Seq(T)]$).</p>
+
+<p>The following theorem expresses a very simple type property:</p>
+
+<script type="math/tex; mode=display">\THEOREM \A s \in Seq(S), f \in [S \to Seq(T)] : Flatmap(s, t) \implies \Box[y \in Seq(T)]</script>
+
+<p>It is expressed analogously to how it would be expressed in a typed programming language: with a universal quantifier over the inhabitants of the input types. However, we could express the algorithm and theorem <em>equivalently</em> as follows:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS S, T}\\
+&\rlap{\VARIABLES x, y, f}\\
+\\
+& Flatmap \defeq  & \land f \in [S \to Seq(T)] \land x \in Seq(S) \land y = \seq{}\\
+&&\land\Box[x\neq \seq{} \land y' = y \circ f[Head(x)] \land x' = Tail(x) \land \UNCHANGED f]_{\seq{x, y, f}}\\
+\\
+&\rlap{\THEOREM Flatmap \implies \Box[y \in Seq(T)]}
+\end{alignat} %]]></script>
+
+<p>You can think of the former formulation as a description of a single, parameterized, computation, and of the latter as a description of all possible computations or as a nondeterministic algorithm, but the theorem is equivalent in both formulations. Nondeterminism is just a different expression of parameterization.</p>
+
+<p>From a formal logic perspective, the difference is one between a formalism that requires all variables to be bound (by quantifiers or lambda expressions) and one that allows free variables. For example, in the latter, instead of writing $\A x \in Int : x &gt; 0 \implies -x &lt; 0$ (all variables are bound) you can write $x \in Int \land x &gt; 0 \implies -x &lt; 0$, and instead of $\A y \in Real : (\E x \in Real : x &gt; 0 \land y \geq x) \implies y &gt; 0$, you can write $x \in Real \land y \in Real \land x &gt; 0 \land y \geq x \implies y &gt; 0$ .</p>
+
+<p>Programming languages are formalisms that generally require all variables to be bound. This requires higher-order constructs where a logic allowing free variables doesn’t. Free variables are just how nondeterminism is expressed syntactically.</p>
+
+<p>But you may object and say that my trick of abstracting the subroutine parameter as a function — while justified as a valid abstraction — is sidestepping the issue. In TLA<sup>+</sup>, algorithms (such as subroutines) are temporal formulas, whereas functions are simple values no different from integers. While abstraction allows us to evade the issue of “higher-order” algorithms, is the theory able to tackle them directly?</p>
+
+<p>The answer is yes. Suppose we have the specification $Spec(G) \defeq F \land G$, which is parameterized by the algorithm specification $G$ (e.g. $G$ can be a subroutine like we saw above, or a concurrent process that interacts with $F$).  If in a typed language we wanted to prove that $Spec(G : Q) : P$, or that for $G$ of type $Q$, $Spec$ is of type $P$, then in a logic like TLA we would think to express the same proposition like so:</p>
+
+<script type="math/tex; mode=display">\THEOREM \A G : (G \implies Q) \implies (Spec(G) \implies P)</script>
+
+<p>However, the above is not a TLA formula: the data logic of TLA<sup>+</sup> allows us to quantify over constants (i.e. non-temporal variables), and TLA additionally allows us to quantify over temporal variables, but $G$ is neither —  it is a temporal formula. The model of a TLA formula is a set of behaviors, but an algorithm (or a property)  is not a TLA object and we cannot quantify over it (nor have a free variable that denotes a set of behaviors). The formula above is a second-order proposition, as it universally quantifies over $G$, an algorithm (a set of behaviors).</p>
+
+<p>However, as we’ve seen, while all TLA formulas are first-order, the TLA<sup>+</sup> proof language does allow us to write second-order propositions that are not themselves formulas. We can therefore write the proposition like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+& \THEOREM &\ASSUME & \TEMPORAL G, G \implies Q\\
+&&\PROVE & Spec(G) \implies P
+\end{alignat} %]]></script>
+
+<p>But this is both overkill and cannot be checked by the TLC model checker. More importantly, the proposition is a very mundane, reasonable one about algorithm correctness, and it stands to reason that a good formalism would allow us to directly specify it as a formula.</p>
+
+<p>As it turns out, this is easy. Because tautologically $\A A : (A \implies B) \implies (A \implies C)$ is equivalent to $B \implies C$<sup id="fnref:implies-order"><a href="#fn:implies-order" class="footnote">13</a></sup>, the above is equivalent to the much simpler, first-order proposition:</p>
+
+<script type="math/tex; mode=display">F \land Q \implies P</script>
+
+<p>which we can write as a TLA formula. Moreover, as $F$ is presumably written in normal form and $Q$ is likely a simple safety property, i.e., an invariant, $F \land Q$ could be easily rewritten as a single, normal form formula, which would allow us to check that it satisfies $P$ using the model checker.</p>
+
+<p>We are saved, again, by nondeterminism. TLA does not distinguish between algorithms and properties of algorithms (or types) — they’re both just formulas, or semantically, sets of behaviors. We don’t need to quantify over all algorithms $G$ that satisfy the property $Q$; we just write $Q$.</p>
+
+<h2 id="various-cool-stuff">Various Cool Stuff</h2>
+
+<p>Before concluding this treatment of the theory and design of TLA<sup>+</sup>, I want showcase some uses of TLA<sup>+</sup> that you’re unlikely to encounter when modeling “ordinary” software but are of great importance for special classes of software, as they demonstrates the power of the formalism. Rather than a thorough treatment, I will just give a taste of what’s possible.</p>
+
+<h3 id="real-time">Real Time</h3>
+
+<p>TLA<sup>+</sup> can be used to model all kinds of systems, among them realtime systems. The following example is taken from <em>Specifying Systems</em>.</p>
+
+<p>Let’s revisit our specification of the hour clock from part 3:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\VARIABLE h\\
+&Next \defeq \IF h \neq 12 \;\THEN h + 1 \;\ELSE 1\\
+&HourClock \defeq h \in 1..12\land \Box[Next]_h \land \WF_h(Next)\\
+\end{alignat} %]]></script>
+
+<p>While this describes the behavior of an hour clock at the level of detail that may be of interest to some, it says nothing about the actual time duration between ticks, which may be of great interest to others. To model real time, we do what scientists normally do and introduce a real-valued variable, $t$ to represent it. The variable $t$ (in second units) will change between ticks of the clock, but not during the tick — we’ll assume that the tick is instantaneous (this is just a modeling choice). If we wanted to implement our clock in a realtime system, we would want to specify that it ticks approximately every hour, allowing for some margin of error, which we’ll call $k$. We’ll introduce a variable, $elapsed$ to represent the elapsed time between now and the last tick:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANT k}\\
+&\nested{
+&\VARIABLES &h, &\comment{The hour}\\
+&&t, &\comment{Time, in second units}\\
+&&elapsed \;& \comment{How much time has elapsed since the last tick}
+}\\
+\\
+&\rlap{HCTInit \defeq h \in 1..12 \land elapsed = 0}
+\\
+&HCTNext \defeq \;&\lor & \land h' = \IF h \neq 12 \;\THEN h + 1 \;\ELSE 1\\
+&&& \land elapsed' = 0\\
+&&\lor & \land \UNCHANGED h\\
+&&& \land elapsed' = elapsed + (t' - t)
+\end{alignat} %]]></script>
+
+<p>We can model the requirement that no more than $3600 + k$ elapse between ticks like so:</p>
+
+<script type="math/tex; mode=display">MaxTime \defeq \Box(elapsed \leq 3600 + k)</script>
+
+<p>We also want to specify that at least $3600 - k$ seconds elapse between consecutive ticks:</p>
+
+<script type="math/tex; mode=display">MinTime \defeq \Box[Next \implies (t \geq 3600 - k)]_h</script>
+
+<p>(remember, an action can only follow $\Box$ within $[]_e$ to ensure invariance under stuttering; in this case $e$ is just $h$ because we don’t care about actions that don’t change the value of $h$).</p>
+
+<p>We can now write the specification for our realtime hour clock:</p>
+
+<script type="math/tex; mode=display">HCTime \defeq HCTInit \land \Box[HCTNext]_{\seq{h, t, elapsed}} \land MaxTime \land MinTime</script>
+
+<p>Finally, we need to specify how $t$ can change. Time can move forward by any amount as long as $h$ doesn’t change (the tick is instantaneous):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&TNext \defeq &\land t' \in \set{r \in Real : r > t}\\
+&&\land \UNCHANGED h
+\end{alignat} %]]></script>
+
+<p>The safety part of the time specification would then be $(t \in Real) \land \Box[TNext]_t$, but what about liveness? Requiring that $TNext$ would occur infinitely often, thus ensuring $t$ increases indefinitely, is not enough. Because $t$ is a real-valued variable, even though $TNext$ requires that $h$ is unchanged and therefore $t$ cannot grow by more than $3600 + k$ at a time, $TNext$ can still occur infinitely often, and $t$ grow indefinitely while never reaching $3600 + k$ and the clock ticking even once. This is what’s known as a <em>Zeno behavior</em>, after <a href="https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Achilles_and_the_tortoise">Zeno’s paradox of Achilles and the tortoise</a>. To rule it out, and to ensure $t$ grows without bound, we’ll use the following fairness condition</p>
+
+<script type="math/tex; mode=display">\A r \in Real : \WF_t(TNext \land t' > r)</script>
+
+<p>which is equivalent to $\A r \in Real : \Diamond(t’ &gt; r)$ but makes it clear that this is indeed a fairness property. We can now finish the time-flow part of the specification:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&RT \defeq & \land t \in Real\\
+&&\land [TNext]_t\\
+&& \land \A r \in Real: \WF_t(TNext \land t' > r)
+\end{alignat} %]]></script>
+
+<p>The complete specification will then be:</p>
+
+<script type="math/tex; mode=display">RTHourClock \defeq RT \land HCTime</script>
+
+<p>It is also true that $RTHourClock \implies HourClock$; our realtime clock <em>implements</em> the less detailed $HourClock$ specification, which serves as an abstraction of the realtime clock.</p>
+
+<p><em>Specifying Systems</em> shows how we can define just two general realtime operators that can then be conjoined with an untimed specifications to create a realtime specification. The two operators are responsible for the two roles we’ve seen: specifying that actions happen within a certain time threshold from a deadline constraint, and specifying that time grows unbound. For even more information on using TLA<sup>+</sup> for specifying realtime systems, see Lamport and Abadi’s 1993 paper, <a href="http://lamport.azurewebsites.net/pubs/lamport-old-fashioned.pdf"><em>An Old-Fashioned Recipe for Real Time</em></a>, or Lamport’s 2005 paper, <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-2005-30.pdf"><em>Real Time is Really Simple</em></a>.</p>
+
+<h3 id="cyber-physical-systems">Cyber-Physical Systems</h3>
+
+<p>Cyber-physical systems, also called hybrid systems, are discrete systems that interact with the physical world through sensors and/or actuators. While the digital system is specified as a (usually realtime) algorithm, the physical world it interacts with is best modeled as a continuous dynamical system.</p>
+
+<p>The idea of how to do this is very similar to the one used in our realtime specification, only instead of a single continuous variable representing time, we have other variables representing continuous quantities that continuously change over time. The following example is also taken from <em>Specifying Systems</em>:</p>
+
+<p>Consider a cyber-physical system where a discrete switch affects the behavior of some object moving along a single dimension. We will denote the object’s position as $x$, and its motion is described by the equation:</p>
+
+<script type="math/tex; mode=display">\ddot x + c\dot x + f[t] + (\IF switchOn \;\THEN kx \;\ELSE 0) = 0</script>
+
+<p>where $c$ and $k$ are some constants, $f$ is some continuous function, $t$ is time, and $\dot x$ and $\ddot x$ are the first and second derivatives, respectively, of $x$ with respect to $t$. In TLA<sup>+</sup>, we can write it as the equation $D[t, x, \dot x, \ddot x] = 0$ where $D$ is:</p>
+
+<script type="math/tex; mode=display">D[t, x0, x1, x2 \in Real] \defeq x2 + x * x1 + f[t] + (\IF switchOn\;\THEN k*x0\;\ELSE 0)</script>
+
+<p>We then define an operator, $Integrate(t, D, t0, \seq{x_0, \ldots, x_n-1})​$ whose value is the value at time $t​$ of the tuple $\seq{x, \dot x, \ldots, \overset{\scriptscriptstyle (n-1)}{x}}​$, the time-derivatives of $x​$ that form the solution to the ordinary differential equation $D[t, x, \dot x, \ldots,\overset{\scriptscriptstyle (n-1)}{x}] = 0​$, and $\seq{x_0, \ldots, x_n-1}​$ are the values of those derivatives at time $t0​$. You can find the definition of $Integrate​$ on page 178 of <a href="https://www.microsoft.com/en-us/research/publication/specifying-systems-the-tla-language-and-tools-for-hardware-and-software-engineers/"><em>Specifying Systems</em></a>. The partial specification (showing only the continuous part) of our hybrid system, where $v​$ stands for the particle velocity $\dot{x}​$, is:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\VARIABLES x, v, t, switchOn}\\
+\\
+&TNext \defeq &\land t' \in \set{r \in Real : r > t}\\
+&&\land \seq{x, v}' = Integrate(t', D, t, \seq{x, v})\\
+&&\land \UNCHANGED switchOn \phantom{XX} \comment{The discrete variable changes instantaneously}
+\end{alignat} %]]></script>
+
+<p>For an example of a hybrid specification with a correctness proof, see <a href="http://lamport.azurewebsites.net/pubs/lamport-hybrid.pdf"><em>Hybrid Systems in TLA<sup>+</sup></em></a>.</p>
+
+<p>A simplified version of TLA that is not stuttering-invariant, basically rTLA from part 3, was implemented in Coq as part of the <a href="http://ucsd-pl.github.io/veridrone/papers.html">VeriDrone project</a> to reason about quadcopter controllers precisely in this manner.</p>
+
+<h3 id="biology">Biology</h3>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Metabolic_network">metabolic network</a> can also be easily modeled as a nondeterministic state machine. For example:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\VARIABLE m\; \comment{The number of each kind of molecule}\\
+&\nested{&State \defeq\; [&a : Nat,\\&& b : Nat,\\&& c: Nat,\\&& d : Nat]}\\
+&TypeOK  \defeq m \in State\\
+\\
+&\comment{$a + b \to c + d$}\\
+&\nested{&Reaction1 \defeq  & \land m.a > 0\\
+&&\land m.b > 0\\
+&& \land m' = [m \;\EXCEPT & !.a = @ - 1\\ 
+&&& !.b = @ -1\\
+&&& !.c = @ + 1\\
+&&&!.d = @ + 1]}\\
+&\comment{$c + d \to a$}\\
+&\nested{&Reaction2 \defeq  & \land m.c > 0\\
+&&\land m.d > 0\\
+&& \land m' = [m \;\EXCEPT & !.a = @ + 1\\
+&&&!.c = @ -1\\
+&&&!.d = @ -1]}\\
+\\
+&\nested{&Init \defeq m \in \;[&a : 0..1000,\\&& b : 0..1000,\\&& c: 0..1000,\\&& d : 0..1000]}\\
+&Next \defeq Reaction1 \lor Reaction2\\
+&Spec \defeq Init \land [Next]_m \land \WF_m(Next)
+\end{alignat} %]]></script>
+
+<p>We can then state propositions about the system, such as that it has three static attractors:</p>
+
+<script type="math/tex; mode=display">\E atts \in \SUBSET State : Cardinality(atts) = 3 \land \Diamond\Box(m \in atts)</script>
+
+<p>Of course, we can make much more complex propositions, such as that the system has no more than two periodical attractors of period less than 100.</p>
+
+<p>See <a href="http://www.cosbi.eu/research/publications?pdf=5437"><em>A Computational Framework For Complex Diseases</em></a> for a brief mention of TLA in this context.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The goal of this series was to show why a mathematical specification of software systems, rather than a programming language-based one, is often a good choice for reasoning about systems as it is both very powerful and relatively simple, how TLA<sup>+</sup> allows such mathematical reasoning, and how this form of reasoning provides insight into similarities between concepts and algorithms that are often obscured in programming languages.</p>
+
+<p>However, I think that the choice of a general, ordinary math formalism for reasoning about algorithms is not enough in itself to rid us of the Whorfian syndrome, as that syndrome has two components. The first is due to the choice of formalisms, like those based on programming languages, that are intentionally restrictive, either for aesthetic or technical reasons, or both. This effect can be seen in a <a href="http://blog.sigfpe.com/2007/07/data-and-codata.html">blog post</a> by an accomplished engineer:</p>
+
+<blockquote>
+  <p>Over the years I’ve seen a few people argue that there’s something fundamentally wrong with the notion of the algorithm because it doesn’t apply to the kind of open-ended loop we see in operating systems and interactive applications. Some have even gone further to suggest that somehow mathematics and computer science are fundamentally different because mathematics can’t seek to describe these kinds of open-ended phenomena… [N]ot only are there nice ways to look at open-ended computations, but from a mathematical perspective they are precisely dual, in the category theoretical sense, to terminating computations. It may be true that mathematicians sometimes spend more time with things, and computer scientists with cothings. But this really isn’t such a big difference and the same language can be used to talk about both… [I realised] there was this entire co-universe out there…</p>
+</blockquote>
+
+<p>By “co-universe”, he’s referring to pure-FP’s way of modeling infinite data streams and infinite computations. Clearly, “this entire co-universe” is not really “out there”, but very much deep inside his chosen formalism, one that chooses (for historical and aesthetic reasons) computable functions as the fundamental building blocks of computation. The notion of co-data or co-computation, doesn’t really provide any fundamental insight into nonterminating computations, but only into their description in that specific formalism. Bartosz Milewski — a physicist, no less! — also repeats this sentiment in his lectures on category theory in the context of functional programming, <a href="https://youtu.be/p54Hd7AmVFU?t=33m56s">saying</a>, “time is really hard to describe in mathematics”. But mathematics has no difficulty whatsoever in expressing time or “open-ended” discrete systems any more that it finds it difficult to describe open-ended continuous systems. As should now be clear, computations of all kinds are easily and elegantly, expressed in mathematics as infinite sequences of states. The difficulty arrises only when using specific formalisms that explicitly choose to <em>disregard</em> time. Whether or not that is a useful simplification is a separate discussion, but the difficulty is not with mathematics.</p>
+
+<p>Formalisms are important, but their importance cannot be properly appreciated if one does not distinguish between insights a formalism provides into its own operation and the far more valuable insights a formalism offers that help discover features of reality. An ideological, almost religious, adherence to specific formalisms, seems to have been common among some logicians almost hundred years ago, long before it became common among programmers; that ideological perspective was no more conducive to understanding mathematics back then as it is for understanding computation now<sup id="fnref:common-sense"><a href="#fn:common-sense" class="footnote">14</a></sup>. In this sense, the Whorfian syndrome is a form of an ideological conviction that blinds more than it enlightens.</p>
+
+<p>But the Whorfian syndrome has another component, one that cannot be avoided even by choosing a very general, relatively simple, mathematical framework such as TLA for reasoning about computation. <em>All</em> formalisms are merely <em>descriptions</em> of computations. Computation is neither a “thing” nor a “cothing”; it isn’t an infinite sequence of states, either, but a discrete dynamical system that we can choose to describe and denote in many different formalisms, picking the one that is most convenient for the task at hand. Whichever language we choose to describe reality, we run the risk of confusing the description with reality. Understanding abstraction, and how it also relates a description of reality to reality helps, but it also takes practice.</p>
+
+<p>This is <a href="https://groups.google.com/forum/#!searchin/tlaplus/mathematical%7Csort:date/tlaplus/XsqwpUruTxY/-vz0d51tAQAJ">a post to the TLA<sup>+</sup> mailing list</a>, where Lamport discusses this more general Whorfian syndrome in TLA<sup>+</sup></p>
+
+<blockquote>
+  <p>You originally wrote:</p>
+  <blockquote>
+    <p>My conundrum is linked to the fact that if the action is taken the primed variable equations have immediate effect, that is the state transition is instantaneous.</p>
+  </blockquote>
+
+  <p>An action is a formula. It makes no sense to say that a formula has immediate effect. Does the formula 2+3=5 have immediate effect? That no one else has pointed this out shows that many people don’t appreciate the distinction between math and reality.</p>
+
+  <p>I have a digital clock on my desk. If I cover part of the display, the clock behaves as follows. It shows a pattern of light and dark regions. For about an hour, that pattern remains quite stable, with barely perceptible changes in light intensity. Then, for a fraction of a second, the pattern fluctuates wildly. It then reaches a different stable pattern. About an hour later, there is another brief period of wild fluctuation followed by another stable pattern. And so on. My brain has learned to recognize the stable patterns as numbers and to ignore the brief fluctuations. When I call the device on my desk a digital clock, I mean that I can think of it as showing the number 22 for about an hour, then the number 23 for about an hour, then the number 0, etc. This allows me to describe a behavior of the clock as a sequence of states — for example, a sequence starting with a state having x=22, followed by a state having x=23, etc. I can describe the set of all such state sequences by a TLA<sup>+</sup> formula.</p>
+
+  <p>That same TLA<sup>+</sup> formula can be interpreted to describe other things. For example, I called the elements of the sequence “states”. I could just as well have called them “events” and have interpreted the sequence as describing a system that releases a sequence of hot air balloons with numbers painted on them. The “event” with x=22 describes the release of a balloon with the number 22 on it. I could also interpret the state sequence as describing a clock falling into a black hole in an imaginary universe, where the clock speeds up as it falls, displaying an infinite sequence of numbers in the few seconds that it takes to reach the event horizon (from the point of view of an external observer). These are perfectly valid interpretations of the behaviors described by the TLA<sup>+</sup> formula that I use to describe my clock. However, they are perfectly irrelevant to my clock specification. For that specification, the only important question is: does it provide a useful description of my clock? And the answer to that question depends on what I want to use the description for. It is useful only for applications in which the fact that the states change about once per hour is unimportant…</p>
+
+  <p>When people get used to describing systems mathematically in a certain way, they tend to confuse the mathematical description with the system.</p>
+</blockquote>
+
+<p>I think that physicists and engineers of physical systems are very adept at describing reality with mathematics, and understanding the difference between them. Mathematicians don’t directly deal with reality, and programmers are used to thinking that their formal descriptions <em>create</em> reality. Even though TLA<sup>+</sup> makes the very notion of levels of description through abstraction and refinement and hiding of variables, it still takes practice until one is comfortable with modeling reality with mathematics. But I can think of no better tool than TLA<sup>+</sup> to afford programmers the practice required in mastering this important skill.</p>
+
+<hr />
+
+<p><a href="">Discuss on Reddit</a></p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:narrow-wide">
+      <p>It is said that math is narrow and deep, while formal verification is wide and shallow.&nbsp;<a href="#fnref:narrow-wide" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:encoding">
+      <p>The model checker TLC does break the encapsulation, and $v.x$ would mean 4.5. However, that’s an implementation detail of the checker. The encoding is hidden from the proof system.&nbsp;<a href="#fnref:encoding" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:proposition">
+      <p>Because we’ve normally seen implication used in propositions, I will repeat the distinction I mentioned in part 2. By $E \implies M$ we do not mean the proposition $\vdash E \implies M$, i.e. that the environment implements the machine specification, but that the specification of the contract is itself is $E \implies M$. To explain the difference consider the logical formula over the integers $(x &gt; 0) \implies (x &gt; 2)$. This formula is not <em>valid</em>, i.e. $\nvdash (x &gt; 0) \implies (x &gt; 2)$ . But it does describe — or, its model is — all numbers that are either negative or greater than 2, or formally $\vdash ((x &gt; 0) \implies (x &gt; 2)) \implies (x &lt; 0 \lor x &gt; 2)$.&nbsp;<a href="#fnref:proposition" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:turing-subroutines">
+      <p>And long before that. In 1945 Alan Turing described how programs in his proposed ACE computer will be composed of subroutines, employing a stack and push/pop operations (which he called bury/unbury), before the first computer was ever built. Sadly, his design was never realized.&nbsp;<a href="#fnref:turing-subroutines" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tla-compile">
+      <p>There have been two academic projects that do just that for <a href="https://link.springer.com/chapter/10.1007/978-3-319-17581-2_14">C programs</a> and for <a href="http://ieeexplore.ieee.org/document/6042069/">Java bytecode</a>, although not by employing such “universal” — and inefficient — composition, but rather more direct means of translating expression. In fact, PlusCal[^pcal] can be thought of as a simple programming language that is easily translated to TLA. See Lamport’s, <a href="http://lamport.azurewebsites.net/pubs/pluscal.pdf"><em>The PlusCal Algorithm Language</em></a>, 2009, and the extended version of PlusCal described in Sabina Akhtar, Stephan Merz, Martin Quinson, <a href="https://members.loria.fr/SMerz/papers/sbmf2010.pdf"><em>A High-Level Language for Modeling Algorithms and their Properties</em></a>, 2010.&nbsp;<a href="#fnref:tla-compile" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:det-comp">
+      <p>Of course, if the language is not deterministic, some comoposition constructs may <em>decrease</em> determinism rather than increase it, and so connectives other than conjunction would be used to model the composition in TLA<sup>+</sup>.&nbsp;<a href="#fnref:det-comp" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:machine-closed">
+      <p>With the important caveat that a machine-closed formula may be equivalent to a non-machine-closed one, as <a href="[Part 3](/posts/tlaplus_part3)#machine-closure-and-fairness">we’ve seen in part 3</a>. However, we should only consider machine-closed formulas to be descriptions of algorithms.&nbsp;<a href="#fnref:machine-closed" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:fp">
+      <p>Pure functional languages treat programs as something similar to functions. Programs and subroutines in pure functional languages that don’t enforce totality are <em>partial constructive functions</em>, which resemble the classical notion of functions in some senses: in that they define a one-valued mapping between objects and in their extensional notion of equality. They differ from ordinary functions in that they must be computable (i.e. constructive) and may not map an object to every object in their domain type (i.e. partial).&nbsp;<a href="#fnref:fp" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:boolean">
+      <p>I believe that <a href="https://en.wikipedia.org/wiki/Universe_(mathematics)">as the universe is a proper class rather than a formal set</a>, it does not precisely form a boolean algebra but a <a href="https://en.wikipedia.org/wiki/Complemented_lattice">relatively complemented lattice</a>. But this is an unimportant detail.&nbsp;<a href="#fnref:boolean" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:sin">
+      <p>It sometimes seems like endless ideas employing novel mathematics are employed just to get around the problems imposed by this original choice that predates even the precise descriptions of computation in 1936, and appears to have no justification today other than the aesthetic desire to unify constructive mathematics and programming. Then again, great technological breakthroughs have been known to occasionally come of seemingly impractical research.&nbsp;<a href="#fnref:sin" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:denotation">
+      <p>A good introduction to what denotation means in programming language theory can be found in Chapter 1, “Sense, Denotation and Semantics”, of Jean-Yves Girard’s <a href="http://www.paultaylor.eu/stable/prot.pdf"><em>Proof and Types</em></a>.&nbsp;<a href="#fnref:denotation" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:notsets">
+      <p>Again, I’m informally ignoring that the sets of behaviors may not be actual sets.&nbsp;<a href="#fnref:notsets" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:implies-order">
+      <p>That is easy to see if we recall that implication is an order relation, and $a \leq b \implies a \leq c$ iff $b \leq c$.&nbsp;<a href="#fnref:implies-order" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:common-sense">
+      <p>As Turing himself strongly believed. See Juliet Floyd, <a href="https://mdetlefsen.nd.edu/assets/201037/jf.turing.pdf"><em>Turing on “Common Sense”</em></a>.&nbsp;<a href="#fnref:common-sense" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+	</div>
+</article>
+
+	  </main>
+
+    <!-- Pagination links -->
+    
+
+  </div>
+
+	    <!-- Footer -->
+	    <footer></footer>
+
+
+	    <!-- Script -->
+      <script type="text/javascript" src="/js/main.js"></script>
+<!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+        <script src="js/vendor/html5shiv.js"></script>
+        <![endif]-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+-->
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-99776245-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- <script>
+var _gaq=[['_setAccount','UA-99776245-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script> -->
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nav-toc').toc();
+});
+</script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
+<script type="text/javascript" src="/js/bigfoot.min.js"></script>
+
+<script type="text/javascript">
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
+</script>
+
+
+
+
+
+	</div>
+</body>
+</html>
