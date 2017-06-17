@@ -1303,6 +1303,20 @@ TypeOK \defeq & \land x \in Int \\
 
 <p>because they are extensionally equal (note that $fact$ is not an algorithm but a function).</p>
 
+<p>By the way, it is much nicer to write the factorial specification as follows:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{2}
+&\rlap{\VARIABLES N, i, f}\\
+\\
+&Fact1 & \defeq &  \rlap{\;\land N \in Nat \land f = 1 \land i = 2} \\
+&&&\land \Box[&\land i \leq N\\
+&&&&\land  f' = f*i \land i'=i+1\\
+&&&&\land \UNCHANGED N]_{\seq{f, i , N}}
+\end{alignat} %]]></script>
+
+<p>but I’ve chosen the <script type="math/tex">\IF/\THEN\!</script> version to make some modifications in part 4 easier.</p>
+
 <p>State machines, then, give us a very general, mathematical framework of reasoning about algorithms. Unlike state machines you may be familiar with — Turing machines or finite-state automata — the state machines that are specified in TLA<sup>+</sup> are completely abstract in the sense that a state can be any mathematical structure (definable in the data logic), and a primitive step, defined as an action, can be as limited or as powerful as we desire (and as the data logic allows).</p>
 
 <p>Many other models of computation can also be easily described as state machines in TLA<sup>+</sup>. For example, <a href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda calculus</a> (or any other <a href="https://en.wikipedia.org/wiki/Abstract_rewriting_system">abstract rewriting system</a>) is normally thought of as a state machine — where each step is a beta-reduction — only when combined with an <a href="https://en.wikipedia.org/wiki/Evaluation_strategy">evaluation strategy</a> such as call-by-name or call-by-value. However, even without a specific evaluation strategy, lambda calculus is easily described as a state machine in TLA<sup>+</sup><sup id="fnref:lc1"><a href="#fn:lc1" class="footnote">26</a></sup> that is nondeterministic with respect to an evaluation strategy. In fact, we could do that to prove the <a href="https://en.wikipedia.org/wiki/Confluence_(abstract_rewriting)">confluence</a> of lambda expressions.</p>
