@@ -1309,9 +1309,10 @@ TypeOK \defeq & \land x \in Int \\
 \begin{alignat}{2}
 &\rlap{\VARIABLES N, i, f}\\
 \\
-&Fact1 & \defeq &  \rlap{\;\land N \in Nat \land f = 1 \land i = 2} \\
+&Fact1 & \defeq &  \land \rlap{N \in Nat \land f = 1 \land i = 2} \\
 &&&\land \Box[&\land i \leq N\\
-&&&&\land  f' = f*i \land i'=i+1\\
+&&&&\land  f' = f*i \\
+&&&&\land i'=i+1\\
 &&&&\land \UNCHANGED N]_{\seq{f, i , N}}
 \end{alignat} %]]></script>
 
