@@ -4,12 +4,25 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-06-20T13:56:31+02:00</updated>
+ <updated>2017-06-20T17:16:26+02:00</updated>
  <author>
    <name></name>
    <uri></uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>Curry On Talk: The Practice and Theory of TLA+</title>
+   <link href="/posts/tlaplus-curryon-talk"/>
+   <id>/posts/tlaplus-curryon-talk</id>
+   <updated>2017-06-20T00:00:00+02:00</updated>
+   <content type="html">&lt;p&gt;Here is my &lt;a href=&quot;http://curry-on.org/2017/&quot;&gt;Curry On&lt;/a&gt; talk about TLA+.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</content>
+ </entry>
 
  
 
