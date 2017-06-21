@@ -1015,7 +1015,7 @@ The specification captures precisely what it means to be a stack without saying 
 &\;&\rlap{\VARIABLES N, out}\\
 &&\rlap{\text{NOTHING} \defeq \CHOOSE x \notin Nat}\\
 &&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
-&&&\IN N \in Nat \land out = \text{NOTHING} \land\Box[out' = fact[N]]_{\seq{N, out}}\\
+&&&\IN N \in Nat \land out = \text{NOTHING} \land\Box[out' = fact[N] \land \UNCHANGED N]_{\seq{N, out}}\\
 &\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}\\
 \end{alignat} %]]></script>
 

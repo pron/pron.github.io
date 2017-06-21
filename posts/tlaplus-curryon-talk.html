@@ -267,17 +267,12 @@
 
 <p><br /><br /></p>
 
-<p>There is a mistake in the slide at ~35:00. I neglected to add $\UNCHANGED N$. The slide should read:</p>
+<p>There is a mistake in the slide at ~35:00. I neglected to add $\UNCHANGED N$. The $FactAlg$ spec should read:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&&&&&&\phantom{XXXX}\\
-&\rlap{\H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\;\;\MODULE FAModule \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H}\\
-&\;&\rlap{\VARIABLES N, f}\\
-\\
-&&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
-&&&\IN N \in Nat \land f = 0 \land\; \Box[f' = fact[N] \land \UNCHANGED N]_{\seq{N, f}}\\
-&\rlap{\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H}\\
+&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
+&&\IN N \in Nat \land f = 0 \land\; \Box[f' = fact[N] \land \UNCHANGED N]_{\seq{N, f}}\\
 \end{alignat} %]]></script>
 
 
