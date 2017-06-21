@@ -178,9 +178,107 @@
 	<time datetime="2017-06-20T00:00:00+02:00" class="by-line">20 Jun 2017</time>
 	<div class="content">
 
-		<p>Here is my <a href="http://curry-on.org/2017/">Curry On</a> talk about TLA<sup>+</sup>.</p>
+		<script type="math/tex; mode=display">\newcommand{\sc}[1]{\mathrm{\small{#1}}\;}
+\newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}}
+\newcommand{\str}[1]{``\mathsf{#1}\!"}
+\newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\seq}[1]{\langle #1 \rangle}
+\newcommand{\llbracket}{[\![}
+\newcommand{\rrbracket}{]\!]}
+\newcommand{\sem}[1]{\llbracket #1 \rrbracket}
+\newcommand{\H}{-\!\!\!}
+\newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!}
+\newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!}
+\newcommand{\LR}{\raise 2.5pt {\lrcorner}}
+\newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!}
+\newcommand{\defeq}{\triangleq}
+\newcommand{\E}{\exists\,}
+\newcommand{\A}{\forall\,}
+\newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,}
+\newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,}
+\newcommand{\implies}{\Rightarrow}
+\newcommand{\whileop}{\overset{+}{-}\!\!\triangleright\; }
+\let\savedBox=\Box
+\renewcommand{\Box}{\raise1mu{\small \square} }
+\renewcommand{\Diamond}{ {\Large \diamond} }
+\newcommand{\LET}{\sc{LET}}
+\newcommand{\IN}{\sc{IN}}
+\newcommand{\RECURSIVE}{\sc{RECURSIVE}}
+\newcommand{\LAMBDA}{\sc{LAMBDA}}
+\newcommand{\IF}{\sc{IF}}
+\newcommand{\THEN}{\sc{THEN}}
+\newcommand{\ELSE}{\sc{ELSE}}
+\newcommand{\CASE}{\sc{CASE}}
+\newcommand{\OTHER}{\sc{OTHER}}
+\newcommand{\CHOOSE}{\sc{CHOOSE}}
+\newcommand{\BOOLEAN}{\sc{BOOLEAN}}
+\newcommand{\TRUE}{\sc{TRUE}}
+\newcommand{\FALSE}{\sc{FALSE}}
+\newcommand{\DOMAIN}{\sc{DOMAIN}}
+\newcommand{\EXCEPT}{\sc{EXCEPT}}
+\newcommand{\STRING}{\sc{STRING}}
+\newcommand{\MODULE}{\sc{MODULE}}
+\newcommand{\LOCAL}{\sc{LOCAL}}
+\newcommand{\INSTANCE}{\sc{INSTANCE}}
+\newcommand{\WITH}{\sc{WITH}}
+\newcommand{\EXTENDS}{\sc{EXTENDS}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\VARIABLE}{\sc{VARIABLE}}
+\newcommand{\VARIABLES}{\sc{VARIABLES}}
+\newcommand{\CONSTANT}{\sc{CONSTANT}}
+\newcommand{\CONSTANTS}{\sc{CONSTANTS}}
+\newcommand{\UNION}{\sc{UNION}}
+\newcommand{\SUBSET}{\sc{SUBSET}}
+\newcommand{\UNCHANGED}{\sc{UNCHANGED}}
+\newcommand{\ENABLED}{\sc{ENABLED}}
+\newcommand{\WF}{\text{WF}}
+\newcommand{\SF}{\text{SF}}
+\newcommand{\THEOREM}{\sc{THEOREM}}
+\newcommand{\LEMMA}{\sc{LEMMA}}
+\newcommand{\COROLLARY}{\sc{COROLLARY}}
+\newcommand{\PROPOSITION}{\sc{PROPOSITION}}
+\newcommand{\AXIOM}{\sc{AXIOM}}
+\newcommand{\PROOF}{\sc{PROOF}}
+\newcommand{\ASSUME}{\sc{ASSUME}}
+\newcommand{\PROVE}{\sc{PROVE}}
+\newcommand{\QED}{\sc{QED}}
+\newcommand{\BY}{\sc{BY}}
+\newcommand{\DEF}{\sc{DEF}}
+\newcommand{\DEFS}{\sc{DEFS}}
+\newcommand{\OBVIOUS}{\sc{OBVIOUS}}
+\newcommand{\OMITTED}{\sc{OMITTED}}
+\newcommand{\NEW}{\sc{NEW}}
+\newcommand{\STATE}{\sc{STATE}}
+\newcommand{\ACTION}{\sc{ACTION}}
+\newcommand{\TEMPORAL}{\sc{TEMPORAL}}
+\newcommand{\USE}{\sc{USE}}
+\newcommand{\DEFINE}{\sc{DEFINE}}
+\newcommand{\SUFFICES}{\sc{SUFFICES}}
+\newcommand{\HAVE}{\sc{HAVE}}
+\newcommand{\TAKE}{\sc{TAKE}}
+\newcommand{\PICK}{\sc{PICK}}
+\newcommand{\WITNESS}{\sc{WITNESS}}
+\newcommand{\HIDE}{\sc{HIDE}}</script>
+
+<p>Here is my <a href="http://curry-on.org/2017/">Curry On</a> talk about TLA<sup>+</sup>.</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/15uy9Ga-14I" frameborder="0" allowfullscreen=""></iframe>
+
+<p><br /><br /></p>
+
+<p>There is a mistake in the slide at ~35:00. I neglected to add $\UNCHANGED N$. The slide should read:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&&&&&&\phantom{XXXX}\\
+&\rlap{\H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\;\;\MODULE FAModule \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H}\\
+&\;&\rlap{\VARIABLES N, f}\\
+\\
+&&FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
+&&&\IN N \in Nat \land f = 0 \land\; \Box[f' = fact[N] \land \UNCHANGED N]_{\seq{N, f}}\\
+&\rlap{\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H}\\
+\end{alignat} %]]></script>
 
 
 	</div>
@@ -235,10 +333,71 @@ $(document).ready(function() {
 });
 </script>
 
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
 <script type="text/javascript" src="/js/bigfoot.min.js"></script>
 
 <script type="text/javascript">
-    $.bigfoot();
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
 </script>
 
 
