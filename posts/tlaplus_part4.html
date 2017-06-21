@@ -828,7 +828,7 @@ The specification captures precisely what it means to be a stack without saying 
 \begin{alignat}{1}
 &\rlap{\VARIABLES N, out}\\
 &FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
-&&\IN N \in Nat \land\Box[out' = fact[N]]_{\seq{N, out}}
+&&\IN N \in Nat \land\Box[out' = fact[N] \land \UNCHANGED N]_{\seq{N, out}}
 \end{alignat} %]]></script>
 
 <p>We can even extend this kind of extensional view to nonterminating computations. Remember the complicated subroutine construction we’ve seen? Well, when hiding the control variables with</p>
