@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-06-27T11:46:54+01:00</updated>
+ <updated>2017-06-27T11:56:15+01:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -58,7 +58,7 @@
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+01:00</updated>
-   <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;Part 3&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part4&quot;&gt;Part 4&lt;/a&gt;. A video of a 40-minute talk I gave at &lt;a href=&quot;http://curry-on.org/2017/&quot;&gt;Curry On&lt;/a&gt; which covers parts of this series is &lt;a href=&quot;/posts/tlaplus-curryon-talk&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt; &lt;p&gt;&lt;em&gt;If you find TLA+ and formal methods...</content>
+   <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;Part 3&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part4&quot;&gt;Part 4&lt;/a&gt;. A &lt;a href=&quot;/posts/tlaplus-curryon-talk&quot;&gt;video of a 40-minute talk&lt;/a&gt; that covers parts of this series.&lt;/em&gt;&lt;/p&gt; &lt;p&gt;&lt;em&gt;If you find TLA+ and formal methods in general interesting, I invite you to visit...</content>
  </entry>
 
  
