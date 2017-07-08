@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-07-09T00:46:01+03:00</updated>
+ <updated>2017-07-09T00:57:04+03:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -59,6 +59,16 @@
    <id>/posts/tlaplus_part1</id>
    <updated>2017-05-25T00:00:00+03:00</updated>
    <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;Part 3&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part4&quot;&gt;Part 4&lt;/a&gt;. A &lt;a href=&quot;/posts/tlaplus-curryon-talk&quot;&gt;video of a 40-minute talk&lt;/a&gt; that covers parts of this series.&lt;/em&gt;&lt;/p&gt; &lt;p&gt;&lt;em&gt;If you find TLA+ and formal methods in general interesting, I invite you to visit...</content>
+ </entry>
+
+ 
+
+ <entry>
+   <title>The Best Programming Language</title>
+   <link href="/posts/the-best-programming-language"/>
+   <id>/posts/the-best-programming-language</id>
+   <updated>2017-02-04T00:00:00+02:00</updated>
+   <content type="html">&lt;p&gt;A certain tweet caught my eye this past week. I will not link to it because I don’t want to single out its author, who expresses an opinion which is rather common in some crowds, but it said: “Do the people behind the big mainstream languages not follow PLT at...</content>
  </entry>
 
  
