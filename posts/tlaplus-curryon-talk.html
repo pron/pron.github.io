@@ -271,14 +271,22 @@
 
 <p><br /><br /></p>
 
-<p>There is a mistake in the slide at ~35:00. I neglected to add $\UNCHANGED N$. The $FactAlg$ spec should read:</p>
+<p><strong>ERRATA:</strong></p>
 
-<script type="math/tex; mode=display">% <![CDATA[
+<ol>
+  <li>
+    <p>There is a mistake in the slide at ~35:00. I neglected to add $\UNCHANGED N$. The $FactAlg$ spec should read:</p>
+
+    <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &FactAlg \defeq \;& \LET fact[n \in Nat] \defeq \IF n \leq 1 \;\THEN 1 \;\ELSE n * fact[n - 1]\\
 &&\IN N \in Nat \land f = 0 \land\; \Box[f' = fact[N] \land \UNCHANGED N]_{\seq{N, f}}\\
 \end{alignat} %]]></script>
-
+  </li>
+  <li>
+    <p>In 26:24, I say “function” (twice!) when I mean to say “action”. It should be: “every time we have the box operator followed by an <em>action</em>, that <em>action</em> must be inside square brackets.”</p>
+  </li>
+</ol>
 
 
 	</div>
