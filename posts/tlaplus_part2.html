@@ -1040,7 +1040,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\CONSTANT S\\
-&\text{EMPTY} \defeq \str{-}\\
+&\text{EMPTY} \defeq \seq{} \;\;\comment{Or any value that can be compared with the node record}\\
 &\RECURSIVE List\\
 &List \defeq \set{\text{EMPTY}} \cup [value : S, next: List]
 \end{alignat} %]]></script>
@@ -1060,6 +1060,24 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 &&\phantom{XX}& \IF n = 0 \;&\THEN \set{\text{EMPTY}} \\
 &&&&\ELSE [value: S, next : ListUpToLength[n-1]]\cup ListUpToLength[n-1]\\
 &&\rlap{\IN \UNION \set{ListUpToLength[n] : n \in Nat}}
+\end{alignat} %]]></script>
+
+<p>In fact, we can generalize this idea:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{InductiveDataType(base, Cons(\_)) \defeq }\\
+&\phantom{XX}& \rlap{\LET upToLength[n \in Nat] \defeq} \\
+&&\phantom{XX}& \IF n = 0 \;&\THEN base \\
+&&&&\ELSE Cons(UpToLength(n-1)\cup upToLength[n-1]\\
+&&\rlap{\IN \UNION \set{upToLength[n] : n \in Nat}}
+\end{alignat} %]]></script>
+
+<p>and then:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA ListR : [value : S, next : ListR])
 \end{alignat} %]]></script>
 
 <p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in List$ is just another proposition, like $a + b = 0$.</p>
