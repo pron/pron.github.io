@@ -1035,15 +1035,34 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>Even though it is not necessary in TLA<sup>+</sup>, we can begin by specifying the “type” of our linked list node, where by type I mean the general structure of the node (without getting into memory layout). The elements of our list can be any members of the set $S$.</p>
 
+<p>We may be tempted to define the “type” of the list — i.e. the set of all lists — like so:</p>
+
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\CONSTANT S\\
-&\RECURSIVE Node\\
-&\text{NULL} \defeq \CHOOSE x : x \notin Node\\
-&Node \defeq [elem : S, next: Node \cup \set{\text{NULL}}]
+&\text{EMPTY} \defeq \str{-}\\
+&\RECURSIVE List\\
+&List \defeq \set{\text{EMPTY}} \cup [value : S, next: List]
 \end{alignat} %]]></script>
 
-<p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in Node$ is just another proposition, like $a + b = 0$.</p>
+<p>However, as with any recursive (i.e. self referential) definition, there are subtleties because a recursion implies a fixed-point equation, but many recusions have multiple solutions and TLA<sup>+</sup> does not commit to a specific one. The last two lines in the above definition could correspond to the following one:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&List \defeq \CHOOSE List : List = \set{\text{EMPTY}} \cup [value : S, next: List]
+\end{alignat} %]]></script>
+
+<p>As <script type="math/tex">\CHOOSE\!</script> picks <em>any</em> set that satisfies the equation, the above line may represent the set of all finite linked-lists, or the set of all finite <em>and infinite</em> linked lists, which is yet another solution. If we want to be specific and, for example, only represent the set of finite lists, we could, instead, define:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&List \defeq \;& \rlap{\LET ListUpToLength[n \in Nat] \defeq} \\
+&&\phantom{XX}& \IF n = 0 \;&\THEN \set{\text{EMPTY}} \\
+&&&&\ELSE [value: S, next : ListUpToLength[n-1]]\cup ListUpToLength[n-1]\\
+&&\rlap{\IN \UNION \set{ListUpToLength[n] : n \in Nat}}
+\end{alignat} %]]></script>
+
+<p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in List$ is just another proposition, like $a + b = 0$.</p>
 
 <p>Now, let’s define a view that presents a linked list as a sequence. For simplicity, let’s assume we only allow finite lists. Remember, a finite sequence is just a function of some 1..n:</p>
 
@@ -1051,19 +1070,19 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 \begin{alignat}{1}
 &&&\phantom{XXXXXXXXX}\\
 &\RECURSIVE LenList(\_) \\
-&LenList(ll) \defeq \IF ll = \text{NULL} \;\THEN 0 \;\ELSE 1 + LenList(ll.next)\\
+&LenList(ll) \defeq \IF ll = \text{EMPTY} \;\THEN 0 \;\ELSE 1 + LenList(ll.next)\\
 &\\
 &\nested{
 &ListAsSeq(ll) \defeq &\;& \LET & \RECURSIVE View(\_, \_)\\
-&&&&View (i, node)\defeq \IF i = 1 \;&\THEN node.elem \\
+&&&&View (i, node)\defeq \IF i = 1 \;&\THEN node.value \\
 &&&&&\ELSE View(i-1, node.next) \\
 &&&\IN \rlap{[i \in 1..LenList(ll) \mapsto View(i, ll)]}
 }\\
 &\\
 &\nested{
 &\rlap{\RECURSIVE SeqAsList(\_)} \\
-& SeqAsList(s) \defeq \IF s = \seq{}\;&\THEN \text{NULL}
-\\ &&\ELSE [elem \mapsto s[1], next \mapsto SeqAsList(Tail(s))]
+& SeqAsList(s) \defeq \IF s = \seq{}\;&\THEN \text{EMPTY}
+\\ &&\ELSE [value \mapsto s[1], next \mapsto SeqAsList(Tail(s))]
 }
 \end{alignat} %]]></script>
 
