@@ -984,6 +984,10 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <h2 id="putting-it-all-together">Putting it All Together</h2>
 
+<p>The logic we’ve learned allows us to define anything we want about the data computer programs operate on.</p>
+
+<h3 id="more-complex-definitions">More Complex Definitions</h3>
+
 <p>Now let’s use everything we’ve seen to define the $Cardinality(S)$ operator, which is the number of elements in the finite set $S$ (the operator is provided by the standard module <code class="highlighter-rouge">FiniteSets</code>).</p>
 
 <p>We can use a computer-sciency definition using recursion, based on the observation that the cardinality of a finite set is 1 plus the cardinality of the set after removing an arbitrary element from it:</p>
@@ -1012,6 +1016,8 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 &&\IN\rlap{TheLargestSuch(Nat, >,\LAMBDA n: \E f \in [1..n \to s]: Injection(f))}
  \end{alignat} %]]></script>
 
+<h3 id="describing-properties-of-data">Describing Properties of Data</h3>
+
 <p>What do we do with all this? We use TLA<sup>+</sup> values to define the data of our program at any step of its execution, and the primitive operations that our computation can perform in one step. Data structures can be easily defined using the objects we learned: Arrays and lists can be modeled as sequences; structures can be modeled as records; maps can be modeled as functions, and sets as, well, sets.</p>
 
 <p>What about things like the heap and the stack? What about processes or threads? In TLA<sup>+</sup>, you choose the level of abstraction. If you wish, you could model memory at a low level, as an array containing bytes (say, as natural numbers between 0 and 255) and write definitions for memory allocation and deallocation operations like <code class="highlighter-rouge">malloc</code> and <code class="highlighter-rouge">free</code>, as well as definitions that take care of encoding and decoding constructs like strings, arrays, floating point numbers etc. to and from bytes. In most circumstances, however, you’re more likely to choose to model those constructs purely abstractly without worrying about their memory layout, or you could choose to find some middle ground where memory is allocated and deallocated in objects, but without worrying about lower-level representation, instead modeling interesting techniques for dealing with shared pointers like <a href="https://en.wikipedia.org/wiki/Separation_logic">separation logic</a>. As to processes, we’ll see how those are modeled in part 3.</p>
@@ -1030,6 +1036,8 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 \\
 &\rlap{Sort(seq, \_\preceq\_)  \defeq \CHOOSE out \in Permutations(seq) : Ordered(out, \preceq) }
 \end{alignat} %]]></script>
+
+<h3 id="data-refinement-and-inductive-data-types">Data Refinement and Inductive Data Types</h3>
 
 <p>To make things more concrete, let’s consider a specification of linked lists. Say we decide to model the list as linked nodes, but we choose not to go into the detail of actual pointer arithmetic, and so we will not model memory directly.</p>
 
@@ -1067,18 +1075,39 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\rlap{InductiveDataType(base, Cons(\_)) \defeq }\\
-&\phantom{XX}& \rlap{\LET upToLength[n \in Nat] \defeq} \\
+&\phantom{XX}& \rlap{\LET upToSize[n \in Nat] \defeq} \\
 &&\phantom{XX}& \IF n = 0 \;&\THEN base \\
-&&&&\ELSE Cons(UpToLength(n-1)\cup upToLength[n-1]\\
-&&\rlap{\IN \UNION \set{upToLength[n] : n \in Nat}}
+&&&&\ELSE Cons(UpToSize[n-1])\cup upToSize[n-1]\\
+&&\rlap{\IN \UNION \set{upToSize[n] : n \in Nat}}
 \end{alignat} %]]></script>
 
 <p>and then:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA ListR : [value : S, next : ListR])
+List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S, next : List])
 \end{alignat} %]]></script>
+
+<p>Note that $List$ inside the <script type="math/tex">\LAMBDA\!</script> is not the set we’re defining, namely, $List$ on the left-hand side of the definition, but simply the name of the <script type="math/tex">\LAMBDA\!</script>’s parameter.</p>
+
+<p>Another, more “set-theoretic” way of defining an inductive data type is by specifying precisely which solution to the recursion equation we want. In the case of lists, if we want to allow only finite lists, we want the <em>least</em>, or <em>smallest</em> solution. We can define it in general like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&Least(C(\_)) \defeq \CHOOSE T : &\land C(T) \\
+&&\land \A U \in \SUBSET T : C(U) \implies U = T
+\end{alignat} %]]></script>
+
+<p>We <script type="math/tex">\CHOOSE\!</script> a set $T$ that satisfies condition $C$, but with the added requirement that $T$ has no subsets that also satisfy $C$. We could then define the set of all finite lists like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&List \defeq &\rlap{Least(\LAMBDA List:}\\
+&&\phantom{XX}&\land \text{EMPTY} \in List, \\
+&&&\land \A x \in S, lst \in List : [value \mapsto x, next \mapsto lst] \in List)
+\end{alignat} %]]></script>
+
+<p>Or in words, the set $List$ is the smallest set that contains $\text{EMPTY}$ and is closed under adding a new head to the list (i.e., for any list in $List$, the list we get by adding the element with the value $x$ as the head, is also in $List$). This last definition using $Least$ is too abstract to be obvious to people who are not logicians. Indeed, as we’ll see in part 4, it is generally discouraged to specify programs in such an abstract way, as it quickly gets very complex. TLA<sup>+</sup> offers alternatives.</p>
 
 <p>We can later use this definition when we define algorithms over linked list to show that the type of the list is preserved. This turns the familiar notion of type into just another, relatively simple property we can specify and verify. For example, $x \in List$ is just another proposition, like $a + b = 0$.</p>
 

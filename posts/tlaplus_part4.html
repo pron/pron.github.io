@@ -510,7 +510,7 @@
 
 <p>How do we specify how a system or a component interacts with its environment or with other component? In other words, how do we specify an <em>interface</em>?</p>
 
-<p>Let’s consider the following, very abstract, very mathematical specification of a stack. But, first, as a technical mathematical necessity I’ll explain later, we’ll define an operator that can be used to specify a set by some properties; it selects some “smallest” set that satisfies the property $C$:</p>
+<p>Let’s consider the following, very abstract, very mathematical specification of a stack. But, first, as a technical mathematical necessity (see <a href="/posts/tlaplus_part2#data-refinement-and-inductive-data-types">Part 2, <em>Data Refinement and Inductive Data Types</em></a>), we’ll define an operator that can be used to specify a set by some properties; it selects some “smallest” set that satisfies the property $C$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -546,8 +546,9 @@
 
 <p>What’s going on here? We define $Stack$ as the “type” of stacks by defining its algebraic structure: a stack can be $\text{EMPTY}$, all stacks can be constructed by pushing elements, and $\text{EMPTY}$ cannot be a result of a push operation.</p>
 
-<p>This description should be very familiar to people who use typed functional programming languages, as it is precisely how algebraic data types are defined. Axiom <em>A1</em> (remember that <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script>) specifies the “type” of the stack operations (defined as  functions), and axioms <em>A2</em> and <em>A3</em> specify the relationships among the three stack operations. 
-The specification captures precisely what it means to be a stack without saying anything about <em>how</em> one is implemented. It’s true that the specification uses functions rather than algorithms in the TLA sense, but I chose that only to make the specification be recognizable to those who are familiar with algebraic specifications in typed functional languages. Axiomatic specification of algorithms in TLA<sup>+</sup> could also be done by using temporal formulas in the axioms.</p>
+<p>This description should be very familiar to people who use typed functional programming languages, as it is precisely how algebraic data types are defined. Axiom <em>A1</em> (remember that <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script>) specifies the “type” of the stack operations (defined as  functions), and axioms <em>A2</em> and <em>A3</em> specify the relationships among the three stack operations.</p>
+
+<p>The specification captures precisely what it means to be a stack without saying anything about <em>how</em> one is implemented. It’s true that the specification uses functions rather than algorithms in the TLA sense, but I chose that only to make the specification be recognizable to those who are familiar with algebraic specifications in typed functional languages. Axiomatic specification of algorithms in TLA<sup>+</sup> could also be done by using temporal formulas in the axioms.</p>
 
 <p>This stack specification is an example of an <em>algebraic</em> specification, which, in turn, is a special case of an <em>axiomatic</em> specification. Axiomatic specifications specify the external behavior of some system or data structure — its interface — as a list of properties is must satisfy. This approach seems very elegant at first sight, very abstract, very mathematical. But see if you can specify a FIFO queue in that way; or a B-Tree; or a concurrent B-Tree. It is very hard for people who are not logicians to figure out how to specify a system as a list of axioms. For example, the use of $Least$ is necessary to exclude infinite stacks, something which may not be obvious to non-logicians.</p>
 
