@@ -577,7 +577,7 @@
 && Init &\defeq buf \in \seq{} \land in = NOTHING \land out = NOTHING\\
 &&Push &\defeq in' \in X \land buf' = \seq{in'} \circ buf \land \UNCHANGED out\\
 &&Pop &\defeq buf \neq \seq{} \land out' = Head(buf) \land buf' = Tail(buf) \land \UNCHANGED in\\
-&&Top &\defeq buf \neq \seq{} \land out' = Head(buf) \land buf' = Tail(buf) \land \UNCHANGED \seq{in, buf}\\
+&&Top &\defeq buf \neq \seq{} \land out' = Head(buf)\land \UNCHANGED \seq{in, buf}\\
 \\
 &&\rlap{IStack\defeq Init \land \Box[Push \lor Pop \lor Top]_{vars}}\\
 &\rlap{\LL\H\H\H\H\H\H \H\H \H\H \H\H \H\H \H\H \H\H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H \H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\H\!\!\H\H\H\H\H\LR}
