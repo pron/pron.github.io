@@ -735,7 +735,7 @@
 
 <p>It is also possible to define a temporal <script type="math/tex">\CHOOSE\!</script> operator in the same vein, but Lamport writes that he did not add it to TLA<sup>+</sup> because it is not necessary for writing specifications.</p>
 
-<p>Note that the four expression levels form a hierarchy. A constant predicate (level-0) is a degenerate form of a state predicate (level-1), which is a degenerate form of an action (level-1), one that states that if the predicate holds in the current state then any next state is possible, which is a degenerate form of a temporal formula (level-3).</p>
+<p>Note that the four expression levels form a hierarchy. A constant predicate (level-0) is a degenerate form of a state predicate (level-1), which is a degenerate form of an action (level-2), one that states that if the predicate holds in the current state then any next state is possible, which is a degenerate form of a temporal formula (level-3).</p>
 
 <p>Also note that the operators $’$ and $\Box$ (and so $\Diamond$, too) are different from the “ordinary” logical operators we saw in part 2. If the value of the variable $x$ is 3 at some point in time, then $x’$ is <em>not</em> the same as $3’$ (which, 3 being constant, is equal to 3). Similarly, if the value of $A$ is <script type="math/tex">\TRUE\!</script> at some point in time, then $\Box A$ is <em>not</em> the same as <script type="math/tex">\Box \TRUE\!</script>. This is a feature (called <em>referential opacity</em>) of modal logic, and, in fact of a larger class of logics that modal logics belong to, called <a href="https://en.wikipedia.org/wiki/Intensional_logic">intensional logic</a>.</p>
 
