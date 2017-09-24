@@ -391,7 +391,11 @@
 
 <script type="math/tex; mode=display">\CASE p_1 \to e_1 \;\Box\; \ldots\;\Box\;p_n \to e_n \ldots\;\Box\; \OTHER\to e</script>
 
-<p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later). If more than one predicate is true, the value of the expression would be one of them, but the language does not commit to which. Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> are defined in terms of the <script type="math/tex">\CHOOSE\!</script> operator we’ll see later.</p>
+<p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later). More precisely:</p>
+
+<script type="math/tex; mode=display">\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n \Box \;\OTHER \to e = \CASE p_1 \to e_1 \;\Box \dots \Box\; p_n \to e_n \Box\; \neg (p_1 \lor \dots \lor p_n) \to e</script>
+
+<p>If more than one predicate is true, the value of the expression would be one of them, but the language does not commit to which. Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> are defined in terms of the <script type="math/tex">\CHOOSE\!</script> operator we’ll see later.</p>
 
 <p>Because in TLA<sup>+</sup> specifications of algorithms and systems are written as formulas, it requires some ergonomics for writing long formulas in a way that makes them easy to read. Lamport devised such a scheme in <a href="http://lamport.azurewebsites.net/pubs/lamport-howtowrite.pdf"><em>How to Write a Long Formula</em></a>. It uses alignment of conjunctions and disjunctions in place of parentheses, like so:</p>
 
@@ -426,10 +430,8 @@
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\IF p \;\THEN e_1 \;\ELSE e_2 &\defeq \CHOOSE v : (p \implies (v = e_1)) \land (\neg p \implies (v = e_2))\\
-\\
-&\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n &\defeq \CHOOSE v : (p_1 \land (v = e_1)) \lor \dots \lor (p_n \land (v = e_n))\\
-\\
-&\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n \Box \;\OTHER \to e&\defeq \CASE p_1 \to e_1 \;\Box \dots \Box\; p_n \to e_n \Box\; \neg (p_1 \lor \dots \lor p_n) \to e
+&& =\CHOOSE v : (p \land (v = e_1)) \lor (\neg p \land (v = e_2))\\
+&\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n &\defeq \CHOOSE v : (p_1 \land (v = e_1)) \lor \dots \lor (p_n \land (v = e_n))
 \end{alignat} %]]></script>
 
 <p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value in our universe of values (we will only encounter values in the next section, but possible ones include 42, $\set{3, \set{4, 5}}$ or $\str{hello}$) which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
