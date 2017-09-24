@@ -377,9 +377,11 @@
 
 <p>If you’re familiar with standard mathematical notation you’ll find TLA<sup>+</sup>’s syntax intuitive and readable for the most part.</p>
 
+<h3 id="the-logical-connectives-and-the-qunatifiers">The Logical Connectives and the Qunatifiers</h3>
+
 <p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. It has the familiar operators<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">9</a></sup>: $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\exists$ and $\forall$ are the regular first order existential and universal quantifiers. In the TLA<sup>+</sup> syntax, we write <code class="highlighter-rouge">:</code> (colon) instead of the more common single dot after a quantifier, which is used instead of parentheses to delineate the scope of the bound variables, and is read as “such that”. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>. $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
 
-<p>Variables that are not part of the state of a computation (we’ll learn about state in part 3), can be introduced with the quantifiers $\A$ or $\E$, or can be declared with the keyword <script type="math/tex">\CONSTANT\!</script>, in which case they are free.</p>
+<p>Variables that are not part of the state of a computation (we’ll learn about state in part 3), can be introduced with the quantifiers $\A$ or $\E$, or can be declared with the keyword <script type="math/tex">\CONSTANT\!</script> (see the chapter <a href="#constants">Constants</a>), in which case they are free.</p>
 
 <p>In addition, TLA<sup>+</sup> has a couple of special constructs inspired by programming languages. The construct</p>
 
@@ -387,7 +389,7 @@
 
 <p>where $p$ is some logical predicate and $x$ and $y$ are values, takes the value $x$ if $p$ is <script type="math/tex">\TRUE\!</script> or the value of $y$ otherwise. The construct</p>
 
-<script type="math/tex; mode=display">\CASE p_1 \rightarrow e_1 \;\Box\; \ldots\;\Box\;p_n \rightarrow e_n \ldots\;\Box\; \OTHER\rightarrow e</script>
+<script type="math/tex; mode=display">\CASE p_1 \to e_1 \;\Box\; \ldots\;\Box\;p_n \to e_n \ldots\;\Box\; \OTHER\to e</script>
 
 <p>is equal to some $e_i$ such that $p_i$ is true, if any, otherwise it is equal to $e$ if the <script type="math/tex">\OTHER\!</script> clause exists; if it does not, the value of the expression is undefined (we’ll look at what precisely that means later). If more than one predicate is true, the value of the expression would be one of them, but the language does not commit to which. Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> are defined in terms of the <script type="math/tex">\CHOOSE\!</script> operator we’ll see later.</p>
 
@@ -404,6 +406,35 @@
 <p>Where a, b, c and d stand for arbitrary subformulas. Note the prefix connective that starts the disjunction and conjunction lists. The implied parentheses extend from the expression following the connective starting the line until another connective (of the same kind) is encountered in some new line aligned with the opening connective. So the above means the same as the following (which is also allowed in TLA<sup>+</sup>):</p>
 
 <script type="math/tex; mode=display">(a) \lor ((b \land c) \land (d)) \lor (e)</script>
+
+<h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
+
+<p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>.</p>
+
+<p>$\CHOOSE x : P(x)$ — where $P(x)$ is some predicate that may contain $x$ — is equal to <em>some</em> value in the logic’s domain of discourse, i.e. universe of values, satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:
+<script type="math/tex">% <![CDATA[
+\begin{alignat}{1}
+&(\E x : P(x)) \equiv\; P(\CHOOSE x : P(x) )\\
+&(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
+\end{alignat} %]]></script>
+The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script><sup id="fnref:true"><a href="#fn:true" class="footnote">10</a></sup>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+
+<p>Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script>[^if-def]:
+<script type="math/tex">% <![CDATA[
+\begin{alignat}{1}
+&\IF p \;\THEN e_1 \;\ELSE e_2 &\defeq \CHOOSE v : (p \implies (v = e_1)) \land (\neg p \implies (v = e_2))\\
+\\
+&\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n &\defeq \CHOOSE v : (p_1 \land (v = e_1)) \lor \dots \lor (p_n \land (v = e_n))\\
+\\
+&\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n \Box \;\OTHER \to e&\defeq \CASE p_1 \to e_1 \;\Box \dots \Box\; p_n \to e_n \Box\; \neg (p_1 \lor \dots \lor p_n) \to e
+\end{alignat} %]]></script>
+[^if-def]: See <em>Specifying Systems</em>, p. 298.</p>
+
+<p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value in our universe of values (we will only encounter values in the next section, but possible ones include 42, $\set{3, \set{4, 5}}$ or $\str{hello}$) which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
+
+<p>It is important to emphasize that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">11</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It “statically” describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE  x : x \in Int \land x \% 2 = 0$ means “<em>some</em> even integer”, not “<em>find</em> an even integer”. The distinction is, indeed, mostly philosophical, but programmers must be reminded that, at this point, we are dealing only with mathematical definitions, not some algorithm that “runs”.</p>
+
+<p>It is also important to remember that <script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them; you cannot <script type="math/tex">\CHOOSE\!</script> a value that doesn’t exist in the universe of values, i.e., whose existence isn’t postulated by the axioms of the logical theory, which I will introduce in the chapter <a href="#sets">Sets</a>.</p>
 
 <h2 id="definitions">Definitions</h2>
 
@@ -439,7 +470,7 @@
 &Fact(n) \defeq \IF n \leq 1 \;\THEN 1\; \ELSE n*Fact(n-1)
 \end{align*} %]]></script>
 
-<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">10</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
+<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">12</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
 
 <p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:</p>
 
@@ -477,11 +508,13 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &x \defeq 3
 \end{align} %]]></script>
 
-<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a first-order logic over set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
+<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
+
+<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
 
 <script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
 
-<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">11</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
+<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">13</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
 
 <script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
 
@@ -491,38 +524,41 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <h2 id="sets">Sets</h2>
 
-<p>The data logic in TLA<sup>+</sup> is based on <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ZFC set theory</a>, so all values in TLA<sup>+</sup> are formally sets. Even the number 1 is a set, <script type="math/tex">\TRUE\!</script> is a set, and the function $\tan$ is a set. But as we’ll see later, how those values are encoded as sets is hidden, and their internal structure is inaccessible to us that it may as well not exist at all, and we can safely treat them as primitive values.</p>
+<p>So far we’ve covered the first-order logic that forms the core of the data logic of TLA<sup>+</sup>; we now introduce the universe of values of that logic, or, put differently, the logical theory we will work with. The data logic is based on <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">ZFC set theory</a>, so all values in TLA<sup>+</sup> are formally sets. Even the number 1 is a set, <script type="math/tex">\TRUE\!</script> is a set, and the function $\tan$ is a set. But as we’ll see later, how those values are encoded as sets is hidden, and their internal structure is inaccessible to us that it may as well not exist at all, and we can safely treat them as primitive values.</p>
 
-<p>When working with set theory, we usually use first-order logic. However, as the values of the universe are sets, the expressivity of the logic is similar to that of higher-order logic<sup id="fnref:class"><a href="#fn:class" class="footnote">12</a></sup>. In fact, FOL over ZFC is considered the “standard” formal system for (ordinary) mathematics.</p>
+<p>When working with set theory, we usually use first-order logic. However, as the values of the universe are sets, the expressivity of the logic is similar to that of higher-order logic<sup id="fnref:class"><a href="#fn:class" class="footnote">14</a></sup>. In fact, FOL over ZFC is considered the “standard” formal system for (ordinary) mathematics.</p>
 
 <h3 id="set-fundamentals">Set Fundamentals</h3>
 
 <p>The constant $\set{}$ is the empty set, and there are two binary relations that are defined for all sets: $\in$ is the membership relation, and $=$ is equality, where sets are equal by extensionality, i.e., iff they have the same elements ($a = b \equiv (\A x : x \in a \equiv x \in b)$).</p>
 
-<p>Sets can be constructed only in accordance with the axioms of ZFC<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">13</a></sup>:</p>
+<p>Sets can be constructed only in accordance with the axioms of ZFC<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">15</a></sup>:</p>
 
 <p>If $a$ and $b$ are sets, then $\set{a, b}$ is another set (axiom of pairing).</p>
 
 <p>If $S$ is a set and $P$ is some predicate, then $\set{x \in S : P(x)}$ is a set containing all members of $S$ that satisfy $P$ (axiom of specification/separation). For example, $\set{n \in Nat : n \% 2 = 0}$ is the set of even natural numbers. Note that a colon is used instead of the more common <code class="highlighter-rouge">|</code> in the set comprehension expression.</p>
 
-<p>If $S$ is a set and $F$ some expression then $\set{F(x) :  x \in S}$ is a set, constructed by replacing each member of $S$ with its image under the operator $F$ (axiom of replacement)<sup id="fnref:ambig"><a href="#fn:ambig" class="footnote">14</a></sup>. For example, $\set{2*n : n \in Nat}$ is also the set of even natural numbers.</p>
+<p>If $S$ is a set and $F$ some expression then $\set{F(x) :  x \in S}$ is a set, constructed by replacing each member of $S$ with its image under the operator $F$ (axiom of replacement)<sup id="fnref:ambig"><a href="#fn:ambig" class="footnote">16</a></sup>. For example, $\set{2*n : n \in Nat}$ is also the set of even natural numbers.</p>
 
 <p>If $S$ is a set, then $\UNION S$ is a set containing all members of the members of $S$ (axiom of union). E.g. $\UNION \set{\set{1, 2}, \set{2, 3}} = \set{1, 2, 3}$.</p>
 
 <p>If $S$ is a set, then $\SUBSET S$ is the <a href="https://en.wikipedia.org/wiki/Power_set">power set</a> of $S$, namely the set of all subsets of $S$ (axiom of power set). For example, $\SUBSET \set{1,2,3} = \set{\set{}, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$.</p>
 
-<p>Quantifiers can (and usually do) appear bounded (e.g. $\forall x \in S : …$), in which case they satisfy the following:</p>
+<p>The quantifiers and the <script type="math/tex">\CHOOSE\!</script> operator can (and usually do) appear <em>bounded</em> to a set (e.g. $\forall x \in S : …$), in which case they satisfy the following:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{2}
 &(\A x \in S : P(x)) & \equiv\; & (\A x : x \in S \implies P(x)) \\
-&(\E x \in S : P(x))  & \equiv\; & (\E x : x \in S \land P(x))
+&(\E x \in S : P(x))  & \equiv\; & (\E x : x \in S \land P(x))\\
+&\CHOOSE x \in S : P(x) &=\;& \CHOOSE x :  x \in S \land P(x)
 \end{alignat} %]]></script>
 
 <p>TLA<sup>+</sup> has the usual set operators $\cup$ (union), $\cap$ (intersection), $\subseteq$ (subset or equal), $\subset$ (strict subset), \ (set difference) etc., all trivially defined using the fundamental operations above.</p>
 
 <p>The set <script type="math/tex">\BOOLEAN\! \defeq \set{\TRUE\!,\FALSE\!}</script> is built-in. TLA<sup>+</sup> does not distinguish between the elements of the set <script type="math/tex">\BOOLEAN\!</script> and logical truth values. So, for example, <script type="math/tex">% <![CDATA[
 \A p \in \BOOLEAN\!: p \lor (5 < 6) %]]></script> is true, one can write $(3 &lt; 4) = (8 &gt; 2)$, using $=$ instead of $\equiv$  even though the latter is a logical connective while the former is a relation on sets, and $(1 &gt; 0) \in \BOOLEAN$ is true. A formula (and a predicate) is, therefore, any boolean-valued expression.</p>
+
+<p>The operations defined above, based on the axioms of ZFC, fully specify which sets exist in our universe. As <script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, you can’t <script type="math/tex">\CHOOSE\!</script> the Russell paradox “set” because one does not exist, as it cannot be constructed using any of the set construction operations. The value of $\CHOOSE x : \A s : s \in x \equiv s \notin s$ (which says that $x$ is the set of all sets that do not contain themselves — a paradox) is, therefore, undefined, as no such set $x$ exists; the right-hand side of the <script type="math/tex">\CHOOSE\!</script> expression is false for all sets in ZFC.</p>
 
 <p>Let’s see some examples of TLA<sup>+</sup> definitions using sets. Here is an example of a useful operator that states that there exists one and only one member of a set satisfying some predicate:</p>
 
@@ -544,7 +580,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &&\land \forall a, b \in S : a \preceq b \lor b\preceq a& \comment{Totality}\\
 \end{alignat} %]]></script>
 
-<p>And here are some important algebraic structures, the <a href="https://en.wikipedia.org/wiki/Semigroup">semigroup</a>, the <a href="https://en.wikipedia.org/wiki/Monoid">monoid</a> and the <a href="https://en.wikipedia.org/wiki/Group_(mathematics)">group</a><sup id="fnref:cdot"><a href="#fn:cdot" class="footnote">15</a></sup>:</p>
+<p>And here are some important algebraic structures, the <a href="https://en.wikipedia.org/wiki/Semigroup">semigroup</a>, the <a href="https://en.wikipedia.org/wiki/Monoid">monoid</a> and the <a href="https://en.wikipedia.org/wiki/Group_(mathematics)">group</a><sup id="fnref:cdot"><a href="#fn:cdot" class="footnote">17</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -583,7 +619,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>The first conjunct says that $x$ — a member of the quotient — must not be empty, the second says that all members of $x$ are equivalent, and the third conjunct says that $x$ is maximal, i.e., contains <em>all</em> members of $S$ that are equivalent to those in $x$; therefore $x$ is an equivalence class.</p>
 
-<p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">16</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
+<p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">18</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
 
 <p>There are often many equivalent ways of defining mathematical concepts. For example, here is another way of defining $Quotient$:</p>
 
@@ -595,41 +631,15 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>The <code class="highlighter-rouge">FiniteSets</code> module (which is part of the TLA<sup>+</sup> standard module library), defines useful set operators, like $IsFiniteSet(S)$, which is true iff $S$ is finite, and $Cardinality(S)$, which is the number of elements in $S$ if $S$ is finite (we define $Cardinality$ ourselves <a href="#putting-it-all-together">later on</a>).</p>
 
-<h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
-
-<p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>. Technically, <script type="math/tex">\CHOOSE\!</script> can be added to any first-order logic and doesn’t rely in any way on our theory of sets, but as it is a powerful general mechanism for talking about specific values, I thought that we should first get to know the values in our theory.</p>
-
-<p>$\CHOOSE x : P(x)$, is equal to <em>some</em> value (i.e. set) satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&(\E x : P(x)) \equiv\; P(\CHOOSE x : P(x) )\\
-&(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
-\end{alignat} %]]></script>
-
-<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
-
-<p>Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script>. See <em>Specifying Systems</em>, p. 298 for the precise definitions.</p>
-
-<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$.</p>
-
-<p>Like the quantifiers, <script type="math/tex">\CHOOSE\!</script> usually appears bounded, as in, $\CHOOSE x \in S : P(x)$, which is shorthand for $\CHOOSE x :  x \in S \land P(x)$.</p>
-
-<p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value  — could be 42, could be $\set{3, \set{4, 5}}$ — which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
-
-<p>When an undefined value is part of an expression that always yields a boolean value (like expressions involving $\in$ or $=$, which are defined on all sets), the value of that expression is some indeterminable <script type="math/tex">\BOOLEAN\!</script>; for example: $3  \in (\CHOOSE x \in \set{} : x &gt; 0)$. In such cases I will also say that the value of the formula is undefined even though it is known to be a <script type="math/tex">\BOOLEAN\!</script>, because the logic says nothing about whether that value is <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>. We can similarly use the word “undefined” loosely to refer to an  indeterminable value in general, even if we do know it is a member of some set.</p>
-
-<p>$ChooseOne$ is a useful operator, whose value is defined only if <em>exactly one</em> value matches the predicate:</p>
+<p>$ChooseOne$ is a useful operator, whose value is defined only if <em>exactly one</em> element of a given set matches the predicate:</p>
 
 <script type="math/tex; mode=display">ChooseOne(S, P(\_)) \defeq \CHOOSE x \in S : P(x) \land \A y \in S : P(y) \implies y = x</script>
 
-<p>Another useful operator is $AnyOf$, which picks an element from a set (and is undefined if the set is empty):</p>
+<p>Another useful operator is $AnyOf$, which picks an arbitrary element from a set (and is undefined if the set is empty):</p>
 
 <script type="math/tex; mode=display">AnyOf(S) \defeq \CHOOSE x \in S : \TRUE</script>
 
-<p><script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them, so you can’t <script type="math/tex">\CHOOSE\!</script> the Russell paradox “set” because one does not exist, as it cannot be constructed using any of the set construction operations. The value of $\CHOOSE x : \A s : s \in x \equiv s \notin s$ (which says that $x$ is the set of all sets that do not contain themselves — a paradox) is, therefore, undefined, as no such set $x$ exists; the right-hand side of the <script type="math/tex">\CHOOSE\!</script> expression is false for all sets in ZFC.</p>
-
-<p>It is important to emphasize yet again that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">17</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It “statically” describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE x \in S : x &gt; 0$ means “<em>some</em> positive element in the set S”, not “<em>find</em> a positive element in the set S”.</p>
+<p>While we are on the subject of the <script type="math/tex">\CHOOSE\!</script> operator, let me revisit our definition of an undefined value. We said that an undefined value is some arbitrary, unknowable value — some set — but we may sometimes know that an unknowable value is a member of some set. For example, the relations $=$ and $\in$ are defined for <em>any</em> two sets, and so we know that the value of the expression  $3  \in (\CHOOSE x \in \set{} : x &gt; 0)$ must be a <script type="math/tex">\BOOLEAN\!</script>. Nevertheless, in such cases I will also say that the value of the formula is undefined even though it is known to be a <script type="math/tex">\BOOLEAN\!</script>, because the logic says nothing about whether that value is <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>. We can similarly use the word “undefined” loosely to refer to an  indeterminable value in general, even if we do know it is a member of some set.</p>
 
 <h3 id="some-important-sets">Some Important Sets</h3>
 
@@ -639,7 +649,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>The special syntax $a .. b$ defines the set $\set{n \in Nat : n \geq a \land n \leq b}$, so $2..5 = \set{2,3,4,5}$. TLA<sup>+</sup> currently has no special syntax for complex numbers or matrices.</p>
 
-<p>In set theory, all values are encoded as some set (so the number 1 is somehow encoded as a set). However, TLA<sup>+</sup> lets us hide encodings within modules so that their details do not escape the module boundary and appear to external modules as primitives (we will cover modules in part 4), and so the value of $1 \in 2$ or of $1 = \str{hi}$ is undefined (i.e., indeterminable). Because equality (and membership) is defined on all sets to have a boolean value we know that $1 = \str{hi}$ must be some boolean, namely, either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>, but we have no way of determining which. In a typed formalism, the expression $1 = \str{hi}$ is simply illegal (ill-formed); in a dynamically-typed programming language it evaluates to false. But in TLA<sup>+</sup> it is simply nonsensical — we cannot assign it any meaning, i.e. a value<sup id="fnref:tlc-nonsense"><a href="#fn:tlc-nonsense" class="footnote">18</a></sup> — like the english expression “Thursday is purple”, which is grammatically legal, or well-formed, yet carries no well-accepted meaning. If you’d like to revisit the tradeoffs of this choice, I’ll refer you to the two papers I linked to above<sup id="fnref:typed-untyped"><a href="#fn:typed-untyped" class="footnote">19</a></sup>.</p>
+<p>In set theory, all values are encoded as some set (so the number 1 is somehow encoded as a set). However, TLA<sup>+</sup> lets us hide encodings within modules so that their details do not escape the module boundary and appear to external modules as primitives (we will cover modules in part 4), and so the value of $1 \in 2$ or of $1 = \str{hi}$ is undefined (i.e., indeterminable). Because equality (and membership) is defined on all sets to have a boolean value we know that $1 = \str{hi}$ must be some boolean, namely, either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>, but we have no way of determining which. In a typed formalism, the expression $1 = \str{hi}$ is simply illegal (ill-formed); in a dynamically-typed programming language it evaluates to false. But in TLA<sup>+</sup> it is simply nonsensical — we cannot assign it any meaning, i.e. a value<sup id="fnref:tlc-nonsense"><a href="#fn:tlc-nonsense" class="footnote">19</a></sup> — like the english expression “Thursday is purple”, which is grammatically legal, or well-formed, yet carries no well-accepted meaning. If you’d like to revisit the tradeoffs of this choice, I’ll refer you to the two papers I linked to above<sup id="fnref:typed-untyped"><a href="#fn:typed-untyped" class="footnote">20</a></sup>.</p>
 
 <p>As a result, we don’t know whether the set $\set{1, \str{hi}}$ contains one or two elements because we cannot know if 1 is equal to “hi” or not as we don’t know how “hi” is encoded  (TLC forbids such a set altogether, as its elements are incomparable). So what do we do if we want to have a set that contains the values 0, 1, and UNKNOWN? We use <script type="math/tex">\CHOOSE\!</script> to define UNKNOWN like so:</p>
 
@@ -651,7 +661,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <script type="math/tex; mode=display">a / b \defeq \CHOOSE c \in Real : a = b*c</script>
 
-<p>This definition immediately tells us, by the meaning of the <script type="math/tex">\CHOOSE\!</script> operator, that $1/0$ is undefined<sup id="fnref:div"><a href="#fn:div" class="footnote">20</a></sup>, in the very precise sense explained in our discussion of <script type="math/tex">\CHOOSE\!</script>.</p>
+<p>This definition immediately tells us, by the meaning of the <script type="math/tex">\CHOOSE\!</script> operator, that $1/0$ is undefined<sup id="fnref:div"><a href="#fn:div" class="footnote">21</a></sup>, in the very precise sense explained in our discussion of <script type="math/tex">\CHOOSE\!</script>.</p>
 
 <p>With numbers, arithmetic operations and the order relation on numbers we can start doing some more concrete math. We’ll begin with something simple: a definition of the operator $Prime$, which is a predicate saying whether a number is prime (other definitions are also possible):</p>
 
@@ -691,7 +701,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <h3 id="functions">Functions</h3>
 
-<p>Usually, a <a href="https://en.wikipedia.org/wiki/Function_(mathematics)">function</a> is defined to be a one-valued relation, where a relation is a set of pairs — in other words, a function is defined by its <a href="https://en.wikipedia.org/wiki/Graph_of_a_function">graph</a> — but in TLA<sup>+</sup> functions are not defined as sets of pairs but as primitives (meaning that, like numbers, their encoding as sets is unknown, or opaque<sup id="fnref:not-pairs"><a href="#fn:not-pairs" class="footnote">21</a></sup>). In fact, it is pairs that are actually functions in TLA<sup>+</sup> as they’re a special case of sequences, which are in turn a special case of functions, as we’ll see. In any event, functions in TLA<sup>+</sup> are not computations; they have no dynamic behavior and no computational complexity. They are just values in the state space of algorithms. Programmers may best think of them as associative arrays, albeit possibly infinite in size (even uncountably big).</p>
+<p>Usually, a <a href="https://en.wikipedia.org/wiki/Function_(mathematics)">function</a> is defined to be a one-valued relation, where a relation is a set of pairs — in other words, a function is defined by its <a href="https://en.wikipedia.org/wiki/Graph_of_a_function">graph</a> — but in TLA<sup>+</sup> functions are not defined as sets of pairs but as primitives (meaning that, like numbers, their encoding as sets is unknown, or opaque<sup id="fnref:not-pairs"><a href="#fn:not-pairs" class="footnote">22</a></sup>). In fact, it is pairs that are actually functions in TLA<sup>+</sup> as they’re a special case of sequences, which are in turn a special case of functions, as we’ll see. In any event, functions in TLA<sup>+</sup> are not computations; they have no dynamic behavior and no computational complexity. They are just values in the state space of algorithms. Programmers may best think of them as associative arrays, albeit possibly infinite in size (even uncountably big).</p>
 
 <p>If $A$ and $B$ are sets, $[A \to B]$ is the set of all functions from $A$ to $B$. Function application is denoted with square brackets ($f[x]$) to syntactically differentiate it from operator “application” (really, substitution). Unlike an operator, whose arguments can be any value in the universe or even other operators, every function has a domain — a set — which is obtained with the <script type="math/tex">\DOMAIN\!</script> operator like so $\A f \in [A \to B] : \DOMAIN f = A$. Because a function has a set domain, we cannot have a function whose parameter can be <em>any</em> set or even any function (as we can with operators), because that would make the domain of the function “too large to be a set”, namely, a proper class, which doesn’t exist in ZFC.</p>
 
@@ -826,7 +836,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>We also have syntactic sugar to define and apply functions with multiple parameters. We’ll talk about it once we’ve learned about tuples.</p>
 
-<p>Now let’s use functions and one of the sets we’ve seen to formally define some more important mathematical concepts<sup id="fnref:calculus"><a href="#fn:calculus" class="footnote">22</a></sup>:</p>
+<p>Now let’s use functions and one of the sets we’ve seen to formally define some more important mathematical concepts<sup id="fnref:calculus"><a href="#fn:calculus" class="footnote">23</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -929,7 +939,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <h3 id="operators-vs-values">Operators vs. Values</h3>
 
-<p>Should you express mathematical functions as TLA<sup>+</sup> functions or as operators? Similarly, should you express relations as sets of pairs or as binary operators? That’s entirely up to you. Expressing them as objects in the theory, i.e. as functions or sets, “reifies” them allowing to <script type="math/tex">\CHOOSE\!</script> them or quantify over them, which may or may not be necessary in your specification. Using operators may be more convenient in terms of syntax (e.g. $x \preceq y$ looks nicer than $\seq{x,y} \in OrderRel$). Sometimes, the choice is dictated by the capabilities of the tools you’d like to use in verifying your specification. For example, the mechanical proof system TLAPS currently does not support recursive operator definitions, but it does support recursive functions (which are just syntax sugar for <script type="math/tex">\CHOOSE\!</script>)<sup id="fnref:tlaps-recursive"><a href="#fn:tlaps-recursive" class="footnote">23</a></sup>. Also, operators can express things that functions simply can’t. For example, the sequence length operator or the set cardinality operator (which we’ll see later) could not have been defined as functions because they’re not functions in set-theory, as their domain is not a set but “too many” sets (i.e. a collection, a <em>class</em> that is cannot be constructed as a set in ZFC).</p>
+<p>Should you express mathematical functions as TLA<sup>+</sup> functions or as operators? Similarly, should you express relations as sets of pairs or as binary operators? That’s entirely up to you. Expressing them as objects in the theory, i.e. as functions or sets, “reifies” them allowing to <script type="math/tex">\CHOOSE\!</script> them or quantify over them, which may or may not be necessary in your specification. Using operators may be more convenient in terms of syntax (e.g. $x \preceq y$ looks nicer than $\seq{x,y} \in OrderRel$). Sometimes, the choice is dictated by the capabilities of the tools you’d like to use in verifying your specification. For example, the mechanical proof system TLAPS currently does not support recursive operator definitions, but it does support recursive functions (which are just syntax sugar for <script type="math/tex">\CHOOSE\!</script>)<sup id="fnref:tlaps-recursive"><a href="#fn:tlaps-recursive" class="footnote">24</a></sup>. Also, operators can express things that functions simply can’t. For example, the sequence length operator or the set cardinality operator (which we’ll see later) could not have been defined as functions because they’re not functions in set-theory, as their domain is not a set but “too many” sets (i.e. a collection, a <em>class</em> that is cannot be constructed as a set in ZFC).</p>
 
 <h2 id="constants">Constants</h2>
 
@@ -937,7 +947,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>The name <em>constant</em> means that the declared value/operator is not a temporal one — we’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>.</p>
 
-<p>Constants are introduced with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them are introduced with the keyword <script type="math/tex">\ASSUME\!</script>. For example:</p>
+<p>Constants are introduced with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script>. For example:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -1133,7 +1143,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 }
 \end{alignat} %]]></script>
 
-<p>The operators $ListAsSeq$<sup id="fnref:listasseq"><a href="#fn:listasseq" class="footnote">24</a></sup> and $SeqAsList$ allow us to move between two levels of abstractions and write a theorem like</p>
+<p>The operators $ListAsSeq$<sup id="fnref:listasseq"><a href="#fn:listasseq" class="footnote">25</a></sup> and $SeqAsList$ allow us to move between two levels of abstractions and write a theorem like</p>
 
 <script type="math/tex; mode=display">\THEOREM \A  s \in Seq(S) : s = ListAsSeq(SeqAsList(s))</script>
 
@@ -1141,7 +1151,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 
 <p>I hope that it is now clear why I opened by saying that this is the least essential part of TLA<sup>+</sup>: any other system for defining data and operations on it would do. For example we could have used HOL instead of ZFC, for a slightly different set of tradeoffs, although when it comes to actual work, the similarities would be greater than the differences; after all, math is math. The interesting — and unique — power of TLA<sup>+</sup> comes from TLA, the logic used to define algorithms, which we’ll cover in the upcoming installments. Nevertheless, the data formalism chosen by TLA<sup>+</sup> is one that is both powerful and relatively familiar to engineers, most of whom learned about sets and functions in a discrete math course.</p>
 
-<p>In fact, this system is powerful enough that we don’t really need anything else. We could define computations as as discrete dynamical processes that change state in time by modeling (discrete) time as the index of an infinite sequence<sup id="fnref:kleene"><a href="#fn:kleene" class="footnote">25</a></sup>. However, this is not the path taken by TLA<sup>+</sup>, which offers a more structured and convenient way of describing algorithms and computations using the temporal logic of actions.</p>
+<p>In fact, this system is powerful enough that we don’t really need anything else. We could define computations as as discrete dynamical processes that change state in time by modeling (discrete) time as the index of an infinite sequence<sup id="fnref:kleene"><a href="#fn:kleene" class="footnote">26</a></sup>. However, this is not the path taken by TLA<sup>+</sup>, which offers a more structured and convenient way of describing algorithms and computations using the temporal logic of actions.</p>
 
 <h2 id="proofs">Proofs</h2>
 
@@ -1165,7 +1175,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 
 <p>TLA<sup>+</sup>’s proof language is rich with constructs designed to make it easier for people to read and write proofs, and can be learned in a day or two once you know TLA<sup>+</sup>. The proof language deviates somewhat from the relative minimalism that characterizes the rest of TLA<sup>+</sup>, and focuses more on readability that evokes prose proofs as much as possible, using a wide selection of keywords — over 25 — many of which are synonyms and syntactic sugar. I will not cover them all, but just highlight the core elements.</p>
 
-<p>The paper introducing the proof language<sup id="fnref:tlaps-paper"><a href="#fn:tlaps-paper" class="footnote">26</a></sup> reads:</p>
+<p>The paper introducing the proof language<sup id="fnref:tlaps-paper"><a href="#fn:tlaps-paper" class="footnote">27</a></sup> reads:</p>
 
 <blockquote>
   <p>The goal of the language is to make proofs easy to read and write for someone with no knowledge of how the proofs are being checked. This leads to a mostly declarative language, built around the uses and proofs of assertions rather than around the application of proof-search tactics.</p>
@@ -1316,7 +1326,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 
 <p>The proof language has some constructs that allow for a more natural expression of the proof (similar to common techniques in prose proofs), or to improve readability. Instead of listing the set of facts and definitions that are supposed to entail the goal, the keyword <script type="math/tex">\USE\!</script> introduces facts and definitions that are then implicitly added to all subsequent steps in the same step sequence. The matching <script type="math/tex">\HIDE\!</script> keyword does the opposite, removing implicit facts from consideration. Because <script type="math/tex">\USE\!</script> doesn’t introduce a proposition, it is usually written in an unnamed step (e.g. $\seq{2}$ as opposed to, say, $\seq{2}5$), as there’s never a reason to reference it.</p>
 
-<p>A more interesting ergonomic construct is <script type="math/tex">\SUFFICES\!</script>. Say that assuming <em>A</em>, we want to prove <em>C</em>, and that we could do that by first proving $A \vdash B$ and then $B \vdash C$. Sometimes it is more convenient (to guide the reader in the intent of the proof) to first prove $B \vdash C$ and only then  $A \vdash B$. In a prose proof, we usually say “suffices to prove <em>B</em> because…” and then move on to proving <em>B</em>. We can do the same in TLA<sup>+</sup> with the <script type="math/tex">\SUFFICES\!</script> construct. When used in an unnamed step, it changes the current goal as seen in the example below, taken from the hyperbook, which demonstrates the use of <script type="math/tex">\SUFFICES\!</script> as well as gives you a sense of what a real proof looks like. The example proves some theorems that can be mechanically checked by TLAPS about the GCD operator we defined above in the section <a href="#some-important-sets">Some Important Sets</a><sup id="fnref:GCD"><a href="#fn:GCD" class="footnote">27</a></sup>:</p>
+<p>A more interesting ergonomic construct is <script type="math/tex">\SUFFICES\!</script>. Say that assuming <em>A</em>, we want to prove <em>C</em>, and that we could do that by first proving $A \vdash B$ and then $B \vdash C$. Sometimes it is more convenient (to guide the reader in the intent of the proof) to first prove $B \vdash C$ and only then  $A \vdash B$. In a prose proof, we usually say “suffices to prove <em>B</em> because…” and then move on to proving <em>B</em>. We can do the same in TLA<sup>+</sup> with the <script type="math/tex">\SUFFICES\!</script> construct. When used in an unnamed step, it changes the current goal as seen in the example below, taken from the hyperbook, which demonstrates the use of <script type="math/tex">\SUFFICES\!</script> as well as gives you a sense of what a real proof looks like. The example proves some theorems that can be mechanically checked by TLAPS about the GCD operator we defined above in the section <a href="#some-important-sets">Some Important Sets</a><sup id="fnref:GCD"><a href="#fn:GCD" class="footnote">28</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -1371,7 +1381,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 &&&\rlap{\BY\seq{2}1, \seq{2}2}\\
 \end{alignat} %]]></script>
 
-<p>Finally, let’s take a look at the <script type="math/tex">\PICK\!</script> construct. If we have an assumption of the form $\exists x : P(x)$ we can use it by <script type="math/tex">\PICK\!</script>ing a fresh variable $x$ for which $P(x)$ is assumed (it works similarly to $\NEW x, P(x)$). Here is an example adapted from the TLAPS documentation. In addition to <script type="math/tex">\PICK\!</script>, it makes use of <script type="math/tex">\SUFFICES\!</script> and also demonstrates a proof of contradiction<sup id="fnref:contra"><a href="#fn:contra" class="footnote">28</a></sup>:</p>
+<p>Finally, let’s take a look at the <script type="math/tex">\PICK\!</script> construct. If we have an assumption of the form $\exists x : P(x)$ we can use it by <script type="math/tex">\PICK\!</script>ing a fresh variable $x$ for which $P(x)$ is assumed (it works similarly to $\NEW x, P(x)$). Here is an example adapted from the TLAPS documentation. In addition to <script type="math/tex">\PICK\!</script>, it makes use of <script type="math/tex">\SUFFICES\!</script> and also demonstrates a proof of contradiction<sup id="fnref:contra"><a href="#fn:contra" class="footnote">29</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -1461,6 +1471,12 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
     <li id="fn:ASCII">
       <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv$, <code class="highlighter-rouge">-&gt;</code> for $\to$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto$, <code class="highlighter-rouge">==</code> for $\triangleq$, <code class="highlighter-rouge">\A</code> for $\forall$, <code class="highlighter-rouge">\E</code> for $\exists$, <code class="highlighter-rouge">[]</code> for $\Box$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond$, « for $\langle$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle$,  <code class="highlighter-rouge">\o</code> for $\circ$ etc.. $\LaTeX$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall$ or <code class="highlighter-rouge">\neg</code> for $\neg$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful.&nbsp;<a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
     </li>
+    <li id="fn:true">
+      <p>I haven’t explained what <script type="math/tex">\TRUE\!</script> is yet, but for now we’ll treat it as a formula that is true.&nbsp;<a href="#fnref:true" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:some">
+      <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name.&nbsp;<a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
+    </li>
     <li id="fn:lambda">
       <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later.&nbsp;<a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
     </li>
@@ -1481,9 +1497,6 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
     </li>
     <li id="fn:tlc-finite">
       <p>Provided that evaluating the expression does not require enumerating an infinite set, but TLC allows overriding set definitions so that you may refer to infinite sets in your specification, but evaluate them on finite subsets.&nbsp;<a href="#fnref:tlc-finite" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:some">
-      <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name.&nbsp;<a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tlc-nonsense">
       <p>Attempting to evaluate the expression in the TLC model checker results in an error.&nbsp;<a href="#fnref:tlc-nonsense" class="reversefootnote">&#8617;</a></p>
