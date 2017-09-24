@@ -411,13 +411,15 @@
 
 <p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>.</p>
 
-<p>$\CHOOSE x : P(x)$ — where $P(x)$ is some predicate that may contain $x$ — is equal to <em>some</em> value in the logic’s domain of discourse, i.e. universe of values, satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:
-<script type="math/tex">% <![CDATA[
+<p>$\CHOOSE x : P(x)$ — where $P(x)$ is some predicate that may contain $x$ — is equal to <em>some</em> value in the logic’s domain of discourse, i.e. universe of values, satisfying the predicate $P$, if one exists. <script type="math/tex">\CHOOSE\!</script> satisfies these two rules:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &(\E x : P(x)) \equiv\; P(\CHOOSE x : P(x) )\\
 &(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
 \end{alignat} %]]></script>
-The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script><sup id="fnref:true"><a href="#fn:true" class="footnote">10</a></sup>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+
+<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script><sup id="fnref:true"><a href="#fn:true" class="footnote">10</a></sup>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
 
 <p>Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">11</a></sup>:</p>
 
