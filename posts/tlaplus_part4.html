@@ -574,7 +574,7 @@
 \\
 &&\rlap{NOTHING \defeq \CHOOSE x : x \notin X} \\
 \\
-&& Init &\defeq buf \in \seq{} \land in = NOTHING \land out = NOTHING\\
+&& Init &\defeq buf = \seq{} \land in = NOTHING \land out = NOTHING\\
 &&Push &\defeq in' \in X \land buf' = \seq{in'} \circ buf \land \UNCHANGED out\\
 &&Pop &\defeq buf \neq \seq{} \land out' = Head(buf) \land buf' = Tail(buf) \land \UNCHANGED in\\
 &&Top &\defeq buf \neq \seq{} \land out' = Head(buf)\land \UNCHANGED \seq{in, buf}\\
