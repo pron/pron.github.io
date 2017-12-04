@@ -1660,6 +1660,67 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>Some algorithms — especially those that are specified at the code level — may be easier for programmers to specify in PlusCal, a pseudocode-like language that can be written inside a comment block in a TLA<sup>+</sup> file, and automatically translated to a readable TLA<sup>+</sup> specification. While I will show a tiny example of PlusCal later, I will not cover it, as it is little more than syntax sugar around TLA<sup>+</sup>. The resources I linked to in part 1 teach PlusCal (except for <em>Specifying Systems</em>, which had been written prior to the development of PlusCal).</p>
 
+<h3 id="higher-order-computation">Higher-Order Computation</h3>
+
+<p>Some formalisms, particularly functional programming languages, make common use of so-called higher-order programs. In those languages, a higher-order subroutine (or “function”), is one that takes as an argument another function or one that returns a function. “Higher-order” progeams are first-order in TLA, similarly to how “higher-order” continuous dynamical systems are expressed as first-order systems of ordinary differential equation. In the section on Plotkin’s parallel or we’ve seen how we can express a computation that interacts and controls other computations, and in part 4 we’ll see a general way of expressing subroutines and functional compositions, which, in TLA, is also expressed as a first-order composition, just like in the parallel or example. However, precisely modeling subroutines (AKA, “functions”) and their interaction is not required in order to express “higher-order” computations in TLA<sup>+</sup> in a simple manner. Let’s examine a higher-order subroutine very familiar to functional programmers, and see how it is expressed in TLA<sup>+</sup>.</p>
+
+<p>The following is a somewhat unidiomatic implementation of the familiar <code class="highlighter-rouge">map</code> function in Standard ML (I’m not using pattern-matching to make the code more readable to those not familiar with the construct). The function takes as parameters a function, <code class="highlighter-rouge">f</code>, and a list, <code class="highlighter-rouge">ls</code>, and returns a list of element, each of which is the result of applying <code class="highlighter-rouge">f</code> to the corresponding element in the input argument <code class="highlighter-rouge">ls</code>.</p>
+
+<div class="language-ocaml highlighter-rouge"><pre class="highlight"><code><span class="k">fun</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="p">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="p">,</span> <span class="n">ls</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="kt">list</span><span class="o">):</span> <span class="k">'</span><span class="n">b</span> <span class="kt">list</span>
+	<span class="k">if</span> <span class="n">l</span> <span class="p">=</span> <span class="n">nil</span> 
+		<span class="k">then</span> <span class="n">nil</span> 
+		<span class="k">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">hd</span> <span class="n">ls</span><span class="o">))</span> <span class="p">::</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tl</span> <span class="n">ls</span><span class="o">))</span>
+</code></pre>
+</div>
+
+<p>This subroutine is recursive: at each recursive step the variable <code class="highlighter-rouge">ls</code> refers to the tail of <code class="highlighter-rouge">ls</code> in the previous recursive step, and the output elements are accumulated on the stack, later to be assembled into a list data structure back to front.</p>
+
+<p>How we would specify this program in TLA<sup>+</sup>? A specification of a program represents all possible executions, or behaviors, of that program. As this program is deterministic, we just a get a different behavior for different values of the subroutine’s parameters, <code class="highlighter-rouge">f</code>, and <code class="highlighter-rouge">ls</code>. Different values of <code class="highlighter-rouge">ls</code> correspond to a different list being traversed, but what different behaviors do different values of <code class="highlighter-rouge">f</code> yield?</p>
+
+<p>What <code class="highlighter-rouge">f</code> can represent depends on the programming language. In ML, thanks to type-safety, the compiler would guarantee that <em>if</em> <code class="highlighter-rouge">f</code> returns a value, it would be of type <code class="highlighter-rouge">'b</code>, and that’s pretty much it. <code class="highlighter-rouge">f</code> may not return a value at all — for example, it may not terminate or it may throw an exception — and it is not guaranteed to return the same value for the same argument (for example, it can randomize its responses).</p>
+
+<p>Let’s describe the program in TLA<sup>+</sup>. We will not bother with modeling the different representations on the output list first on the stack and then as a list data structure, and we will ignore exceptions (they’re easy to model, but would distract us from the core of this treatment):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS A, B\;\; \; \;\comment{The in/out "types"}}\\
+&\rlap{\VARIABLES in, out\;\; \comment{The in/out lists}}\\
+&Map \defeq &\land \rlap{in \in Seq(A)}\\
+&&\land \Box[&\land in \neq \seq{}\\
+&&&\land in' = Tail(in)\\
+&&&\land out' = \E y \in B : Append(out, y)]_{\seq{in, out}}\\
+\end{alignat} %]]></script>
+
+<p>The last line encodes our only assumption that, if <code class="highlighter-rouge">f</code> returns a value, it will be one in the set $B$. Note that we are not assuming that <code class="highlighter-rouge">f</code> terminates, as we’ve not added a liveness condition, and so our program may get stuck at any step.</p>
+
+<p>Suppose, however, that the program were written in (again, unidiomatic) Haskell, like so:</p>
+
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">b</span>
+<span class="n">map</span> <span class="n">f</span> <span class="n">ls</span> <span class="o">=</span>
+	<span class="kr">if</span> <span class="n">null</span> <span class="n">ls</span>
+		<span class="kr">then</span> <span class="kt">[]</span>
+		<span class="kr">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">head</span> <span class="n">ls</span><span class="p">))</span> <span class="o">:</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tail</span> <span class="n">ls</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>Functions in Hakell do not mean the same thing as they do in ML, because the language provides further guarantees (asuming they’re not circumvented with an escape hatch — a possibility we will choose to ignore in to show a somewhat different specification). Because Haskell enforces purity, it guarantees that, while <code class="highlighter-rouge">f</code> may throw an exception or not terminate, it behaves a little more like an actual function in the sense that if it returns a value, it will always return the same value for a given argument. This guarantee reduces the nondeterminism in our specification. To describe this expected behavior, we will introduce a function, $fn$, that will allow us to limit the algorithm’s behavior. $fn$ is determined in the first step and then never changes, and is used to represent <code class="highlighter-rouge">f</code>’s function-like behavior, and ensures that <em>if</em> the algorithm doesn’t stop, it will yield the equal output elements for equal input elements.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS A, B}\\
+&\rlap{\VARIABLES in, out, fn}\\
+&Map \defeq &\land \rlap{in \in Seq(A)}\\
+&&\land \rlap{fn \in [A \to B]}\\
+&&\land \Box[&\land in \neq \seq{}\\
+&&&\land in' = Tail(in)\\
+&&&\land out' = Append(out, fn[Head(in)])\\
+&&&\land \UNCHANGED fn]_{\seq{in, out, fn}}\\
+\end{alignat} %]]></script>
+
+<p>It is important to note that $fn$ is a function and so does not represent the subroutine <code class="highlighter-rouge">f</code>; it is just used to specify some aspect of its behavior. This specification still captures the possibility that <code class="highlighter-rouge">f</code> may not terminate, as there are no liveness conditions.</p>
+
+<p>If the program were written in a <em>total</em> functional language that guarantees <code class="highlighter-rouge">f</code>’s termination, we would specify it by adding a fairness condition on the algorithm. In part 4 we will explore the abstraction/refinement relation, which forms the very core of TLA’s power, and using which we could justify using the function $fn$ as an <em>abstraction</em> of the subroutine <code class="highlighter-rouge">f</code>, but there is no need to think of $fn$ in this way (although the abstraction/refinement relation serves as the deep explanation to why TLA can specify anything at all).</p>
+
 <h2 id="what-we-can-and-cannot-specify">What We Can and Cannot Specify</h2>
 
 <p>Once we have a system specification, we make statements about its behavior that are normally of the form:</p>
