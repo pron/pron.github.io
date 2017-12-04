@@ -1666,9 +1666,9 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>The following is a somewhat unidiomatic implementation of the familiar <code class="highlighter-rouge">map</code> function in Standard ML (I’m not using pattern-matching to make the code more readable to those not familiar with the construct). The function takes as parameters a function, <code class="highlighter-rouge">f</code>, and a list, <code class="highlighter-rouge">ls</code>, and returns a list of element, each of which is the result of applying <code class="highlighter-rouge">f</code> to the corresponding element in the input argument <code class="highlighter-rouge">ls</code>.</p>
 
-<div class="language-ocaml highlighter-rouge"><pre class="highlight"><code><span class="k">fun</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="p">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="p">,</span> <span class="n">ls</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="kt">list</span><span class="o">):</span> <span class="k">'</span><span class="n">b</span> <span class="kt">list</span>
-	<span class="k">if</span> <span class="n">l</span> <span class="p">=</span> <span class="n">nil</span> 
-		<span class="k">then</span> <span class="n">nil</span> 
+<div class="language-ocaml centered highlighter-rouge"><pre class="highlight"><code><span class="k">fun</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="p">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="p">,</span> <span class="n">ls</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="kt">list</span><span class="o">):</span> <span class="k">'</span><span class="n">b</span> <span class="kt">list</span>
+	<span class="k">if</span> <span class="n">l</span> <span class="p">=</span> <span class="n">nil</span>
+		<span class="k">then</span> <span class="n">nil</span>
 		<span class="k">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">hd</span> <span class="n">ls</span><span class="o">))</span> <span class="p">::</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tl</span> <span class="n">ls</span><span class="o">))</span>
 </code></pre>
 </div>
@@ -1695,7 +1695,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>Suppose, however, that the program were written in (again, unidiomatic) Haskell, like so:</p>
 
-<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">b</span>
+<div class="language-haskell centered highlighter-rouge"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">b</span>
 <span class="n">map</span> <span class="n">f</span> <span class="n">ls</span> <span class="o">=</span>
 	<span class="kr">if</span> <span class="n">null</span> <span class="n">ls</span>
 		<span class="kr">then</span> <span class="kt">[]</span>
