@@ -1747,7 +1747,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin {alignat}{1}
-&\E c \in Nat : Spec \land Time \implies \;&\LET n \defeq Size(input) \;\IN \\ &&\Box (time \leq n^2)
+&\E c \in Nat : Spec \land Time \implies \;&\LET n \defeq Size(input) \;\IN \\ &&\Box (time \leq c * n^2)
 \end{alignat} %]]></script>
 
 <p>to state that the worst-case time complexity is quadratic (compare with the even more general complexity operator we defined <a href="#level-of-detail">above</a>).</p>
