@@ -175,7 +175,7 @@
 	  <main>
 			<article id="post-page" class=>
 	<h2>TLA<sup>+</sup> in Practice and Theory<br/>Part 2: The + in TLA<sup>+</sup></h2>		
-	<time datetime="2017-06-01T00:00:00+03:00" class="by-line">01 Jun 2017</time>
+	<time datetime="2017-06-01T00:00:00+01:00" class="by-line">01 Jun 2017</time>
 	<div class="content">
 
 		<script type="math/tex; mode=display">\newcommand{\sc}[1]{\mathrm{\small{#1}}\;}
@@ -569,6 +569,14 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 <script type="math/tex; mode=display">ExistsOne(S, P(\_)) \defeq \E x \in S : P(x) \land \A y \in S : P(y) \implies y = x</script>
 
 <p>(this is a common pattern in logic to express a unique value; a value is unique iff two variables referring to it must be equal).</p>
+
+<p>Note that we could have defined an unbounded operator, $ExistsOne0$,</p>
+
+<script type="math/tex; mode=display">ExistsOne0(P(\_)) \defeq \E x : P(x) \land \A y : P(y) \implies y = x</script>
+
+<p>and then defined $ExistsOne$ in terms of $ExistsOne0$ like so:</p>
+
+<script type="math/tex; mode=display">ExistsOne(S, P(\_)) \defeq ExistsOne0(LAMBDA x : x \in S \land P(x))</script>
 
 <p>Now let’s define some richer mathematical concepts. We’ll define a <em>proset</em> — a set with a <a href="https://en.wikipedia.org/wiki/Preorder">preorder</a> — a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set"><em>poset</em></a> — a partially-ordered set — and a <a href="https://en.wikipedia.org/wiki/Total_order">totally-ordered</a> set:</p>
 
