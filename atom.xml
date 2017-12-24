@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2017-12-04T12:02:47+02:00</updated>
+ <updated>2017-12-24T13:14:57+00:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -17,7 +17,7 @@
    <title>Curry On Talk: The Practice and Theory of TLA+</title>
    <link href="/posts/tlaplus-curryon-talk"/>
    <id>/posts/tlaplus-curryon-talk</id>
-   <updated>2017-06-20T00:00:00+03:00</updated>
+   <updated>2017-06-20T00:00:00+01:00</updated>
    <content type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;\newcommand{\sc}[1]{\mathrm{\small{#1}}\;} \newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}} \newcommand{\str}[1]{``\mathsf{#1}\!&quot;} \newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}} \newcommand{\set}[1]{\{#1\}} \newcommand{\seq}[1]{\langle #1 \rangle} \newcommand{\llbracket}{[\![} \newcommand{\rrbracket}{]\!]} \newcommand{\sem}[1]{\llbracket #1 \rrbracket} \newcommand{\H}{-\!\!\!} \newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!} \newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!} \newcommand{\LR}{\raise 2.5pt {\lrcorner}} \newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!} \newcommand{\defeq}{\triangleq} \newcommand{\E}{\exists\,} \newcommand{\A}{\forall\,} \newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,} \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,} \newcommand{\implies}{\Rightarrow} \newcommand{\whileop}{\overset{+}{-}\!\!\triangleright\; } \let\savedBox=\Box \renewcommand{\Box}{\raise1mu{\small \square} } \renewcommand{\Diamond}{ {\Large \diamond} } \newcommand{\LET}{\sc{LET}} \newcommand{\IN}{\sc{IN}} \newcommand{\RECURSIVE}{\sc{RECURSIVE}} \newcommand{\LAMBDA}{\sc{LAMBDA}} \newcommand{\IF}{\sc{IF}} \newcommand{\THEN}{\sc{THEN}}...</content>
  </entry>
 
@@ -27,7 +27,7 @@
    <title>TLA+ in Practice and Theory<br/>Part 4: Order in TLA+</title>
    <link href="/posts/tlaplus_part4"/>
    <id>/posts/tlaplus_part4</id>
-   <updated>2017-06-15T00:00:00+03:00</updated>
+   <updated>2017-06-15T00:00:00+01:00</updated>
    <content type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;\newcommand{\sc}[1]{\mathrm{\small{#1}}\;} \newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}} \newcommand{\str}[1]{``\mathsf{#1}\!&quot;} \newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}} \newcommand{\set}[1]{\{#1\}} \newcommand{\seq}[1]{\langle #1 \rangle} \newcommand{\llbracket}{[\![} \newcommand{\rrbracket}{]\!]} \newcommand{\sem}[1]{\llbracket #1 \rrbracket} \newcommand{\H}{-\!\!\!} \newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!} \newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!} \newcommand{\LR}{\raise 2.5pt {\lrcorner}} \newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!} \newcommand{\defeq}{\triangleq} \newcommand{\E}{\exists\,} \newcommand{\A}{\forall\,} \newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,} \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,} \newcommand{\implies}{\Rightarrow} \newcommand{\whileop}{\overset{+}{-}\!\!\triangleright\; } \let\savedBox=\Box \renewcommand{\Box}{\raise1mu{\small \square} } \renewcommand{\Diamond}{ {\Large \diamond} } \newcommand{\LET}{\sc{LET}} \newcommand{\IN}{\sc{IN}} \newcommand{\RECURSIVE}{\sc{RECURSIVE}} \newcommand{\LAMBDA}{\sc{LAMBDA}} \newcommand{\IF}{\sc{IF}} \newcommand{\THEN}{\sc{THEN}}...</content>
  </entry>
 
@@ -37,7 +37,7 @@
    <title>TLA+ in Practice and Theory<br/>Part 3: The (Temporal) Logic of Actions</title>
    <link href="/posts/tlaplus_part3"/>
    <id>/posts/tlaplus_part3</id>
-   <updated>2017-06-08T00:00:00+03:00</updated>
+   <updated>2017-06-08T00:00:00+01:00</updated>
    <content type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;\newcommand{\sc}[1]{\mathrm{\small{#1}}\;} \newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}} \newcommand{\str}[1]{``\mathsf{#1}\!&quot;} \newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}} \newcommand{\set}[1]{\{#1\}} \newcommand{\seq}[1]{\langle #1 \rangle} \newcommand{\llbracket}{[\![} \newcommand{\rrbracket}{]\!]} \newcommand{\sem}[1]{\llbracket #1 \rrbracket} \newcommand{\H}{-\!\!\!} \newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!} \newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!} \newcommand{\LR}{\raise 2.5pt {\lrcorner}} \newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!} \newcommand{\defeq}{\triangleq} \newcommand{\E}{\exists\,} \newcommand{\A}{\forall\,} \newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,} \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,} \newcommand{\implies}{\Rightarrow} \newcommand{\whileop}{\stackrel{+} -\!\!\triangleright\; } \let\savedBox=\Box \renewcommand{\Box}{\raise1mu{\small \square} } \renewcommand{\Diamond}{ {\Large \diamond} } \newcommand{\LET}{\sc{LET}} \newcommand{\IN}{\sc{IN}} \newcommand{\RECURSIVE}{\sc{RECURSIVE}} \newcommand{\LAMBDA}{\sc{LAMBDA}} \newcommand{\IF}{\sc{IF}}...</content>
  </entry>
 
@@ -47,7 +47,7 @@
    <title>TLA+ in Practice and Theory<br/>Part 2: The + in TLA+</title>
    <link href="/posts/tlaplus_part2"/>
    <id>/posts/tlaplus_part2</id>
-   <updated>2017-06-01T00:00:00+03:00</updated>
+   <updated>2017-06-01T00:00:00+01:00</updated>
    <content type="html">&lt;script type=&quot;math/tex; mode=display&quot;&gt;\newcommand{\sc}[1]{\mathrm{\small{#1}}\;} \newcommand{\comment}[1]{\bbox[lightgrey,2pt]{\text{#1}}} \newcommand{\str}[1]{``\mathsf{#1}\!&quot;} \newcommand{\nested}[1]{\!\!\rlap{\begin{aligned}\begin{alignat}{1}#1\end{alignat}\end{aligned}}} \newcommand{\set}[1]{\{#1\}} \newcommand{\seq}[1]{\langle #1 \rangle} \newcommand{\llbracket}{[\![} \newcommand{\rrbracket}{]\!]} \newcommand{\sem}[1]{\llbracket #1 \rrbracket} \newcommand{\H}{-\!\!\!} \newcommand{\UR}{\lower 4.3pt {\urcorner}\!\!} \newcommand{\UL}{\lower 4.3pt {\ulcorner}\!\!\!} \newcommand{\LR}{\raise 2.5pt {\lrcorner}} \newcommand{\LL}{\raise 2.5pt {\llcorner}\!\!\!} \newcommand{\defeq}{\triangleq} \newcommand{\E}{\exists\,} \newcommand{\A}{\forall\,} \newcommand{\EE}{\pmb{\pmb{\boldsymbol{\boldsymbol{\exists}}}}\,} \newcommand{\AA}{\pmb{\pmb{\boldsymbol{\boldsymbol{\forall}}}}\,} \newcommand{\implies}{\Rightarrow} \newcommand{\whileop}{\stackrel{+} -\!\!\triangleright\; } \let\savedBox=\Box \renewcommand{\Box}{\raise1mu{\small \square} } \renewcommand{\Diamond}{ {\Large \diamond} } \newcommand{\LET}{\sc{LET}} \newcommand{\IN}{\sc{IN}} \newcommand{\RECURSIVE}{\sc{RECURSIVE}} \newcommand{\LAMBDA}{\sc{LAMBDA}} \newcommand{\IF}{\sc{IF}}...</content>
  </entry>
 
@@ -57,7 +57,7 @@
    <title>TLA+ in Practice and Theory<br/>Part 1: The Principles of TLA+</title>
    <link href="/posts/tlaplus_part1"/>
    <id>/posts/tlaplus_part1</id>
-   <updated>2017-05-25T00:00:00+03:00</updated>
+   <updated>2017-05-25T00:00:00+01:00</updated>
    <content type="html">&lt;p&gt;&lt;em&gt;This is the first installment in a four-part blog post series about TLA+. &lt;a href=&quot;/posts/tlaplus_part2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part3&quot;&gt;Part 3&lt;/a&gt;, &lt;a href=&quot;/posts/tlaplus_part4&quot;&gt;Part 4&lt;/a&gt;. A &lt;a href=&quot;/posts/tlaplus-curryon-talk&quot;&gt;video of a 40-minute talk&lt;/a&gt; that covers parts of this series.&lt;/em&gt;&lt;/p&gt; &lt;p&gt;&lt;em&gt;If you find TLA+ and formal methods in general interesting, I invite you to visit...</content>
  </entry>
 
@@ -67,7 +67,7 @@
    <title>The Best Programming Language</title>
    <link href="/posts/the-best-programming-language"/>
    <id>/posts/the-best-programming-language</id>
-   <updated>2017-02-04T00:00:00+02:00</updated>
+   <updated>2017-02-04T00:00:00+00:00</updated>
    <content type="html">&lt;p&gt;A certain tweet caught my eye this past week. I will not link to it because I don’t want to single out its author, who expresses an opinion which is rather common in some crowds, but it said: “Do the people behind the big mainstream languages not follow PLT at...</content>
  </entry>
 
@@ -77,7 +77,7 @@
    <title>What We Talk About When We Talk About Computation</title>
    <link href="/posts/what-we-talk-about-when-we-talk-about-computation"/>
    <id>/posts/what-we-talk-about-when-we-talk-about-computation</id>
-   <updated>2016-08-30T00:00:00+03:00</updated>
+   <updated>2016-08-30T00:00:00+01:00</updated>
    <content type="html">&lt;p&gt;&lt;em&gt;Abstract: Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally...</content>
  </entry>
 
@@ -87,7 +87,7 @@
    <title>Why Writing Correct Software Is Hard</title>
    <link href="/posts/correctness-and-complexity"/>
    <id>/posts/correctness-and-complexity</id>
-   <updated>2016-07-23T00:00:00+03:00</updated>
+   <updated>2016-07-23T00:00:00+01:00</updated>
    <content type="html">&lt;h2 id=&quot;-and-why-math-alone-wont-help-us&quot;&gt;… and why math (alone) won’t help us&lt;/h2&gt; &lt;p&gt;&lt;em&gt;I was very happy to speak at &lt;a href=&quot;http://curry-on.org/2016/#program&quot;&gt;Curry On&lt;/a&gt; once again. Last year, following our work with Quasar, I spoke on &lt;a href=&quot;http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/&quot;&gt;continuations vs. monads&lt;/a&gt;. This year I gave a talk about computational complexity results in software verification, a subject...</content>
  </entry>
 

@@ -175,7 +175,7 @@
 	  <main>
 			<article id="post-page" class=>
 	<h2>TLA<sup>+</sup> in Practice and Theory<br/>Part 3: The (Temporal) Logic of Actions</h2>		
-	<time datetime="2017-06-08T00:00:00+03:00" class="by-line">08 Jun 2017</time>
+	<time datetime="2017-06-08T00:00:00+01:00" class="by-line">08 Jun 2017</time>
 	<div class="content">
 
 		<script type="math/tex; mode=display">\newcommand{\sc}[1]{\mathrm{\small{#1}}\;}
@@ -1703,7 +1703,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 </code></pre>
 </div>
 
-<p>Functions in Hakell do not mean the same thing as they do in ML, because the language provides further guarantees (asuming they’re not circumvented with an escape hatch — a possibility we will choose to ignore in to show a somewhat different specification). Because Haskell enforces purity, it guarantees that, while <code class="highlighter-rouge">f</code> may throw an exception or not terminate, it behaves a little more like an actual function in the sense that if it returns a value, it will always return the same value for a given argument. This guarantee reduces the nondeterminism in our specification. To describe this expected behavior, we will introduce a function, $fn$, that will allow us to limit the algorithm’s behavior. $fn$ is determined in the first step and then never changes, and is used to represent <code class="highlighter-rouge">f</code>’s function-like behavior, and ensures that <em>if</em> the algorithm doesn’t stop, it will yield the equal output elements for equal input elements.</p>
+<p>Functions in Hakell do not mean the same thing as they do in ML, because the language provides further guarantees (asuming they’re not circumvented with an escape hatch — a possibility we will choose to ignore in to show a somewhat different specification). Because Haskell enforces purity, it guarantees that, while <code class="highlighter-rouge">f</code> may throw an exception or not terminate, it behaves a little more like an actual function in the sense that if it returns a value, it will always return the same value for a given argument. This guarantee reduces the nondeterminism in our specification. To describe this expected behavior, we will introduce a function, $fn$, that will allow us to limit the algorithm’s behavior. $fn$ is determined in the first step and then never changes, and is used to represent <code class="highlighter-rouge">f</code>’s function-like behavior, and ensures that <em>if</em> the algorithm terminates, it will yield the equal output elements for equal input elements.</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
