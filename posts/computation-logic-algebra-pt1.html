@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Jekyll">
+    <link rel="canonical" href="/posts/computation-logic-algebra-pt1"/>
+    <!--<link rel="canonical" href="/posts/computation-logic-algebra-pt1">-->
+
+    <title>Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part I</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/fav/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"    href="/fav/favicon-16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+    <!--
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"   href="/fav/favicon-57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60"   href="/fav/favicon-60.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="/fav/favicon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/fav/favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/fav/favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/fav/favicon-180.png">
+    -->
+    <!--
+    <link rel="icon" type="image/png" href="/fav/favicon-96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/fav/favicon-192.png" sizes="192x192">
+    -->
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS & fonts -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+    <!--
+    <script data-cfasync="false" type="text/javascript" src="//use.typekit.net/pfn0abv.js"></script>
+    <script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- RSS -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+
+
+    <!-- Social cards -->
+    
+        <!-- Twitter -->
+<meta name="twitter:site" content="@pressron"> 
+<meta name="twitter:card" content="summary"> 
+<meta name="twitter:title" content="Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part I"> 
+<meta name="twitter:description" content="The history of computation, logic and algebra, told by primary sources. Part 1 covers the classical and embryonic periods of logic, from Aristotle in the fourth century, BCE, to Euler in the eighteenth century.
+"> 
+
+<!-- OpenGraph -->
+<meta property="og:site_name" content="Ron Pressler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part I">
+<meta property="og:description" content="The history of computation, logic and algebra, told by primary sources. Part 1 covers the classical and embryonic periods of logic, from Aristotle in the fourth century, BCE, to Euler in the eighteenth century.
+">
+<meta property="og:url" content="/posts/computation-logic-algebra-pt1">
+<meta property="og:image" content="http://www.gravatar.com/avatar/c69557151e2f8331f6b1865469b694dd?s=200">
+<meta property="article:published_time" content="2018-01-05">
+
+    
+
+
+    
+
+    
+    <meta name="twitter:site" content="@pressron">
+</head>
+
+
+<body>
+	<div id="wrap">
+
+	  <!-- Navigation -->
+	  <nav id="nav">
+    
+        <div id="nav-toc">
+        </div>
+    
+	<div id="nav-list">
+		<a href="/">Home</a>
+
+		<!-- Nav pages -->
+	  
+	    
+	  
+	    
+	      <a href="/about" title="About">About</a>
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+	    
+	  
+
+    <!-- Nav links -->
+	  
+
+
+	</div>
+
+    <footer>
+
+	<!-- <span>version </span> -->
+
+</footer>
+
+</nav>
+
+
+    <!-- Icon menu -->
+	  <a id="nav-menu">
+	  	<div id="menu"></div>
+	  </a>
+
+      <!-- Header -->
+      
+        <header id="header" class="parent justify-spaceBetween">
+  <div class="inner w100 relative">
+    <span class="f-left">
+      <a href="/">
+        <h1>
+          <span>press</span>ron
+        </h1>
+      </a>
+    </span>
+    <!--
+    <span id="nav-links" class="absolute right bottom">
+	    
+	      
+	    
+	      
+	        <a href="/about" title="About">About</a>
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+	      
+	    
+
+	    
+
+
+    </span>
+    -->
+  </div>
+</header>
+
+      
+
+    <!-- Main content -->
+	  <div id="container">
+
+	  <main>
+			<article id="post-page" class="group tufte">
+	<h2>Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part I</h2>		
+	<time datetime="2018-01-05T00:00:00+00:00" class="by-line">05 Jan 2018</time>
+	<div class="content">
+
+		<div class="fullwidth">
+
+  <div class="epigraph">
+
+    <blockquote>
+      <p>God invented and gave us sight to the end that we might behold the courses of intelligence in the heaven, and apply them to the courses of our own intelligence which are akin to them, the unperturbed to the perturbed; and that we, learning them and partaking of the natural truth of reason, might imitate the absolutely unerring courses of God and regulate our own vagaries. The same may be affirmed of speech and hearing: they have been given by the gods to the same end and for a like reason. For this is the principal end of speech, whereto it most contributes.</p>
+
+      <p class="ep-footer">— Plato, <em>Timaeus</em>, c. 360 BC</p>
+    </blockquote>
+
+    <blockquote>
+      <p>By <em>ratiocination</em>, I mean <em>computation</em>.</p>
+
+      <p class="ep-footer">— Thomas Hobbes, “Computation or Logique”, in <em>De Corpore</em>, 1655</p>
+    </blockquote>
+
+  </div>
+
+  <h2 id="preface">Preface</h2>
+
+  <p>An encouraging development in the education of programmers in recent years has been a renewed interest in the relationship between programming, logic and abstract algebra. Recent enthusiasm over functional programming is no doubt the main motivation behind this happy development.</p>
+
+  <p>However, this interest is at times accompanied by a kind of awed appreciation of this relationship, perhaps among practitioner enthusiasts, , who consider it almost miraculous, more than among academics. Some researchers notable for popularizing the interest in this relationship encourage this view with talk of “computational trinitarianism” and statements like, “this is further proof that mathematics is discovered rather than invented,” one, <a href="https://existentialtype.wordpress.com/2011/03/27/the-holy-trinity/">going so far</a> as to call the relationship “a manifestation of the divine” and to say that “all three have ontological force; they codify what is, not how to describe what is already given to us. In this sense they are foundational; if we suppose that they are merely descriptive, we would be left with the question of where these previously given concepts arise, leading us back again to foundations”. Another has <a href="https://vimeo.com/242784236">said</a>,<sup id="fnref:milewski"><a href="#fn:milewski" class="footnote">1</a></sup> “Have you heard of the Curry-Howard-Lambek isomorphism? … These three different theories … were developed separately — constructive logic, typed lambda calculus, and category theory — and the isomorphism says that these are actually <em>identical</em>. Why do these three completely separate theories have the same structure? Because all three of them are about composability.” While he is not too far off the mark when he later says, “Maybe we are just discovering the way our brains work. … [I]f mathematics is all about composition, then composition is something that our brains came up with in order to deal with complexity,” the truth is far simpler yet more interesting, even if less mysterious.</p>
+
+  <p>Awed wonder is a powerful marketing tool, but it mystifies rather than clarifies, and fosters a kind of magical thinking in a field that strives to be most at odds with it (although, as we’ll see in part 2, it sometimes fails). The goal of mathematics is to simplify, not to wow. This attitude towards that — quite obvious, as we’ll see — relationship also distracts from the actual — and very non-obvious — discoveries made, and hinders the ability to appreciate their relative importance. The existence of this relationship was not among them. It was not the denouement — it was the setup; confusing the two muddles the very essence of any story. Except in rare instances, the observation that a single concept can be mathematically modeled in different ways is just the beginning of the inquiry; the conclusions we draw from each perspective motivate the mathematical treatment.</p>
+
+  <p>I also believe that it is this very attitude that puts the focus on the chosen mathematical abstractions rather than on the things they describe creates an atmosphere where there can only be one True interpretation — even one with three personas. I call this absolutist view that confuses the peculiarities of a method of observation with those of the observed system and so denies alternative interpretations the “Protestant” view, and it is a hindrance to understanding logic, where truth is, almost by definition, always relative to a specific system. As Alonzo Church wrote in the very paper he first introduced the λ-calculus<sup id="fnref:church0"><a href="#fn:church0" class="footnote">2</a></sup>:</p>
+
+  <blockquote>
+    <p>We do not attach any character of uniqueness or absolute truth to any particular system of logic. The entities of formal logic are abstractions, invented because of their use in describing and systematizing facts of experience or observation, and their properties, determined in rough outline by this intended use, depend for their exact character on the arbitrary choice of the inventor… [T]here exist, undoubtedly, more than one formal system whose use as a logic is feasible, and of these systems one may be more pleasing or more convenient than another, but it cannot be said that one is right and the other wrong.</p>
+  </blockquote>
+
+  <p>The following text will attempt to demistify this relationship between computation, logic and abstract algebra. Category theory is a generalization of the last, but programming languages are sometimes interchangeably assigned to both the second, logic, and the first, computation, adding to the confusion, at least in terms of terminology. In my view, programming languages (at least when studied in a theoretical context) strictly belong to the second persona of logic, and not at all to the first, computation, other than by virtue of the ordinary relationship between the three; programming languages are no more related to computation than formal logic is. I <a href="/posts/what-we-talk-about-when-we-talk-about-computation">have previously written</a> about the distinction between programming and computation and the misunderstanding caused by confusing the two, and I hope that this text will clarify the matter further.</p>
+
+  <p>While I will not opine on whether or not mathematical objects have “an ontological force”, as the Platonic ontology of mathematics is a matter of debate in the philosophy of mathematics — a fascinating field, but not a focus of this discussion — but I will show that they are not only very much descriptive, but that <em>what</em> they attempt to describe, and therefore how they arise, has been explicitly stated by the originators of those ideas, and the similarity between them follows from a similar methodology of analysis. There is nothing incidental, miraculous, surprising or “divine” in the relationship between computation, logic and algebra; rather, nothing is more creatively human than the process that led to their correlation, and while some things in mathematics are perhaps discovered, logic and algebra were <em>invented</em>, and rather than carrying an independent “foundational ontological force”, they were devised to <em>describe</em> a physical phenomenon (although I do not claim that the mathematical systems invented may not <em>also</em> correspond to some Platonic Truth). In particular, I will show that computation, logic and algebra were studied as a single subject for most of their relevant history, related in the following way: human reason works by computation, logic is a description of the process of reasoning, and algebra is the mathematical modeling of logic. The three began to separate into different disciplines only towards the end of the nineteenth century and the beginning of the twentieth. Logic was separated from algebra by Gottlob Frege, immediately triggering the criticism that the correspondence between the two is an argument for having only one. Frege responded that there would <em>obviously</em> be a correspondence between the two because he had invented one to describe the same thing as the other, but that one can translate between two modes of expression does not mean that one of them is redundant. Computation separated from logic some decades later as a more foundational or primitive concept, while exposing the fact that the basic principles of how logic supposedly described human reason — which Gottfried Leibniz called the “Art of Combination” — hadn’t changed for literally millennia, and while logicians/algebraists declared themselves to be studying the computation in the human mind, they were actually just modeling a very particular, and ancient, <em>view</em> of human reason that they had taken on unquestionable faith. The systems were in such harmonious correspondence not just because they described the same physical phenomenon, but because they all <em>re</em>-described the <em>same ancient description</em> of that phenomenon.</p>
+
+  <p>While researching the topic — not being a logician or a historian, but rather a programmer and an amateur interested in the history of mathematics — I was surprised how explicit this connection was made from the very beginning of the disciplines. Quite the opposite of accidental or miraculous, calling this relationship obvious is an <em>understatement</em>. That there is some relationship between a house cat and a leopard can be said to be obvious; the one between the original Star Wars trilogy and its many prequels and sequels is much more than just obvious. If you think that it is in any way accidental or miraculous, or that it is proof that Darth Vader was discovered rather than invented, you are clearly missing something very important in understanding the meta-theory of stories — meaning, how they come to be. I delight at the opportunity to use the history of science — or of logic and mathematics in this case — to clarify the development of mathematical concepts by tracing their evolution and the creative process of their originators.</p>
+
+  <p>This book-length text — and not a short book — is published as a three-part blog post series, but I personally wrote very little of it. While the text is not different in content or conclusions from books about the history of logic and computation (or the wonderful recent Atlantic article, <a href="https://www.theatlantic.com/technology/archive/2017/03/aristotle-computer/518697/"><em>How Aristotle Created the Computer</em></a>), it is certainly different in style, being comprised mostly of original sources. I chose to compose the text in this way for several reasons, listed here in no particular order: 1. I am not a professional historian and do not have sufficient knowledge to provide insight on historical trends. 2. I find reading (carefully selected) primary sources a lot more fun than sweeping descriptions. 3. As most mathematicians and programmers do not make good historians, a lot of inaccuracies and downright mistakes are perpetrated because few have seen the actual sources. 4. As my goal is to demystify logic and mathematics, I think it is especially enlightening to read how the originators of the ideas describe their process of arriving at their insight. My text is also different in focus; it attempts to emphasize the evolution of the connection between computation, logic and algebra, and is concerned with each of the three subjects mostly inasmuch as they relate to the other two</p>
+
+  <p>While the thesis regarding nature of that connection is easily established — in fact, it is satisfactorily established by picking at random almost any single one of the original sources I’ll cover —  we must take care not to fall into the trap of an overarching, coherent, <a href="https://en.wikipedia.org/wiki/Malcolm_Gladwell">Gladwellian</a> narrative, and remember that there is a wide gap between an early, vague notion of ideas — even if it employs modern terms, as that is often a later homage to early sparks — and a rigorous treatment of them; the two must not be considered the same or one risks falling into the trap of anachronism.</p>
+
+  <p>Of course, the thesis is only a guiding question and an excuse and to cover what a fascinating subject in the history of science and ideas. So I allowed myself to quote longer excerpts when I found them interesting or amusing, even if they are tangential to the main thrust of the narrative. I’ve also skipped most of the overly technical portions of the texts, quoting only the basics, as this is not a mathematical textbook.</p>
+
+  <p>For essential context, I rely on secondary sources; these are just a few notable ones: In part 1, on the classical and embryonic period of logic, I relied heavily the book <a href="https://www.amazon.com/Mechanization-Historical-Perspective-Philosophy-Humanities/dp/9051838042"><em>Mechanization of Reasoning in a Historical Perspective</em></a> by Witold Marciszewski and Roman Murawski (<a href="https://kw.uni-paderborn.de/fileadmin/fakultaet/Institute/philosophie/Peckhaus/Schriften_zum_Download/marci.pdf">review here</a>). For part 2, about the algebraic period, I used Daniel J. Cohen’s, <a href="https://www.amazon.com/Equations-God-Mathematics-Victorian-Hopkins/dp/0801885531"><em>Equations from God: Pure Mathematics and Victorian Faith</em></a>. For part 3, about the logicist/mathematical/computational period I relied on Robin Gandy’s paper  <a href="https://dl.acm.org/citation.cfm?id=57252"><em>The Confluence of Ideas in 1936</em></a> and Andrew Hodges’s <a href="https://www.amazon.com/Alan-Turing-Enigma-Inspired-Imitation/dp/069116472X/">biography of Alan Turing</a>. There were others as well, all referenced in the text and bibliography.</p>
+
+</div>
+
+<h2 id="i-the-language-of-thought">I. The Language of Thought</h2>
+
+<h3 id="simplex-apprehensio">Simplex Apprehensio</h3>
+
+<p>No idea is born, spontaneously, from nothingness; every invention grows in a time and a place, and is produced by a context in addition to ingenuity. But a story must begin somewhere, and a good place to start the story of logic is with <a href="https://en.wikipedia.org/wiki/Aristotle">Aristotle of Stagira</a> (384-322 BC), who was interested in the question of how we know what is true, and how we demonstrate the truth of a claim to others. Unfortunately, Aristotle was a rather dull and abstract writer; quoting long passages from his writings would put an end to my attempt at writing a coherent text composed mostly of primary sources before it begins in earnest. Nevertheless, we cannot do without him completely:</p>
+
+<blockquote>
+  <p><label for="aristotle1" class="margin-toggle"> ⊕</label><input type="checkbox" id="aristotle1" class="margin-toggle" /><span class="marginnote"><a href="#aristotle-prior"><em>Prior Analytics</em></a>, c. 350 BCE </span>We must first state the subject of our inquiry and the faculty to which it belongs: its subject is demonstration and the faculty that carries it out demonstrative science. We must next define a premiss, a term, and a syllogism, …; and after that, the inclusion or noninclusion of one term in another as in a whole, and what we mean by predicating one term of all, or none, of another.</p>
+
+  <p>A premiss then is a sentence affirming or denying one thing of another. This is either universal or particular or indefinite. By universal I mean the statement that something belongs to all or none of something else; by particular that it belongs to some or not to some or not to all; by indefinite that it does or does not belong, without any mark to show whether it is universal or particular, e.g. ‘contraries are subjects of the same science’, or ‘pleasure is not good’. … Therefore a syllogistic premiss without qualification will be an affirmation or denial of something concerning something else in the way we have described; it will be demonstrative, if it is true and obtained through the first principles of its science.</p>
+
+  <p><label for="platoaristotle" class="margin-toggle">⊕</label><input type="checkbox" id="platoaristotle" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/Plato_Aristotle2.jpg" /><br />Plato (left) who believed in the divine  world of ideals and Aristotle (right) who believed in the power of earthly empiricism, depicted here in a Vatican fresco by Raphael as they’re debating Haskell vs. ML among Go programmers</span></p>
+
+  <p>… A syllogism is discourse in which, certain things being stated, something other than what is stated follows of necessity from their being so. I mean by the last phrase that they produce the consequence, and by this, that no further term is required from without in order to make the consequence necessary.</p>
+
+  <p>… Every premiss states that something either is or must be or may be the attribute of something else; of premisses of these three kinds some are affirmative, others negative, in respect of each of the three modes of attribution; again some affirmative and negative premisses are universal, others particular, others indefinite. It is necessary then that in universal attribution the terms of the negative premiss should be convertible, e.g. if no pleasure is good, then no good will be pleasure; the terms of the affirmative must be convertible, not however, universally, but in part, e.g. if every pleasure, is good, some good must be pleasure; the particular affirmative must convert in part (for if some pleasure is good, then some good will be pleasure); but the particular negative need not convert, for if some animal is not man, it does not follow that some man is not animal.</p>
+
+  <p>First then take a universal negative with the terms <em>A</em> and <em>B</em>. If no <em>B</em> is <em>A</em>, neither can any <em>A</em> be <em>B</em>. For if some <em>A</em> (say <em>C</em>) were <em>B</em>, it would not be true that no <em>B</em> is <em>A</em>; for <em>C</em> is a <em>B</em>. But if every <em>B</em> is <em>A</em> then some <em>A</em> is <em>B</em>. For if no <em>A</em> were <em>B</em>, then no <em>B</em> could be <em>A</em>. But we assumed that every <em>B</em> is <em>A</em>. Similarly too, if the premiss is particular. For if some <em>B</em> is <em>A</em>, then some of the <em>A</em>s must be <em>B</em>. For if none were, then no <em>B</em> would be <em>A</em>. But if some <em>B</em> is not <em>A</em>, there is no necessity that some of the <em>A</em>s should not be <em>B</em>; e.g. let <em>B</em> stand for animal and <em>A</em> for man. Not every animal is a man; but every man is an animal.</p>
+</blockquote>
+
+<p>Aristotle’s main contribution, which dominated most work in logic to this day was in pointing out that if our premises are stated in that particular syntactic <em>form</em>, such as <em>all A is B</em> and <em>all B is C</em>, then, using the syntactic <em>formal</em> inference rule of the <a href="https://en.wikipedia.org/wiki/Syllogism">syllogism</a>, we may deduce that <em>all A is C</em>, regardless of what <em>A</em>, <em>B</em> and <em>C</em> mean. As the nineteenth century logician <a href="https://en.wikipedia.org/wiki/Augustus_De_Morgan">Augustus De Morgan</a> put it,<label for="de-morgan1" class="margin-toggle"> ⊕</label><input type="checkbox" id="de-morgan1" class="margin-toggle" /><span class="marginnote"><a href="#de-morgan"><em>Formal Logic</em>, p. 1</a> </span> “[t]his logical truth depends upon the <em>structure of the sentence</em> and not upon the particular matters spoken of.”</p>
+
+<p>But another significant contribution, though less essential, served as the basis of all work in formal logic until Turing and has to do less with the formal proof theory of the syllogism, but with how logical sentenses are formed, namely as a <em>composition</em> of <em>terms</em> denoting (having the meaning, or <em>semantics</em>, of) <em>attributes</em>, <em>concepts</em>, or <em>classes</em> that stand for some collection of objects, such as <em>man</em>, <em>animal</em> or <em>virtue</em>. The composition takes the general form <em>[quantifier] A is B</em>, and there are four kinds of propositions: <em>positive universal</em> propositions, for example, <em>all men are animals</em>, <em>positive particular</em> (or <em>existential</em> in modern terms) propositions, namely, <em>some men are virtuous</em>, and their negation<label for="monadic" class="margin-toggle sidenote-number"></label><input type="checkbox" id="monadic" class="margin-toggle" /><span class="sidenote">This logic resembles monadic logic, in the modern nomenclature. </span>.</p>
+
+<p>Aristotle’s general framework of reasoning, which was elaborated upon somewhat during the middle-ages, can be summarized as the mechanization of reasoning through the manipulation of language, or syntax, that expresses meaning through a combination of terms denoting concepts. This framework could be called <em>combinatory logic</em>, but as the name is nowadays used for something much more technical and specific, I will call it <em>the Aristotelian framework</em>.</p>
+
+<p>In the book <em>Mechanization Of Reasoning In A Historical Perspective</em> by Witold Marciszewski and Roman Murawski,  Marciszewski writes that this Aristotelian framework,</p>
+
+<blockquote>
+  <p><label for="marciszewski1" class="margin-toggle"> ⊕</label><input type="checkbox" id="marciszewski1" class="margin-toggle" /><span class="marginnote"><a href="#mechanization"><em>Mechanization Of Reasoning</em>, Kindle Locations 828-875</a> </span>started from singling out three hierarchically arranged operations of the mind. Fundamental among those three operations was that of grasping things by concepts. In a sense it could be called the simplest one, and so it was called by scholastic logicians…, when they used the term ‘simple apprehension’ (<em>simplex apprehensio</em>). It is the simplest one in the sense that in that part of the act of grasping things which occurs at the level of consciousness, and so is accessible to introspection, we do not perceive any components that could be clearly isolated. For instance, some simple apprehension leads one to the concept of natural number, whose content includes, inter alia, the fact that every natural number has its successor.</p>
+
+  <p>…The second operation of the mind, second in the sense that it assumes the existence of concepts and is more complex than conceptualization, is the formation of judgements. According to…  scholatic logic… it consists in the combination of concepts into a judgement (<em>judicium</em>)… A judgement was treated as an invariably tripartite structure consisting of the subject, the copula, and the predicate, the copula expressing either affirmation (‘is’) or negation (‘is not’). This is how a judgement (<em>protasis</em>) was understood by Aristotle.</p>
+
+  <p>… The third operation of the mind, the most complex one in the sense that it assumes the two preceding ones and brings the most complex product, consists in the proof, construed in the Aristotelian logic as a syllogism.</p>
+</blockquote>
+
+<p>We shall now skip some two thousand years to the seventeenth century, and so must turn to a secondary source, Marciszewski again, for some background of the developments that occurred during that long period and the context in which they occured:</p>
+
+<blockquote>
+  <p><label for="marciszewski2" class="margin-toggle"> ⊕</label><input type="checkbox" id="marciszewski2" class="margin-toggle" /><span class="marginnote"><a href="#mechanization"><em>Mechanization Of Reasoning</em>, Kindle Locations 898-927</a> </span>That context involved two philosophical tendencies, namely finitism and formalism.</p>
+
+  <p>… In the Greek philosophy of mathematics finitism established its place for good owing to the <a href="https://plato.stanford.edu/entries/paradox-zeno/">paradoxes of Zeno of Elea</a> (490-430 B.C.), which showed how formidably perplex are the problems resulting from the concept of (actual) infinity. That was reinforced by the authority of Aristotle who in his Physics and Metaphysics advanced arguments, to be later repeated for centuries, against the existence of actually infinite domains.</p>
+
+  <p>… Likewise, a kind of formalism was at that time [of the 17th century] nothing extraordinary. Its lively presence can be seen in both the intensification of the nominalistic trends from the 12th century to the late Middle Ages and the 17th century, and also in other elements of medieval culture. It was not without importance that human minds were at that time imbued with biblical ideas, which included the faith in the perfection of the concepts to be found in the Scripture and the adequacy of the words which rendered those concepts. For instance, since Adam in Paradise gave names to all animals, that is, came in the possession of their concepts, nothing more was left in that respect to be done. No new intuition was necessary, it just sufficed to make use of the words assigned to the concepts. Likewise astronomy was a complete and closed system, which was moreover perfectly synthetized with the theological one (which we can finely seen, for instance, in Dante’s Divine Comedy). The ideas of the potential infinity of human cognition, of the limits of verbalization, of the approximative nature of scientific theories and the like, have become familiar to the modern mind only recently. As long as it was believed that concepts and judgements had adequate mappings in language, on the one-to-one basis, there were reasons to believe that thoughts could be fully replaced by words, and these, being material objects, could be processed mechanically. This picture of medieval mentality applies to only some of its trends (it would be naive to treat it as a monolith). For instance, Augustinism opposed Aristotelianism both by its infinitism and its doctrine of illumination, which stressed the intuitive, non-mechanizable elements of cognition; that tendency even more manifested itself in the gnostic movements. But as for the problems with which we are concerned here the essential point is that both the finitistic and the formalistic trend were firmly rooted in the medieval thought.</p>
+</blockquote>
+
+<p>While the Aristotelian framework served as the basis for virtually all work on logic and the mechanization of reasoning up to the twentieth century, not deviated from until the major philosophical breakthrough by Alan Turing, it inhabited an intellectual context very different from ours. Marciszewski writes that<label for="marciszewski3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="marciszewski3" class="margin-toggle" /><span class="sidenote"><a href="#mechanization"><em>Mechanization Of Reasoning</em>, Kindle Locations 828-910</a> </span> “[p]aradoxically enough the problem of a certain formalization of arguments was for centuries discussed in terms of the logic of discovery, and hence in terms of processes which we now treat as typically creative and not subject to mechanical procedures was due to a combinatory interpretation of the process of discovery, which involved finitism and formalism. … [F]or the representatives of the Platonic-Aristotelian views (which came to be opposed by modern empiricism) truth in the strict sense of the term was identical with necessary truth or (approximately) analytic truth, and the set of such truths was supposed to be decidable. … The view which implied the finiteness of both the domain of individuals and the set of concepts provided people with reasons to postulate the decidability of the system of human knowledge. True statements would be deducible from a finite set of first principles (as Aristotle claimed), and false ones would be refutable by demonstrating that they contradict those principles.”</p>
+
+<p>There were dissenting views, some anti-formalistic, and some, like <a href="https://en.wikipedia.org/wiki/Francis_Bacon">Francis Bacon</a> opposed this deductive program altogether, pointing out that deduction can never create new knowledge, only expose, or demonstrate, truths already present in the assumed premises, and wished to create a logic based on <em>inductive</em> reasoning. However,<label for="marciszewski4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="marciszewski4" class="margin-toggle" /><span class="sidenote"><a href="#mechanization"><em>Mechanization Of Reasoning</em>, Kindle Locations 1669-1673</a> </span> “[t]he greatness which logic was destined to attain and which it did attain in our century, was reached by the old Aristotelian road when it merged with the path along which mathematics was developing. Those two paths came closer to one another for the first time in the 17th century, and the process was due to Leibniz. Thus it was he and not Bacon who became the forerunner of future logic. And those thinkers who, while underestimating Aristotle, did not commit the mistake of underestimating deduction, also proved to have come closer to what was ahead.”</p>
+
+<h3 id="the-clockwork-mind">The Clockwork Mind</h3>
+
+<p>While the intellectual climate changed considerably with the scientific revolution and the rise of empiricism, which no longer saw human knowledge as a closed system, the Aristotelian framework was able to both survive a migration to a very different intellectual climate, while at the same time gaining more rigor in the 17th century by <a href="https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz">Gottfried Wilhelm Leibniz</a> (1646-1716), who became, according to Marciszewski, “the first logician of our epoch.”</p>
+
+<p><label for="leviathan" class="margin-toggle">⊕</label><input type="checkbox" id="leviathan" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/Leviathan_by_Thomas_Hobbes.jpg" /><br />Leviathan</span></p>
+
+<p>Leibniz reestablished the Aristotelian framework on <em>scientific</em> grounds by constructing it on top of two new foundations: 1. that the universe is a machine that behaves according to fixed laws, and 2. that the highest of God’s creation, man’s reason, is no different, itself being a sophisticated machine. Leibniz compared the universe (including man’s mind) to an elaborate clock, ticking without the constant intervention of the clockmaker (an idea that Leibniz’s contemporary, Isaac Newton, rejected as marginalizing the role of God in His creation).</p>
+
+<p>For a full treatment of the intellectual climate in Leibniz’s time, and how both empiricism and Platonism seved as influence, I will refer the interested reader to Marciszewski, while we move on to examine the primary sources.</p>
+
+<p>Leibniz wrote that he had been inspired by his recent predecessor <a href="https://en.wikipedia.org/wiki/Thomas_Hobbes">Thomas Hobbes</a> (1588-1679) to consider even the human mind as an automaton. In the introduction to his 1651 masterwork, <em>Leviathan</em>, Hobbes — who, to put him in historical context, was a contemporary of William Shakespeare — writes:</p>
+
+<blockquote>
+  <p>Nature (the art whereby God hath made and governes the world) is by the art of man, as in many other things, so in this also imitated, that it can make an Artificial Animal. For seeing life is but a motion of Limbs, the begining whereof is in some principall part within; why may we not say, that all Automata (Engines that move themselves by springs and wheeles as doth a watch) have an artificial life? For what is the Heart, but a Spring; and the Nerves, but so many Strings; and the Joynts, but so many Wheeles, giving motion to the whole Body, such as was intended by the Artificer? Art goes yet further, imitating that Rationall and most excellent worke of Nature, Man.</p>
+</blockquote>
+
+<p>Man-made machines and the natural creations, including the mind, differ not in kind, Hobbes believed, but merely in degree of complexity, as natural beings are machines “all-the-way-down”:</p>
+
+<blockquote>
+  <p><label for="monadology1" class="margin-toggle"> ⊕</label><input type="checkbox" id="monadology1" class="margin-toggle" /><span class="marginnote"><em>The Monadology</em> 1714, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>,  p.644</a> </span>[E]ach organic body belonging to a living being is a kind of divine machine or natural automaton inﬁnitely surpassing all artiﬁcial automata. For a machine made by human art is not a machine in each of its parts; for example, the tooth of a brass wheel has parts or fragments which are not artiﬁcial so far as we are concerned, and which do not have the character of a machine, in that they ﬁt the use for which the wheel was intended. But the machines of nature, living bodies, are still machines in their smallest parts, into inﬁnity. It is this that makes the difference between nature and art, that is, between the divine art and ours.</p>
+</blockquote>
+
+<p>The idea that reason itself can be mechanized by formalization, and that it resembles algebra, also came from Hobbes, who in his work, <em>Computation or Logique</em> wrote:</p>
+
+<blockquote>
+  <p><label for="comorlogique1" class="margin-toggle"> ⊕</label><input type="checkbox" id="comorlogique1" class="margin-toggle" /><span class="marginnote"><a href="#elements"><em>Elements of Philosophy</em>, pp. 2-4, 1656</a> </span>By RATIOCINATION, I mean <em>computation</em>. Now to compute, is either to collect the sum of many things that are added together, or to know what remains when one thing is taken out of another. <em>Ratiocination</em> therefore is the same with <em>Addition</em> and <em>Substraction</em>; and if any man adde <em>Multiplication</em> and <em>Division</em>, I will not be against it, seeing Multiplication is nothing but Addition of equals one to another, and Division nothing but a Substraction of equals one from another, as often as is possible. So that all Ratiocination is comprehended in these two operations of the minde, Addition and Substraction.</p>
+
+  <p>But how by the <em>ratiocination</em> of our mind, we add and substract in our silent thoughts, without the use of words, it will be necessary for me to make intelligible by an example or two. If therefore a man see something afar off and obscurely, although no appellation had yet been given to anything, he will, notwithstanding, have the same idea of that thing for which now, by imposing a name on it, we call it <em>body</em>. Again, when, by coming nearer, he sees the same thing thus and thus, now in one place and now in another, he will have a new idea thereof, namely, that for which we now call such a thing <em>animated</em>. Thirdly, when standing nearer, he perceives the figure, hears the voice, and sees other things which are signs of a rational mind, he has a third idea, though it have yet no appellation, namely, that for which we now call anything <em>rational</em>. Lastly, when, by looking fully and distinctly upon it, he conceives all that he has seen as one thing, the idea he has now is compounded of his former ideas, which are put together in the mind in the same order in which these three single names, <em>body</em>, <em>animated</em>, <em>rational</em>, are in speech compounded into this one name, <em>body-animated-rational</em> or <em>man</em>. In like manner, of the several conceptions of <em>four sides, equality of sides, and right angles</em>, is compounded the conception of a square. For the mind may conceive a figure of four sides without any conception of their equality, and of that equality without conceiving a right angle ; and may join together all these single conceptions into one conception or one idea of a square. And thus we see how the conceptions of the mind are compounded.</p>
+
+  <p>… We must not therefore thinke that Computation, that is, Ratiocination, has place onely in numbers; as if man were distinguished from other living Creatures (which is said to have been the opinion of Pythagoras) by nothing but the faculty of numbring; for Magnitude, Body, Motion, Time, Degrees of Quality, Action, Conception, Proportion, Speech and Names (in which all the kinds of Philosophy consist) are capable of Addition and Substraction.</p>
+
+</blockquote>
+
+<p>Note how Hobbes equates computation with the combination of concepts (moreover, he describes a process of <em>abstraction</em>, i.e., naming a general concept, and <em>refinement</em>, i.e., restricting that concept to a narrower contained concepts).</p>
+
+<h3 id="leibnizs-instrument">Leibniz’s Instrument</h3>
+
+<p>Leibniz set out to give a more rigorous, mathematical, treatment to Hobbes’s ideas. To understand the more technical state of affairs at the time we must know that that the use of letters to stand for arbitrary concepts was pioneered by Aristotle, but over the middle ages and early-modern period, algebra was developed in the Arab world and in Europe, and letters were also taken to mean an arbitrary number, a class of numbers, or an unknown number — meaning, the <em>variable</em> came to be.</p>
+
+<p>In 1666, as part of his admission process to the philosophical faculty at Leipzig, 20-year-old Leibniz wrote the <em>Dissertation on the Art of Combinations</em>. After dispensing with the obligatory proof of God’s existence in the introduction, he roughly outlines the idea of expressing things universally with numbers, he writes,</p>
+
+<blockquote>
+  <p><label for="dissert1" class="margin-toggle"> ⊕</label><input type="checkbox" id="dissert1" class="margin-toggle" /><span class="marginnote"><em>Dissertation On the Art of Combination</em>, part 3 </span>Thomas Hobbes, everywhere a profound examiner of principles, rightly stated that everything done by our mind is a <em>computation</em>, by which is to be understood either the addition of a sum or the subtraction of a difference … So just as there are two primary signs of algebra and analytics, + and −, in the same way there are as it were two copulas, ‘is’ and ‘is not’”.</p>
+
+</blockquote>
+
+<p>He came up with an ambitious plan:</p>
+
+<blockquote>
+  <p><label for="universalsynth" class="margin-toggle"> ⊕</label><input type="checkbox" id="universalsynth" class="margin-toggle" /><span class="marginnote"><em>On Universal Synthesis and Analysis, or The Art of Discovery and Judgment</em>, l679 in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, pp. 229-233</a> </span>Seeing that there are categories for the simple terms by which concepts are ordered, why should there not also be categories for complex terms, by which truths may be ordered? … It seemed to me, however, that this could be achieved universally if we ﬁrst had the true categories for simple terms and if, to obtain these, we set up something new in the nature of an alphabet of thoughts, or a catalogue of the highest genera or of those we assume to be highest, such as <em>a</em>, <em>b</em>, <em>c</em>, <em>d</em>, <em>e</em>, <em>f</em>, out of whose combination inferior concepts may be formed.</p>
+
+  <p>… All derivative concepts, moreover, arise from a combination of primitive ones, and the more composite concepts from the combination of less composite ones. [But one must take care that the combinations do not become useless through the joining-together of incompatible concepts. This can be avoided only by experience or by resolving them into distinct single concepts. One must be especially careful, in setting up real definitions, to establish their possibility, that is, to show that the concepts from which they are formed are compatible with each other.]</p>
+
+  <p><label for="combinatoria" class="margin-toggle">⊕</label><input type="checkbox" id="combinatoria" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/de_arte_combinatoria.jpg" /><br />Frontispiece of Leibniz’s <em>Dissertatio de arte combinatoria</em>, printed in 1690 (source: <a href="https://en.wikipedia.org/wiki/De_Arte_Combinatoria#/media/File:Fotothek_df_tg_0005486_Mathematik_%5E_Kombinatorik.jpg">Wikipedia</a>)</span></p>
+
+  <p>… Thus any truth whatever can be justiﬁed, for the connection of the predicate with the subject is either evident in itself as in identities, or can be explained by an analysis of the terms. This is the only, and the highest, criterion of truth in abstract things, that is, things which do not depend on experience — that it must either be an identity or be reducible to identities.</p>
+
+  <p>… the art of combinations in particular, as I take it (it can also be called a general characteristic or algebra), is that science in which are treated the forms or formulas of things in general, that is, quality in general or similarity and dissimilarity; in the same way that ever new formulas arise from the elements <em>a</em>, <em>b</em>, <em>c</em> themselves when combined with each other, whether these elements represent quantities or something else. This art is distinct from common algebra, which deals with formulas applied to quantity only or to equality and inequality. This algebra is thus subordinate to the art of combinations and constantly uses its rules. But these rules of combination are far more general and ﬁnd application not only in algebra but in the art of deciphering, in various games, in geometry itself when it is treated linearly in the manner of the ancients, and ﬁnally, in all matters involving relations of similarity.</p>
+</blockquote>
+
+<p>Here we can already see the idea of a hierarchy, or an <em>order</em>, of propositions or <em>categories</em> (sometimes also called by Leibniz and most future logicians, <em>concepts</em>, <em>notions</em> or <em>classes</em>), as well as the idea that complex concepts are built from simpler ones by applying <em>combinations</em>, which are themselves finer (or coarser) concepts with semantics that can be manipulated computationally. We also see Leibniz making a connection between logic and algebra — both manipulate formulas and symbols — even though algebra is ultimately concerned with quantities and logic with more abstract concepts. What matters, according to Leibniz, is the genral idea of combination of symbols.</p>
+
+<p>But to take advantage of algebra for the actual study of logic, another step had to be made. While algebra as the art of manipulating symbols had already been established by Leibniz’s time, algebraic variables could only stand for numbers for their combinations to make sense. Leibniz, however, recognized this was not a limitation, as numbers can be used to encode, or <em>characterize</em>, anything:</p>
+
+<blockquote>
+  <p><label for="char1" class="margin-toggle"> ⊕</label><input type="checkbox" id="char1" class="margin-toggle" /><span class="marginnote"><em>On the General Characteristic</em>, Ca. 1679 in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 221-227</a> </span>There is an old saying that God created everything according to weight, measure, and number. But there are things which cannot be weighed, those namely which have no force or power. There are also things which have no parts and hence admit of no measure. But there is nothing which is not subordinate to number. Number is thus a basic metaphysical ﬁgure, as it were, and arithmetic is a kind of statics of the universe by which the powers of things are discovered.</p>
+
+  <p>Men have been convinced ever since Pythagoras that the deepest mysteries lie concealed in numbers. It is possible that Pythagoras brought over this opinion, like many others, from the Orient to Greece. But, because the true key to the mystery was unknown, more inquisitive minds fell into futiﬁties and superstitions, from which there ﬁnally arose a kind of popular Cabbala, far removed from the true one, and that multitude of follies which is falsely called a kind of magic and with which books have
+been ﬁlled. Meanwhile there remained deep-rooted in men the propensity to believe that marvels can be discovered by means of numbers, characters, and a certain new language, which some called the Adamic language, by numbers; Jacob Böhme called it the <em>Natursprache</em>.</p>
+
+  <p>But perhaps no mortal has yet seen into the true basis upon which everything can be assigned its characteristic number. For the most scholarly men have admitted that they did not understand what I said when I incidentally mentioned something of the sort to them. And although learned men have long since thought of some kind of language or universal characteristic by which all concepts and things can be put into beautiful order, and with whose help different nations might communicate their
+thoughts and each read in his own language what another has written in his, yet no one has attempted a language or characteristic which includes at once both the arts of discovery and of judgment, that is, one whose signs or characters serve the same purpose that arithmetical signs serve for numbers, and algebraic signs for quantities taken abstractly. Yet it does seem that since God has bestowed these two sciences on mankind, he has sought to notify us that a far greater secret lies hidden in our understanding, of which these are but the shadows.</p>
+
+  <p>Some unknown fate has brought it about, however, that when I was a mere boy I became involved in these considerations, and as ﬁrst inclinations usually do, they have remained strongly ﬂxed in my mind ever since. Two things which are otherwise of doubtful merit and are harmful to many people, proved wonderfully useful to me: ﬁrst, I was self-taught, and second, I looked for something new in every science when I ﬁrst studied it, often before I even understood its already established content. But so I gained a double reward: ﬁrst, I did not ﬁll my head with empty and cumbersome teachings accepted on the authority of the teacher instead of sound arguments; second, I did not rest until I had traced back the tissues and roots of every teaching and had penetrated to its principles. By such training I was enabled to discover by my own effort everything with which I was concerned.</p>
+
+  <p><label for="sophie1" class="margin-toggle">⊕</label><input type="checkbox" id="sophie1" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/sophie_charlotte_leibniz.jpg" /><br />Leibniz mansplaining monads to his friend and disciple, Queen Sophia Charlotte of Hanover, queen consort of Prussia, in front of the Charlottenburg Palace in Berlin (source: <a href="http://www.gwleibniz.com/sophie_charlotte/sophie_charlotte_leibniz.html">Leibnitiana</a>)</span></p>
+
+  <p>When I turned, therefore, from the reading of history, which had delighted me from my earliest youth, and from the cultivation of style, which I carried out with such ease both in prose and in more restricted forms that my teachers feared that I might remain stuck in such frivolities, and took up logic and philosophy and had barely begun to understand something about these ﬁelds, what a multitude of fancies came to birth in my brain and were scratched down on paper to be laid before my astonished teachers. Among other things I once raised a doubt concerning the categories. I said that just as we have categories or classes of simple concepts, we ought also to have a new class of categories in which propositions or complex terms themselves may be arranged in their natural order. For I had not even dreamed of demonstrations at that time and did not know that the geometricians do exactly what I was seeking when they arrange propositions in an order such that one is demonstrated from the other. My question was thus superﬂuous, but when my teachers failed to answer it, I pursued these ideas for the sake of their novelty, attempting to establish such categories for complex terms or propositions. Upon making the effort to study this more intently, I necessarily arrived at this remarkable thought, namely that a kind of alphabet of human thoughts can be worked out and that everything can be discovered and judged by a comparison of the letters of this alphabet and an analysis of the words made from them. This discovery gave me great joy though it was childish of course, for I had not grasped the true importance of the matter. But later, the more progress I made in my thinking about these things, the more conﬁrmed I was in my decision to carry the problem further.</p>
+
+  <p>…  For this is what I ﬁnally discovered after most intent thought. Nothing more is necessary to establish the characteristic which I am attempting, at least to a point sufficient to build the grammar of this wonderful language and a dictionary for the most frequent cases, or what amounts to the same thing, nothing more is necessary to set up the characteristic numbers for all ideas than to develop a philosophical and mathematical ‘course of studies’, as it is called, based on a certain new method which I can set forth, and containing nothing more dilﬁcult than other courses of study, or more remote from use and understanding, or more alien to the usual way of writing.</p>
+
+  <p>… Once the characteristic numbers for most concepts have been set up, however, the human race will have a new kind of instrument which will increase the power of the mind much more than optical lenses strengthen the eyes and which will be as far superior to microscopes or telescopes as reason is superior to sight. The magnetic needle has brought no more help to sailors than this lodestar will bring to those who navigate the sea of experiments. What other consequences will eventually follow from it must be left to the decree of the fates; however, they cannot be the great and good. For men can be debased by all other gifts; only right reason can be nothing but wholesome. But reason will be right beyond all doubt only when it is everywhere as clear and certain as only arithmetic has been until now. Then there will be an end to that burdensome raising of objections by which one person now usually plagues another andewhich turns so many away from the desire to reason. When one person argues, namely, his opponent, instead of examining his argument, answers generally, thus, ‘How do you know that your reason is any truer than mine? What criterion of truth have you?’ And if the ﬁrst person persists in his argument, his hearers lack the patience to examine it. For usually many other problems have to be investigated ﬁrst, and this would be the work of several weeks, following the laws of thought accepted until now. And so after much agitation, the emotions usually win out instead of reason, and we end the controversy by cutting the Gordian knot rather than untying it. This happens especially in deliberations pertaining to life, where a decision must be made; here it is given to few people to weigh the factors of expediency and inexpediency, which are often numerous on both sides, as in a balance. The more strongly we are able to present to ourselves, now one circumstance and now another, in order to balance the varying inclinations of our own minds, and the more eloquently and effectively we can adorn and point them out for others, the more ﬁrmly we shall act and carry the minds of other men with us, especially if we make wise use of their emotions. There is hardly anyone who could work out the entire table of pros and cons in any deliberation, that is, who could not only enumerate the expedient and inexpedient aspects but also weigh them rightly. Thus two disputants seem to me almost like two merchants who are in debt to each other for various items, but who are never willing to strike a balance; instead, each one advances his own various claims against the other, exaggerating the truth and magnitude of certain particular items. Their quarrel will never end on this basis. And we need not be surprised that this is what has happened until now in most controversies in which the matter is not clear, that is, is not reduced to numbers.</p>
+
+  <p><label for="sophie2" class="margin-toggle">⊕</label><input type="checkbox" id="sophie2" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/Sophie-Charlotte_image_full.jpg" /><br />Leibniz entertaining the guests at a soirée at Sophie Charlotte’s (source: <a href="https://www.hannover.de/Herrenhausen/Museum-Schloss-Herrenhausen/Historische-Pers%C3%B6nlichkeiten/Sophie-Charlotte">Museum Schloss Herrenhausen</a>)</span></p>
+
+  <p>Now, however, our characteristic will reduce the whole to numbers, so that reasons can also be weighed, as if by a kind of statics. For probabilities, too, will be treated in this calculation and demonstration, since one can always estimate which of the given circumstances will more probably occur. Finally, anyone who is certainly convinced of the truth of religion and its consequences, and so embraces others in love that he desires the conversion of mankind, will surely admit, if he understands these matters, that nothing will be more inﬂuential than this discovery for the propagation of the faith, unless it be miracles, the holiness of an apostle, or the victories of a great monarch. Where this language can once be introduced by missionaries, the true religion, which is in complete agreement with reason, will be established, and apostasy will no more be feared in the future than would an apostasy of men from the arithmetic or geometry which they have once learned. So I repeat what I have often said: that no man who is not a prophet or a prince can ever undertake anything of greater good to mankind or more ﬁtting for the divine glory.</p>
+
+  <p>But we must go further than words! Since the admirable connection of things makes it most diﬂicult to give the characteristic numbers of a few things separated from others, I have thought of an elegant device, if I am not mistaken, by which to show that ratiocination can be proved through numbers. Thus I imagine that these most remarkable characteristic numbers are already given, and, having observed a certain general property to be true of them, I set up such numbers as are somehow consistent with this property, and applying these, I at once demonstrate through numbers, in wonderful order, all the rules of logic and show how we can know whether certain arguments are in good form. But the material soundness or truth of an argument can be judged without much mental effort and danger of error only when we have the true characteristic numbers of things themselves.</p>
+
+  <p><label for="causality" class="margin-toggle"> ⊕</label><input type="checkbox" id="causality" class="margin-toggle" /><span class="marginnote">Leibniz also explicitly and succinctly states something that had also been discussed by Aristotle: “This axiom, however, that there is nothing without a reason, must be considered one of the greatest and most fruitful of all human knowledge, for upon it is built a great part of metaphysics, physics, and moral science”. It is this axiom of <a href="https://en.wikipedia.org/wiki/Causality">causality</a>, probably the most important one in metaphysics and in all of the philosophy of science, that explains some of the “surprising effectiveness” of mathematics and seemingly surprising similarities between different theories, that, at their core, are just descriptions of this fundamental assumption. Most importantly, it explains why so many mathematical theories have a notion of transitivity, as causality is transitive: if A necessarily (or possibly) causes B, and B necessarily (or possibly) causes C, then A necessarily (or possibly) causes C. </span></p>
+
+  <p>[… One cannot go to inﬁnity in his proofs, however, and therefore some things must be assumed without proof — not silently and by stealth, indeed, dissimulating our own laziness as philosophers customarily do, but keeping clearly in mind what we have used as ﬁrst assertions, after the example of geometricians who, to show their good faith, acknowledge at the very start the assumed axioms they are to use, so that they may be sure that all the conclusions are proved at least hypothetically from these assumptions.</p>
+
+  <p>First of all, I assume that every judgment (i.e., aﬂirmation or negation) is either true or false and that if the aﬂirmation is true the negation is false, and if the negation is true the aﬂirmation is false; that what is denied to be true -— truly, of course — is false, and what is denied to be false is true; that what is denied to be aﬂirmed, or affirmed to be denied, is to be denied; and what is affirmed to be affirmed and denied to be denied is to be afﬁrmed. Similarly, that it is false that what is false should be true or that what is true should be false; that it is true that what is true is true, and what is false, false. All these are usually included in one designation, the <em>principle of contradiction</em>.</p>
+
+  <p>… In general, every true proposition which is not identical or true in itself can be proved a priori with the help of axioms or propositions that are true in themselves and with the help of deﬁnitions or ideas. For no matter how often a predicate is truly afﬁrmed of a subject, there must be some real connection between subject and predicate, such that in every proposition whatever, such as <em>A</em> is <em>B</em> (or <em>B</em> is truly predicated of <em>A</em>), it is true that <em>B</em> is contained in <em>A</em>, or its concept is in some way contained in the concept of <em>A</em> itself. …  Such truth could itself be deduced from the analysis of concepts, if this were always within human power, and will certainly not escape the analysis of an omniscient substance who sees everything a priori from ideas themselves and from his decrees. It is certain, therefore, that all truths, even highly contingent ones, have a proof a priori or some reason why they are rather than are not. And this is what is commonly asserted: that nothing happens without a cause, or these is nothing without a reason.]</p>
+
+  <p>[… This axiom, however, that there is nothing without a reason, must be considered one of the greatest and most fruitful of all human knowledge, for upon it is built a great part of metaphysics, physics, and moral science; without it, indeed, the existence of God cannot be proved from his creatures, nor can an argument be carried fom causes to effects or from effects to causes, nor any conclusions be drawn in civil matters. So true is this that whatever is not of mathematical necessity, as for instance are logical forms and numerical truths, must be sought here entirely.]</p>
+</blockquote>
+
+<p>Thus was born the dream of the general characteristic, or <em>characteristica universalis</em>, the universal language of all human thought. Note that Leibniz’s <em>characteristica universalis</em> was intended to describe not only acts of deduction but also of scientific discovery (“both the arts of discovery and of judgment”).</p>
+
+<p>Leibniz justified the feasibility of a universal characteristic in the inherent mechanical nature of the mind:</p>
+
+<blockquote>
+  <p><label for="leib4" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib4" class="margin-toggle" /><span class="marginnote"><em>A New System of the Nature and the Communication of Substances, as Well as the Union Between the Soul and the Body</em>, Journal des savants, June 27, 1695, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 458</a> </span>For why should God be unable to give to substance in the beginning a nature or internal force which enables it to produce in regular order — as in an <em>automaton that is spiritual or formal but free</em> in the case of that substance which has a share of reason — everything which is to happen to it, that is, all the appearances or expressions which it is to have, and this without the help of any created being? Especially since the nature of substance necessarily demands and essentially involves progress or change and would have no force of action without it. And since it is the nature of the soul to represent the universe in a very exact way, though with relative degrees of distinctness, the sequence of representations which the soul produces will correspond naturally to the sequence of changes in the universe itself. So the body, in turn, has also been adapted to the soul to ﬁt those situations in which the soul is thought of as acting externally. This is all the more reasonable inasmuch as bodies are made solely for the spirits themselves, who are capable of entering into a society with God and of extolling his glory. Thus as soon as one sees the possibility of this <em>hypothesis of agreement</em>, one sees also that it is the most reasonable one and that it gives a wonderful idea of the harmony of the universe and of the perfection of the works of God.</p>
+</blockquote>
+
+<p>Leibniz explained how, if the mind is a machine, it is capable of exhibiting elaborate behavior:</p>
+
+<blockquote>
+  <p><label for="leib5" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib5" class="margin-toggle" /><span class="marginnote"><em>Clarification of the Difficulties Which Mr. Bayle Has Found in the New System of the Union of Soul and Body</em>, Histoire des ouvrages des savants, July, 1698, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 495</a> </span>I have compared the soul with a clock only with regard to the regulated precision of its changes, which is only imperfect; even in the best clocks, but which is perfect in the works of God. And one can say that the soul is a most exact immaterial automaton. When it is said that a simple being will always act uniformly, a distinction needs to be made. If to act uniformly is to follow perpetually the same law of order or of succession, as in a certain scale or series of numbers, I agree that in this sense every simple being and even every composite being acts uniformly. But if uniformly means similarly, I do not agree.</p>
+
+  <p>… We must also take into consideration that the soul, however simple it may be, always has a feeling [sentiment] composed of many perceptions at once, a fact which serves our purpose as well as if it were composed of parts like a machine. For each preceding perception inﬂuences those which follow in conformity with a law of order which is found in perceptions as well as in movements. For many centuries, too, most philosophers, who ascribe thoughts to souls and to angels, whom they believe to be without any bodies (not to speak of the intellects of Aristotle), have admitted spontaneous change in simple beings. I add that the perceptions which are found together in one soul at the same time include a veritably inﬁnite multitude of little indistinguishable feelings, which the subsequent series must develop, so that we need not be astonished at the inﬁnite variety of what must result from it in time. All this is only a consequence of the representative nature of the soul, which must express what happens, and even what will happen in its body and in some way in all other bodies, through the connection or correspondence between all the parts of the world. Perhaps it would have sufficed to say that God, having made material automatons, could also make immaterial ones which represent the former ones, but I believed that it would be well to elaborate my views a little more fully.</p>
+</blockquote>
+
+<p>We therefore see that Leibniz, in the 1600s, believed that the mind was a “natural automaton” and reason a “computation”, and seeing the similarity between Aristotle’s logic, the description of correct reasoning in a semi-symbolic language, and algerba, the science of symbol combination, sought to invent an algebra-like calculus that to provide a “determined procedure” for reasoning.</p>
+
+<p>The centrality of <em>language</em> in a mechanical description of thought was explained by Leibniz thus:</p>
+
+<blockquote>
+  <p><label for="leib6" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib6" class="margin-toggle" /><span class="marginnote"><a href="#bennett"><em>New Essays</em>, p. 134</a> </span>If we didn’t want to make ourselves understood we indeed wouldn’t ever have created language… But once it has been created it serves also for purposes other than communication; for it also enables man to reason to himself, both because words provide the means for remembering abstract thoughts and also because symbols and ‘blind thoughts’ are useful in reasoning, as it would take too long to lay everything out and always replace terms by definitions.</p>
+</blockquote>
+
+<p>He explains what he means by “blind thought”, i.e., thought expressible as symbolic, formal or mechanical computation:</p>
+
+<blockquote>
+  <p><label for="leib6" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib6" class="margin-toggle" /><span class="marginnote"><a href="#bennett"><em>New Essays</em>, p. 82</a> </span>[O]ur thoughts are for the most part what I call ‘blind thoughts’. I mean that they are empty of perception and sensibility, and consist in the wholly unaided use of symbols—like people doing algebraic geometry and mostly not attending to the geometrical figures that are being dealt with. Usually words are in this respect like the symbols of arithmetic and algebra. We often reason in words, with the object itself virtually absent from our mind.</p>
+</blockquote>
+
+<p>And elsewhere:</p>
+
+<blockquote>
+  <p><label for="leib7" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib7" class="margin-toggle" /><span class="marginnote"><em>Dialogue</em>, August 1677, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, pp. 183-184</a> </span>B. What of it? Thoughts can occur without words.</p>
+
+  <p>A. But not without some other signs. Try, I pray, whether you can begin any arithmetical calculation without numerical signs.</p>
+
+  <p>…</p>
+
+  <p>B. … Yet I notice that, if characters can be used for ratiocination, there is in them a kind of complex mutual relation [<em>situs</em>] or order which ﬁts the things; if not in the single words at least in their combination and inﬂection, although it is even better if found in the single words themselves. Though it varies, this order somehow corresponds in all languages. This fact gives me hope of escaping the difficulty. For although characters are arbitrary, their use and connection have something which is not arbitrary, namely a deﬁnite analogy between characters and things, and the relations which different characters expressing the same thing have to each other. This analogy or relation is the basis of truth. For the result is that whether we apply one set of characters or another, the products will be the same or equivalent or correspond analogously. But perhaps certain characters are always necessary for thinking.</p>
+
+</blockquote>
+
+<p>In the margin he scribbled, “When God calculates and exercises his thought, the world is made.”</p>
+
+<p><label for="leibniz-machine" class="margin-toggle">⊕</label><input type="checkbox" id="leibniz-machine" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/Leibniz_machine_without_cover.jpg" /><br />Leibniz’s <em>stepped reckoner</em>, the first mechanical calculator to perform all four arithmetic operations (source: <a href="http://history-computer.com/MechanicalCalculators/Pioneers/Lebniz.html">History of Computers</a>)</span></p>
+
+<p>This emphasis on language cannot be understated, and it would come to dominate all work in logic in the subsequent ceturies, at least until Turing. But note that language requires not only a syntax of characters, but also a semantics. Despite the “blind” computation, “[t]his analogy or relation” — between characters and things, i.e., semantics —  “is the basis of truth.” So while reasoning can be carried out “blindly”, or mechanically, it is predicated on an <em>a priori</em> semantics.</p>
+
+<p>Some of Leibniz’s contemporaries and immediate predecessors, most notably <a href="https://en.wikipedia.org/wiki/Ren%C3%A9_Descartes">René Descartes</a>, rejected the formalistic view of logic, and believed that it should be a <em>direct</em> description of the work of the mind for which the use of language is inessential. Leibniz, however, believed that thought — or, at least, much of it — is or can be mediated by the mechanical manipulation of language. Indeed, “blind thought”,  he claimed, is essential. For example, when multiplying 3 by 4 one can have a mental image of the operation, but multiplication of larger numbers requires mechanical, <em>symbolic</em> operations on numerals. Leibniz makes the point about the importance of algorithmic thought — although he doesn’t use the term <em>algorithm</em>, but rather <em>calculus</em> — in a letter to <a href="https://en.wikipedia.org/wiki/Ehrenfried_Walther_von_Tschirnhaus">Ehrenfried Walther von Tschirnhaus</a>:</p>
+
+<blockquote>
+  <p><label for="leib8" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib8" class="margin-toggle" /><span class="marginnote"><em>Letter to Walter von Tschirnhaus</em>, May, 1678, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 194</a> </span>You are entirely of my opinion when you say that in very composite matters a calculus is necessary. For this is the same as if you had said that characters are necessary, for a calculus is nothing but operation through characters, and this has its place not only in matters of quantity but in all other reasoning as well. Meanwhile I have a very high regard for such problems as can be solved by mental powers alone insofar as this is possible, without a prolonged calculation, that is, without paper and pen. For such problems depend as little as possible on external circumstances, being within the power even of a captive who is denied a pen and whose hands are tied. Therefore we ought to practice both in calculating and in meditating, and when we have reached certain results by calculation, we ought to try afterward to demonstrate them by meditation alone, which has in my experience often been successful.</p>
+
+</blockquote>
+
+<p>Here Leibniz contrasts <em>calculation</em> employing a pen and paper with <em>meditation</em>, that can be done entirely in the mind and involves the direct manipulation of concepts rather than symbols. A similar analysis of the work of a person thinking while scribbling would serve as the starting point for Turing’s work as well, only he would come up with a very different conclusion, one that removes the distinction between meditation and calculation.</p>
+
+<p>According to Marciszewski, all three ideas comprising Leibniz’s program — symbolic or algorithmic process, composition and separation of concepts, and a universal language of philosophy — were popular subjects of inquiry in the 17th century, but Leibniz was the first to combine them all. For example, the idea of a computation by a systematized application of small steps gained popularity in Europe after arriving from the Arab world in the work of <a href="https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi">al-Khwarizmi</a>, who, in turn, relied on Hindu methods, in particular, on the <a href="https://en.wikipedia.org/wiki/Hindu%E2%80%93Arabic_numeral_system">decimal system</a>, required for symbolic computation on numbers.</p>
+
+<p>Leibniz went further in his development of a <em>calculus ratiocinator</em> — his “elegant device… by which to show that ratiocination can be proved through numbers” — a calculus of reasoning inspired by algebra to mechanically, i.e., through a “determined procedure”, to deduce propositions in the <em>characteristica universalis</em>:</p>
+
+<blockquote>
+  <p><label for="leib9" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib9" class="margin-toggle" /><span class="marginnote"><em>Studies in a Geometry of Situation with a Letter to Christian Huygens</em>, 1679, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 249-250</a> </span>I have discovered certain elements of a new characteristic which is entirely different from algebra and which will have great advantages in representing to the mind, exactly and in a way faithful to its nature, even without figures, everything which depends on sense perception. Algebra is the characteristic for undetermined numbers or magnitudes only, but it does not express situation, angles, and motion directly. Hence it is often difficult to analyze the properties of a figure by calculation, and still more diﬂicult to ﬁnd very convenient geometrical demonstrations and constructions, even when the algebraic calculation is completed. But this new characteristic, which follows the visual figures, cannot fail to give the solution, the construction, and the geometric demonstration all at the same time, and in a natural way and in one analysis, that is, through determined procedure.</p>
+
+  <p>… If it were completed in the way in which I think of it, one could carry out the description of a machine, no matter how complicated, in characters which would be merely the letters of the alphabet, and so provide the mind with a method of knowing the machine and all its parts, their motion and use, distinctly and easily without the use of any ﬁgures or models and without the need of imagination. Yet the ﬁgure would inevitably be present to the mind whenever one wishes to interpret the characters. One could also give exact descriptions of natural things by means of it, such, for example, as the structure of plants and animals. With its aid people who ﬁnd it hard to draw ﬁgures could explain a matter perfectly, provided they have it present before them or in their mind, and could transmit their thoughts and experiences to posterity — a thing which cannot be done today because the words of our languages are not suﬂiciently ﬁxed or well enough ﬁtted for good explanations
+without ﬁgures.</p>
+
+  <p>This is the least useful aspect of this characteristic, however, for if only description were involved, it would be better — assuming that we can and are willing to bear the expense — to have ﬁgures and even models or, better still, the original things themselves. But its chief value lies in the reasoning which can be done and the conclusions which can be drawn by operations with its characters, which could not be expressed in figures, and still less in models, without multiplying these too greatly or without confusing them with too many points and lines in the course of the many futile attempts one is forced to make. This method, by contrast, will guide us surely and without effort. I believe that by this method one could treat mechanics almost like geometry, and one could even test the qualities of materials, because this ordinarily depends on certain ﬁgures in their sensible parts.</p>
+</blockquote>
+
+<p>I believe that it would not be completely anachronistic to attribute to Leibniz a belief in something close to what is now called <em>universal computation</em> (although perhaps not one that extends to <em>all</em> functions of the mind), as he believed that a <em>precise</em> and <em>formal</em> language could be used to describe the workings of both man-made machines, “no matter how complicated”, and “natural things,” like “the structure of plants and animals”. Indeed, Alan Turing, who, as we’ll see, was the first to try to describe the “immaterial automaton” of the mind by formal means that are <em>not</em> Aristotelian or linguistic (yet still “not without some other signs”), soon after set out to precisely describe the very “structure of plants and animals” using universal computation.</p>
+
+<p>Leibniz began considering concrete mechanisms for the manipulating concepts and their combinations using numbers and algebra, stating with the assumption that every primitive concept is assigned a <em>characteristic number</em>. The following description of the <em>calculus ratiocinator</em> is probably the very first attempt at the algebraization, or mathematization of logic in general, and Aristotle’s framwork in particular:</p>
+
+<blockquote>
+  <p><label for="leib10" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib10" class="margin-toggle" /><span class="marginnote"><em>Two Studies in the Logical Calculus</em>, 1679, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 235-244</a> </span></p>
+
+  <ol>
+    <li>A <em>term</em> is the subject or predicate of a categorical proposition. Thus I include neither the sign nor the copula among the terms. So when it is said, ‘The wise man believes’, the term is not believes, but a believer, just as if I say, ‘The wise man is a believer’.</li>
+  </ol>
+
+  <p>…</p>
+
+  <ol>
+    <li>To every term whatever may be assigned its <em>characteristic number</em>, which we may use in calculating, as we use the term itself in reasoning. I choose numbers in writing; in time I shall adapt other signs both to numbers and to speech itself. For the present numbers are the most useful because of their accuracy and the ease with which they are handled and because it is thus clear to the eye that all of the relations of concepts are certain and determined after the likeness of numbers.</li>
+    <li><em>The rule for discovering fitting characteristic numbers</em> is this one only: when the concept of a given term is composed directly out of the concepts of two or more other terms, then the characteristic number of the given term is to be produced by multiplying the characteristic numbers of the terms composing it. For example, since man is a rational animal, if the number of animal is <em>a</em>, for instance, 2 and the number of rational is <em>r</em>, for instance 3, the number of man, or <em>h</em>, will be $2 \times 3$ or 6.</li>
+    <li>We shall introduce letters (such as <em>a</em>, <em>r</em>, and <em>h</em> here) when the numbers are not given or at least need not be considered specifically but are dealt with in general, as it is proper for us to do here in dealing with the elements. Like the practice in symbolic algebra or the arithmetic of figures, this is a way of avoiding the effort to try to do for each individual case what can be shown at one and the same time for an inﬁnite number of instances. I shall explain the manner of using these letters below.</li>
+  </ol>
+
+  <p>…</p>
+
+  <ol>
+    <li>To make clear the use of characteristic numbers in propositions, the following must be kept in mind. Every true categorical proposition, afﬁrmative and universal, signiﬁes nothing but a certain connection between the predicate and the subject — in the direct case, that is, of which I am always speaking here. This connection is such that the predicate is said to be in the subject, or to be contained in it, and this either absolutely and viewed in itself, or in some particular case. Or in the same way, the subject is said to contain the predicate; that is, the concept of the subject, either in itself or with some addition, involves the concept of the predicate. And therefore the subject and predicate are mutually related to each other either as whole and part, or as whole and coinciding whole, or as part to whole. In the ﬁrst two cases the proposition is universal afﬁrmative. So when I say, ‘All gold is a metal’, I mean by this only that the notion of metal is contained in the notion of gold in a direct sense, for gold is the heaviest metal. And when I say, ‘All pious people are happy’, I mean only that the connection between piety and happiness is such that whoever understands the nature of piety perfectly will see that the nature of happiness is involved in it in the direct sense. But in every case, whether the subject or the predicate is a part or a whole, a particular affirmative proposition always holds. … But a distinction between the subjects of a universal and a particular proposition is found in the manner of this inclusion. For the subject of a universal proposition, viewed in itself and taken absolutely, must contain the predicate; so that the concept of gold, viewed in itself and taken absolutely, involves the concept of metal, since the notion of gold is that of the heaviest metal. But in an afﬁrmative particular proposition it suﬂices that the inclusion is successful when something is added to the subject. The concept of metal, viewed absolutely and in itself, does not involve the concept of gold; something must be added to involve it, namely, the sign of particularity. For it is some certain metal which contains the concept of gold. In the future, however, when we say that a term is contained in another or a concept in another concept, we understand this to mean simply and in itself.</li>
+  </ol>
+
+  <p>… <label for="candide" class="margin-toggle">⊕</label><input type="checkbox" id="candide" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/PanglossAutodeFe.jpg" /><br />From <a href="https://en.wikipedia.org/wiki/Candide"><em>Candide</em></a> by <a href="https://en.wikipedia.org/wiki/Voltaire">Voltaire</a>, a novella satirizing Leibniz’s claim that ours is <a href="https://en.wikipedia.org/wiki/Best_of_all_possible_worlds">the best of all possible worlds</a>. Dr. Pangloss, Candide’s mentor and ‘the greatest philosopher of the Holy Roman Empire’ — who probably represents Leibniz —  is reduced to panhandling, and, after being cured from syphilis, is shown in this 18th century illustration as he is about to be tortured and hanged in an auto-de-fé. (source: <a href="http://literature.wikia.com/wiki/Candide">Literature Wikia</a>)</span></p>
+
+  <ol start="12">
+    <li>
+      <p>The schools speak otherwise, because they are considering not concepts but instances subsumed under universal concepts. Thus they say that metal is wider than gold, since it contains more species than does gold. If we were to count the individuals made of gold on the one hand, and those made of metal on the other, there would certainly be more of the latter than of the former, and hence the former would be contained in the latter as part in a whole. In fact, by applying this observation and using ﬁtting characters, we could demonstrate all the rules of logic by another kind of calculus than the one developed here, merely by an inversion of our own calculus. But I prefer to consider universal concepts or ideas and their composition, for these do not depend on the existence of individuals. So I say that gold is greater than metal, because more constituents are required for the concept of gold than for that of metal, and more is needed to produce gold than to produce just a metal. Thus our phrases here and the Scholastic phrases do not contradict each other but must nevertheless be carefully distinguished. It will be clear to the careful student that I make no innovations in my way of speaking which do not have a deﬁnite reason and application.</p>
+    </li>
+    <li>
+      <p>Everything that we have so far said about terms that contain or do not contain each other in various ways, we may now transfer to their characteristic numbers. This is easy because, as we said in Article 4, when a term helps to constitute another term, that is, when the concept of one term is contained in that of another, then the characteristic number of the one enters by multiplication into the characteristic number assumed for the term so constituted. Or what amounts to the same thing, the characteristic number of the term to be constituted (or that which contains the other) is divisible by the characteristic number of the constituting term (or that which is in the other). For example, the concept of animal enters into the formation of the concept of man, and so the characteristic number of animal, <em>a</em> (for example, 2), combines with some other number <em>r</em> (such as 3), to produce the number <em>ar</em> or It by multiplication ($2 \times 3$); that is, the characteristic number of man. Hence number <em>ar</em> or <em>h</em> (or 6) must necessarily be divisible by a (or by 2).</p>
+    </li>
+  </ol>
+  <p>…</p>
+
+  <ol start="16">
+    <li>
+      <p>Hence we can also determine through characteristic numbers which term does not contain another. One has merely to test whether the number of one term can be divided exactly by the number of the other. For example, if the characteristic number of man is found to be 6, and that of the ape is 10, it is obvious that the concept of ape does not include that of man, nor that of man the ape, since 10 cannot be divided evenly by 6, nor 6 by 10. So if you wish to know whether the concept of wisdom is contained in that of a just being, that is, whether nothing more is required for wisdom than what is already contained in justice, you need merely to examine whether the characteristic number of just can be divided exactly by the characteristic number of wise. If the division is impossible, it will be clear that something more is required for wisdom than what is in justice, namely, a knowledge of reasons. For one can be just by custom or habit, even though he cannot give a reason for what he does. I will show later how that minimum which is necessary or must be added for the purpose can be discovered by characteristic numbers.</p>
+    </li>
+    <li>
+      <p>So we can learn in this way whether any universal affirmative proposition is true. For in such a proposition the concept of the subject, taken absolutely and indeﬁnitely and in general viewed in itself, always contains the concept of the predicate. For example, all gold is a metal, that is, the concept of metal is contained in the concept of gold generally and viewed in itself… Thus if we wish to know whether all gold is a metal … we merely see whether the defiinition of metal is contained in it; that is, by a very simple procedure when characteristic numbers are introduced, we see whether the characteristic number of gold can be divided by the characteristic number of metal.</p>
+    </li>
+  </ol>
+
+  <p>…</p>
+
+  <p>II. SPECIMEN OF UNIVERSAL CALCULUS</p>
+
+  <p>…</p>
+
+  <ol start="6">
+    <li>If one thing can be substituted anywhere in place of another without destroying truth, the other thing can be substituted conversely in place of the ﬁrst… For assuming two terms <em>a</em> and <em>b</em>, such that b can be substituted anywhere for a, then I say, a can be substituted anywhere in place of <em>b</em>. This I prove as follows…</li>
+  </ol>
+
+  <p>…</p>
+
+  <p>If <em>a</em> is <em>b</em>, and <em>d</em> is <em>c</em>, then <em>ad</em> is <em>bc</em>. This is an admirable theorem, which can be demonstrated in this way.</p>
+
+  <p><em>a</em> is <em>b</em>, therefore <em>ad</em> is <em>bd</em>, by the above.</p>
+
+  <p><em>d</em> is <em>c</em>, therefore <em>bd</em> is <em>bc</em>, also by the above.</p>
+
+  <p><em>ad</em> is <em>bd</em>, and <em>bd</em> is <em>bc</em>, therefore <em>ad</em> is <em>bc</em>, which was to be demonstrated.</p>
+
+  <p>…</p>
+
+  <p>If <em>a</em> is <em>b</em> and <em>b</em> is <em>a</em>, then <em>a</em> and <em>b</em> are said to be the same. Thus every pious man is happy, and every happy man is pious. Therefore pious and happy are the same.</p>
+
+  <p>…</p>
+
+  <p>Propositions true in themselves:</p>
+
+  <blockquote>
+    <p>(1) <em>a</em> is <em>a</em>. Animal is animal.</p>
+
+    <p>(2) <em>ab</em> is <em>a</em>. Rational animal is animal.</p>
+
+    <p>(3) <em>a</em> is not non-<em>a</em>. Animal is not nonanimal.</p>
+
+    <p>(4) Non-<em>a</em> is not <em>a</em>. Nonanimal is not animal.</p>
+
+    <p>(5) What is not <em>a</em> is non-<em>a</em>. What is not an animal is nonanimal.</p>
+
+    <p>(6) What is not non-<em>a</em> is <em>a</em>. What is not a nonanimal is an animal.</p>
+  </blockquote>
+
+  <p>From these many others can be derived.</p>
+
+  <p>Consequences true in themselves: <em>a</em> is <em>b</em>, and <em>b</em> is <em>c</em>, therefore <em>a</em> is <em>c</em>. God is wise, wise is just; therefore God is just. This chain can be continued further. For example, God is wise, wise is just, just is austere; therefore God is austere.</p>
+
+  <p>Principles of the calculus:</p>
+
+  <blockquote>
+    <p>(1) Whatever is concluded in certain indeﬁnite letters must be understood to be concluded in whatever other letters have the same relation. Thus, since it is true that <em>ab</em> is <em>a</em>, it is also true that <em>be</em> is <em>b</em>…</p>
+
+    <p>(2) The transposition of letters in the same term changes nothing; thus <em>ab</em> coincides with <em>ba</em>, or rational animal with animal reasoner.</p>
+
+    <p>(3) The repetition of the same letter in the same term is useless; thus <em>b</em> is <em>aa</em>, or <em>bb</em> is <em>a</em>; man is an animal animal, or man man is an animal. It suﬂices to say that <em>a</em> is <em>b</em>, or man is an animal.</p>
+  </blockquote>
+</blockquote>
+
+<p>This should be considered remarkable by anyone familiar with the modern notions of formal logic and algebras of logic considering that it was written almost 350 years ago. It is not hard to guess how Frege, when attempting to continue, in his own words, Leibniz’s work on the <em>characteristica</em> exactly two hundred years later, formalized Leibniz’s (or, indeed, Aristotle’s) construct of a “concept” or a “notion” — and we will revisit that development. But let’s examine Leibniz’s algebra: he assigns every <em>concept</em> a number — in a way that should remind us of <a href="https://en.wikipedia.org/wiki/G%C3%B6del_numbering">Gödel numbering</a> — and the conjunction or intersection of two concepts as the multiplication of their characteristic numbers. Implication or inclusion of concepts is represented by division, but note that as the numbers <em>grow</em> with conjunction or intersection, <em>A</em> divides <em>B</em> corresponds to <em>B</em> implies <em>A</em> or <em>B</em> is contained in <em>A</em>, and therefore the number 1 would represent <em>true</em> (i.e., as it divides everything, it corresponds to the concept that is implied by anything) and 0 would represent <em>false</em>. Usually, when speaking about divisibility as an order relation we have it the other way around, namely 1 is the bottom element and 0 is the top, and, indeed Leibniz recognizes the possible inversion in section 12 above, and notes that “we could demonstrate all the rules of logic by another kind of calculus than the one developed here, merely by an inversion of our own calculus.”</p>
+
+<p>Leibniz’s calculus would run into a small problem. His axioms state that “the repetition of the same letter in the same term is useless”, but mere multiplication does not satisfy this. Thus, the multiplication of, “big man” with “green man” does not divide “big green man” because of the repetition of the factors of the characteristic number corresponding to “big”. To correct this, Leibniz would have had to use the least common multiple (i.e., the smallest number dividing <em>a</em> and <em>b</em>) instead of multiplication, and then he would have been surprisingly close to a very decent algebraization of logic. In fact, combining the axiom that repetition of the same concept, such as <em>animal animal</em> is equal to just one occurrence of the term (yielding a least-common-multiplier approach), with the observation that the algebra can be inverted (to use a greatest-common-divisor), and that the order and its dual can be used together to form a <a href="https://en.wikipedia.org/wiki/Distributive_lattice">distributive lattice</a>, would have given Leibniz the modern Boolean algebra (as opposed to Boole’s original algebra, as we’ll see), at least for finite domains — a nice algebra of Aristotelian logic — with the difference that Leibniz’s algebra is <em>concrete</em>, namely, terms signify natural numbers as opposed to abstract concetps. However, Leibniz specifically alludes to the possibility of thinking of terms more abstractly, when he writes, “I choose numbers in writing; in time I shall adapt other signs both to numbers and to speech itself. For the present numbers are the most useful because of their accuracy and the ease with which they are handled and because it is thus clear to the eye that all of the relations of concepts are certain and determined after the likeness of numbers.” So what is important is not that the terms represent <em>actual</em> numbers, but that the <em>relations</em> between terms bears the <em>likeness</em> of numbers, where concrete numbers are just used for demonstration purposes and for the gaining of intuition.</p>
+
+<p>We may wonder if <em>this</em> is some mathematical miracle, but it isn’t. A distributive lattice arises directly from the Aristotelian logic’s combination of concepts, where concepts are collections of elements. Indeed, <em>all</em> Boolean algebras are isomorphic to <a href="https://en.wikipedia.org/wiki/Field_of_sets">fields of sets</a>, and distributive lattices <a href="https://en.wikipedia.org/wiki/Distributive_lattice#Representation_theory">are isomorphic to set operations</a>, but in order to get that structure for Leibniz’s representation of concepts as integers those modern theorems aren’t necessary, as integers ordered with the divisibility relation are just a straightforward encoding of finite sets of their prime factors, by the <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic">fundamental theorem of arithmetic</a> (known since antiquity) and so can nicely serve as a direct representation of a combinatorial logic of concepts, as long as those concepts comprise a finite number of elements. That such an encoding should exist in the first place isn’t surprising to Leibniz, who intuits that a universal description of man-made and natural systems exists, and that numbers could encode it. Turing would give a more satisfying explanation.</p>
+
+<p>Leibniz’s attempts to algebrize logic continued with his followers, who were all part of a historical development that Marciszewski describes thus:<label for="marciszewski5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="marciszewski5" class="margin-toggle" /><span class="sidenote"><a href="#mechanization"><em>Mechanization Of Reasoning</em>, Kindle Locations 2109-2114</a> </span> “We are here to do with a case in which the intersection, at a certain point of time, of two mutually independent processes opens a new stage in history. Such intersection may also appear in the fact that a certain group of scholars is engaged with similar intensity in both processes. This was just in the case under consideration: people strongly rooted in the tradition of scholastic logic came to be interested in algebra, and some of them proved creative in that newly born discipline called then <em>logistica speciosa universalis</em>, that is (in a free translation), the general theory of calculating with variables (i.e., sign denoting species of objects, e.g. numbers, instead of individual objects).”</p>
+
+<h3 id="the-algebra-of-thought">The Algebra of Thought</h3>
+
+<p>Others continued Leibniz’s quest for the algebraization of logic in the 17th and 18th centuries, like <a href="https://www.britannica.com/topic/history-of-logic/Modern-logic#ref535658">Gottfried Ploucquet</a> (1716-1790), <a href="https://www.britannica.com/topic/history-of-logic/Modern-logic#ref535661">Johann Heinrich Lambert</a> (1728-1777),  <a href="https://en.wikipedia.org/wiki/Johann_Andreas_Segner">Johann Andreas Segner</a> (1704-1777), or like the brothers <a href="https://en.wikipedia.org/wiki/Johann_Bernoulli">Johann</a> (1667-1748) and <a href="https://en.wikipedia.org/wiki/Jacob_Bernoulli">Jacob Bernoulli</a> (1655-1705), who frequently correspondedwith Leibniz and are considered his disciples, who in 1685 wrote a book called, <em>Parallelismus ratiocinii logici et algebraici</em> (the parallelism between logical reasoning and algebra), that again showed the similarity between the two disciplines, both concerned with the combination of symbols, or like <a href="https://en.wikipedia.org/wiki/Daniel_Bernoulli">Daniel Bernoulli</a>, Johann Bernoulli’s son. But I will focus on <a href="https://en.wikipedia.org/wiki/Leonhard_Euler">Leonhard Euler</a>, Johann Bernoulli’s student and Daniel’s close friend, mostly because his writings are particularly clear.</p>
+
+<p>The passages I will quote are from a <a href="#hunter">1795 English translation</a> by the Scottish minister <a href="https://en.wikipedia.org/wiki/Henry_Hunter_(divine)">Henry Hunter</a>, of <a href="https://en.wikipedia.org/wiki/Letters_to_a_German_Princess">a series of letters</a> Euler wrote between 1760 and 1762 to <a href="https://en.wikipedia.org/wiki/Friederike_Charlotte_of_Brandenburg-Schwedt">Friederike Charlotte of Brandenburg-Schwedt</a> and her sister.</p>
+
+<p>In the following passage Euler beautifully explains a central notion in mathematics — the one that both justifies its suitability for the description of natural phenomena and explains its universality — namely <em>abstraction</em>. While not uniquely related to logic and algebra, abstraction, Euler explains, is a prerequisite to any formal treatment of logic, as it is how the primitives of logic — the <em>notion</em> or <em>concepts</em> — are formed:</p>
+
+<blockquote>
+  <p><label for="euler100" class="margin-toggle"> ⊕</label><input type="checkbox" id="euler100" class="margin-toggle" /><span class="marginnote"><a href="#hunter"><em>Letters to a German Princess</em>, pp. 385-389 </a> </span><strong>Letter 100. Of the Abstraction of Notion</strong></p>
+
+  <p>The senses represent objects only which exist externally; and sensible ideas all refer to them; but of these sensible ideas, the soul forms to itself a variety of other ideas, which are indeed derived from these, but which no longer represent objects really existing.</p>
+
+  <p><label for="princess" class="margin-toggle">⊕</label><input type="checkbox" id="princess" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/Friederike-Charlotte-Preussen.jpg" /><br />The German Princess</span></p>
+
+  <p>When, for example, I look at the full moon, and fix my attention only on its contour, I form the idea of roundness; but I cannot affirm that roundness exists of itself. The moon is round, but the round figure does not exist separately out of the moon…. The ideas of numbers have the same origin. Having seen two or three persons, the soul forms the idea of two or three, without attaching it any longer to the persons. Having already acquired the idea of <em>three</em>, the soul is able to proceed, and to form the ideas of greater numbers, … without ever having precisely seen so many things together. A single instantce, therefore, in which we have seen two or three objects, may carry the soul forward to the formation of the ideas of other numbers, be they ever so great.</p>
+
+  <p>… Here the soul exerts a new faculty, which is called the power of <em>abstraction</em>; this takes place when the soul fixes its attention on only one quantity or quality of the object, and considers it separately, as if it were no longer attached to the object. When, for instance, I put my hand on a heated stone, and confine my attention to the heat only, I form from it the idea of heat, which is no longer attached to the stone. This idea of heat is formed by abstraction, as it is separated from the stone, and the soul might have derived the same idea from touching a piece of wood heated, or by plunging the hand into hot water.</p>
+
+  <p>Thus, by means of abstraction, the soul forms a thousand other ideas of the quantities and properties of objects, by separating them afterwards from the objects themselves… These ideas, acquired by abstraction, are denominated <em>notions</em>, to distinguish them from sensible ideas, which represent to us objects really existing.</p>
+
+  <p>There is still farther a species of notions, likewise formed by abstraction… When I see a pear-tree, a cherry-tree, an apple-tree, an oak, a fir, &amp;c. all these ideas are different; I, nevertheless, remark in them several things which they have in common; as the truck, the branches, and the root; I stop short only at those things which the different ideas have in common, and the object, in which all such qualities meet, I call a <em>tree</em>. Thus the idea of tree, which I have formed in this manner, is a <em>general notion</em>, and comprehends the sensible ideas of the pear-tree, the apple-tree, and, in general, of every tree that exists.</p>
+
+  <p>… This manner of forming general ideas is, therefore, likewise performed by abstraction, and it is here, chiefly, that the soul exerts the activity and performs the operations from which all our knowledge is derived. Without these general notions, we should differ nothing from the brutes.</p>
+
+  <p><em>7th February, 1761</em></p>
+</blockquote>
+
+<p>In the next letter, Euler explains how language <em>denotes</em> abstract notions, and how it is essential to reasoning:</p>
+
+<blockquote>
+  <p><label for="euler101" class="margin-toggle"> ⊕</label><input type="checkbox" id="euler101" class="margin-toggle" /><span class="marginnote"><a href="#hunter"><em>Letters to a German Princess</em>, pp. 389-393</a> </span><strong>Letter 101. Of Language; its Nature, Advantages, and Necessity, in order to the Communication of Thought, and the Cultivation of Knowledge</strong></p>
+
+  <p>Whatever aptitude a man may have to exercise the power of abstraction, and to furnish himself with general ideas, he can make no considerable progress without the aid of language, spoken or written. Both the one and the other contains a variety of words, which are only certain signs, corresponding to our ideas, and whose signification is settled by custom, or the tacit consent of several men who live together.</p>
+
+  <p>It would appear, from this, that the only purpose of language to mankind is mutually to communicate their sentiments, and that a solitary man might do very well without it; but a little reflection only is necessary to be convinced, that men stand in need of language, as much to pursue and cultivate their own thoughts, as to keep up a communication with others.</p>
+
+  <p>… The essence of language consists, rather, in its containing words to denote general notions; as that of tree corresponds to a prodigious number of individual beings. These words serve not only to convey to others, who understand the same language, the same idea which I affix to the words; but they are, likewise, a great assistance to me, in representing this idea to myself. Without the word tree, which represents to me the general notion of a tree, I must imagine to myself at once a cherry-tree, a pear-tree, an apple-tree, a fir, &amp;c. This would necessarily oppress the mind, and speedily involve it in the greatest perplexity.</p>
+
+  <p>… You may easily conceive how many abstractions it was necessary to make, in order to arrive at the notion of <em>virtue</em>. The actions of men were first to be considered; they were, then, to be compared with the duties imposed on them; in consequence of this, we give the name of <em>virtue</em> to the disposition which a man has to regulate his actions conformably to his duties. But, on hearing the word <em>virtue</em> rapidly pronounced in conversation, do we always connect with it this complex notion? And what idea is excited in the mind, on hearing the particle <em>and</em> or <em>also</em> pronounced? …</p>
+
+  <p>You are now enabled to judge of what advantage language is to direct our thoughts; and that, without language, we should hardly be in a condition to think at all.</p>
+
+  <p><em>10th February, 1761</em></p>
+</blockquote>
+
+<p>After establishing, or, rather, asserting, the importance of language, Euler introduces the Aristotelian <em>logical form</em> of propositions and judgments:</p>
+
+<blockquote>
+  <p><label for="euler102" class="margin-toggle"> ⊕</label><input type="checkbox" id="euler102" class="margin-toggle" /><span class="marginnote"><a href="#hunter"><em>Letters to a German Princess</em>, pp. 393-397</a> </span><strong>Letter CII. Of the Perfections of a Language. Judgments and Nature of Propositions, affirmative negative; universal, or particular.</strong></p>
+
+  <p>I have been endeavouring to shew you, how necessary language is to man, not only for the mutual communication of sentiment and though, but, likewise, for the improvement of the mind, and the extension of knowledge.</p>
+
+  <p>These signs, or words, represent, then, general notions, each of which is applicable to an infinite number of objects: as, for instance, the idea of hot, and of heat, to every individual object which is hot; and the idea, or general notion of <em>tree</em>, is applicable to every individual tree in a garden, or a forest, whether cherries, oaks or firs, &amp;c.</p>
+
+  <p><label for="hunter-preface1" class="margin-toggle"> ⊕</label><input type="checkbox" id="hunter-preface1" class="margin-toggle" /><span class="marginnote">A passage from the translator’s preface to the second edition of Euler’s Letters of Euler On Different Subjects in Physics and Philosophy Adressed to A German Princess, 1802, by Henry Hunter, D.D. The words may sound cryptic to the modern reader, especially ones educated in the arts of logic and programming, but in the 18th century people claimed that women are naturally less inclined for intellectual pursuits to justify not encouraging them to learn.: </span></p>
+
+  <p><label for="hunter-preface2" class="margin-toggle"> ⊕</label><input type="checkbox" id="hunter-preface2" class="margin-toggle" /><span class="marginnote">I was mortified to reflect that the specious and seductive productions of a Rousseau, and the poisonous effusions of a Voltaire, should be in the hands of so many young men, not to say young women, to the perversion of the understanding, and the corruption of the moral principle, while the simple and useful instructions of the virtuous Euler were hardly mentioned… I considered myself as rendering a meritorious service to my country. </span></p>
+
+  <p><label for="hunter-preface3" class="margin-toggle"> ⊕</label><input type="checkbox" id="hunter-preface3" class="margin-toggle" /><span class="marginnote">The subjects of these Letters, and the Author’s method of treating them, seem to me much adapted to this purpose. With the assistance of a very moderate apparatus, they might conduct youth of both sexes, with equal delight and emolument, to a very competent knowledge of natural philosophy. Euler wrote these Letters for the instruction of a young and sensible female, and in the same view that they were written, the are translated, namely, the improvement of the female mind; and object of what importance to the world! I rejoice to think I have lived to see female education conducted on a more liberal and enlarged plan. I am old enough to remember the time when well-born young women, even of the north, could spell their own language but very indifferently, and some hardly read it with common decency… While the boys of the family were conversing with Virgil, perhaps with old Homer himself, the poor girls were condemned to cross-stitch, on a piece of gauze-canvass, and to record their own age at the bottom of a sampler. They are now treated as rational beings, and society is already the better for it. And wherefore should the terms female and philosophy seem a ridiculous combination? Wherefore preclude to a woman any source of knowledge to which her capacity, and condition in life, entitle her to apply? It is cruel and ungenerous to expose the frivolity of the sex, after reducing it to the necessity of being silly and frivolous. Cultivate a young woman’s understanding, and her person will become, even to herself, only a secondary concern; let her time be filled up in the acquisition of attainable and useful knowledge, and then she will cease to be a burden to herself and to every body about her; make her acquainted with the world of nature, and the world of art will delude her no longer. </span></p>
+
+  <p>Hence you must be sensible how one language may be more perfect than another. A language always is so, in proposition as it is in a condition to express a greater number of general notions, formed by abstraction. It is with respect to these notions that we must estimate the perfection of a language.</p>
+
+  <p>… These general notions, formed by abstraction, are the source of all of our judgments and all our reasonings. A <em>judgment</em> is nothing else but the affirmation, or negation, that a notion is applicable, or inapplicable; and when such judgment is expressed in words, we call it a <em>proposition</em>. To give an example: <em>All men are mortal</em>, is a proposition which contains two notions; the first, that of men in general; and the second, that of mortality, which comprehends whatever is mortal. The judgment consists in pronouncing and affirming, <em>that the notion of mortality is applicable to all men</em>. This is a judgment, and, being expressed in words, it is a proposition; and, because it affirms, we call it <em>an affirmative proposition</em>. If it denied, we would call it <em>negative</em>, such as this, <em>no man is righteous</em>. These two <em>propositions</em>, which I have introduced as examples, are <em>universal</em>, because the one affirms of <em>all</em> men, that they are mortal, and the other denies that they are righteous.</p>
+
+  <p>There are likewise <em>particular propositions</em>, both negative and affirmative; as, <em>some men are learned</em>, and <em>some men are not wise</em>. What is here affirmed, and denied, is not applicable to all men, but to <em>some</em> of them.</p>
+
+  <p>Hence we derive four species of propositions. The first is that of <em>affirmative and universal propositions</em>, the form of which in general is:</p>
+
+  <blockquote>
+    <p>Every A is B.</p>
+
+    <p>The second species contains <em>negative and universal propositions</em>, the form of which in general is:</p>
+
+    <p>No A is B.</p>
+
+    <p>The third is, that of <em>affirmative propositions</em>, but <em>particular</em>, contained in this form:</p>
+
+    <p>Some A is B.</p>
+
+    <p>And, finally, the fourth is that of <em>negative</em> and <em>particular propositions</em>, of which the form is:</p>
+
+    <p>Some A is not B.</p>
+  </blockquote>
+
+  <p>All these propositions contain, essentially, two notions, A and B, which are called the <em>terms of the proposition</em>: the first of which affirms or deines some things; and this we call the <em>subject</em>; and the second, which we say is applicable, or inapplicable, to the first, is the <em>attribute</em>. Thus, in the proposition <em>All men are mortal</em>, the word <em>man</em>, or <em>men</em>, is the subject, and the word <em>mortal</em> the attribute; these words are much used in logic, which teaches the rules of just reasoning.</p>
+
+  <p>These four species of propositions may likewise be represented by figures, so as to exhibit their nature to the eye. This must be a great assistance toward comprehending more distinctly wherein the accuracy of a chain of reasoning consists.</p>
+
+  <p>As a general notion contains an infinite number of individual objects, we may consider it a space in which they are all contained. Thus, for the notion of <em>man</em> we form a space [fig 1] in which we conceive all men to be comprehended. For the notion of <em>mortal</em> we form another (fig 2) in which we conceive every thing mortal to be comprehended. And when I affirm, <em>all men are mortal</em>, is is the same thing with affirming, the the first figure is contained within the second….</p>
+
+  <p><em>14th February, 1761</em></p>
+</blockquote>
+
+<p>Euler clearly explains that the <em>notions</em> or <em>concepts</em> formed by abstraction are collections (finite or inifite) of individuals, and it is now easy to guess how those notions — traced back all the way to Aristotle — would be formalized at the end of the nineteenth century. But it is Euler’s introduction of the <em>Euler circles</em> that is of most interest to us (when researching this post I realized, for the first time, that most times we say “Venn diagrams” we actually mean Euler circles; Venn diagrams are slightly different):</p>
+
+<blockquote>
+  <p><label for="euler103" class="margin-toggle"> ⊕</label><input type="checkbox" id="euler103" class="margin-toggle" /><span class="marginnote"><a href="#hunter"><em>Letters to a German Princess</em>, pp. 397-402</a> </span><strong>Letter 103. Of Syllogisms, and their different Forms, when the first Proposition is universal.</strong></p>
+
+  <p><label for="euler-circles" class="margin-toggle">⊕</label><input type="checkbox" id="euler-circles" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/img/computation-logic-algebra/euler-circles.png" /><br />Euler’s circles</span>These circles, or rather these spaces, for it is of no importance of what figure they are, are extremely commodious for facilitating our reflections on this subject, and for unfolding all the boasted mysteries of logic, which that art finds it so difficult to explain; whereas, by means of these signs, the whole is rendered sensible to the eye. We may employ, then, spaces formed at pleasure to represent every general notion, and mark the subject of a proposition, by a space containing A, and the attribute, by another which contains B. The nature of the proposition itself is always imports either that the space of A is wholly contained in the space B, or that it is partly contained in that space; or that a part, at least, is out of the space B; or, finally, that the space A is wholly out of B.</p>
+
+  <p>… This may suffice to shew you how all propositions may be represented by figures: but their greatest utility is manifest in reasonings which, when expressed in words, are called <em>syllogisms</em>, and of which the object is to draw a just conlusion from certain given propositions. This method will discover to us the true form of all syllogisms.</p>
+
+  <p><em>17th February, 1761</em></p>
+</blockquote>
+
+<blockquote>
+  <p><label for="euler104" class="margin-toggle"> ⊕</label><input type="checkbox" id="euler104" class="margin-toggle" /><span class="marginnote"><a href="#hunter"><em>Letters to a German Princess</em>, pp. 403-406</a> </span><strong>Letter 104. Different forms of Syllogisms, whose first Proposition is particular.</strong></p>
+
+  <p>… The foundation of all these forms [of syllogism] is reduced to two principles, reflecting the nature of <em>containing</em> and <em>contained</em>.</p>
+
+  <p>I. <em>Whatever is in the thing contained, must likewise be in the thing containing.</em></p>
+
+  <p>II. <em>Whatever is out of the containing, must likewise be out of the contained.</em></p>
+
+  <p>… Every syllogism, then, consists of three propositions, the two first of which are called the <em>premises</em>, and the third the <em>conclusion</em>. Now, the advantage of all these forms, to direct our reasoning, is this, that if the premises are both true, the conclusion, infallibly, is so.</p>
+
+  <p>This is , likewise, the only method of discovering unknown truths. Every truth must always be the conclusion of a syllogism, whose premises are indubitably true…</p>
+
+  <p><em>21st, February, 1761</em></p>
+</blockquote>
+
+<p>While Euler does not make a specific reference to algebra or the algebraic manipulation of symbols, his circles beautifully capture a more modern view of algebraic logic than even Boole’s logical algebra (which we will cover in the next chapter). Euler’s explicit reduction of Aristotelian logic to the transitive principle of <em>containment</em>, and the symmetric treatment of the subject and the predicate merely as two <em>notions</em> that can be given a geometrical meaning in the form of <em>spaces</em> and related by the partial order relation of containment — and whose only difference is that one is marked <em>A</em> and the other <em>B</em> — captures the very core of modern algebraic logic.</p>
+
+<p>Euler’s clear pedagogical writing makes it clear that what today we’d call the algebraic structure of Aristotelian logic isn’t some <em>observation</em>. Rather, Aristotelian logic was <em>conceived</em> as a system of composing concepts, which are actually sets (not necessarily in any precise axiomatic sense, but just a collection of objects). The structure that emerges and will come to be called a distributive lattice, which is an algebra on sets, is just a rigorous expression of the Aristotle’s intended design.</p>
+
+<p>Leibniz also discussed the importance of abstraction to his “art of combinations”:</p>
+
+<blockquote>
+  <p><label for="leib11" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib11" class="margin-toggle" /><span class="marginnote"><em>Letter to Walter von Tschirnhaus</em>, May, 1678, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 192-193</a> </span> For if you hold the art of combinations to be the science of ﬁnding the number of variations, I freely admit that it is subordinate to the science of numbers and consequently to algebra, since the science of numbers is also subordinate to algebra. For certainly you do not ﬁnd these numbers except by adding, multiplying, etc., and the art of multiplying is derived from the general science of quantity, which some call algebra. But for me the art of combinations is in fact something far different, namely, the science of forms or of similarity and dissimilarity, while algebra is the science of magnitude or of equality and inequality. The combinatory art seems little different, indeed, from the general science of characteristics, by the use of which ﬁtting characters have been or can be devised for algebra, for music, and even for logic itself.</p>
+
+  <p>Cryptography is also a part of this science, although the difﬁculty here lies not so much in compounding as in analyzing what has been compounded, or in investigating its roots, so to speak. What a root is in algebra a key is in cryptographic divination. Taken by itself algebra has only rules of equality and proportion but, when the problems are more difficult and the roots of equations very involved, algebra is forced to draw something again from the higher science of similitude and dissimilitude or from the science of combinations. … But this art can be and ought to be used not only when our concern is with formulas which express magnitudes, and with the solution of equations, but also when the involved key is to be developed for other formulas which have nothing in common with magnitude. The art of ﬁnding progressions and of establishing tables of formulas is also purely combinatorial, for these have a place not only in formulas expressing magnitude but in all
+others as well. For formulas can also be derived from them which express situation [situs] and the construction of lines and angles without considering magnitude. More elegant constructions can be discovered by this method, and more easily, than through the computing of magnitudes. With the help of combinatorial theorems (that is, involving similarity and dissimilarity) it can be proved far more naturally than Euclid has done that the sides of triangles having equal angles are proportional. Meanwhile I admit that no more beautiful example of the art of combinations can be found anywhere than in algebra and that therefore he who masters algebra will the more easily establish the general art of combinations, because it is always easier to arrive at a general science a posteriori from particular instances than a priori. But there can be no doubt that the general art of combinations or characteristics contains much greater things than algebra has given, for by its use all our thoughts can be pictured and as it were, ﬁxed, abridged, and ordered; pictured to others in teaching them, ﬁxed for ourselves in order to remember them; abridged so that they may be reduced to a few; ordered so that all of them can be present in our thinking. And though I know you are prejudiced, by reasons which I do not know, to look rather adversely upon these meditations of mine, I believe that when you examine the matter more seriously, you will agree that this general characteristic will be of unbelievable value, since a spoken and written language can also be developed with its aid which can be learned in a few days and will be adequate to express everything that occurs in everyday practice, and of astonishing value in criticism and discovery, after the model of the numeral characters. We certainly calculate much more easily with the characters of arithmetic than the Romans did either with pens or in their heads, and this is undoubtedly because the Arabic characters are more convenient, that is, because they better express the genesis of numbers.</p>
+
+  <p>No one should fear that the contemplation of characters will lead us away from the things themselves; on the contrary, it leads us into the interior of things. For we often have confused notions today because the characters we use are badly arranged; but then, with the aid of characters, we will easily have the most distinct notions, for we will have at hand a mechanical thread of meditation, as it were, with whose aid we can very easily resolve any idea whatever into those of which it is composed. In fact, if the character expressing any concept is considered attentively, the simpler concepts into which it is resolvable will at once come to mind. Since the analysis of concepts thus corresponds exactly to the analysis of a character, we need merely to see the characters in order to have adequate notions brought to our mind freely and without effort. We can hope for no greater aid than this in the perfection of the mind.</p>
+</blockquote>
+
+<blockquote>
+  <p><label for="leib12" class="margin-toggle"> ⊕</label><input type="checkbox" id="leib12" class="margin-toggle" /><span class="marginnote"><em>Letter to Henry Oldenburg</em>, December 28, 1675, in <a href="#loemker">Loemker, <em>Philosophical Papers</em>, p. 165</a> </span>[W]e believe that we are thinking of many things (though confusedly) which nevertheless imply a contradiction; for example, the number of all numbers. We ought strongly to suspect the concepts of inﬁnity, of maximum and minimum, of the most perfect, and of allness [omninitas] itself. Nor ought we to believe in such concepts until they have been tested by that criterion I seem to recognize, and which renders truth stable, visible, and irresistible, so to speak, as on a mechanical basis. Such a criterion nature has granted us as an inexplicable kindness.</p>
+
+  <p>Algebra, which we rightly hold in such esteem, is only a part of this general device. Yet algebra accomplished this much — that we cannot err even if we wish and that truth can be grasped as if pictured on paper with the aid of a machine. I have come to understand that everything of this kind which algebra proves is only due to a higher science, which I now usually call a <em>combinatorial characteristic</em>, though it is far different from what may ﬁrst occur to someone hearing these words. I hope sometime, given health and leisure, to explain its remarkable force and power by rules and examples. I cannot encompass the nature of the method in a few words. Yet I should venture to say that nothing more effective can well be conceived for perfecting the human mind and that if this basis for philosophizing is accepted, there will come a time, and it will be soon, when we shall have as certain knowledge of God and the mind as we now have of ﬁgures and numbers and when the invention of machines will be no more difficult than the construction of geometric problems. And when these studies have been completed — though there will always remain to be studied the choicest harmonies of an inﬁnity of theorems, but by observation from day to day rather than by toil — men will return to the investigation of nature alone, which will never be entirely completed. For in experiments good luck is mixed with genius and industry.</p>
+</blockquote>
+
+<p>But here we come to a surprising turn of events. While Leibniz’s <em>plan</em> for the algebraization of logic was known through his correspondences — especially in the German-speaking world — Leibniz did not publish any of his own work on the particulars of his <em>characteristica universals</em> or the <em>calculus ratiocinator</em>, as he considered the work unfinished. Instead, they lay hidden in the library of Hanover, where Leibniz worked, for nearly 200 years. Their partial publication only began in the 1830s and 40s — too late to directly influence the work done in England at the time on the use of algebra as a mathematical description of logic — and the full extent of his writing on logic was only known after the indexing of the library in 1895, which was followed by a partial treatment of Leibniz’s work by <a href="https://en.wikipedia.org/wiki/Bertrand_Russell">Bertrand Russell</a> in 1900, followed by a thorough study of Leibniz’s logic work by <a href="https://en.wikipedia.org/wiki/Louis_Couturat">Louis Coutorat</a>, according to Wikipedia, “was thus the first to appreciate that Leibniz was the greatest logician during the more than 2000 years that separate <a href="https://en.wikipedia.org/wiki/Aristotle">Aristotle</a> from <a href="https://en.wikipedia.org/wiki/George_Boole">George Boole</a> and <a href="https://en.wikipedia.org/wiki/Augustus_De_Morgan">Augustus De Morgan</a>.”</p>
+
+<p>Volker Peckhaus <a href="https://plato.stanford.edu/entries/leibniz-logic-influence/">notes</a> that “[i]t is an important question in the historiography of modern logic whether Leibniz’s logical calculi influenced logic in its present state or whether they were only ingenious anticipations. The most significant of Leibniz’s contributions to formal logic were published in the early 20th century. Only then, Leibniz’s logic could be fully understood. Nevertheless, the essentials of his philosophy of logic and some technical elaborations could be derived from early editions of his writings published in the 18th and 19th centuries.”</p>
+
+<p>Peckhaus cocludes, “No doubt, the new logic emerging in the second half of the 19th century was created in a Leibnizian spirit. The essentials of Leibniz’s logical and metaphysical program and of his idea concerning a logical calculus were available at least since the 1840s… But the logical systems had basically been already established. Therefore there was no initial influence of Leibniz on the emergence of modern logic in the second half of the 19th century.” The British philosophers of the 19th century discovered or invented the algebra of logic only to later learn that Leibniz had done so two hundred years prior.</p>
+
+<p>Nevertheless, as early the seventeenth century, a mainstream school of thought began to view human reason as computation, Aristotelian logic as its formulation, and algebra as the mathematical mechanism most appropriate for its precise analysis.</p>
+
+<div class="fullwidth">
+
+  <h2 id="bibliography">Bibliography</h2>
+
+  <ul>
+    <li><a name="aristotle-prior"></a>Atistotle, A. J. Jenkinson tran., <a href="http://classics.mit.edu/Aristotle/prior.html"><em>Prior Analytics</em></a>, 350 BCE</li>
+    <li>Aristotle, G. R. G. Mure tran., <a href="http://classics.mit.edu/Aristotle/posterior.html"><em>Posterior Analytics</em></a>, 350 BCE</li>
+    <li><a name="de-morgan"></a>De Morgan, Augustus, <a href="https://archive.org/details/formallogicorthe00demouoft"><em>Formal Logic, or, The Calculus of Inference, Necessary and Probably</em></a>, 1847</li>
+    <li><a name="hunter"></a>Euler, Leonhard, Henry Hunter, tran., <a href="https://archive.org/details/letterseulertoa00eulegoog"><em>Letters of Euler on Different Subjects in Physics and Philosophy, Addressed to a German Princess.</em></a>, Second Edition, 1802</li>
+    <li><a name="elements"></a>Hobbes, Thomas, <a href="http://quod.lib.umich.edu/cgi/t/text/text-idx?c=eebo;idno=A43987.0001.001"><em>Elements of philosophy the first section, concerning body / written in Latine by Thomas Hobbes of Malmesbury ; and now translated into English ; to which are added Six lessons to the professors of mathematicks of the Institution of Sr. Henry Savile, in the University of Oxford</em></a>, 1656</li>
+    <li><a name="leviathan"></a>Hobbes, Thomas, <a href="http://www.gutenberg.org/files/3207/3207-h/3207-h.htm"><em>Leviathan</em> (<em>OR The Matter, Forme, &amp; Power of a Common-Wealth Ecclesiastical and Civill</em>)</a>, 1651</li>
+    <li><a name="bennett"></a>Leibniz, Gottfried Wilhelm, Jonathan Bennett tran., <a href="http://www.earlymoderntexts.com/assets/pdfs/leibniz1705book1.pdf"><em>New Essays on Human Understanding Preface and Book I: Innate Notions</em></a>, 1704</li>
+    <li><a name="loemker"></a>Leibniz, Gottfried Wilhelm, Leroy M. Loemker ed. trans., <a href="http://www.springer.com/gb/book/9789027700087"><em>Philosophical Papers and Letters</em></a>, 1956, 1969, 1989</li>
+    <li><a name="mechanization"></a>Marciszewski, Witold and Murawski, Roman, <a href="https://www.amazon.com/Mechanization-Historical-Perspective-Philosophy-Humanities-ebook/dp/B005EY6UYC/"><em>Mechanization Of Reasoning In A Historical Perspective</em></a> (Poznan Studies in the Philosophy of the Sciences and the Humanities, Volume 43), 1995, Kindle Edition</li>
+    <li>Peckhaus, Volker, <a href="https://plato.stanford.edu/entries/leibniz-logic-influence/"><em>Leibniz’s Influence on 19th Century Logic</em></a>, 2009 in <em><a href="https://plato.stanford.edu/index.html">Stanford Encyclopedia of Philosophy</a></em> (E-text prepared from the Pelican Classics edition)</li>
+    <li>Plato, B. Jowett, tran., <a href="http://www.ellopos.net/elpenor/physis/plato-timaeus/default.asp"><em>Timaeus</em></a>, c. 360 BCE</li>
+  </ul>
+
+</div>
+<div class="footnotes">
+  <ol>
+    <li id="fn:milewski">
+      <p>At 35:33 in the video.&nbsp;<a href="#fnref:milewski" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:church0">
+      <p><a href="#church-postulates"><em>A Set of Postulates for the Foundation of Logic</em> pp. 348-349</a>, 1932&nbsp;<a href="#fnref:church0" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+	</div>
+</article>
+
+	  </main>
+
+    <!-- Pagination links -->
+    
+
+  </div>
+
+	    <!-- Footer -->
+	    <footer></footer>
+
+
+	    <!-- Script -->
+      <script type="text/javascript" src="/js/main.js"></script>
+<!-- <script src="/js/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+        <script src="js/vendor/html5shiv.js"></script>
+        <![endif]-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--
+<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+-->
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-99776245-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- <script>
+var _gaq=[['_setAccount','UA-99776245-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src='//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+</script> -->
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nav-toc').toc();
+});
+</script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        // showProcessingMessages: false,
+        jax: ["input/TeX","output/CommonHTML"],
+        extensions: ["tex2jax.js","AssistiveMML.js"], // "MathMenu.js","MathZoom.js", "a11y/accessibility-menu.js"
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            balanceBraces: true
+        },
+        showMathMenu: false,
+        showMathMenuMSIE: false,
+        menuSettings: {
+            inTabOrder: false,
+            zoom: "None"
+        },
+        'HTML-CSS': {
+            availableFonts: [],
+            webFont: 'TeX',
+        }
+    });
+
+    MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message)
+    });
+    MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message)
+    });
+
+    (function () {
+      var EXT = MathJax.Extension, mm, mz;
+            MathJax.Hub.Register.StartupHook("End Typeset",function () {
+              mm = EXT.MathMenu; mz = EXT.MathZoom;
+              EXT.MathMenu = EXT.MathZoom = {};
+            });
+      MathJax.Hub.Queue(function () {
+        if (mm) {EXT.MathMenu = mm} else {delete EXT.MathMenu}
+        if (mm) {EXT.MathZoom = mz} else {delete EXT.MathZoom}
+      });
+    })();
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+<!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
+<script type="text/javascript" src="/js/bigfoot.min.js"></script>
+
+<script type="text/javascript">
+// see https://esham.io/2014/07/mathjax-and-bigfoot
+$.bigfoot({
+    activateCallback: function($popover, $button) {
+        if (MathJax && !$button.data('mathjax-processed')) {
+            var content_wrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, content_wrapper]);
+            MathJax.Hub.Queue(function () {
+                $button.attr('data-bigfoot-footnote', content_wrapper.innerHTML);
+                $button.data('mathjax-processed', true);
+            });
+        }
+    }
+});
+</script>
+
+
+
+
+
+	</div>
+</body>
+</html>

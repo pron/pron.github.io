@@ -132,7 +132,6 @@ h3, h4, h5, h6 {
   padding: 0.66667em 0; }
 
 blockquote {
-  font-style: italic;
   margin: 1.5em;
   /* 24px/18px */
   -webkit-border-radius: 4px;
@@ -185,7 +184,6 @@ blockquote {
     padding: 0.5em 0; }
 
   blockquote {
-    font-style: italic;
     margin: 1.3334em;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -414,7 +412,6 @@ img {
   max-width: 100%;
   display: block;
   margin: 0 auto;
-  margin-bottom: 24px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -507,6 +504,9 @@ article.tufte {
   width: 100%; }
 .tufte li .sidenote, .tufte li .marginnote {
   margin-right: -80%; }
+
+.fullwidth p, .fullwidth footer, .fullwidth div.table-wrapper, .fullwidth div.mathblock, .fullwidth blockquote {
+  width: 100%; }
 
 :not(article.tufte) .sidenote, :not(article.tufte) .sidenote-number, :not(article.tufte) .marginnote {
   display: none; }
