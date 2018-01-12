@@ -4,12 +4,22 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2018-01-10T15:54:42+00:00</updated>
+ <updated>2018-01-12T09:32:56+00:00</updated>
  <author>
    <name></name>
    <uri></uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part II</title>
+   <link href="/posts/computation-logic-algebra-pt2"/>
+   <id>/posts/computation-logic-algebra-pt2</id>
+   <updated>2018-01-12T00:00:00+00:00</updated>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Logic is the science that exhaustively presents and strictly proves nothing but the formal rules of all thinking.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Immanuel Kant, &lt;em&gt;Critique of Pure Reason&lt;/em&gt;, Preface to the 2nd edition, 1787&lt;/p&gt; &lt;/blockquote&gt; &lt;/div&gt; &lt;h2 id=&quot;ii-divine-machines&quot;&gt;II. Divine Machines&lt;/h2&gt; &lt;h3 id=&quot;celestial-mathematics&quot;&gt;Celestial Mathematics&lt;/h3&gt; &lt;p&gt;As we now...</content>
+ </entry>
 
  
 
