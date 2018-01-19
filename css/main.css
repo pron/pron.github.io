@@ -505,6 +505,9 @@ article.tufte {
 .tufte li .sidenote, .tufte li .marginnote {
   margin-right: -80%; }
 
+.tufte blockquote blockquote {
+  width: 85%; }
+
 .fullwidth p, .fullwidth footer, .fullwidth div.table-wrapper, .fullwidth div.mathblock, .fullwidth blockquote {
   width: 100%; }
 

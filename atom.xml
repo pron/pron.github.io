@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2018-01-13T10:49:08+00:00</updated>
+ <updated>2018-01-19T07:02:58+00:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -14,11 +14,21 @@
  
 
  <entry>
+   <title>Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part III</title>
+   <link href="/posts/computation-logic-algebra-pt3"/>
+   <id>/posts/computation-logic-algebra-pt3</id>
+   <updated>2018-01-19T00:00:00+00:00</updated>
+   <content type="html">&lt;div class=&quot;fullwidth&quot;&gt; &lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt2&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;An almost metaphysical system of abstract signs, by which the motion of the hand performs the office of the mind.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Dionysius Lardner, &lt;em&gt;Babbage’s Calculating Engine&lt;/em&gt;, 1834&lt;/p&gt; &lt;/blockquote&gt; &lt;blockquote&gt; &lt;p&gt;Even when the connotation of a term has been...</content>
+ </entry>
+
+ 
+
+ <entry>
    <title>Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra, Part II</title>
    <link href="/posts/computation-logic-algebra-pt2"/>
    <id>/posts/computation-logic-algebra-pt2</id>
    <updated>2018-01-12T00:00:00+00:00</updated>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Logic is the science that exhaustively presents and strictly proves nothing but the formal rules of all thinking.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Immanuel Kant, &lt;em&gt;Critique of Pure Reason&lt;/em&gt;, Preface to the 2nd edition, 1787&lt;/p&gt; &lt;/blockquote&gt; &lt;/div&gt; &lt;h2 id=&quot;ii-divine-machines&quot;&gt;II. Divine Machines&lt;/h2&gt; &lt;h3 id=&quot;celestial-mathematics&quot;&gt;Celestial Mathematics&lt;/h3&gt; &lt;p&gt;As we now...</content>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt3&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Logic is the science that exhaustively presents and strictly proves nothing but the formal rules of all thinking.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Immanuel Kant, &lt;em&gt;Critique of Pure Reason&lt;/em&gt;, Preface to the 2nd edition, 1787&lt;/p&gt; &lt;/blockquote&gt; &lt;/div&gt; &lt;h2 id=&quot;ii-divine-machines&quot;&gt;II. Divine Machines&lt;/h2&gt; &lt;h3 id=&quot;celestial-mathematics&quot;&gt;Celestial Mathematics&lt;/h3&gt;...</content>
  </entry>
 
  
@@ -28,7 +38,7 @@
    <link href="/posts/computation-logic-algebra-pt1"/>
    <id>/posts/computation-logic-algebra-pt1</id>
    <updated>2018-01-05T00:00:00+00:00</updated>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt2&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;fullwidth&quot;&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;God invented and gave us sight to the end that we might behold the courses of intelligence in the heaven, and apply them to the courses of our own intelligence which are akin to them, the unperturbed to the perturbed; and that...</content>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt3&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;fullwidth&quot;&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;God invented and gave us sight to the end that we might behold the courses of intelligence in the heaven, and apply them to the courses of our own intelligence which are akin to them, the unperturbed to the...</content>
  </entry>
 
  
@@ -99,16 +109,6 @@
    <id>/posts/what-we-talk-about-when-we-talk-about-computation</id>
    <updated>2016-08-30T00:00:00+01:00</updated>
    <content type="html">&lt;p&gt;&lt;em&gt;Abstract: Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally...</content>
- </entry>
-
- 
-
- <entry>
-   <title>Why Writing Correct Software Is Hard</title>
-   <link href="/posts/correctness-and-complexity"/>
-   <id>/posts/correctness-and-complexity</id>
-   <updated>2016-07-23T00:00:00+01:00</updated>
-   <content type="html">&lt;h2 id=&quot;-and-why-math-alone-wont-help-us&quot;&gt;… and why math (alone) won’t help us&lt;/h2&gt; &lt;p&gt;&lt;em&gt;I was very happy to speak at &lt;a href=&quot;http://curry-on.org/2016/#program&quot;&gt;Curry On&lt;/a&gt; once again. Last year, following our work with Quasar, I spoke on &lt;a href=&quot;http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/&quot;&gt;continuations vs. monads&lt;/a&gt;. This year I gave a talk about computational complexity results in software verification, a subject...</content>
  </entry>
 
  

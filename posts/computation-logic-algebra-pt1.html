@@ -77,6 +77,8 @@
 
 
     
+        <meta property="article:tag" content="cla-history">
+    
 
     
     <meta name="twitter:site" content="@pressron">
@@ -106,7 +108,15 @@
 	    
 	  
 	    
+	      <a href="/computation-logic-algebra" title="Finite of Sense and Infinite of Thought:<br/>A History of Computation, Logic and Algebra">Finite of Sense and Infinite of Thought:<br/>A History of Computation, Logic and Algebra</a>
+	    
 	  
+	    
+	  
+	    
+	  
+	    
+	      <a href="/tlaplus" title="TLA<sup>+</sup> In Practice and Theory">TLA<sup>+</sup> In Practice and Theory</a>
 	    
 	  
 	    
@@ -155,7 +165,15 @@
 	      
 	    
 	      
+	        <a href="/computation-logic-algebra" title="Finite of Sense and Infinite of Thought:<br/>A History of Computation, Logic and Algebra">Finite of Sense and Infinite of Thought:<br/>A History of Computation, Logic and Algebra</a>
+	      
 	    
+	      
+	    
+	      
+	    
+	      
+	        <a href="/tlaplus" title="TLA<sup>+</sup> In Practice and Theory">TLA<sup>+</sup> In Practice and Theory</a>
 	      
 	    
 	      
@@ -180,7 +198,7 @@
 	<time datetime="2018-01-05T00:00:00+00:00" class="by-line">05 Jan 2018</time>
 	<div class="content">
 
-		<p><a href="/posts/computation-logic-algebra-pt2">Part 2</a></p>
+		<p><a href="/posts/computation-logic-algebra-pt2">Part 2</a>, <a href="/posts/computation-logic-algebra-pt3">Part 3</a></p>
 
 <div class="fullwidth">
 
@@ -254,7 +272,9 @@
 
 <p>But another significant contribution, though less essential, served as the basis of all work in formal logic until Turing and has to do less with the formal proof theory of the syllogism, but with how logical sentenses are formed, namely as a <em>composition</em> of <em>terms</em> denoting (having the meaning, or <em>semantics</em>, of) <em>attributes</em>, <em>concepts</em>, or <em>classes</em> that stand for some collection of objects, such as <em>man</em>, <em>animal</em> or <em>virtue</em>. The composition takes the general form <em>[quantifier] A is B</em>, and there are four kinds of propositions: <em>positive universal</em> propositions, for example, <em>all men are animals</em>, <em>positive particular</em> (or <em>existential</em> in modern terms) propositions, namely, <em>some men are virtuous</em>, and their negation<label for="monadic" class="margin-toggle sidenote-number"></label><input type="checkbox" id="monadic" class="margin-toggle" /><span class="sidenote">This logic resembles monadic logic, in the modern nomenclature. </span>.</p>
 
-<p>Aristotle’s general framework of reasoning, which was elaborated upon somewhat during the middle-ages, can be summarized as the mechanization of reasoning through the manipulation of language, or syntax, that expresses meaning through a combination of terms denoting concepts. This framework could be called <em>combinatory logic</em>, but as the name is nowadays used for something much more technical and specific, I will call it <em>the Aristotelian framework</em>.</p>
+<p>It should be noted that while Aristotle’s logic deals with some form of quantification (<em>all</em> A is B or <em>some</em> C is D), it did not include the propositional connectives of conjunction and disjunction (“and” and “or”) that allow forming compound predicates. This was likely deliberate<label for="smith" class="margin-toggle sidenote-number"></label><input type="checkbox" id="smith" class="margin-toggle" /><span class="sidenote">Robin Smith, <a href="#smith"><em>Aristotle’s Logic</em></a> </span>. The connectives and compound predicates were developed later in Ancient Greece and during the Middle Ages<label for="klement" class="margin-toggle sidenote-number"></label><input type="checkbox" id="klement" class="margin-toggle" /><span class="sidenote">Kevin Klement, <a href="#klement"><em>Propositional Logic</em></a> </span>.</p>
+
+<p>Aristotle’s general framework of reasoning — elaborated upon and expanded somewhat during the Middle Ages — can be summarized as the mechanization of reasoning through the manipulation of language, or syntax, that expresses meaning through a combination of terms denoting concepts. This framework could be called <em>combinatory logic</em>, but as the name is nowadays used for something much more technical and specific, I will call it <em>the Aristotelian framework</em>.</p>
 
 <p>In the book <em>Mechanization Of Reasoning In A Historical Perspective</em> by Witold Marciszewski and Roman Murawski,  Marciszewski writes that this Aristotelian framework,</p>
 
@@ -369,15 +389,15 @@ thoughts and each read in his own language what another has written in his, yet 
 
   <p>But we must go further than words! Since the admirable connection of things makes it most diﬂicult to give the characteristic numbers of a few things separated from others, I have thought of an elegant device, if I am not mistaken, by which to show that ratiocination can be proved through numbers. Thus I imagine that these most remarkable characteristic numbers are already given, and, having observed a certain general property to be true of them, I set up such numbers as are somehow consistent with this property, and applying these, I at once demonstrate through numbers, in wonderful order, all the rules of logic and show how we can know whether certain arguments are in good form. But the material soundness or truth of an argument can be judged without much mental effort and danger of error only when we have the true characteristic numbers of things themselves.</p>
 
-  <p><label for="causality" class="margin-toggle"> ⊕</label><input type="checkbox" id="causality" class="margin-toggle" /><span class="marginnote">Leibniz also explicitly and succinctly states something that had also been discussed by Aristotle: “This axiom, however, that there is nothing without a reason, must be considered one of the greatest and most fruitful of all human knowledge, for upon it is built a great part of metaphysics, physics, and moral science”. It is this axiom of <a href="https://en.wikipedia.org/wiki/Causality">causality</a>, probably the most important one in metaphysics and in all of the philosophy of science, that explains some of the “surprising effectiveness” of mathematics and seemingly surprising similarities between different theories, that, at their core, are just descriptions of this fundamental assumption. Most importantly, it explains why so many mathematical theories have a notion of transitivity, as causality is transitive: if A necessarily (or possibly) causes B, and B necessarily (or possibly) causes C, then A necessarily (or possibly) causes C. </span></p>
-
-  <p>[… One cannot go to inﬁnity in his proofs, however, and therefore some things must be assumed without proof — not silently and by stealth, indeed, dissimulating our own laziness as philosophers customarily do, but keeping clearly in mind what we have used as ﬁrst assertions, after the example of geometricians who, to show their good faith, acknowledge at the very start the assumed axioms they are to use, so that they may be sure that all the conclusions are proved at least hypothetically from these assumptions.</p>
+  <p>… One cannot go to inﬁnity in his proofs, however, and therefore some things must be assumed without proof — not silently and by stealth, indeed, dissimulating our own laziness as philosophers customarily do, but keeping clearly in mind what we have used as ﬁrst assertions, after the example of geometricians who, to show their good faith, acknowledge at the very start the assumed axioms they are to use, so that they may be sure that all the conclusions are proved at least hypothetically from these assumptions.</p>
 
   <p>First of all, I assume that every judgment (i.e., aﬂirmation or negation) is either true or false and that if the aﬂirmation is true the negation is false, and if the negation is true the aﬂirmation is false; that what is denied to be true -— truly, of course — is false, and what is denied to be false is true; that what is denied to be aﬂirmed, or affirmed to be denied, is to be denied; and what is affirmed to be affirmed and denied to be denied is to be afﬁrmed. Similarly, that it is false that what is false should be true or that what is true should be false; that it is true that what is true is true, and what is false, false. All these are usually included in one designation, the <em>principle of contradiction</em>.</p>
 
-  <p>… In general, every true proposition which is not identical or true in itself can be proved a priori with the help of axioms or propositions that are true in themselves and with the help of deﬁnitions or ideas. For no matter how often a predicate is truly afﬁrmed of a subject, there must be some real connection between subject and predicate, such that in every proposition whatever, such as <em>A</em> is <em>B</em> (or <em>B</em> is truly predicated of <em>A</em>), it is true that <em>B</em> is contained in <em>A</em>, or its concept is in some way contained in the concept of <em>A</em> itself. …  Such truth could itself be deduced from the analysis of concepts, if this were always within human power, and will certainly not escape the analysis of an omniscient substance who sees everything a priori from ideas themselves and from his decrees. It is certain, therefore, that all truths, even highly contingent ones, have a proof a priori or some reason why they are rather than are not. And this is what is commonly asserted: that nothing happens without a cause, or these is nothing without a reason.]</p>
+  <p>… In general, every true proposition which is not identical or true in itself can be proved a priori with the help of axioms or propositions that are true in themselves and with the help of deﬁnitions or ideas. For no matter how often a predicate is truly afﬁrmed of a subject, there must be some real connection between subject and predicate, such that in every proposition whatever, such as <em>A</em> is <em>B</em> (or <em>B</em> is truly predicated of <em>A</em>), it is true that <em>B</em> is contained in <em>A</em>, or its concept is in some way contained in the concept of <em>A</em> itself. …  Such truth could itself be deduced from the analysis of concepts, if this were always within human power, and will certainly not escape the analysis of an omniscient substance who sees everything a priori from ideas themselves and from his decrees. It is certain, therefore, that all truths, even highly contingent ones, have a proof a priori or some reason why they are rather than are not. And this is what is commonly asserted: that nothing happens without a cause, or these is nothing without a reason.</p>
 
-  <p>[… This axiom, however, that there is nothing without a reason, must be considered one of the greatest and most fruitful of all human knowledge, for upon it is built a great part of metaphysics, physics, and moral science; without it, indeed, the existence of God cannot be proved from his creatures, nor can an argument be carried fom causes to effects or from effects to causes, nor any conclusions be drawn in civil matters. So true is this that whatever is not of mathematical necessity, as for instance are logical forms and numerical truths, must be sought here entirely.]</p>
+  <p><label for="causality" class="margin-toggle"> ⊕</label><input type="checkbox" id="causality" class="margin-toggle" /><span class="marginnote">Leibniz succinctly states something that had also been discussed by Aristotle: the axiom of <a href="https://en.wikipedia.org/wiki/Causality">causality</a>, probably the most important one in metaphysics and in all of the philosophy of science, that explains some of the “surprising effectiveness” of mathematics and seemingly surprising similarities between different theories, that, at their core, are just descriptions of this fundamental assumption. Most importantly, it explains why so many mathematical theories have a notion of transitivity, as causality is transitive: if A necessarily (or possibly) causes B, and B necessarily (or possibly) causes C, then A necessarily (or possibly) causes C. </span></p>
+
+  <p>… This axiom, however, that there is nothing without a reason, must be considered one of the greatest and most fruitful of all human knowledge, for upon it is built a great part of metaphysics, physics, and moral science; without it, indeed, the existence of God cannot be proved from his creatures, nor can an argument be carried fom causes to effects or from effects to causes, nor any conclusions be drawn in civil matters. So true is this that whatever is not of mathematical necessity, as for instance are logical forms and numerical truths, must be sought here entirely.</p>
 </blockquote>
 
 <p>Thus was born the dream of the general characteristic, or <em>characteristica universalis</em>, the universal language of all human thought. Note that Leibniz’s <em>characteristica universalis</em> was intended to describe not only acts of deduction but also of scientific discovery (“both the arts of discovery and of judgment”).</p>
@@ -730,13 +750,15 @@ others as well. For formulas can also be derived from them which express situati
   <h3 id="secondary-sources">Secondary Sources</h3>
 
   <ul>
+    <li><a name="klement"></a>Klement, Kevin C., <a href="http://www.iep.utm.edu/prop-log/"><em>Propositional Logic</em></a>, in the <a href="http://www.iep.utm.edu/"><em>Internet Encyclopedia of Philosophy</em></a></li>
     <li><a name="mechanization"></a>Marciszewski, Witold and Murawski, Roman, <a href="https://www.amazon.com/Mechanization-Historical-Perspective-Philosophy-Humanities-ebook/dp/B005EY6UYC/"><em>Mechanization Of Reasoning In A Historical Perspective</em></a>, 1995, Kindle Edition</li>
-    <li><a name="peckhaus1"></a>Peckhaus, Volker, <a href="https://plato.stanford.edu/entries/leibniz-logic-influence/"><em>Leibniz’s Influence on 19th Century Logic</em></a>, 2009 in <em><a href="https://plato.stanford.edu/index.html">Stanford Encyclopedia of Philosophy</a></em></li>
+    <li><a name="smith"></a>Smith, Robin, <a href="https://plato.stanford.edu/entries/aristotle-logic/"><em>Aristotle’s Logic</em></a>, 2017, in in the <a href="https://plato.stanford.edu/index.html"><em>Stanford Encyclopedia of Philosophy</em></a></li>
+    <li><a name="peckhaus1"></a>Peckhaus, Volker, <a href="https://plato.stanford.edu/entries/leibniz-logic-influence/"><em>Leibniz’s Influence on 19th Century Logic</em></a>, 2009 in the <em><a href="https://plato.stanford.edu/index.html">Stanford Encyclopedia of Philosophy</a></em></li>
   </ul>
 
 </div>
 
-<p><a href="/posts/computation-logic-algebra-pt2">Part 2</a></p>
+<p><a href="/posts/computation-logic-algebra-pt2">Part 2</a>, <a href="/posts/computation-logic-algebra-pt3">Part 3</a></p>
 <div class="footnotes">
   <ol>
     <li id="fn:milewski">
