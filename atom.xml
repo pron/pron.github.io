@@ -4,7 +4,7 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2018-02-21T16:50:55+00:00</updated>
+ <updated>2018-02-24T19:23:17+00:00</updated>
  <author>
    <name></name>
    <uri></uri>
@@ -18,7 +18,7 @@
    <link href="/posts/computation-logic-algebra-pt3"/>
    <id>/posts/computation-logic-algebra-pt3</id>
    <updated>2018-01-19T00:00:00+00:00</updated>
-   <content type="html">&lt;div class=&quot;fullwidth&quot;&gt; &lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt2&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;An almost metaphysical system of abstract signs, by which the motion of the hand performs the office of the mind.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Dionysius Lardner, &lt;em&gt;Babbage’s Calculating Engine&lt;/em&gt;, 1834&lt;/p&gt; &lt;/blockquote&gt; &lt;blockquote&gt; &lt;p&gt;Even when the connotation of a term has been...</content>
+   <content type="html">&lt;div class=&quot;fullwidth&quot;&gt; &lt;p&gt;&lt;a href=&quot;/computation-logic-algebra&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;An almost metaphysical system of abstract signs, by which the motion of the hand performs the office of the mind.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Dionysius Lardner, &lt;em&gt;Babbage’s Calculating Engine&lt;/em&gt;, 1834&lt;/p&gt; &lt;/blockquote&gt; &lt;blockquote&gt; &lt;p&gt;Even when the connotation of a term has been accurately fixed,...</content>
  </entry>
 
  
@@ -28,7 +28,7 @@
    <link href="/posts/computation-logic-algebra-pt2"/>
    <id>/posts/computation-logic-algebra-pt2</id>
    <updated>2018-01-12T00:00:00+00:00</updated>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt1&quot;&gt;Part 1&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt3&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Logic is the science that exhaustively presents and strictly proves nothing but the formal rules of all thinking.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Immanuel Kant, &lt;em&gt;Critique of Pure Reason&lt;/em&gt;, Preface to the 2nd edition, 1787&lt;/p&gt; &lt;/blockquote&gt; &lt;/div&gt; &lt;h2 id=&quot;ii-divine-machines&quot;&gt;II. Divine Machines&lt;/h2&gt; &lt;h3 id=&quot;celestial-mathematics&quot;&gt;Celestial Mathematics&lt;/h3&gt;...</content>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/computation-logic-algebra&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;Logic is the science that exhaustively presents and strictly proves nothing but the formal rules of all thinking.&lt;/p&gt; &lt;p class=&quot;ep-footer&quot;&gt;— Immanuel Kant, &lt;em&gt;Critique of Pure Reason&lt;/em&gt;, Preface to the 2nd edition, 1787&lt;/p&gt; &lt;/blockquote&gt; &lt;/div&gt; &lt;h2 id=&quot;ii-divine-machines&quot;&gt;II. Divine Machines&lt;/h2&gt; &lt;h3 id=&quot;celestial-mathematics&quot;&gt;Celestial Mathematics&lt;/h3&gt; &lt;p&gt;As we...</content>
  </entry>
 
  
@@ -38,7 +38,7 @@
    <link href="/posts/computation-logic-algebra-pt1"/>
    <id>/posts/computation-logic-algebra-pt1</id>
    <updated>2018-01-05T00:00:00+00:00</updated>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;/posts/computation-logic-algebra-pt2&quot;&gt;Part 2&lt;/a&gt;, &lt;a href=&quot;/posts/computation-logic-algebra-pt3&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;fullwidth&quot;&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;God invented and gave us sight to the end that we might behold the courses of intelligence in the heaven, and apply them to the courses of our own intelligence which are akin to them, the unperturbed to the...</content>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;/computation-logic-algebra&quot;&gt;Table of Contents&lt;/a&gt;&lt;/p&gt; &lt;div class=&quot;fullwidth&quot;&gt; &lt;div class=&quot;epigraph&quot;&gt; &lt;blockquote&gt; &lt;p&gt;God invented and gave us sight to the end that we might behold the courses of intelligence in the heaven, and apply them to the courses of our own intelligence which are akin to them, the unperturbed to the perturbed; and...</content>
  </entry>
 
  
