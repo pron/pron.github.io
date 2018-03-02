@@ -458,7 +458,7 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>The restriction made by total languages, therefore, does not help make verification any easier. Indeed, it would have been surprising to discover that an impossible problem becomes easy by restricting it just a bit (giving up leather seats does not reduce the cost of a car by 90%). We also note that every program could be trivially made total by adding a large counter, say $2^{100}$ to all loops – this won’t change its physical semantics in any way – so we can already <em>assume</em> all real-world programs to be written in total languages <em>without loss of generality</em>. If total languages helped, we could have assumed all languages are total.</p>
 
-<p>To give an intuition for how hard total programs are to prove, the following 10-line Java or C example is written in the total style. All loops have decrementing counters. It clearly always terminates. It also doesn’t do any tricky mathematical operations; just addition and subtraction:</p>
+<p>To give an intuition for how hard total programs are to prove, the following 10-line Java or C example is written in the total style. All loops have decrementing counters. It clearly always terminates. It also doesn’t do any tricky mathematical operations – just subtraction:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>int foo(int x) {
     if (x &lt;= 2 || (x &amp; 1) != 0)
