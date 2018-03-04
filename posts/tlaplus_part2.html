@@ -573,9 +573,9 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\CHOOSE x \in S : P(x) &=\;& \CHOOSE x :  x \in S \land P(x)
 \end{alignat} %]]></script>
 
-<p>Next we specify which sets exist in our universe using the axioms of set theory:<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">16</a></sup></p>
+<p>Next we specify which sets exist in our universe using the axioms of set theory.<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">16</a></sup> To make this more precise (and to tie everything together), recall that stating that some object $S$ — in our case, a set — satisfying some property $P$ exists, i.e., $\E S : P(S)$, can be done using choice: $P(\CHOOSE S : P(S))$. The following axioms are all of this form, but they also introduce syntactic notation for $\CHOOSE S : P(S)$ for their respective property $P$.</p>
 
-<p>The constant $\set{}$ is the empty set, and $\A x : x \notin \set{}$ (which is an abbreviation for $\A x : \neg (x \in \set{})$).</p>
+<p>The constant $\set{}$ is the empty set, and $\A x : x \notin \set{}$ (which is an abbreviation for $\A x : \neg (x \in \set{})$). I.e. $\set{} \defeq \CHOOSE S : \A x : x \notin S$, and this set exists.</p>
 
 <p>If $a$ and $b$ are sets, then $S = \set{a, b}$ is another set (axiom of pairing), and $\A x : x \in \set{a, b} \equiv x = A \lor x = b$.</p>
 
