@@ -822,15 +822,15 @@
 
 <h3 id="two-serious-problems">Two Serious Problems</h3>
 
-<p>The logic we’ve defined, rTLA, suffers from two problems. Suppose we want to write an algorithm for a clock that shows both the hour and the minute:</p>
+<p>The logic we’ve defined, rTLA, suffers from two problems. Suppose we want to write an algorithm for a clock that shows both the hour and the minute (remember that a conjunction list, like that appearing after the $\Box$ operator, is read as if it is enclosed in parentheses):</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\rlap{\VARIABLES h, m}\\
 &Clock \defeq &\; \rlap{h \in 1..12 \land m \in {0..59}}\\
-&&\phantom{XX}\land\Box(&\land\rlap{m' = (m + 1)\%60}\\
+&&\phantom{XX}\land\Box&\land\rlap{m' = (m + 1)\%60}\\
 &&& \land m < 59 &\implies \UNCHANGED  h\\
-&&&\land m = 59 &\implies h' = \IF h \neq 12 \;\THEN h + 1 \;\ELSE 1)
+&&&\land m = 59 &\implies h' = \IF h \neq 12 \;\THEN h + 1 \;\ELSE 1
 \end{alignat} %]]></script>
 
 <p>We would very much like it to be the case that $\vdash Clock \implies HourClock$ because a clock that shows both the minute and the hour is, intuitively at least, an instance of a clock that shows the hour. Unfortunately, this isn’t true in rTLA, because while the behaviors of $HourClock$ change the value of $h$ at each step, in $Clock$’s behaviors, $h$ changes only once every 60 steps.</p>
@@ -844,9 +844,9 @@
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\land \rlap{x \in Nat \land t = 0}\\
-&\land \Box(&\land t' = t +1\\
+&\land \Box&\land t' = t +1\\
                       &&\land x' = x + 10\\
-                      && \land t = 10 \implies x = 100) \;\;&\comment{this is the $``$boundary condition"}
+                      && \land t = 10 \implies x = 100 \;\;&\comment{this is the $``$boundary condition"}
 \end{alignat} %]]></script>
 
 <p>Or, if you prefer, we can use the equivalence $\Box(A \land B) \equiv \Box A \land \Box B$ to rewrite the formula as:</p>
@@ -885,9 +885,9 @@
 &\rlap{\VARIABLES x, t}\\
 &\rlap{RandomWalkForTenSteps \defeq }\\
 &\phantom{XX}&\; \rlap{t = 10 \land x =  0\land\;}\\
-&&&\phantom{XX}\Box(
+&&&\phantom{XX}\Box
 && \land t > 0 &\land t' = t - 1 \land (x' = x + 1 \lor x'=x-1)\\
-&&&&&\land t = 0 &\land \UNCHANGED \seq{t, x})
+&&&&&\land t = 0 &\land \UNCHANGED \seq{t, x}
 \end{alignat} %]]></script>
 
 <p>then</p>
@@ -1039,7 +1039,7 @@
 \begin{alignat}{1}
 &\rlap{\VARIABLE m}\\
 &Spec&\defeq \;& \EE n : & \land \rlap{m = 0 \land n = 0}\\
-&&&& \land [\IF\rlap{m=0}\\
+&&&& \land\Box [\IF\rlap{m=0}\\
 &&&&& \THEN &  n' \in Nat &\land m '= 1\\
 &&&&&\ELSE & n > 0  \land n' = n-1&\land m' = m+1]_{\seq{m, n}}\\
 \end{alignat} %]]></script>
@@ -1052,7 +1052,7 @@
 \begin{alignat}{1}
 &\rlap{\VARIABLE m}\\
 &Spec&\defeq \;& \EE n : & \land \rlap{m = 0 \land n = 0}\\
-&&&& \land [\IF\rlap{m=0}\\
+&&&& \land \Box[\IF\rlap{m=0}\\
 &&&&& \THEN &  n' \in 0..1000 &\land m '= 1\\
 &&&&&\ELSE & n > 0  \land n' = n-1&\land m' = m+1]_{\seq{m, n}}\\
 \end{alignat} %]]></script>
