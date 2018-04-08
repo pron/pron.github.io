@@ -876,6 +876,14 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>where $@$ refers to the original function’s value at that point.</p>
 
+<p><script type="math/tex">\EXCEPT\!</script> expressions also support cases where functions can be “nested” (i.e., a function returns a function, or a multi-dimensional array), so, if we wanted to express incrementing the (1,2) coordinate of a two-dimensional array, instead of writing:</p>
+
+<script type="math/tex; mode=display">[f \;\EXCEPT ![1] = [@ \;\EXCEPT [2] = @ + 1]]</script>
+
+<p>we can write:</p>
+
+<script type="math/tex; mode=display">[f \;\EXCEPT ![1][2] = @ + 1]</script>
+
 <p>We also have syntactic sugar to define and apply functions with multiple parameters. We’ll talk about it once we’ve learned about tuples.</p>
 
 <p>Now let’s use functions and one of the sets we’ve seen to formally define some more important mathematical concepts<sup id="fnref:calculus"><a href="#fn:calculus" class="footnote">24</a></sup>:</p>
@@ -973,7 +981,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <script type="math/tex; mode=display">[f \in \set{\str{a}, \str{b}, \str{c}} \mapsto \CASE\;f=\str{a} \to 10 \;\Box\;  f=\str{b} \to 20 \;\Box\;  f=\str{c} \rightarrow 30]</script>
 
-<p>and $r.a$ is syntax sugar for $r[\str{a}]$. <script type="math/tex">\EXCEPT\!</script> also has special syntax for records, so a record that is equal to $r$ but whose “field” $b$ is 200, could be created with $[r \;\EXCEPT !.b = 200]$ (or with $[r \;\EXCEPT !.b = @*10]$). Finally, we have special syntax for sets of records:</p>
+<p>and $r.a$ is syntax sugar for $r[\str{a}]$. <script type="math/tex">\EXCEPT\!</script> also has special syntax for records, so a record that is equal to $r$ but whose “field” $b$ is 200, could be created with $[r \;\EXCEPT !.b = 200]$ (or with $[r \;\EXCEPT !.b = @*10]$). Nested structures also work (e.g. $[r \;\EXCEPT !.a.k = @+1]$). Finally, we have special syntax for sets of records:</p>
 
 <script type="math/tex; mode=display">[name: \STRING\!, id : Nat]</script>
 
@@ -1535,7 +1543,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
       <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by the facts that a set cannot contain elements of different order (so $\set{1, \set{2, 3}}$ is not a valid set), i.e. different types.&nbsp;<a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ambig">
-      <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}​</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning.&nbsp;<a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
+      <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning.&nbsp;<a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:cdot">
       <p>Actually, the $\cdot$ operator is already taken in TLA<sup>+</sup> (for action composition), so you’d need to choose a different operator.&nbsp;<a href="#fnref:cdot" class="reversefootnote">&#8617;</a></p>
