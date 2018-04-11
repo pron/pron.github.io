@@ -591,7 +591,7 @@ X(a, b, c, d, e, f) = ((a ∧ b) ∨ c) ∧ ¬d ∧ (e ∨ f)
 
 <p>Yet, not only is this possible but it takes very little effort to ensure that, say, a C, or Java, or Haskell program returns an <code class="highlighter-rouge">int</code>. How is that not a contradiction with the theorem?</p>
 
-<p>Some seem to assume that there is no violation because the property is “correct by construction”. This is false. Rice’s theorem says nothing about construction, and for good reason. Suppose we could easily prove properties on the results of programs by using types, because of “correctness by construction”. We can then have the following efficient algorithm for verifying programs: I write the program in Python, you translate it to, say, Haskell, and Voilas! Problem solved! This is impossible, because complexity applies to people as well as to computers.</p>
+<p>Some seem to assume that there is no violation because the property is “correct by construction”. This is false. Rice’s theorem says nothing about construction, and for good reason. Suppose we could easily prove properties on the results of programs by using types, because of “correctness by construction”. We can then have the following efficient algorithm for verifying programs: I write the program in Python, you translate it to, say, Haskell, and voilà! Problem solved! This is impossible, because complexity applies to people as well as to computers.</p>
 
 <p>The real answer must directly address Rice’s theorem: either the property is trivial, or what’s computing the partial function is not a TM.</p>
 
