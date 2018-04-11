@@ -448,7 +448,7 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>Given all that, we can reduce the problem of deciding $P$ to simply answering $V(M_P, x)$ (which is equal to $P(x)$). Because $M_P$ is constant for a given problem $P$, this reduction is polynomial. This means that $V$’s complexity must be greater than the <em>lower</em> bound for $P$, if such a bound exists. We say that $V$ is at least as hard as $P$. However, $P$ was chosen completely arbitrarily, and by the time hierarchy theorem, for <em>any</em> computable $g(n)$ we could find a problem $P$ whose complexity is greater than $g$, and so $V$ is harder than <em>every</em> problem with a known computational upper bound. We say that any decision problem with a known upper complexity bound is reducible to bounded halting. In other words, verification is the hardest problem in computer science.</p>
 
-<h2 id="limiting-our-scope">Limiting our Scope</h2>
+<h2 id="limiting-our-scope">Limiting our scope</h2>
 
 <p>To try and tackle verification, we can make life easier by either restricting the machine on the left side, or the property checked on the right side. So far, restricting the property doesn’t help us much, because we get undecidable or intractable results even for the simplest properties (halting, result, reachability), so let’s try to restrict the machine.</p>
 
