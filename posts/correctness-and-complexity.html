@@ -398,7 +398,7 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>Such that, $TIME(H_n) \leq n - 2$</p>
 
-<p>We then defined</p>
+<p>We then define</p>
 
 <blockquote>
   <p>$G(y)$ := <code class="highlighter-rouge">IF</code> $H_n(y, y)$ = <code class="highlighter-rouge">FALSE THEN TRUE ELSE</code> loop $n$ times and return <code class="highlighter-rouge">FALSE</code></p>
@@ -408,7 +408,7 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>Put simply, you can’t know what a program will do faster that running it. Bounded halting is $\theta(n)$.</p>
 
-<p>But can we generalize from one input to the another? Can we work hard on <em>some</em> inputs so that we’re fast on all others? I call that problem amortized bounded halting. If working hard on analyzing the program’s behavior on some inputs could yield gains on others, there would be a large enough number of inputs, $K$, such that answering the bounded halting question on all of them would take less than $K \cdot n$ steps. We can state the question like so:</p>
+<p>But can we generalize from one input to the another? Can we work hard on <em>some</em> inputs so that we’re fast on all others? If working hard on analyzing the program’s behavior on some inputs could yield gains on others, there would be a large enough number of inputs, $K$, such that answering the bounded halting question on all of them would take less than $K \cdot n$ steps. I could not find that problem in the literature, so I called it amortized bounded halting, and we can state it precisely like so:</p>
 
 <blockquote>
   <p>Given natural numbers $n$, $K$, does there exist a machine <script type="math/tex">HA_{n,k}</script> that for all TMs $M$, $HA_{n,k}(M, x_1,…, x_k)$ decides whether $M$ halts on all $x_1…x_k$ within $n$ steps, and does so within $K \cdot n$ steps?</p>
@@ -557,7 +557,7 @@ X(a, b, c, d, e, f) = ((a ∧ b) ∨ c) ∧ ¬d ∧ (e ∨ f)
   <p>There does not exist a generally useful programming language where every program is feasibly verifiable</p>
 </blockquote>
 
-<p>So now we know why writing correct programs is hard: because it has to be. But while we cannot verify all programs all the time — regardless of how they’re written — but there’s nothing stopping us from verifying some programs some of the time for some properties.</p>
+<p>So now we know why writing correct programs is hard: because it has to be. But while we cannot verify all programs all the time — regardless of how they’re written — there’s nothing stopping us from verifying some programs some of the time for some properties.</p>
 
 <h2 id="chapter-iii-verification">CHAPTER III: VERIFICATION</h2>
 
@@ -672,7 +672,7 @@ p3:        else x := x + 1
 
 <p>If you need further convincing that non-dependent type systems only encode FSM properties, if you are a Haskell developer you can do the following exercise to convince yourself: try to replace every function body (including library functions, of course) with one that is clearly an FSM by using recursion of constant depth or unbounded depth (depth 0 or 1 should suffice to obtain a type inhabitant in most cases). You’ll find that you can always succeed in replacing a Haskell program with a FSM program that – while completely different from your original program and likely completely wrong – would type-check without requiring any change to any signatures.</p>
 
-<p class="alert alert-warn"><strong>CORRECTION</strong>: Readers <a href="https://twitter.com/samth">@samth</a> and <a href="https://twitter.com/kamatsu8">@kamatsu8</a> pointed out to me that the above is incorrect when <a href="https://en.wikipedia.org/wiki/Polymorphic_recursion">polymorphic recursion</a> is used (which Haskell supports though it does not infer). They provided an example which can only be replaced with <a href="https://en.wikipedia.org/wiki/Pushdown_automaton">pushdown automaton</a> with a small number of control-states (for which model-checking is also feasible) rather than a FSM.</p>
+<p class="alert alert-warn"><strong>CORRECTION</strong>: Readers <a href="https://twitter.com/samth">@samth</a> and <a href="https://twitter.com/kamatsu8">@kamatsu8</a> pointed out to me that the above is incorrect when <a href="https://en.wikipedia.org/wiki/Polymorphic_recursion">polymorphic recursion</a> is used (which Haskell supports though it does not infer). They provided an example which can only be replaced with a <a href="https://en.wikipedia.org/wiki/Pushdown_automaton">pushdown automaton</a> with a small number of control-states (for which model-checking is also feasible) rather than a FSM.</p>
 
 <p>On the other hand, in languages with dependent types, the number of concrete types can be infinite, and therefore type-inference, which is still $\Omega(|S|)$, is of infinite complexity, i.e., undecidable. It’s really as simple as that.</p>
 
