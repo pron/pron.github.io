@@ -4,12 +4,22 @@
  <title>Ron Pressler</title>
  <link href="/atom.xml" rel="self"/>
  <id></id>
- <updated>2018-04-12T13:33:07+01:00</updated>
+ <updated>2018-04-28T18:38:59+01:00</updated>
  <author>
    <name></name>
    <uri></uri>
    <email></email>
  </author>
+
+ 
+
+ <entry>
+   <title>People Don't Write Programs</title>
+   <link href="/posts/people-dont-write-programs"/>
+   <id>/posts/people-dont-write-programs</id>
+   <updated>2018-04-28T00:00:00+01:00</updated>
+   <content type="html">&lt;p&gt;Recently I participated in some online discussions about the relative merits of various software verification tools and techniques. This post is not about that. I think that, while different tools and approaches currently differ in the scale of programs they can verify, it is safe to say that, when considering...</content>
+ </entry>
 
  
 
@@ -99,16 +109,6 @@
    <id>/posts/the-best-programming-language</id>
    <updated>2017-02-04T00:00:00+00:00</updated>
    <content type="html">&lt;p&gt;A certain tweet caught my eye this past week. I will not link to it because I don’t want to single out its author, who expresses an opinion which is rather common in some crowds, but it said: “Do the people behind the big mainstream languages not follow PLT at...</content>
- </entry>
-
- 
-
- <entry>
-   <title>What We Talk About When We Talk About Computation</title>
-   <link href="/posts/what-we-talk-about-when-we-talk-about-computation"/>
-   <id>/posts/what-we-talk-about-when-we-talk-about-computation</id>
-   <updated>2016-08-30T00:00:00+01:00</updated>
-   <content type="html">&lt;p&gt;&lt;em&gt;Abstract: Machine and language models of computation differ so greatly in the computational complexity properties of their representation that they form two distinct classes that cannot be directly compared in a meaningful way. While machine models are self-contained, the properties of the language models indicate that they require a computationally...</content>
  </entry>
 
  
