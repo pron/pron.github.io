@@ -577,15 +577,15 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>The constant $\set{}$ is the empty set, and $\A x : x \notin \set{}$ (which is an abbreviation for $\A x : \neg (x \in \set{})$). I.e. $\set{} \defeq \CHOOSE S : \A x : x \notin S$, and this set exists.</p>
 
-<p>If $a$ and $b$ are sets, then $S = \set{a, b}$ is another set (axiom of pairing), and $\A x : x \in \set{a, b} \equiv x = A \lor x = b$.</p>
+<p>If $a$ and $b$ are sets, then $S = \set{a, b}$ is another set (axiom of pairing), and $\A x : x \in \set{a, b} \equiv x = a \lor x = b$.</p>
 
-<p>If $S$ is a set and $P$ is some predicate, then a set $T$ that contains all those members of $S$ that satisfy $P$ also exists, i.e., $\A x : x \in T \equiv x \in S \land P(x)$. We introduce a convenient syntax (called set-comprehension), and write the set $T$ like so: $\set{x \in S : P(x)}$ is a set containing all members of $S$ that satisfy $P$ (axiom of specification/separation). For example, $\set{n \in Nat : n \% 2 = 0}$ is the set of even natural numbers. Note that a colon is used instead of the more common <code class="highlighter-rouge">|</code> in the set comprehension expression.</p>
+<p>If $S$ is a set and $P$ is some predicate, then a set $T$ that contains all those members of $S$ that satisfy $P$ also exists, i.e., $\A x : x \in T \equiv x \in S \land P(x)$ (axiom of specification/separation). We introduce a convenient syntax (called set-comprehension), and write the set $T$ like so: $\set{x \in S : P(x)}$. For example, $\set{n \in Nat : n \% 2 = 0}$ is the set of even natural numbers. Note that a colon is used instead of the more common <code class="highlighter-rouge">|</code> in the set comprehension expression.</p>
 
 <p>If $S$ is a set and $F$ some expression then another form of comprehension, $U = \set{F(x) :  x \in S}$, is a set constructed by replacing each member of $S$ with its image under the operator $F$ (axiom of replacement)<sup id="fnref:ambig"><a href="#fn:ambig" class="footnote">17</a></sup>; formally, $\A x : x \in U \equiv \E z \in S : F(z) = x$. For example, $\set{2*n : n \in Nat}$ is also the set of even natural numbers.</p>
 
-<p>If $S$ is a set, then $\UNION S$ is a set containing all members of the members of $S$ (axiom of union) E., i.e., $\A x : x \in \UNION S \equiv \E s \in S : x \in s$. E.g. $\UNION \set{\set{1, 2}, \set{2, 3}} = \set{1, 2, 3}$.</p>
+<p>If $S$ is a set, then $\UNION S$ is a set containing all members of the members of $S$ (axiom of union), i.e., $\A x : x \in \UNION S \equiv \E s \in S : x \in s$. E.g. $\UNION \set{\set{1, 2}, \set{2, 3}} = \set{1, 2, 3}$.</p>
 
-<p>If $S$ is a set, then $\SUBSET S$ is the <a href="https://en.wikipedia.org/wiki/Power_set">power set</a> of $S$, namely the set of all subsets of $S$ (axiom of power set), or, $\A x : x\in \SUBSET S  \equiv \A z \in x : z\in S$ (note that for any set $S$, the empty set is a member of $\SUBSET S$ because $\A z \in \set{} : z\in S$). For example, $\SUBSET \set{1,2,3} = \set{\set{}, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$.</p>
+<p>If $S$ is a set, then $\SUBSET S$ is the <a href="https://en.wikipedia.org/wiki/Power_set">power set</a> of $S$, namely the set of all subsets of $S$ (axiom of the power set), or, $\A x : x\in \SUBSET S  \equiv \A z \in x : z\in S$ (note that for any set $S$, the empty set is a member of $\SUBSET S$ because $\A z \in \set{} : z \in S$). For example, $\SUBSET \set{1,2,3} = \set{\set{}, \set{1}, \set{2}, \set{3}, \set{1, 2}, \set{1, 3}, \set{2, 3}, \set{1, 2, 3}}$.</p>
 
 <p>TLA<sup>+</sup> has the usual set operators $\cup$ (union), $\cap$ (intersection), $\subseteq$ (subset or equal), $\subset$ (strict subset), \ (set difference) etc., all trivially defined using the fundamental operations above (for example $a \subseteq b \defeq \A x  : x \in a \implies x \in b$, and $a \cap b \defeq \set{x \in a : x\in b}$).</p>
 
