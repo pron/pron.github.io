@@ -60,7 +60,7 @@
 <meta name="twitter:site" content="@pressron">
 <meta name="twitter:title" content="TLA+ in Practice and Theory<br/>Part 2: The + in TLA+">
 
-  <meta name="twitter:description" content="We explore the "data logic" of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
+  <meta name="twitter:description" content="We explore the data logic of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
 ">
 
 
@@ -70,7 +70,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="TLA+ in Practice and Theory<br/>Part 2: The + in TLA+">
 
-  <meta property="og:description" content="We explore the "data logic" of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
+  <meta property="og:description" content="We explore the data logic of TLA+, the means by which TLA+ specifications describe a state of computation: its data structures. To do that, we first cover the basics of mathematical logic.
 ">
 
 <meta property="og:url" content="/posts/tlaplus_part2">
@@ -451,9 +451,9 @@
 &(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
 \end{alignat} %]]></script>
 
-<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!</script><sup id="fnref:true"><a href="#fn:true" class="footnote">10</a></sup>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+<p>The first rule shows how the quantifier $\E​$ can be defined in terms of <script type="math/tex">\CHOOSE\!​</script> (and therefore so can $\A​$). The second rule is sometimes called <em>right-uniqueness</em>, and means that <script type="math/tex">\CHOOSE\!​</script> is <em>not</em> nondeterministic, but rather always picks a specific value (although not one that is dictated by the logic). In other words, there is just one model for the formula <script type="math/tex">a = \CHOOSE x : \TRUE\!​</script><sup id="fnref:true"><a href="#fn:true" class="footnote">10</a></sup>, although the axioms of the logic don’t allow us to know which particular model it is. This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
 
-<p>Both <script type="math/tex">\IF\!/\THEN\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">11</a></sup>:</p>
+<p>Both <script type="math/tex">\IF\!/\ELSE\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">11</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
