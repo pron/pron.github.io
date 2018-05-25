@@ -953,7 +953,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <script type="math/tex; mode=display">[i \in 1..3 \mapsto \CASE i=1 \to 10 \;\Box\;  i=2 \to \str{hi} \;\Box\;  i=3 \to [x \in N \mapsto x + 1]]</script>
 
-<p>If $A$ and $B$ are sets, then $A \times B$ is their <a href="https://en.wikipedia.org/wiki/Cartesian_product"><em>Cartesian product</em></a>, $\set{\seq{a, b} : a \in A , b \in B}$. Similarly, $A \times B \times C = \set{\seq{a, b, c} : a \in A , b \in B, c \in C}$ etc. The Cartesian product is <em>not</em> associative in TLA<sup>+</sup>, so $A \times B \times C \neq (A \times B) \times C \neq A \times (B \times C)$, because $\seq{a,b,c} \neq \seq{\seq{a,b},c} \neq \seq{a,\seq{b,c}}$.</p>
+<p>If $A$ and $B$ are sets, then $A \times B$ is their <a href="https://en.wikipedia.org/wiki/Cartesian_product"><em>Cartesian product</em></a>, $\set{\seq{a, b} : a \in A , b \in B}$. Similarly, $A \times B \times C = \set{\seq{a, b, c} : a \in A , b \in B, c \in C}$ etc. The Cartesian product is <em>not</em> associative in TLA<sup>+</sup>, so $A \times B \times C \neq (A \times B) \times C \neq A \times (B \times C)$, because $\seq{a,b,c} \neq \seq{\seq{a,b},c} \neq \seq{a,\seq{b,c}}$ (and so $\times$ is not an ordinary binary infix operator – despite behaving almost like one – but a special construct).</p>
 
 <p>For convenience, tuples can be used as quantified variables: instead of $\E pair \in A \times B : pair[1] &gt; pair[2]$, we can write $\E \seq{a, b} \in A \times B : a &gt; b$.</p>
 
