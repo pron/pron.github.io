@@ -455,6 +455,8 @@
 
 <p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value in our universe of values (we will only encounter values in the next section, but possible ones include 42, $\set{3, \set{4, 5}}$ or $\str{hello}$) which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
 
+<p>This definition interprets the <em>informal</em> notion of “undefined” – which probably means <em>no</em> value – as <em>unspecified</em> (i.e., <em>some</em> value, but we don’t know which). You may find this interpretation philosophically troubling, but rest assured that it poses no issue to the soundness of mathematics.</p>
+
 <p>It is important to emphasize that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">10</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE  x : x \in Int \land x \% 2 = 0$ means “<em>some</em> even integer”, not “<em>find</em> an even integer”. The distinction is, indeed, mostly philosophical, but programmers must be reminded that, at this point, we are dealing only with mathematical definitions, not some algorithm that “runs”.</p>
 
 <p>It is also important to remember that <script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them; you cannot <script type="math/tex">\CHOOSE\!</script> a value that doesn’t exist in the universe of values, i.e., whose existence isn’t postulated by the axioms of the logical theory, which I will introduce in the chapter <a href="#sets">Sets</a>.</p>
@@ -470,7 +472,23 @@
 
 <h2 id="definitions">Definitions</h2>
 
-<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). A definition looks like so:</p>
+<table>
+  <tbody>
+    <tr>
+      <td>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of inconvenient axioms. For example, the absolute value function ($</td>
+      <td>\cdot</td>
+      <td>$) would be defined in FOL (interpreted over, say, the natural numbers) like so:</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{0}
+\A x.x\geq 0 \implies |x| = x\\
+\A x. x <0 \implies |x| = {-x}
+\end{alignat} %]]></script>
+
+<p>In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:</p>
 
 <script type="math/tex; mode=display">\text{Name} \defeq e</script>
 
