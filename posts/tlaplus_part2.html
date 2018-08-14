@@ -475,9 +475,9 @@
 <p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of inconvenient axioms. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the natural numbers) like so:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{0}
-\A x.x\geq 0 \implies |x| = x\\
-\A x. x <0 \implies |x| = {-x}
+\begin{alignat}{1}
+&\A x.x\geq 0 \implies |x| = x\\
+&\A x. x <0 \implies |x| = {-x}
 \end{alignat} %]]></script>
 
 <p>In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:</p>
