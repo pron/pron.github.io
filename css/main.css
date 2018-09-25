@@ -498,12 +498,10 @@ article.tufte {
   color: #111;
   max-width: 1400px; }
 
-.tufte p, .tufte footer, .tufte div.table-wrapper, .tufte div.mathblock, .tufte blockquote {
+.tufte p, .tufte footer, .tufte div.table-wrapper, .tufte div.mathblock, .tufte blockquote, .tufte li {
   width: 65%; }
-.tufte blockquote p {
+.tufte blockquote p, .tufte blockquote li {
   width: 100%; }
-.tufte li .sidenote, .tufte li .marginnote {
-  margin-right: -80%; }
 
 .tufte blockquote blockquote {
   width: 85%; }
