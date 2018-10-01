@@ -1005,7 +1005,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 
 <p>In addition to definitions, we may also declare <em>constants</em>. They are values (i.e. sets) or operators that are not given a definition, but we may specify assumptions that they must satisfy. One way to think about constants is as unknowns; yet another is to think of them as analogous to type parameters of polymorphic definitions in typed programming languages. In part 4 we’ll see how those constants can be seen as an input or parameters when we learn of modules and module instantiation.</p>
 
-<p>The name <em>constant</em> means that the declared value/operator is not a temporal one — we’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>.</p>
+<p>The name <em>constant</em> means that the declared value/operator is not a temporal one. We’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>, but it is important to keep in mind that temporal variables may change <em>during</em> an execution while constants may not, but constants <em>do change between different executions</em>.</p>
 
 <p>Constants are introduced with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script>. For example:</p>
 
