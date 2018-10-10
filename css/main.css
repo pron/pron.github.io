@@ -506,7 +506,7 @@ article.tufte {
 .tufte blockquote blockquote {
   width: 85%; }
 
-.fullwidth p, .fullwidth footer, .fullwidth div.table-wrapper, .fullwidth div.mathblock, .fullwidth blockquote {
+.fullwidth p, .fullwidth footer, .fullwidth div.table-wrapper, .fullwidth div.mathblock, .fullwidth blockquote, .fullwidth li {
   width: 100%; }
 
 :not(article.tufte) .sidenote, :not(article.tufte) .sidenote-number, :not(article.tufte) .marginnote {
