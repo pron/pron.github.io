@@ -653,7 +653,7 @@
 
 <p>The specification $E \implies M$ appears to say what we want, but not quite. Suppose that in its first nine steps the environment sends the system even numbers, but in the tenth step the environment sends us an odd number. This would mean that for that behavior, the formula $E$ is false, and so (because $A \implies B$ is true for any $B$ if $A$ is false) the system may exhibit <em>any</em> behavior for which the formula $M$ is false. For example, set $y$ to 33.125 in the <em>second</em> step! This is not what we want. We want to say that $M$ would behave correctly <em>as long as</em> $E$ does, i.e., up until the step $E$ starts misbehaving.</p>
 
-<p>The special temporal operator $\whileop$ says that if $F \whileop G$, then $G$ would not “become false” before $F$ does. Our open system specification would, therefore, be $E \whileop M$.</p>
+<p>The special temporal operator $\whileop$ says that if $F \whileop G$, then $G$ would not “become false” before $F$ does, i.e., any behavior that satisfies $F$ up to some finite prefix, must also satisfy $G$ up to that prefix. Our open system specification would, therefore, be $E \whileop M$.</p>
 
 <p>In practice, however, simple implication (i.e. $E \implies M$) would suffice, because it is very hard to write a specification for $M$ — let alone a realizable, machine-closed one — that knows in advance that it may misbehave if the environment will misbehave sometime in the future.</p>
 
