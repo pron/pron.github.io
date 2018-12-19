@@ -1453,7 +1453,19 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>The last conjunct forbids the simultaneous change to $x$ and $y$.</p>
 
-<p>The <em>conjunction</em> of the two specifications denotes a parallel composition of processes, but it is equivalent to what appears like a specification of a single process with a nondeterministic action, specified as a <em>disjunction</em>.</p>
+<p>(More generally, we have,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\Box[NextX]_x \land \Box[NextY]_y &\equiv\;
+\Box[&\lor NextX \land NextY \\
+&&&\lor  NextX \land y'=y\\
+&&&\lor  NextY \land x'=x]_{\seq{x , y}}\\
+\end{alignat} %]]></script>
+
+<p>but if <script type="math/tex">NextX \implies y' = y$ and $NextY \implies x' = x</script> we get <script type="math/tex">\Box[NextX]_x \land \Box[NextY]_y \equiv\Box[NextX \lor NextY]_{\seq{x , y}}</script>. In practice, we don’t usually have separate variables for the two actions, but we specify in a form that gives the same effect.)</p>
+
+<p>The <em>conjunction</em> of the two specifications denotes a parallel composition of processes, but it is equivalent to what appears like a specification of a single process with a nondeterministic action, specified as a <em>disjunction</em> of sub-actions.</p>
 
 <p>Lamport <a href="https://groups.google.com/d/msg/tlaplus/XsqwpUruTxY/-vz0d51tAQAJ">writes</a>:</p>
 
