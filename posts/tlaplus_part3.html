@@ -1443,7 +1443,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 &Spec &\defeq& Init\land \Box[Next]_{\seq{x , y}} \land \WF_x(NextX) \land \WF_y(NextY)
 \end{alignat} %]]></script>
 
-<p>Where $Spec​$ is equivalent to $SpecX \land SpecY​$.</p>
+<p>Where $Spec$ is equivalent to $SpecX \land SpecY$.</p>
 
 <p>Can we also combine $\WF_x(NextX) \land \WF_y(NextY)$ into $\WF_{\seq{x, y}}(Next)$? Absolutely not! The latter specifies that if $Next$ is continually enabled, it will eventually occur — and as $Next$ is always enabled, it means that it will occur infinitely often — which will only guarantee that <em>either</em> $x$ or $y$ will be incremented infinitely often, but maybe only $x$. If our processes are scheduled by a fair scheduler, then <em>both</em> $x$ <em>and</em> $y$ will be incremented infinitely often, which is what  $\WF_x(NextX) \land \WF_y(NextY)$ specifies.</p>
 
@@ -1463,7 +1463,7 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 &&&\lor  NextY \land x'=x]_{\seq{x , y}}\\
 \end{alignat} %]]></script>
 
-<p>but if <script type="math/tex">NextX \implies y' = y$ and $NextY \implies x' = x</script> we get <script type="math/tex">\Box[NextX]_x \land \Box[NextY]_y \equiv\Box[NextX \lor NextY]_{\seq{x , y}}</script>. In practice, we don’t usually have separate variables for the two actions, but we specify in a form that gives the same effect.)</p>
+<p>but if <script type="math/tex">NextX \implies y' = y</script> and <script type="math/tex">NextY \implies x' = x</script> we get <script type="math/tex">\Box[NextX]_x \land \Box[NextY]_y \equiv\Box[NextX \lor NextY]_{\seq{x , y}}</script>. In practice, we don’t usually have separate variables for the two actions, but we specify in a form that gives the same effect.)</p>
 
 <p>The <em>conjunction</em> of the two specifications denotes a parallel composition of processes, but it is equivalent to what appears like a specification of a single process with a nondeterministic action, specified as a <em>disjunction</em> of sub-actions.</p>
 
