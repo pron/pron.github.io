@@ -1447,25 +1447,35 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>Can we also combine $\WF_x(NextX) \land \WF_y(NextY)$ into $\WF_{\seq{x, y}}(Next)$? Absolutely not! The latter specifies that if $Next$ is continually enabled, it will eventually occur — and as $Next$ is always enabled, it means that it will occur infinitely often — which will only guarantee that <em>either</em> $x$ or $y$ will be incremented infinitely often, but maybe only $x$. If our processes are scheduled by a fair scheduler, then <em>both</em> $x$ <em>and</em> $y$ will be incremented infinitely often, which is what  $\WF_x(NextX) \land \WF_y(NextY)$ specifies.</p>
 
-<p>If we’d like to forbid a simultaneous change to both $x$ and $y$ to get an <em>interleaving specification</em> we could remove the first disjunct ($\lor NextX \land NextY$) from $Next$. This would result in $Spec$ being equivalent to:</p>
+<p>If we’d like to forbid a simultaneous change to both $x$ and $y$ to get an <em>interleaving specification</em> we could remove the first disjunct ($NextX \land NextY$) from $Next$. This would result in $Spec$ being equivalent to:</p>
 
 <script type="math/tex; mode=display">SpecX \land SpecY \land \Box[x' = x \lor y' = y]_{\seq{x, y}}</script>
 
 <p>The last conjunct forbids the simultaneous change to $x$ and $y$.</p>
 
-<p>(More generally, we have,</p>
+<p>More generally, if <script type="math/tex">v_A</script> is the state function representing process $A$’s internal state (e.g., a tuple of $A$’s internal state variables), <script type="math/tex">v_B</script> is the state function representing process $B$’s internal state, and <script type="math/tex">v_S</script> is the state function representing their shared state (modeling some communication channel). Their conjoined specification would be:</p>
+
+<script type="math/tex; mode=display">InitA \land InitB \land \Box[NextA]_{v_A} \land \Box[NextB]_{v_B} \land \Box[NextA \lor NextB]_{v_S} \land \WF_{v_A}(NextA) \land \WF_{v_B}(NextB)</script>
+
+<p>(where <script type="math/tex">\Box[NextA \lor NextB]_{v_S}</script> specifying that the shared state can only be modified by one of these processes)</p>
+
+<p>Then usually we’d be interested in an interleaving specification, where an $A$ step cannot simultaneously be a $B$ step. In such a specification we have <script type="math/tex">NextA \implies v_B' = v_B</script> and <script type="math/tex">NextB \implies v_A' = v_A</script> and therefore we have:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&\Box[NextX]_x \land \Box[NextY]_y &\equiv\;
-\Box[&\lor NextX \land NextY \\
-&&&\lor  NextX \land y'=y\\
-&&&\lor  NextY \land x'=x]_{\seq{x , y}}\\
+&\Box[NextA]_{v_A} \land \Box[NextB]_{v_B} &\equiv
+\Box[&\lor NextA \land NextB \\
+&&&\lor NextA \land v_B'=v_B\\
+&&&\lor NextB \land v_A'=v_A]_{\seq{v_A , v_B}}\\
+&\comment{Interleaving assumption}&\equiv\Box[&\lor NextA \land NextB\\
+&&&\lor NextA\\
+&&&\lor NextB]_{\seq{v_A , v_B}}\\
+&&\equiv\Box[&NextA \lor NextB]_{\seq{v_A , v_B}}
 \end{alignat} %]]></script>
 
-<p>but if <script type="math/tex">NextX \implies y' = y</script> and <script type="math/tex">NextY \implies x' = x</script> we get <script type="math/tex">\Box[NextX]_x \land \Box[NextY]_y \equiv\Box[NextX \lor NextY]_{\seq{x , y}}</script>. In practice, we don’t usually have separate variables for the two actions, but we specify in a form that gives the same effect.)</p>
+<p>Similarly, we get <script type="math/tex">\Box[NextA \lor NextB]_{\seq{v_A , v_B}} \land \Box[NextA \lor NextB]_{v_S} \equiv \Box[NextA \lor NextB]_{\seq{v_A , v_B, v_S}}</script></p>
 
-<p>The <em>conjunction</em> of the two specifications denotes a parallel composition of processes, but it is equivalent to what appears like a specification of a single process with a nondeterministic action, specified as a <em>disjunction</em> of sub-actions.</p>
+<p>The <em>conjunction</em> of the two specifications, then, denotes a parallel composition of processes, but it is equivalent to what appears like a specification of a single process with a nondeterministic action, specified as a <em>disjunction</em> of sub-actions.</p>
 
 <p>Lamport <a href="https://groups.google.com/d/msg/tlaplus/XsqwpUruTxY/-vz0d51tAQAJ">writes</a>:</p>
 
