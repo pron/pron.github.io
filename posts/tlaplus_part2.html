@@ -451,7 +451,7 @@
 &(\A x : P(x) \equiv Q(x)) \implies  (\CHOOSE x : P(x)) = (\CHOOSE x : Q(x))
 \end{alignat} %]]></script>
 
-<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em> or a <em>schema of extensionality</em>, and means that <script type="math/tex">\CHOOSE\!</script> always assigns the same value given equivalent predicates (although not one that is dictated or can be determined by the logic). This is a common misunderstanding among new TLA<sup>+</sup> users.</p>
+<p>The first rule shows how the quantifier $\E$ can be defined in terms of <script type="math/tex">\CHOOSE\!</script> (and therefore so can $\A$). The second rule is sometimes called <em>right-uniqueness</em> or a <em>schema of extensionality</em>, and means that <script type="math/tex">\CHOOSE\!</script> always assigns the same value given equivalent predicates (although not one that is dictated or can be determined by the logic). In other words, $\CHOOSE!$ is <em>deterministic</em>, although the particular choice is not prescribed; this is a common misunderstanding among new TLA<sup>+</sup> users.</p>
 
 <p>If no value satisfies the predicate $P$, the value of $\CHOOSE x : P(x)$ is <em>undefined</em>, which means that it is equal to <em>some</em> value in our universe of values (we will only encounter values in the next section, but possible ones include 42, $\set{3, \set{4, 5}}$ or $\str{hello}$) which we simply cannot determine (meaning, prove in the logic). In other words, “undefined” means “we don’t know and we don’t care”.</p>
 
@@ -461,7 +461,7 @@
 
 <p>It is also important to remember that <script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them; you cannot <script type="math/tex">\CHOOSE\!</script> a value that doesn’t exist in the universe of values, i.e., whose existence isn’t postulated by the axioms of the logical theory, which I will introduce in the chapter <a href="#sets">Sets</a>.</p>
 
-<p>Both <script type="math/tex">\IF\!/\THEN\!/\ELSE\!</script> and <script type="math/tex">\CASE\!</script> constructs are defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">11</a></sup>:</p>
+<p>TLA<sup>+</sup>’s <script type="math/tex">\IF\!/\THEN\!/\ELSE\!</script> and <script type="math/tex">\CASE\!</script> constructs are actually defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">11</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
