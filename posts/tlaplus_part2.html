@@ -572,11 +572,9 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <h3 id="set-fundamentals">Set Fundamentals</h3>
 
-<p>The signature (the symbols used in the logic beyond those of first-order logic) contains just the membership operator $\in$, which is a binary relation defined on all sets (i.e., for any sets $a$ and $b$, $a \in b$ is defined, and is either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>). We can then define equality, $=$ (although it is often taken to be a primitive symbol in the signature) using membership as $a = b \equiv (\A x : x \in a \equiv x \in b)$; equality is therefore also defined on all sets.</p>
+<p>The signature (the symbols used in the logic beyond those of first-order logic) contains just the membership operator $\in$, which is a binary relation defined on all sets (i.e., for any sets $a$ and $b$, $a \in b$ is defined). We can then define equality, $=$ (although it is often taken to be a primitive symbol in the signature) using membership as $a = b \defeq \A x : x \in a \equiv x \in b$; equality is therefore also defined on all sets.</p>
 
-<p>As an aside, because we now know that all values in TLA<sup>+</sup> are sets, and because the relations $\in$ and $=$ are defined for <em>all</em> sets, we should revisit our definition of an “undefined value”, because we can now have an undefined value used in an expression and still know <em>something</em> about the expression’s result. For example, the value of expression <script type="math/tex">\CHOOSE x : \FALSE\!</script> is undefined, which means it is some unknowable value. But as that value is a set, the value of the expression, say, <script type="math/tex">10 \in (\CHOOSE x : \FALSE\!)</script> must be either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script> (and so, similarly, the value of <script type="math/tex">\IF 3 \in (\CHOOSE x : \FALSE\!) \;\THEN 3 \;\ELSE 5</script> must be either 3 or 5). In such cases I will also say that the value of the expression is undefined even though it is known to be in some set, because the logic does not let us determine its precise value.</p>
-
-<p>The quantifiers and the <script type="math/tex">\CHOOSE\!</script> operator can (and usually do) appear <em>bounded</em> to a set (e.g. $\forall x \in S : …$), in which case they satisfy the following:</p>
+<p>The quantifiers and the <script type="math/tex">\CHOOSE\!</script> operator can – and usually do – appear <em>bounded</em> to a set (e.g. $\forall x \in S : …$), in which case they are defined as follows:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{2}
@@ -585,7 +583,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\CHOOSE x \in S : P(x) &=\;& \CHOOSE x :  x \in S \land P(x)
 \end{alignat} %]]></script>
 
-<p>Next we specify which sets exist in our universe using the axioms of set theory.<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">16</a></sup> To make this more precise (and to tie everything together), recall that stating that some object $S$ — in our case, a set — satisfying some property $P$ exists, i.e., $\E S : P(S)$, can be done using choice: $P(\CHOOSE S : P(S))$. The following axioms are all of this form, but they also introduce syntactic notation for $\CHOOSE S : P(S)$ for their respective property $P$.</p>
+<p>Next we specify which sets exist in our universe using the axioms of set theory.<sup id="fnref:paradox"><a href="#fn:paradox" class="footnote">16</a></sup> To make this more precise (and to tie everything together), recall that stating that some object $S$ — in our case, a set — satisfying some property $P$ exists, i.e., $\E S : P(S)$, can be done using choice: $P(\CHOOSE S : P(S))$. The following axioms can all be understood as being of this form – i.e., they postulate $\E S : P(S)$ for some predicate $P$ – only they introduce notation which is used instead of writing $\CHOOSE S : P(S)$.</p>
 
 <p>The constant $\set{}$ is the empty set, and $\A x : x \notin \set{}$ (which is an abbreviation for $\A x : \neg (x \in \set{})$). I.e. $\set{} \defeq \CHOOSE S : \A x : x \notin S$, and this set exists.</p>
 
@@ -663,14 +661,14 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&Quotient(S, \_ \sim \_) \defeq \{x \in \SUBSET S: &\land x \neq \set{}\\
-&&\land \A a,b \in x : a \sim b\\
+&Quotient(S, \_ \sim \_) \defeq \{x \in \SUBSET S: &\land \A a,b \in x : a \sim b\\
+&&\land x \neq \set{}\\
 &&\land \A a \in S :(\E b \in x : a \sim b) \implies a \in x\}
 \end{alignat} %]]></script>
 
-<p>The first conjunct says that $x$ — a member of the quotient — must not be empty, the second says that all members of $x$ are equivalent, and the third conjunct says that $x$ is maximal, i.e., contains <em>all</em> members of $S$ that are equivalent to those in $x$; therefore $x$ is an equivalence class.</p>
+<p>The first conjunct says that all members of $x$ — a member of the quotient — are equivalent, the second conjunct says that $x$ must not be empty, and the third conjunct says that $x$ is maximal, i.e., contains <em>all</em> members of $S$ that are equivalent to those in $x$; therefore $x$ is an equivalence class.</p>
 
-<p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the third conjunct, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">19</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
+<p>People who are not accustomed to writing formal definitions — and even those who are — may neglect to write the second or third conjuncts, but the TLA<sup>+</sup> tooling can help. $Quotient(\set{1,2,3,4}, \LAMBDA a, b : a \% 2 = b \%2)$ specifies the equivalence classes of numbers that are of equal parity: $\set{\set{1,3}, \set{2, 4}}$. The TLA<sup>+</sup> toolbox allows you to evaluate expressions using the model checker TLC<sup id="fnref:tlc-finite"><a href="#fn:tlc-finite" class="footnote">19</a></sup>; not quite a REPL, but almost. If you try to evaluate the above expression without the third conjunct in the definition you’ll get $\set{\set{2}, \set{3}, \set{4}, \set{1,3}, \set{2, 4}}$ and realize your mistake.</p>
 
 <p>There are often many equivalent ways of defining mathematical concepts. For example, here is another way of defining $Quotient$:</p>
 
@@ -689,6 +687,8 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 <p>Another useful operator is $AnyOf$, which picks an arbitrary element from a set (and is undefined if the set is empty):</p>
 
 <script type="math/tex; mode=display">AnyOf(S) \defeq \CHOOSE x \in S : \TRUE</script>
+
+<p>Speaking of <script type="math/tex">\CHOOSE\!</script>, because we now know that all values in TLA<sup>+</sup> are sets, and because the relations $\in$ and $=$ are defined on <em>all</em> sets, we should revisit our definition of “undefined”, because we can now have an undefined value used in an expression yet still know <em>something</em> about the expression’s value. For example, <script type="math/tex">\CHOOSE x : \FALSE\!</script> is undefined, which means it is some unknowable value. But as that value is a set, then, say, <script type="math/tex">10 \in (\CHOOSE x : \FALSE\!)</script> must be either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script> (and so, similarly, <script type="math/tex">\IF 3 \in (\CHOOSE x : \FALSE\!) \;\THEN 3 \;\ELSE 5</script> must be either 3 or 5). In such cases I will also say that the expression is undefined even though it is known to be in some set, because the logic does not let us determine its precise value.</p>
 
 <h3 id="some-important-sets">Some Important Sets</h3>
 
