@@ -748,7 +748,7 @@
 
 <p>and reversing the direction of all implications.</p>
 
-<p>TLA has another rarely used temporal operator, $\whileop$, which we’ll cover in part 4.</p>
+<p>TLA has another, rarely used, temporal operator, $\whileop$, that cannot be directly defined in terms of the operators we’ve introduced and which we’ll cover in part 4.</p>
 
 <p>Finally, just as in addition to declaring free ordinary, i.e. rigid, or constant variables with a <script type="math/tex">\CONSTANT\!</script> declaration, we can also introduce bounded ordinary variables with the quantifiers $\A$ and $\E$, so to in addition to declaring free temporal variables with <script type="math/tex">\VARIABLE\!</script>, we can introduce bounded, or quantified, temporal variables with temporal quantifiers.</p>
 
@@ -931,6 +931,8 @@
   <li>When $\Box$ is immediately followed by an action, the action must be of the form $[A]_e$</li>
   <li>When $\Diamond$ is immediately followed by an action, the action must be of the form $\seq{A}_e$</li>
 </ol>
+
+<p>Additionally, an action is not a well-formed formula on its own; it must be immediately preceded by a temporal operator ($\Box$ or $\Diamond$).</p>
 
 <p>So the formula $\Box(x’ = x + 1)$ is ill-formed in TLA (but is well-formed in rTLA)  — it is a syntax error. Note that $\Box(x &gt; 0)$ is still fine, as $x &gt; 0$ is not an action but a state predicate (there are no instances of $x’$).</p>
 
