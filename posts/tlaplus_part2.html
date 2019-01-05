@@ -441,7 +441,7 @@
 
 <script type="math/tex; mode=display">(a) \lor ((b \land c) \land (d)) \lor (e)</script>
 
-<p>The quantifiers bind their variables in a scope that lasts “as far as it can,” i.e., until the end of a definition or a closing parentheses. Therefore, $\A x : P(x) =&gt; \E x : Q(x)$ is illegal because it’s parsed as $\A x : (P(x) =&gt; \E x : Q(x))$, and so the existential quantifier introduces the variable $x$, which is already bound to the universal quantifier. However,  $(\A x : P(x)) =&gt; \E x : Q(x)$ is well-formed, as is:</p>
+<p>The quantifiers bind their variables in a scope that extends “as far as it can,” i.e., until a closing parentheses or the end of the current expression. Therefore, $\A x : P(x) \implies \E x : Q(x)​$ is illegal because it’s parsed as $\A x : (P(x) \implies \E x : Q(x))​$, and so the existential quantifier introduces the variable $x​$, which is already bound to the universal quantifier. However,  $(\A x : P(x)) \implies \E x : Q(x)​$ is well-formed, as is:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
