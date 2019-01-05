@@ -407,7 +407,9 @@
 
 <h3 id="the-logical-connectives-and-the-quantifiers">The Logical Connectives and the Quantifiers</h3>
 
-<p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. It has the familiar operators<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">9</a></sup>: $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\exists$ and $\forall$ are the regular first order existential and universal quantifiers. In the TLA<sup>+</sup> syntax, we write <code class="highlighter-rouge">:</code> (colon) instead of the more common single dot after a quantifier, which is used instead of parentheses to delineate the scope of the bound variables, and is read as “such that”. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>.<sup id="fnref:logical-constants"><a href="#fn:logical-constants" class="footnote">10</a></sup> $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
+<p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>.<sup id="fnref:logical-constants"><a href="#fn:logical-constants" class="footnote">9</a></sup> We use the familiar operators<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">10</a></sup>: $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
+
+<p>$\exists$ and $\forall$ are the regular first order existential and universal quantifiers. In the TLA<sup>+</sup> syntax, we write <code class="highlighter-rouge">:</code> (colon) instead of the more common single dot after a quantifier, which is used instead of parentheses to delineate the scope of the bound variables, and is read as “such that”.</p>
 
 <p>Variables that are not part of the state of a computation (we’ll learn about state in part 3), can be introduced with the quantifiers $\A$ or $\E$, or can be declared with the keyword <script type="math/tex">\CONSTANT\!</script> (see the chapter <a href="#constants">Constants</a>), in which case they are free.</p>
 
@@ -438,6 +440,16 @@
 <p>Where a, b, c and d stand for arbitrary subformulas. Note the prefix connective that starts the disjunction and conjunction lists. The implied parentheses extend from the expression following the connective starting the line until another connective (of the same kind) is encountered in some new line aligned with the opening connective. So the above means the same as the following (which is also allowed in TLA<sup>+</sup>):</p>
 
 <script type="math/tex; mode=display">(a) \lor ((b \land c) \land (d)) \lor (e)</script>
+
+<p>The quantifiers bind their variables in a scope that lasts “as far as it can,” i.e., until the end of a definition or a closing parentheses. Therefore, $\A x : P(x) =&gt; \E x : Q(x)$ is illegal because it’s parsed as $\A x : (P(x) =&gt; \E x : Q(x))$, and so the existential quantifier introduces the variable $x$, which is already bound to the universal quantifier. However,  $(\A x : P(x)) =&gt; \E x : Q(x)$ is well-formed, as is:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\lor \A x : P(x)\\
+&\lor \E x : Q(x)
+\end{alignat} %]]></script>
+
+<p>because it is parsed as $(\A x : P(x)) \lor (\E x : Q(x))$.</p>
 
 <h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
 
@@ -525,7 +537,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p><script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
 
-<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope, so this is not allowed:</p>
+<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope. Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
@@ -1528,11 +1540,11 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
     <li id="fn:non-standard">
       <p>That would be impossible, due to the physical limitations of computation.&nbsp;<a href="#fnref:non-standard" class="reversefootnote">&#8617;</a></p>
     </li>
-    <li id="fn:ASCII">
-      <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv​$, <code class="highlighter-rouge">-&gt;</code> for $\to​$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto​$, <code class="highlighter-rouge">==</code> for $\triangleq​$, <code class="highlighter-rouge">\A</code> for $\forall​$, <code class="highlighter-rouge">\E</code> for $\exists​$, <code class="highlighter-rouge">[]</code> for $\Box​$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond​$, « for $\langle​$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle​$,  <code class="highlighter-rouge">\o</code> for $\circ​$ etc.. $\LaTeX​$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup​$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall​$ or <code class="highlighter-rouge">\neg</code> for $\neg​$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful.&nbsp;<a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
-    </li>
     <li id="fn:logical-constants">
       <p>Later we’ll see that <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script> are also ordinary values in TLA<sup>+</sup>.&nbsp;<a href="#fnref:logical-constants" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:ASCII">
+      <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv$, <code class="highlighter-rouge">-&gt;</code> for $\to$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto$, <code class="highlighter-rouge">==</code> for $\triangleq$, <code class="highlighter-rouge">\A</code> for $\forall$, <code class="highlighter-rouge">\E</code> for $\exists$, <code class="highlighter-rouge">[]</code> for $\Box$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond$, « for $\langle$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle$,  <code class="highlighter-rouge">\o</code> for $\circ$ etc.. $\LaTeX$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall$ or <code class="highlighter-rouge">\neg</code> for $\neg$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful.&nbsp;<a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:some">
       <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name.&nbsp;<a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
