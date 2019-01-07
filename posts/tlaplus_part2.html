@@ -519,36 +519,44 @@ This could, however, be easily achieved with functions, as we’ll see later.</p
 
 <p>because it is parsed as $(\A x : P(x)) \lor (\E x : Q(x))$.</p>
 
-<h3 id="constant-free-and-uninterpreted-variables"><script type="math/tex">\CONSTANT\!</script>: Free and Uninterpreted Variables</h3>
+<h3 id="free-and-uninterpreted-variables-constant">Free and Uninterpreted Variables: $\CONSTANT$</h3>
 
 <p>Values or operators can be declared but not defined (with a definition); instead, their meaning can be specified with the use of axioms. Such symbols that are not directly defined in terms of other symbols, but are given axioms that specify how they interact are often called in logic <em>uninterpreted symbols</em>. In part 4 we’ll see how those declarations can also be seen as an input or parameters when we learn of modules and module instantiation.</p>
 
-<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword  <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>, although <script type="math/tex">\ASSUME\!</script> is much more common in TLA<sup>+</sup>, as it is treated slightly differently by the model checker TLC). For example, assuming $P$ and $Q$ are some predicates, we can write:
-<script type="math/tex">% <![CDATA[
+<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>, although <script type="math/tex">\ASSUME\!</script> is much more common in TLA<sup>+</sup>, as it is treated slightly differently by the model checker TLC). For example, assuming $P$ and $Q$ are some predicates, we can write:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\rlap{\CONSTANTS A, B}\\
 &\ASSUME P(A)\\
 &\ASSUME Q(B)
 \end{alignat} %]]></script>
-Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
+
+<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
 
 <p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) is undefined. We will see precisely what “undefined” means in the next section.</p>
 
-<p>As constants can be not only values but also operators, they are technically free second-order variables. The reason is that we can write something like the following (we’ll introduce the <script type="math/tex">\THEOREM\!</script> construct when we talk about <a href="#proofs">proofs</a>, but its meaning should be intuitive here):
-<script type="math/tex">% <![CDATA[
+<p>As constants can be not only values but also operators, they are technically free second-order variables. The reason is that we can write something like the following (we’ll introduce the <script type="math/tex">\THEOREM\!</script> construct when we talk about <a href="#proofs">proofs</a>, but its meaning should be intuitive here):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\CONSTANTS C, D, F(\_)\\
 &\THEOREM (C = D) \implies (F(C) = F(D))
 \end{alignat} %]]></script>
-This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):
-<script type="math/tex">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
-However, TLA<sup>+</sup> does not define an equality relation over those second-order objects (i.e., operators). Writing,
-<script type="math/tex">% <![CDATA[
+
+<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>However, TLA<sup>+</sup> does not define an equality relation over those second-order objects (i.e., operators). Writing,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\CONSTANT F(\_), G(\_) \\
 &\ASSUME F = G
 \end{alignat} %]]></script>
-is a syntax error. One must write $\ASSUME \A x : F(x) = G(x)$.</p>
+
+<p>is a syntax error. One must write $\ASSUME \A x : F(x) = G(x)$.</p>
 
 <p>Constants are one way in which TLA<sup>+</sup> allows us to state second-order propositions even though it is a first-order logic. We’ll say a more about that in the section on proofs.</p>
 
@@ -773,7 +781,7 @@ We can now think of $S$ as a type parameter that has a partial order relation de
 
 <p>In set theory, all values are encoded as some set (so the number 1 is somehow encoded as a set), and, as we’ve learned, equality is a relation defined on all sets, and could have been defined as $a = b \defeq \A x : x \in a \equiv x \in b$ (except that, as we’ve seen, the boolean values are also sets in TLA<sup>+</sup> rather than special constants of the logic itself, and so $\equiv$ is defined in terms of $=$, and $=$ must be primitive).</p>
 
-<p>However, TLA<sup>+</sup> lets us hide encodings within modules so that their details do not escape the module boundary and appear to external modules as primitives or uninterpreted (we will cover modules in part 4), and so the value of $1 \in 2$ or of $1 = \str{hi}$ is undefined (i.e., indeterminable). Because equality (and membership) is defined on all sets to have a boolean value we know that $1 = \str{hi}$ must be some boolean, namely, either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>, but we have no way of determining which. In a typed formalism, the expression $1 = \str{hi}​$ is simply illegal (ill-formed); in a dynamically-typed programming language it evaluates to false. But in TLA<sup>+</sup> it is simply nonsensical — we cannot assign it any meaning, i.e. a value<sup id="fnref:tlc-nonsense"><a href="#fn:tlc-nonsense" class="footnote">22</a></sup> — like the english expression “Thursday is purple”, which is grammatically legal, or well-formed, yet carries no well-accepted meaning. If you’d like to revisit the tradeoffs of this choice, I’ll refer you to the two papers I linked to above<sup id="fnref:typed-untyped"><a href="#fn:typed-untyped" class="footnote">23</a></sup>.</p>
+<p>However, TLA<sup>+</sup> lets us hide encodings within modules so that their details do not escape the module boundary and appear to external modules as primitives or uninterpreted (we will cover modules in part 4), and so the value of $1 \in 2$ or of $1 = \str{hi}$ is undefined (i.e., indeterminable). Because equality (and membership) is defined on all sets to have a boolean value we know that $1 = \str{hi}$ must be some boolean, namely, either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script>, but we have no way of determining which. In a typed formalism, the expression $1 = \str{hi}$ is simply illegal (ill-formed); in a dynamically-typed programming language it evaluates to false. But in TLA<sup>+</sup> it is simply nonsensical — we cannot assign it any meaning, i.e. a value<sup id="fnref:tlc-nonsense"><a href="#fn:tlc-nonsense" class="footnote">22</a></sup> — like the english expression “Thursday is purple”, which is grammatically legal, or well-formed, yet carries no well-accepted meaning. If you’d like to revisit the tradeoffs of this choice, I’ll refer you to the two papers I linked to above<sup id="fnref:typed-untyped"><a href="#fn:typed-untyped" class="footnote">23</a></sup>.</p>
 
 <p>As a result, we don’t know whether the set $\set{1, \str{hi}}$ contains one or two elements because we cannot know if 1 is equal to “hi” or not as we don’t know how “hi” is encoded  (TLC forbids such a set altogether, as its elements are incomparable). So what do we do if we want to have a set that contains the values 0, 1, and UNKNOWN? We use <script type="math/tex">\CHOOSE\!</script> to define UNKNOWN like so:
 <script type="math/tex">\text{UNKNOWN} \defeq \CHOOSE x : x \notin \set{0, 1}</script>
