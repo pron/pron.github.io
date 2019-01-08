@@ -407,69 +407,95 @@
 
 <h3 id="definitions">Definitions</h3>
 
-<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the real numbers) like so:
-<script type="math/tex">% <![CDATA[
+<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the real numbers) like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\A x.x\geq 0 \implies |x| = x\\
 &\A x. x <0 \implies |x| = {-x}
 \end{alignat} %]]></script>
-In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:
-<script type="math/tex">\text{Name} \defeq e</script>
-Where $\text{Name}$ is the name of our definition, and $e$ is a TLA<sup>+</sup> expression.</p>
 
-<p>Definitions can be parameterized, in which case they’re called operators (we’ll get to what numbers are in TLA<sup>+</sup> later, but for now let’s assume that numbers and arithmetic operators are at our disposal):
-<script type="math/tex">Double(x) \defeq 2*x</script>
-Operators are <em>not</em> functions; those have a precise meaning, and we’ll learn the distinction later. Operators can be second-order:
-<script type="math/tex">ApplyTwice(Op(\_), x) \defeq Op(Op(x))</script>
-Defining some symbolic operators is also supported:
-<script type="math/tex">a \preceq b \defeq a \% b = 0</script>
-We can also use symbolic names for operator arguments:
-<script type="math/tex">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
-(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
+<p>In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:</p>
 
-<p>Recursive operators are also allowed:
-<script type="math/tex">% <![CDATA[
+<script type="math/tex; mode=display">\text{Name} \defeq e</script>
+
+<p>Where $\text{Name}$ is the name of our definition, and $e$ is a TLA<sup>+</sup> expression.</p>
+
+<p>Definitions can be parameterized, in which case they’re called operators (we’ll get to what numbers are in TLA<sup>+</sup> later, but for now let’s assume that numbers and arithmetic operators are at our disposal):</p>
+
+<script type="math/tex; mode=display">Double(x) \defeq 2*x</script>
+
+<p>Operators are <em>not</em> functions; those have a precise meaning, and we’ll learn the distinction later. Operators can be second-order:</p>
+
+<script type="math/tex; mode=display">ApplyTwice(Op(\_), x) \defeq Op(Op(x))</script>
+
+<p>Defining some symbolic operators is also supported:</p>
+
+<script type="math/tex; mode=display">a \preceq b \defeq a \% b = 0</script>
+
+<p>We can also use symbolic names for operator arguments:</p>
+
+<script type="math/tex; mode=display">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
+
+<p>(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
+
+<p>Recursive operators are also allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{align*}
 &\RECURSIVE\; Fact(\text{_})\\
 &Fact(n) \defeq \IF n \leq 1 \;\THEN 1\; \ELSE n*Fact(n-1)
 \end{align*} %]]></script>
-Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">9</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
 
-<p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:
-<script type="math/tex">% <![CDATA[
+<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">9</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
+
+<p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 && y \defeq x * a\\
 &\rlap{\;\IN y * b}
 \end{alignat} %]]></script>
-<script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
 
-<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope. Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:
-<script type="math/tex">% <![CDATA[
+<p><script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
+
+<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope. Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
 &x \defeq 3\\
 &Foo(x) \defeq x + 1
 \end{align} %]]></script>
-and neither is this:
-<script type="math/tex">% <![CDATA[
+
+<p>and neither is this:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\rlap{Foo(x) \defeq} \\
 &\phantom{XX}&\LET Bar(x) \defeq x + 1 \\
 && \IN x * 2
 \end{alignat} %]]></script>
-But this is allowed because $x$ is not in scope when $Foo$ is defined:
-<script type="math/tex">% <![CDATA[
+
+<p>But this is allowed because $x$ is not in scope when $Foo$ is defined:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
 &Foo(x) \defeq x + 1\\
 &x \defeq 3
 \end{align} %]]></script>
-<script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
 
-<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:
-<script type="math/tex">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
-Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">10</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:
-<script type="math/tex">Add(x) \defeq \LAMBDA y : x + y</script>
-This could, however, be easily achieved with functions, as we’ll see later.</p>
+<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
+
+<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">10</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
+
+<script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
+
+<p>This could, however, be easily achieved with functions, as we’ll see later.</p>
 
 <p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn later, as well as in the <a href="#proofs">proof language</a>.</p>
 
