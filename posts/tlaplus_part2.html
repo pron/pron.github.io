@@ -628,7 +628,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 \ASSUME P(x)
 \end{alignat}</script>
 
-<p>initially appear to be very different — the former talks about <em>some</em> value of $x$ such that $P(x)$, while the latter talks about <em>any</em> $x$ such that $P(x)$ — proving a theorem about $x$ in both cases is the same: we must prove it for <em>every</em> $x$ such that $P(x)$, because in either case we know nothing about $x$ except that $P(x)$ is true. Nevertheless, the two constructs are used in very different ways. <script type="math/tex">\CHOOSE\!</script> can be used inside any expression and refer to variables bound to quantifiers or operator parameters, while <script type="math/tex">\CONSTANT\!​</script> can be instantiated to particular values (we’ll see how that’s done when we learn about modules in part 4).</p>
+<p>initially appear to be very different — the former talks about <em>some</em> value of $x$ such that $P(x)$, while the latter talks about <em>any</em> $x$ such that $P(x)$ — proving a theorem about $x$ in both cases is the same: we must prove it for <em>every</em> $x$ such that $P(x)$, because in either case we know nothing about $x$ except that $P(x)$ is true. Nevertheless, the two constructs are used in very different ways. <script type="math/tex">\CHOOSE\!</script> can be used inside any expression and use a predicate that refers to variables bound to quantifiers or operator parameters, while <script type="math/tex">\CONSTANT\!</script> can be instantiated to particular values (we’ll see how that’s done when we learn about modules in part 4).</p>
 
 <h2 id="sets">Sets</h2>
 
