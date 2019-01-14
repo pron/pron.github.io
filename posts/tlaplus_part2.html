@@ -824,11 +824,9 @@ We can now think of $S$ as a type parameter that has a partial order relation de
 <script type="math/tex">\text{UNKNOWN} \defeq \CHOOSE x : x \notin \set{0, 1}</script>
 and then we can write the set $\set{0, 1, \text{UNKNOWN}}$, now known to contain three elements.</p>
 
-<h2 id="functions-sequences-and-records">Functions, Sequences and Records</h2>
-
-<p>Most interesting objects we deal with both in mathematics and programming are not normally thought of as sets. TLA<sup>+</sup> lets us cleanly express standard mathematical and programming objects.</p>
-
 <h3 id="functions">Functions</h3>
+
+<p>Most interesting objects we deal with both in mathematics and programming are not normally thought of as sets. TLA<sup>+</sup> lets us cleanly express standard mathematical and programming objects, for which the function serves as the main building block.</p>
 
 <p>Usually, a <a href="https://en.wikipedia.org/wiki/Function_(mathematics)">function</a> is defined to be a one-valued relation, where a relation is a set of pairs — in other words, a function is defined by its <a href="https://en.wikipedia.org/wiki/Graph_of_a_function">graph</a> — but in TLA<sup>+</sup> functions are not defined as sets of pairs but as primitives (meaning that, like numbers, their encoding as sets is unknown, or opaque<sup id="fnref:not-pairs"><a href="#fn:not-pairs" class="footnote">24</a></sup>). In fact, it is pairs that are actually functions in TLA<sup>+</sup> as they’re a special case of sequences, which are in turn a special case of functions, as we’ll see. In any event, functions in TLA<sup>+</sup> are not computations; they have no dynamic behavior and no computational complexity. They are just values in the state space of algorithms. Programmers may best think of them as associative arrays, albeit possibly infinite in size (even uncountably big).</p>
 
