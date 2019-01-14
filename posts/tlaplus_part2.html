@@ -385,7 +385,7 @@
 
 <p>Similarly, a third-order logic allows us to quantify over sets of sets of values etc. <a href="https://en.wikipedia.org/wiki/Higher-order_logic">Higher-order logic</a>, or HOL, allows us to quantify over variables of any order, and is usually used in typed formalisms only. The original concept of <a href="https://en.wikipedia.org/wiki/Type_theory">types</a> was created by Bertrand Russell precisely to distinguish order: objects of different orders are of different <em>type</em>, i.e., if our “ground” values are of type one, then sets of those are of type two, sets-of-sets are of type three etc.. Types have a syntactic as well as a semantic significance: if $x$ and $y$ are of different types, then the expression $x = y$ is not false, but rather <em>ill-formed</em>, meaning it is not a legal expression at all. Similar to the subscripts I used above, quantifiers in HOL are distinguished by types; we write $\E x : T$ (instead of $\E_{\scriptsize T} x$) meaning “there exists an $x$ of type $T$”.</p>
 
-<p>One of the most important theorems in all of logic is that in first-order logics (only!), semantic truth and syntactic provability coincide, i.e. $\vdash A$ iff $\vDash A$, or, $A$ is a tautology iff it is valid. In other words, if a formula $A$ is <em>valid</em>  — satisfied by all interpretations (that also satisfy the axioms of the theory) — then it has a proof, and vice-versa. Similarly, $A \vdash B$ iff $\sem A \vDash B$. This is <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_completeness_theorem">Gödels’ completeness theorem</a>. Note, however, that this doesn’t mean that every sentence in FOL can be proven or disproven. If your theory is rich enough, there will always be sentences that can be neither disproven nor proven (which, in the case of FOL, means that such theories will have multiple models, in some the sentence would be true and in others false). This is a consequence of yet another famous result, known as <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel’s first incompleteness theorem</a>. That theorem doesn’t apply only to FOL, but to any formalism whatsoever, as it is a direct result of the halting theorem (even though the halting theorem was proven some years later).</p>
+<p>One of the most important theorems in all of logic is that in first-order logics (only!), semantic truth and syntactic provability coincide, i.e. $\vdash A​$ iff $\vDash A​$, or, $A​$ is a tautology iff it is valid. In other words, if a formula $A​$ is <em>valid</em>  — satisfied by all interpretations (that also satisfy the axioms of the theory) — then it has a proof, and vice-versa. Similarly, $A \vdash B​$ iff $\sem A \vDash B​$. This is <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_completeness_theorem">Gödels’ completeness theorem</a>. Note, however, that this doesn’t mean that every sentence in FOL can be proven or disproven. If your theory is rich enough, there will always be sentences that can be neither disproven nor proven (which, in the case of FOL, means that such theories will have multiple models, in some the sentence would be true and in others false). This is a consequence of yet another famous result, known as <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel’s first incompleteness theorem</a>. That theorem doesn’t apply only to FOL, but to any formalism whatsoever, as it is a direct result of the halting theorem (even though the halting theorem was proven some years later).</p>
 
 <p>As both the “static” or data logic and the temporal logic in TLA<sup>+</sup> only allow first-order formulas, we can just use the symbol $\vdash$ to mean both validity and provability (unless we want to specifically talk about a semantic structure on the left-hand side). But as the first incompleteness theorem applies to ZFC, not every TLA<sup>+</sup> sentence can be proven or disproven.</p>
 
@@ -547,49 +547,6 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>because it is parsed as $(\A x : P(x)) \lor (\E x : Q(x))$.</p>
 
-<h3 id="free-and-uninterpreted-variables-constant">Free and Uninterpreted Variables: CONSTANT</h3>
-
-<p>Values or operators can be declared but not defined (with a definition); instead, their meaning can be specified with the use of axioms. Such symbols that are not directly defined in terms of other symbols, but are given axioms that specify how they interact are often called in logic <em>uninterpreted symbols</em>. In part 4 we’ll see how those declarations can also be seen as an input or parameters when we learn of modules and module instantiation.</p>
-
-<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>, although <script type="math/tex">\ASSUME\!</script> is much more common in TLA<sup>+</sup>, as it is treated slightly differently by the model checker TLC). For example, assuming $P$ and $Q$ are some predicates, we can write:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\rlap{\CONSTANTS A, B}\\
-&\ASSUME P(A)\\
-&\ASSUME Q(B)
-\end{alignat} %]]></script>
-
-<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
-
-<p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) is undefined. We will see precisely what “undefined” means in the next section.</p>
-
-<p>As constants can be not only values but also operators, they are technically free second-order variables. The reason is that we can write something like the following (we’ll introduce the <script type="math/tex">\THEOREM\!</script> construct when we talk about <a href="#proofs">proofs</a>, but its meaning should be intuitive here):</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\CONSTANTS C, D, F(\_)\\
-&\THEOREM (C = D) \implies (F(C) = F(D))
-\end{alignat} %]]></script>
-
-<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):</p>
-
-<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
-
-<p>However, TLA<sup>+</sup> does not define an equality relation over those second-order objects (i.e., operators). Writing,</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\CONSTANT F(\_), G(\_) \\
-&\ASSUME F = G
-\end{alignat} %]]></script>
-
-<p>is a syntax error. One must write $\ASSUME \A x : F(x) = G(x)$.</p>
-
-<p>Constants are one way in which TLA<sup>+</sup> allows us to state second-order propositions even though it is a first-order logic. We’ll say a more about that in the section on proofs.</p>
-
-<p>The name <em>constant</em> simply means that the declared value/operator is not a temporal one that changes over time when specifying a dynamic system. We’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>, but it is important to keep in mind that temporal variables may change <em>during</em> an execution while constants may not, but constants <em>do change between different executions</em>.</p>
-
 <h3 id="the-choose-operator-and-the-meaning-of-undefined">The CHOOSE Operator and the Meaning of Undefined</h3>
 
 <p>Completing the picture of the fundamental operators is <script type="math/tex">\CHOOSE\!</script>, which is <a href="https://en.wikipedia.org/wiki/Epsilon_calculus">Hilbert’s epsilon operator</a>.</p>
@@ -621,7 +578,24 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n &\defeq \CHOOSE v : (p_1 \land (v = e_1)) \lor \dots \lor (p_n \land (v = e_n))
 \end{alignat} %]]></script>
 
-<p>For a value to be undefined, <script type="math/tex">\CHOOSE\!</script> must not necessarily be used in its definition. Undefined values can arise whenever a specific value cannot be determined by axioms and definitions, e.g. when using a <script type="math/tex">\CONSTANT\!</script> in an expression whose value cannot be determined by the axioms specified for the constant.</p>
+<p>For a value to be undefined, <script type="math/tex">\CHOOSE\!</script> must not necessarily be used in its definition. Undefined values can arise whenever a specific value cannot be determined by axioms and definitions, as we’ll now see.</p>
+
+<h3 id="free-and-uninterpreted-variables-constant">Free and Uninterpreted Variables: CONSTANT</h3>
+
+<p>Values or operators can be declared but not defined (with a definition); instead, their meaning can be specified with the use of axioms. Such symbols that are not directly defined in terms of other symbols, but are given axioms that specify how they interact are often called in logic <em>uninterpreted symbols</em>. In part 4 we’ll see how those declarations can also be seen as an input or parameters when we learn of modules and module instantiation.</p>
+
+<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>, although <script type="math/tex">\ASSUME\!</script> is much more common in TLA<sup>+</sup>, as it is treated slightly differently by the model checker TLC). For example, assuming $P$ and $Q$ are some predicates, we can write:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{\CONSTANTS A, B}\\
+&\ASSUME P(A)\\
+&\ASSUME Q(B)
+\end{alignat} %]]></script>
+
+<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
+
+<p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) — i.e. that of any expression whose value cannot be determined from our axioms about $A$ — is undefined, in the exact same sense explained in the previous section about <script type="math/tex">\CHOOSE\!</script>.</p>
 
 <p>While $\CHOOSE x : P(x)$ and</p>
 
@@ -630,7 +604,33 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 \ASSUME P(x)
 \end{alignat}</script>
 
-<p>initially appear to be very different — the former talks about <em>some</em> value of $x​$ such that $P(x)​$, while the latter talks about <em>any</em> $x​$ such that $P(x)​$ — proving a theorem about $x​$ in both cases is the same: we must prove it for <em>every</em> $x​$ such that $P(x)​$, because in either case we know nothing about $x​$ except that $P(x)​$ is true. Nevertheless, the two constructs are used in very different ways. <script type="math/tex">\CHOOSE\!​</script> can be used inside any expression and use a predicate that refers to variables bound to quantifiers or operator parameters, while <script type="math/tex">\CONSTANT\!​</script> can be instantiated to particular values (we’ll see how that’s done when we learn about modules in part 4).</p>
+<p>initially appear to be very different — the former talks about <em>some</em> value of $x$ such that $P(x)$, while the latter talks about <em>any</em> $x$ such that $P(x)$ — proving a theorem about $x$ in both cases is the same: we must prove it for <em>every</em> $x$ such that $P(x)$, because in either case we know nothing about $x$ except that $P(x)$ is true. Nevertheless, the two constructs are used in very different ways. <script type="math/tex">\CHOOSE\!</script> can be used inside any expression and use a predicate that refers to variables bound to quantifiers or operator parameters, while <script type="math/tex">\CONSTANT\!</script> can be instantiated to particular values (we’ll see how that’s done when we learn about modules in part 4).</p>
+
+<p>As constants can be not only values but also operators, they are technically free second-order variables. The reason is that we can write something like the following (we’ll introduce the <script type="math/tex">\THEOREM\!</script> construct when we talk about <a href="#proofs">proofs</a>, but its meaning should be intuitive here):</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANTS C, D, F(\_)\\
+&\THEOREM (C = D) \implies (F(C) = F(D))
+\end{alignat} %]]></script>
+
+<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>However, TLA<sup>+</sup> does not define an equality relation over those second-order objects (i.e., operators). Writing,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\CONSTANT F(\_), G(\_) \\
+&\ASSUME F = G
+\end{alignat} %]]></script>
+
+<p>is a syntax error. One must write $\ASSUME \A x : F(x) = G(x)$.</p>
+
+<p>Constants are one way in which TLA<sup>+</sup> allows us to state second-order propositions even though it is a first-order logic. We’ll say a more about that in the section on proofs.</p>
+
+<p>The name <em>constant</em> simply means that the declared value/operator is not a temporal one that changes over time when specifying a dynamic system. We’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>, but it is important to keep in mind that temporal variables may change <em>during</em> an execution while constants may not, but constants <em>do change between different executions</em>.</p>
 
 <h2 id="sets">Sets</h2>
 
