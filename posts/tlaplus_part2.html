@@ -405,103 +405,9 @@
 
 <p>We will now begin learning the particulars of TLA<sup>+</sup>. If you’re familiar with standard mathematical notation you’ll find TLA<sup>+</sup>’s syntax intuitive and readable for the most part. However, because TLA<sup>+</sup> is completely formal, the meaning of every expression must be precisely defined, with no room for ambiguity or intuition. This makes the description seem obsessive, but this precision is what allows mechanical analyses of the logic. Because TLA<sup>+</sup> is untyped and tries to mimic the familiar, informal mathematical notation, albeit formally, its details may be of particular interest to those who are generally interested in proof assistants but are used to typed formalisms.</p>
 
-<h3 id="definitions">Definitions</h3>
-
-<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the real numbers) like so:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\A x.x\geq 0 \implies |x| = x\\
-&\A x. x <0 \implies |x| = {-x}
-\end{alignat} %]]></script>
-
-<p>In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:</p>
-
-<script type="math/tex; mode=display">\text{Name} \defeq e</script>
-
-<p>Where $\text{Name}$ is the name of our definition, and $e$ is a TLA<sup>+</sup> expression.</p>
-
-<p>Definitions can be parameterized, in which case they’re called operators (we’ll get to what numbers are in TLA<sup>+</sup> later, but for now let’s assume that numbers and arithmetic operators are at our disposal):</p>
-
-<script type="math/tex; mode=display">Double(x) \defeq 2*x</script>
-
-<p>Operators are <em>not</em> functions; those have a precise meaning, and we’ll learn the distinction later. Operators can be second-order:</p>
-
-<script type="math/tex; mode=display">ApplyTwice(Op(\_), x) \defeq Op(Op(x))</script>
-
-<p>Defining some symbolic operators is also supported:</p>
-
-<script type="math/tex; mode=display">a \preceq b \defeq a \% b = 0</script>
-
-<p>We can also use symbolic names for operator arguments:</p>
-
-<script type="math/tex; mode=display">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
-
-<p>(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
-
-<p>Recursive operators are also allowed:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align*}
-&\RECURSIVE\; Fact(\text{_})\\
-&Fact(n) \defeq \IF n \leq 1 \;\THEN 1\; \ELSE n*Fact(n-1)
-\end{align*} %]]></script>
-
-<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">9</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
-
-<p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
-&& y \defeq x * a\\
-&\rlap{\;\IN y * b}
-\end{alignat} %]]></script>
-
-<p><script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
-
-<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope. Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-&x \defeq 3\\
-&Foo(x) \defeq x + 1
-\end{align} %]]></script>
-
-<p>and neither is this:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{alignat}{1}
-&\rlap{Foo(x) \defeq} \\
-&\phantom{XX}&\LET Bar(x) \defeq x + 1 \\
-&& \IN x * 2
-\end{alignat} %]]></script>
-
-<p>But this is allowed because $x$ is not in scope when $Foo$ is defined:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-&Foo(x) \defeq x + 1\\
-&x \defeq 3
-\end{align} %]]></script>
-
-<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
-
-<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
-
-<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
-
-<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">10</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
-
-<script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
-
-<p>This could, however, be easily achieved with functions, as we’ll see later.</p>
-
-<p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn later, as well as in the <a href="#proofs">proof language</a>.</p>
-
 <h3 id="the-logical-connectives-and-the-quantifiers">The Logical Connectives and the Quantifiers</h3>
 
-<p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>.<sup id="fnref:logical-constants"><a href="#fn:logical-constants" class="footnote">11</a></sup> We use the familiar operators:<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">12</a></sup> $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
+<p>The static, data logic of TLA<sup>+</sup> is first order logic with equality. The logical constants are <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script>.<sup id="fnref:logical-constants"><a href="#fn:logical-constants" class="footnote">9</a></sup> We use the familiar operators:<sup id="fnref:ASCII"><a href="#fn:ASCII" class="footnote">10</a></sup> $\land$ for conjunction, $\lor$ for disjunction, $\lnot$ for negation, $\Rightarrow$ for implication, and $\equiv$ for equivalence. $\land$ and $\lor$ have the same precedence, so the expression $a \land b \lor c$ is a syntax error due to the precedence ambiguity, and parentheses are required to resolve it. Implication has a lower precedence, so $A \land B \implies C$ is equivalent to $(A \land B) \implies C$.</p>
 
 <p>$\exists$ and $\forall$ are the regular first order existential and universal quantifiers, and introduce bound variables. In the TLA<sup>+</sup> syntax, we write <code class="highlighter-rouge">:</code> (colon) instead of the more common single dot after a quantifier, which is used instead of parentheses to delineate the scope of the bound variables, and is read as “such that”. E.g.,</p>
 
@@ -565,11 +471,11 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>This definition interprets the <em>informal</em> notion of “undefined” – which probably means <em>no</em> value – as <em>unspecified</em> (i.e., <em>some</em> value, but we don’t know which). You may find this interpretation philosophically troubling, but rest assured that it poses no issue to the soundness of mathematics.</p>
 
-<p>It is important to emphasize that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">13</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE  x : x \in Int \land x \% 2 = 0$ means “<em>some</em> even integer”, not “<em>find</em> an even integer”. The distinction is, indeed, mostly philosophical, but programmers must be reminded that, at this point, we are dealing only with mathematical definitions, not some algorithm that “runs”.</p>
+<p>It is important to emphasize that <script type="math/tex">\CHOOSE\!</script>, despite being named as a verb — a confusing choice for programmers, I believe<sup id="fnref:some"><a href="#fn:some" class="footnote">11</a></sup> — does not imply any algorithm, or indeed any dynamic process for finding a value. It describes <em>what</em> something is, not <em>how</em> to find it. For example $\CHOOSE  x : x \in Int \land x \% 2 = 0$ means “<em>some</em> even integer”, not “<em>find</em> an even integer”. The distinction is, indeed, mostly philosophical, but programmers must be reminded that, at this point, we are dealing only with mathematical definitions, not some algorithm that “runs”.</p>
 
 <p>It is also important to remember that <script type="math/tex">\CHOOSE\!</script> only <em>selects</em> values, it does not construct them; you cannot <script type="math/tex">\CHOOSE\!</script> a value that doesn’t exist in the universe of values, i.e., whose existence isn’t postulated by the axioms of the logical theory, which I will introduce in the chapter <a href="#sets">Sets</a>.</p>
 
-<p>TLA<sup>+</sup>’s <script type="math/tex">\IF\!/\THEN\!/\ELSE\!</script> and <script type="math/tex">\CASE\!</script> constructs are actually defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">14</a></sup>:</p>
+<p>TLA<sup>+</sup>’s <script type="math/tex">\IF\!/\THEN\!/\ELSE\!</script> and <script type="math/tex">\CASE\!</script> constructs are actually defined in terms of <script type="math/tex">\CHOOSE\!</script><sup id="fnref:if-def"><a href="#fn:if-def" class="footnote">12</a></sup>:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -578,7 +484,101 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\CASE p_1 \to e_1 \Box \dots \Box \;p_n \to e_n &\defeq \CHOOSE v : (p_1 \land (v = e_1)) \lor \dots \lor (p_n \land (v = e_n))
 \end{alignat} %]]></script>
 
-<p>For a value to be undefined, <script type="math/tex">\CHOOSE\!</script> must not necessarily be used in its definition. Undefined values can arise whenever a specific value cannot be determined by axioms and definitions, as we’ll now see.</p>
+<p>For a value to be undefined, <script type="math/tex">\CHOOSE\!</script> must not necessarily be used in its definition. Undefined values can arise whenever a specific value cannot be determined by axioms and definitions, as we’ll see in the section on <script type="math/tex">\CONSTANT\!</script>.</p>
+
+<h3 id="definitions">Definitions</h3>
+
+<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the real numbers) like so:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\A x.x\geq 0 \implies |x| = x\\
+&\A x. x <0 \implies |x| = {-x}
+\end{alignat} %]]></script>
+
+<p>In TLA<sup>+</sup> we can write definitions in a precise and formal notation that resembles familiar informal ones. A definition looks like so:</p>
+
+<script type="math/tex; mode=display">\text{Name} \defeq e</script>
+
+<p>Where $\text{Name}$ is the name of our definition, and $e$ is a TLA<sup>+</sup> expression.</p>
+
+<p>Definitions can be parameterized, in which case they’re called operators (we’ll get to what numbers are in TLA<sup>+</sup> later, but for now let’s assume that numbers and arithmetic operators are at our disposal):</p>
+
+<script type="math/tex; mode=display">Double(x) \defeq 2*x</script>
+
+<p>Operators are <em>not</em> functions; those have a precise meaning, and we’ll learn the distinction later. Operators can be second-order:</p>
+
+<script type="math/tex; mode=display">ApplyTwice(Op(\_), x) \defeq Op(Op(x))</script>
+
+<p>Defining some symbolic operators is also supported:</p>
+
+<script type="math/tex; mode=display">a \preceq b \defeq a \% b = 0</script>
+
+<p>We can also use symbolic names for operator arguments:</p>
+
+<script type="math/tex; mode=display">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
+
+<p>(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
+
+<p>Recursive operators are also allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+&\RECURSIVE\; Fact(\text{_})\\
+&Fact(n) \defeq \IF n \leq 1 \;\THEN 1\; \ELSE n*Fact(n-1)
+\end{align*} %]]></script>
+
+<p>Anonymous operators can be defined inline with <script type="math/tex">\LAMBDA\!</script><sup id="fnref:lambda"><a href="#fn:lambda" class="footnote">13</a></sup>, as in $ApplyTwice(\LAMBDA x: x^2, 3)$.</p>
+
+<p>Definitions have a scope of the module in which they are defined (we will learn about modules in part 4), and a definition must precede its use. Definitions that are local to an expression are introduced with the <script type="math/tex">\LET..\IN\!</script> construct:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
+&& y \defeq x * a\\
+&\rlap{\;\IN y * b}
+\end{alignat} %]]></script>
+
+<p><script type="math/tex">\LET\!</script> definitions can be made inside any expression.</p>
+
+<p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope. Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&x \defeq 3\\
+&Foo(x) \defeq x + 1
+\end{align} %]]></script>
+
+<p>and neither is this:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{alignat}{1}
+&\rlap{Foo(x) \defeq} \\
+&\phantom{XX}&\LET Bar(x) \defeq x + 1 \\
+&& \IN x * 2
+\end{alignat} %]]></script>
+
+<p>But this is allowed because $x$ is not in scope when $Foo$ is defined:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&Foo(x) \defeq x + 1\\
+&x \defeq 3
+\end{align} %]]></script>
+
+<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
+
+<p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
+
+<script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
+
+<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">14</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
+
+<script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
+
+<p>This could, however, be easily achieved with functions, as we’ll see later.</p>
+
+<p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn later, as well as in the <a href="#proofs">proof language</a>.</p>
 
 <h3 id="free-and-uninterpreted-variables-constant">Free and Uninterpreted Variables: CONSTANT</h3>
 
@@ -595,7 +595,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
 
-<p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) — i.e. that of any expression whose value cannot be determined from our axioms about $A$ — is undefined, in the exact same sense explained in the previous section about <script type="math/tex">\CHOOSE\!</script>.</p>
+<p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) — i.e. that of any expression whose value cannot be determined from our axioms about $A$ — is undefined, in the exact same sense explained in the section about <script type="math/tex">\CHOOSE\!</script>.</p>
 
 <p>While $\CHOOSE x : P(x)$ and</p>
 
@@ -1554,12 +1554,6 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
     <li id="fn:non-standard">
       <p>That would be impossible, due to the physical limitations of computation.&nbsp;<a href="#fnref:non-standard" class="reversefootnote">&#8617;</a></p>
     </li>
-    <li id="fn:lambda">
-      <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later.&nbsp;<a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:substitution">
-      <p>For more on this, see Lamport’s <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf">Substitution: Syntactic versus Semantic</a>&nbsp;<a href="#fnref:substitution" class="reversefootnote">&#8617;</a></p>
-    </li>
     <li id="fn:logical-constants">
       <p>Later we’ll see that <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script> are also ordinary values in TLA<sup>+</sup>.&nbsp;<a href="#fnref:logical-constants" class="reversefootnote">&#8617;</a></p>
     </li>
@@ -1571,6 +1565,12 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
     </li>
     <li id="fn:if-def">
       <p>See <em>Specifying Systems</em>, p. 298.&nbsp;<a href="#fnref:if-def" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:lambda">
+      <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later.&nbsp;<a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:substitution">
+      <p>For more on this, see Lamport’s <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf">Substitution: Syntactic versus Semantic</a>&nbsp;<a href="#fnref:substitution" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:class">
       <p>If you’re wondering what the model of a FOL+ZFC formula is, as the models of FOL formulas are always second-order objects, and yet sets are already our first-order object, then that model is called a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)">class</a>. Many classes, like the universe of ZFC (i.e., the model of the formula $x = x$), are not formal sets, meaning they cannot be constructed by the axioms of ZFC. A class that is not a (formal) set is called a <em>proper class</em>.&nbsp;<a href="#fnref:class" class="reversefootnote">&#8617;</a></p>
