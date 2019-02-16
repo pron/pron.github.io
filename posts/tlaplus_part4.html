@@ -1943,49 +1943,49 @@
 <div class="footnotes">
   <ol>
     <li id="fn:narrow-wide">
-      <p>It is said that math is narrow and deep, while formal verification is wide and shallow.&nbsp;<a href="#fnref:narrow-wide" class="reversefootnote">&#8617;</a></p>
+      <p>It is said that math is narrow and deep, while formal verification is wide and shallow. <a href="#fnref:narrow-wide" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:encoding">
-      <p>The model checker TLC does break the encapsulation, and $v.x$ would mean 4.5. However, that’s an implementation detail of the checker. The encoding is hidden from the proof system.&nbsp;<a href="#fnref:encoding" class="reversefootnote">&#8617;</a></p>
+      <p>The model checker TLC does break the encapsulation, and $v.x$ would mean 4.5. However, that’s an implementation detail of the checker. The encoding is hidden from the proof system. <a href="#fnref:encoding" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:proposition">
-      <p>Because we’ve normally seen implication used in propositions, I will repeat the distinction I mentioned in part 2. By $E \implies M$ we do not mean the proposition $\vdash E \implies M$, i.e. that the environment implements the machine specification, but that the specification of the contract is itself is $E \implies M$. To explain the difference consider the logical formula over the integers $(x &gt; 0) \implies (x &gt; 2)$. This formula is not <em>valid</em>, i.e. $\nvdash (x &gt; 0) \implies (x &gt; 2)$ . But it does describe — or, its model is — all numbers that are either negative or greater than 2, or formally $\vdash ((x &gt; 0) \implies (x &gt; 2)) \implies (x &lt; 0 \lor x &gt; 2)$.&nbsp;<a href="#fnref:proposition" class="reversefootnote">&#8617;</a></p>
+      <p>Because we’ve normally seen implication used in propositions, I will repeat the distinction I mentioned in part 2. By $E \implies M$ we do not mean the proposition $\vdash E \implies M$, i.e. that the environment implements the machine specification, but that the specification of the contract is itself is $E \implies M$. To explain the difference consider the logical formula over the integers $(x &gt; 0) \implies (x &gt; 2)$. This formula is not <em>valid</em>, i.e. $\nvdash (x &gt; 0) \implies (x &gt; 2)$ . But it does describe — or, its model is — all numbers that are either negative or greater than 2, or formally $\vdash ((x &gt; 0) \implies (x &gt; 2)) \implies (x &lt; 0 \lor x &gt; 2)$. <a href="#fnref:proposition" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:turing-subroutines">
-      <p>And long before that. In 1945 Alan Turing described how programs in his proposed ACE computer will be composed of subroutines, employing a stack and push/pop operations (which he called bury/unbury), before the first computer was ever built. Sadly, his design was never realized.&nbsp;<a href="#fnref:turing-subroutines" class="reversefootnote">&#8617;</a></p>
+      <p>And long before that. In 1945 Alan Turing described how programs in his proposed ACE computer will be composed of subroutines, employing a stack and push/pop operations (which he called bury/unbury), before the first computer was ever built. Sadly, his design was never realized. <a href="#fnref:turing-subroutines" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tla-compile">
-      <p>There have been two academic projects that do just that for <a href="https://link.springer.com/chapter/10.1007/978-3-319-17581-2_14">C programs</a> and for <a href="http://ieeexplore.ieee.org/document/6042069/">Java bytecode</a>, although not by employing such “universal” — and inefficient — composition, but rather more direct means of translating expression. In fact, PlusCal[^pcal] can be thought of as a simple programming language that is easily translated to TLA. See Lamport’s, <a href="http://lamport.azurewebsites.net/pubs/pluscal.pdf"><em>The PlusCal Algorithm Language</em></a>, 2009, and the extended version of PlusCal described in Sabina Akhtar, Stephan Merz, Martin Quinson, <a href="https://members.loria.fr/SMerz/papers/sbmf2010.pdf"><em>A High-Level Language for Modeling Algorithms and their Properties</em></a>, 2010.&nbsp;<a href="#fnref:tla-compile" class="reversefootnote">&#8617;</a></p>
+      <p>There have been two academic projects that do just that for <a href="https://link.springer.com/chapter/10.1007/978-3-319-17581-2_14">C programs</a> and for <a href="http://ieeexplore.ieee.org/document/6042069/">Java bytecode</a>, although not by employing such “universal” — and inefficient — composition, but rather more direct means of translating expression. In fact, PlusCal[^pcal] can be thought of as a simple programming language that is easily translated to TLA. See Lamport’s, <a href="http://lamport.azurewebsites.net/pubs/pluscal.pdf"><em>The PlusCal Algorithm Language</em></a>, 2009, and the extended version of PlusCal described in Sabina Akhtar, Stephan Merz, Martin Quinson, <a href="https://members.loria.fr/SMerz/papers/sbmf2010.pdf"><em>A High-Level Language for Modeling Algorithms and their Properties</em></a>, 2010. <a href="#fnref:tla-compile" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:det-comp">
-      <p>Of course, if the language is not deterministic, some comoposition constructs may <em>decrease</em> determinism rather than increase it, and so connectives other than conjunction would be used to model the composition in TLA<sup>+</sup>.&nbsp;<a href="#fnref:det-comp" class="reversefootnote">&#8617;</a></p>
+      <p>Of course, if the language is not deterministic, some comoposition constructs may <em>decrease</em> determinism rather than increase it, and so connectives other than conjunction would be used to model the composition in TLA<sup>+</sup>. <a href="#fnref:det-comp" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:machine-closed">
-      <p>With the important caveat that a machine-closed formula may be equivalent to a non-machine-closed one, as <a href="[Part 3](/posts/tlaplus_part3)#machine-closure-and-fairness">we’ve seen in part 3</a>. However, we should only consider machine-closed formulas to be descriptions of algorithms.&nbsp;<a href="#fnref:machine-closed" class="reversefootnote">&#8617;</a></p>
+      <p>With the important caveat that a machine-closed formula may be equivalent to a non-machine-closed one, as <a href="[Part 3](/posts/tlaplus_part3)#machine-closure-and-fairness">we’ve seen in part 3</a>. However, we should only consider machine-closed formulas to be descriptions of algorithms. <a href="#fnref:machine-closed" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:fp">
-      <p>Pure functional languages treat programs as something similar to functions. Programs and subroutines in pure functional languages that don’t enforce totality are <em>partial constructive functions</em>, which resemble the classical notion of functions in some senses: in that they define a one-valued mapping between objects and in their extensional notion of equality. They differ from ordinary functions in that they must be computable (i.e. constructive) and may not map an object to every object in their domain type (i.e. partial).&nbsp;<a href="#fnref:fp" class="reversefootnote">&#8617;</a></p>
+      <p>Pure functional languages treat programs as something similar to functions. Programs and subroutines in pure functional languages that don’t enforce totality are <em>partial constructive functions</em>, which resemble the classical notion of functions in some senses: in that they define a one-valued mapping between objects and in their extensional notion of equality. They differ from ordinary functions in that they must be computable (i.e. constructive) and may not map an object to every object in their domain type (i.e. partial). <a href="#fnref:fp" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:boolean">
-      <p>I believe that <a href="https://en.wikipedia.org/wiki/Universe_(mathematics)">as the universe is a proper class rather than a formal set</a>, it does not precisely form a boolean algebra but a <a href="https://en.wikipedia.org/wiki/Complemented_lattice">relatively complemented lattice</a>. But this is an unimportant detail.&nbsp;<a href="#fnref:boolean" class="reversefootnote">&#8617;</a></p>
+      <p>I believe that <a href="https://en.wikipedia.org/wiki/Universe_(mathematics)">as the universe is a proper class rather than a formal set</a>, it does not precisely form a boolean algebra but a <a href="https://en.wikipedia.org/wiki/Complemented_lattice">relatively complemented lattice</a>. But this is an unimportant detail. <a href="#fnref:boolean" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:sin">
-      <p>It sometimes seems like endless ideas employing novel mathematics are employed just to get around the problems imposed by this original choice that predates even the precise descriptions of computation in 1936, and appears to have no justification today other than the aesthetic desire to unify constructive mathematics and programming. Then again, great technological breakthroughs have been known to occasionally come of seemingly impractical research.&nbsp;<a href="#fnref:sin" class="reversefootnote">&#8617;</a></p>
+      <p>It sometimes seems like endless ideas employing novel mathematics are employed just to get around the problems imposed by this original choice that predates even the precise descriptions of computation in 1936, and appears to have no justification today other than the aesthetic desire to unify constructive mathematics and programming. Then again, great technological breakthroughs have been known to occasionally come of seemingly impractical research. <a href="#fnref:sin" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:PRL">
-      <p>I’ve been told that in the computational type theory of <a href="http://www.nuprl.org/">PRL</a>, programs <em>can</em> refine one another.&nbsp;<a href="#fnref:PRL" class="reversefootnote">&#8617;</a></p>
+      <p>I’ve been told that in the computational type theory of <a href="http://www.nuprl.org/">PRL</a>, programs <em>can</em> refine one another. <a href="#fnref:PRL" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:denotation">
-      <p>A good introduction to what denotation means in programming language theory can be found in Chapter 1, “Sense, Denotation and Semantics”, of Jean-Yves Girard’s <a href="http://www.paultaylor.eu/stable/prot.pdf"><em>Proof and Types</em></a>.&nbsp;<a href="#fnref:denotation" class="reversefootnote">&#8617;</a></p>
+      <p>A good introduction to what denotation means in programming language theory can be found in Chapter 1, “Sense, Denotation and Semantics”, of Jean-Yves Girard’s <a href="http://www.paultaylor.eu/stable/prot.pdf"><em>Proof and Types</em></a>. <a href="#fnref:denotation" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:notsets">
-      <p>Again, I’m informally ignoring that the sets of behaviors may not be actual sets.&nbsp;<a href="#fnref:notsets" class="reversefootnote">&#8617;</a></p>
+      <p>Again, I’m informally ignoring that the sets of behaviors may not be actual sets. <a href="#fnref:notsets" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:implies-order">
-      <p>That is easy to see if we recall that implication is an order relation, and $a \leq b \implies a \leq c$ iff $b \leq c$.&nbsp;<a href="#fnref:implies-order" class="reversefootnote">&#8617;</a></p>
+      <p>That is easy to see if we recall that implication is an order relation, and $a \leq b \implies a \leq c$ iff $b \leq c$. <a href="#fnref:implies-order" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:common-sense">
-      <p>As Turing himself strongly believed. See Juliet Floyd, <a href="https://mdetlefsen.nd.edu/assets/201037/jf.turing.pdf"><em>Turing on “Common Sense”</em></a>.&nbsp;<a href="#fnref:common-sense" class="reversefootnote">&#8617;</a></p>
+      <p>As Turing himself strongly believed. See Juliet Floyd, <a href="https://mdetlefsen.nd.edu/assets/201037/jf.turing.pdf"><em>Turing on “Common Sense”</em></a>. <a href="#fnref:common-sense" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -2091,6 +2091,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
 <!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
 
 <script type="text/javascript" src="/js/bigfoot.min.js"></script>
 

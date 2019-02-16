@@ -246,17 +246,15 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>Assume such a program H exists:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>H(M, x) := IF M halts on x THEN TRUE 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H(M, x) := IF M halts on x THEN TRUE 
                            ELSE FALSE
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>we can then easily construct $G$:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>G(y) := IF H(y, y) = FALSE THEN TRUE 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G(y) := IF H(y, y) = FALSE THEN TRUE 
                                 ELSE loop forever
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If we then pass $G$ to itself ($G(G)$) we get a contradiction between what $G$ does and what $H$ says that $G$ does.</p>
 
@@ -460,7 +458,7 @@ the 19th century view on the limits of knowledge was expressed by the maxim “i
 
 <p>To give an intuition for how hard total programs are to prove, the following 10-line Java or C example is written in the total style. All loops have decrementing counters. It clearly always terminates. It also doesn’t do any tricky mathematical operations – just subtraction:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>int foo(int x) {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int foo(int x) {
     if (x &lt;= 2 || (x &amp; 1) != 0)
         return 0;
     for (int i = x; i &gt; 0; i--)
@@ -476,8 +474,7 @@ boolean bar(int x) {
                 return false;
     return true;
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Yet mathematicians have failed to prove that this program never fails (i.e., reaches <code class="highlighter-rouge">crash()</code>) for 270 years. The program will crash iff Goldbach’s conjecture is false (of course, assuming we replace <code class="highlighter-rouge">int</code> with some larger integer type; we know it holds for 32-bit integers, but we’re not sure about 64-bit integers). At this point, some of you may say, “well of course proving the behavior of programs that encode hard number theory problems would be hard!” but that would be misunderstands the problem. Noticing that this program encodes a well-known hard problem in number theory is just a way of convincing ourselves that verifying this particular program is indeed hard. But it doesn’t tell us that this program is any harder to verify than programs we encounter regularly. If we didn’t know that the program corresponds to Goldbach’s conjecture (or if Goldbach never made the conjecture), would we be able to tell that the program would be so hard to verify by looking at it?</p>
 
@@ -537,15 +534,14 @@ boolean bar(int x) {
 
 <p>Just as a quick example of why verifying even FSMs is hard, consider a language with nothing but boolean variables and function calls. There are no higher-order functions, no recursion and no iteration provided. Such a language is clearly an FSM language. For example, The number of states in this program is $\leq 2^6$:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>A() = B(TRUE) ∧ B(FALSE)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A() = B(TRUE) ∧ B(FALSE)
 B(a) = C(a, TRUE) ∨ C(a, FALSE)
 C(a, b) = D(a, b, TRUE) ∧ D(a, b, FALSE)
 D(a, b, c) = E(a, b, c, TRUE) ∨ E(a, b, c, FALSE)
 E(a, b, c, d) = F(a, b, c, d, TRUE) ∧ F(a, b, c, d, FALSE)
 F(a, b, c, d, e) = X(a, b, c, d, e, TRUE) ∨ X(a, b, c, d, e, FALSE)
 X(a, b, c, d, e, f) = ((a ∧ b) ∨ c) ∧ ¬d ∧ (e ∨ f)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Yet, verifying programs in this language is PSPACE-hard, because even the trivial program above directly encodes a <a href="https://en.wikipedia.org/wiki/True_quantified_Boolean_formula">TQBF</a> – true quantified boolean formula – problem, which is PSPACE complete (in this case, the formula $\forall a \exists b \forall c \exists d \forall e \exists f . ((a \land b) \lor c) \land \lnot d \land (e \lor f)$).</p>
 
@@ -641,12 +637,11 @@ X(a, b, c, d, e, f) = ((a ∧ b) ∨ c) ∧ ¬d ∧ (e ∨ f)
 
 <p>The very rough idea is to consider a program that is a sound, but less precise abstraction of our input program, usually as a FSM with a small number of states, which can then be model-checked. The complexity is the $O(|S|)$ of the abstraction. For example, consider the following program:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>p0: while (true)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p0: while (true)
 p1:    if isEven(x)
 p2:        then x := x div 2
 p3:        else x := x + 1
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This program has an infinite state space (assuming <code class="highlighter-rouge">x</code> is some unbounded integer), but if we only care about the <em>parity</em> of x, we can apply the following transformation to <code class="highlighter-rouge">x</code>’s values:</p>
 
@@ -830,106 +825,106 @@ in 58% of the catastrophic failures, the underlying faults could easily have bee
 <div class="footnotes">
   <ol>
     <li id="fn:Dawson">
-      <p>John W. Dawson, Jr., <a href="https://www.amazon.com/Logical-Dilemmas-Life-Work-G%C3%B6del/dp/1568812566"><em>Logical Dilemmas, The Life and Work of Kurt Gödel</em></a>, A K Peters,1997 p. 71&nbsp;<a href="#fnref:Dawson" class="reversefootnote">&#8617;</a></p>
+      <p>John W. Dawson, Jr., <a href="https://www.amazon.com/Logical-Dilemmas-Life-Work-G%C3%B6del/dp/1568812566"><em>Logical Dilemmas, The Life and Work of Kurt Gödel</em></a>, A K Peters,1997 p. 71 <a href="#fnref:Dawson" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Dawson2">
-      <p>Dawson, p.69&nbsp;<a href="#fnref:Dawson2" class="reversefootnote">&#8617;</a></p>
+      <p>Dawson, p.69 <a href="#fnref:Dawson2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Kripke1">
-      <p>Saul Kripke, <a href="https://youtu.be/D9SP5wj882w?t=53m4s"><em>The Origins and Nature of Computation</em></a>, Lecture at Tel Aviv University, June 13, 2006, 1:45:50-1:47:10&nbsp;<a href="#fnref:Kripke1" class="reversefootnote">&#8617;</a></p>
+      <p>Saul Kripke, <a href="https://youtu.be/D9SP5wj882w?t=53m4s"><em>The Origins and Nature of Computation</em></a>, Lecture at Tel Aviv University, June 13, 2006, 1:45:50-1:47:10 <a href="#fnref:Kripke1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Church1">
-      <p>Alonzo Church, <a href="https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf"><em>An Unsolvable Problem of Elementary Number Theory</em></a>, 1936&nbsp;<a href="#fnref:Church1" class="reversefootnote">&#8617;</a></p>
+      <p>Alonzo Church, <a href="https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf"><em>An Unsolvable Problem of Elementary Number Theory</em></a>, 1936 <a href="#fnref:Church1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Turing1">
-      <p>A. M. Turing, <a href="https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"><em>On Computable Numbers, with an application to the Entschidungsproblem</em></a>, 1936&nbsp;<a href="#fnref:Turing1" class="reversefootnote">&#8617;</a></p>
+      <p>A. M. Turing, <a href="https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"><em>On Computable Numbers, with an application to the Entschidungsproblem</em></a>, 1936 <a href="#fnref:Turing1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Aaronson1">
-      <p>Scott Aaronson, <a href="http://www.scottaaronson.com/blog/?p=710"><em>Rosser’s Theorem via Turing machines</em></a>, July 2011&nbsp;<a href="#fnref:Aaronson1" class="reversefootnote">&#8617;</a></p>
+      <p>Scott Aaronson, <a href="http://www.scottaaronson.com/blog/?p=710"><em>Rosser’s Theorem via Turing machines</em></a>, July 2011 <a href="#fnref:Aaronson1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:reachability">
-      <p>To see that reachability is <em>no harder</em> than halting, we can take an arbitrary reachability problem, replace all the existing halting states with infinite loops, and mark the state we want to test reachability for as halting. Solving the halting problem would be identical to solving the reachability problem, as the transformed program would halt if-and-only-if the tested state was reachable in the original program.&nbsp;<a href="#fnref:reachability" class="reversefootnote">&#8617;</a></p>
+      <p>To see that reachability is <em>no harder</em> than halting, we can take an arbitrary reachability problem, replace all the existing halting states with infinite loops, and mark the state we want to test reachability for as halting. Solving the halting problem would be identical to solving the reachability problem, as the transformed program would halt if-and-only-if the tested state was reachable in the original program. <a href="#fnref:reachability" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Rado">
-      <p>Tibor Rado, <em><a href="http://computation4cognitivescientists.weebly.com/uploads/6/2/8/3/6283774/rado-on_non-computable_functions.pdf">On Non-Computable Functions</a></em>, 1961&nbsp;<a href="#fnref:Rado" class="reversefootnote">&#8617;</a></p>
+      <p>Tibor Rado, <em><a href="http://computation4cognitivescientists.weebly.com/uploads/6/2/8/3/6283774/rado-on_non-computable_functions.pdf">On Non-Computable Functions</a></em>, 1961 <a href="#fnref:Rado" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Yedidiya">
-      <p>Adam Yedidia and Scott Aaronson <a href="https://arxiv.org/pdf/1605.04343v1.pdf"><em>A Relatively Small Turing Machine Whose Behavior Is Independent of Set Theory</em></a>, 2016&nbsp;<a href="#fnref:Yedidiya" class="reversefootnote">&#8617;</a></p>
+      <p>Adam Yedidia and Scott Aaronson <a href="https://arxiv.org/pdf/1605.04343v1.pdf"><em>A Relatively Small Turing Machine Whose Behavior Is Independent of Set Theory</em></a>, 2016 <a href="#fnref:Yedidiya" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Infinity">
-      <p>Although the subject of infinity in mathematics has always been controversial, with some logicians arguing against it, I would say that the reason for the opposition is precisely <em>because</em> of the same physical limitations that we associate with computation.&nbsp;<a href="#fnref:Infinity" class="reversefootnote">&#8617;</a></p>
+      <p>Although the subject of infinity in mathematics has always been controversial, with some logicians arguing against it, I would say that the reason for the opposition is precisely <em>because</em> of the same physical limitations that we associate with computation. <a href="#fnref:Infinity" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:TuringLecture">
-      <p>A. M. Turing, <a href="http://www.vordenker.de/downloads/turing-vorlesung.pdf">A lecture to the London Mathematical Society</a>, February 20, 1947&nbsp;<a href="#fnref:TuringLecture" class="reversefootnote">&#8617;</a></p>
+      <p>A. M. Turing, <a href="http://www.vordenker.de/downloads/turing-vorlesung.pdf">A lecture to the London Mathematical Society</a>, February 20, 1947 <a href="#fnref:TuringLecture" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:math">
-      <p>Some readers may object. After all, programs are abstract mathematical concepts. But just as physics, as an academic discipline, is not concerned with the study of all properties of all physical objects (or chemistry and biology wouldn’t exist as separate disciplines), the academic discipline of mathematics need not be concerned with the study of all mathematical objects (of course, math as a <em>tool</em> is used extensively in computer science, just as it is used in physics, chemistry and biology).&nbsp;<a href="#fnref:math" class="reversefootnote">&#8617;</a></p>
+      <p>Some readers may object. After all, programs are abstract mathematical concepts. But just as physics, as an academic discipline, is not concerned with the study of all properties of all physical objects (or chemistry and biology wouldn’t exist as separate disciplines), the academic discipline of mathematics need not be concerned with the study of all mathematical objects (of course, math as a <em>tool</em> is used extensively in computer science, just as it is used in physics, chemistry and biology). <a href="#fnref:math" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Edm65">
-      <p>Jack Edmonds, <a href="http://math.nist.gov/~JBernal/p_t_f.pdf"><em>Paths, Trees, and Flowers</em></a>, 1965&nbsp;<a href="#fnref:Edm65" class="reversefootnote">&#8617;</a></p>
+      <p>Jack Edmonds, <a href="http://math.nist.gov/~JBernal/p_t_f.pdf"><em>Paths, Trees, and Flowers</em></a>, 1965 <a href="#fnref:Edm65" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:BBC">
-      <p>A panel on BBC radio, recorded January 10, 1952, as appears in, B. Jack Copeland (Editor), <a href="https://www.amazon.com/Essential-Turing-Philosophy-Artificial-Intelligence/dp/0198250800"><em>The Essential Turing: Seminal Writings in Computing, Logic, Philosophy, Artificial Intelligence, and Artificial Life: Plus The Secrets of Enigma</em></a>, Oxford University Press, 2004, p. 503&nbsp;<a href="#fnref:BBC" class="reversefootnote">&#8617;</a>&nbsp;<a href="#fnref:BBC:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
+      <p>A panel on BBC radio, recorded January 10, 1952, as appears in, B. Jack Copeland (Editor), <a href="https://www.amazon.com/Essential-Turing-Philosophy-Artificial-Intelligence/dp/0198250800"><em>The Essential Turing: Seminal Writings in Computing, Logic, Philosophy, Artificial Intelligence, and Artificial Life: Plus The Secrets of Enigma</em></a>, Oxford University Press, 2004, p. 503 <a href="#fnref:BBC" class="reversefootnote">&#8617;</a> <a href="#fnref:BBC:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
     </li>
     <li id="fn:HartmanisStearns">
-      <p>J. Hartmanis and R.E. Stearns, <a href="http://www.ams.org/journals/tran/1965-117-00/S0002-9947-1965-0170805-7/S0002-9947-1965-0170805-7.pdf">On The Computational Complexity of Algorithms</a>, 1965&nbsp;<a href="#fnref:HartmanisStearns" class="reversefootnote">&#8617;</a></p>
+      <p>J. Hartmanis and R.E. Stearns, <a href="http://www.ams.org/journals/tran/1965-117-00/S0002-9947-1965-0170805-7/S0002-9947-1965-0170805-7.pdf">On The Computational Complexity of Algorithms</a>, 1965 <a href="#fnref:HartmanisStearns" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:HartmanisTuring">
-      <p>Juris Hartmanis, Turing Award Lecture: <a href="http://delivery.acm.org/10.1145/1290000/1283949/a1993-hartmanis.pdf?ip=79.177.205.62&amp;id=1283949&amp;acc=OPEN&amp;key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E6D218144511F3437&amp;CFID=478799520&amp;CFTOKEN=98906141&amp;__acm__=1469181272_6345bfd2a8f8a762a92af1333d7c5ae0"><em>On Computational Complexity and the Nature of Computer Science</em></a>, 1994&nbsp;<a href="#fnref:HartmanisTuring" class="reversefootnote">&#8617;</a></p>
+      <p>Juris Hartmanis, Turing Award Lecture: <a href="http://delivery.acm.org/10.1145/1290000/1283949/a1993-hartmanis.pdf?ip=79.177.205.62&amp;id=1283949&amp;acc=OPEN&amp;key=4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35%2E6D218144511F3437&amp;CFID=478799520&amp;CFTOKEN=98906141&amp;__acm__=1469181272_6345bfd2a8f8a762a92af1333d7c5ae0"><em>On Computational Complexity and the Nature of Computer Science</em></a>, 1994 <a href="#fnref:HartmanisTuring" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:CookReckhow1">
-      <p>Stephen A. Cook and Robert A. Reckhow, <a href="https://www.cs.toronto.edu/~sacook/homepage/rams.pdf"><em>Time Bounded Random Access Machines</em></a>, 1972&nbsp;<a href="#fnref:CookReckhow1" class="reversefootnote">&#8617;</a></p>
+      <p>Stephen A. Cook and Robert A. Reckhow, <a href="https://www.cs.toronto.edu/~sacook/homepage/rams.pdf"><em>Time Bounded Random Access Machines</em></a>, 1972 <a href="#fnref:CookReckhow1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Turner">
-      <p>D. A. Turner, <a href="http://sblp2004.ic.uff.br/papers/turner.pdf">Total Functional Programming</a>, 2004&nbsp;<a href="#fnref:Turner" class="reversefootnote">&#8617;</a></p>
+      <p>D. A. Turner, <a href="http://sblp2004.ic.uff.br/papers/turner.pdf">Total Functional Programming</a>, 2004 <a href="#fnref:Turner" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:total">
-      <p>I should note that totality – especially in functional languages – may serve some useful purposes; making verification easier, however, is not one of them.&nbsp;<a href="#fnref:total" class="reversefootnote">&#8617;</a></p>
+      <p>I should note that totality – especially in functional languages – may serve some useful purposes; making verification easier, however, is not one of them. <a href="#fnref:total" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:BellantoniCook">
-      <p>Stephen Bellantoni and Stephen Cook, <a href="https://www.cs.toronto.edu/~sacook/homepage/ptime.pdf"><em>A New Recursion-Theoretic Characterization of the Polytime Functions</em></a>, 1992&nbsp;<a href="#fnref:BellantoniCook" class="reversefootnote">&#8617;</a></p>
+      <p>Stephen Bellantoni and Stephen Cook, <a href="https://www.cs.toronto.edu/~sacook/homepage/ptime.pdf"><em>A New Recursion-Theoretic Characterization of the Polytime Functions</em></a>, 1992 <a href="#fnref:BellantoniCook" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:FPT">
-      <p>S. Demri, F. Laroussinie and Ph. Schnoebelen, <a href="http://www.lsv.ens-cachan.fr/Publis/PAPERS/PDF/DLS-jcss-param.pdf"><em>A Parametric Analysis of the State-Explosion Problem in Model Checking</em></a>, 2005&nbsp;<a href="#fnref:FPT" class="reversefootnote">&#8617;</a></p>
+      <p>S. Demri, F. Laroussinie and Ph. Schnoebelen, <a href="http://www.lsv.ens-cachan.fr/Publis/PAPERS/PDF/DLS-jcss-param.pdf"><em>A Parametric Analysis of the State-Explosion Problem in Model Checking</em></a>, 2005 <a href="#fnref:FPT" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:symbolic">
-      <p>Philippe Schnoebelen, <a href="http://www.lsv.ens-cachan.fr/Publis/PAPERS/PDF/Sch-aiml02.pdf"><em>The Complexity of Temporal Logic Model Checking</em></a>, 2002&nbsp;<a href="#fnref:symbolic" class="reversefootnote">&#8617;</a>&nbsp;<a href="#fnref:symbolic:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
+      <p>Philippe Schnoebelen, <a href="http://www.lsv.ens-cachan.fr/Publis/PAPERS/PDF/Sch-aiml02.pdf"><em>The Complexity of Temporal Logic Model Checking</em></a>, 2002 <a href="#fnref:symbolic" class="reversefootnote">&#8617;</a> <a href="#fnref:symbolic:1" class="reversefootnote">&#8617;<sup>2</sup></a></p>
     </li>
     <li id="fn:Alur">
-      <p>Rajeev Alur, <a href="https://www.cis.upenn.edu/~alur/Zohar03.pdf"><em>Formal Analysis of Hierarchical State Machines</em></a>, 2003&nbsp;<a href="#fnref:Alur" class="reversefootnote">&#8617;</a></p>
+      <p>Rajeev Alur, <a href="https://www.cis.upenn.edu/~alur/Zohar03.pdf"><em>Formal Analysis of Hierarchical State Machines</em></a>, 2003 <a href="#fnref:Alur" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Clarke">
-      <p>Edmund M. Clarke, <a href="https://youtu.be/I1lf2MBy3J4?t=18m3s"><em>Model checking: my 27-year quest to overcome the state explosion problem</em></a>, 2007 and <a href="http://www.cs.cmu.edu/~emc/papers/Conference%20Papers/Progress%20on%20the%20State%20Explosion%20Problem%20in%20Model%20Checking.pdf"><em>Progress on the State Explosion Problem in Model Checking</em></a>, 2001&nbsp;<a href="#fnref:Clarke" class="reversefootnote">&#8617;</a></p>
+      <p>Edmund M. Clarke, <a href="https://youtu.be/I1lf2MBy3J4?t=18m3s"><em>Model checking: my 27-year quest to overcome the state explosion problem</em></a>, 2007 and <a href="http://www.cs.cmu.edu/~emc/papers/Conference%20Papers/Progress%20on%20the%20State%20Explosion%20Problem%20in%20Model%20Checking.pdf"><em>Progress on the State Explosion Problem in Model Checking</em></a>, 2001 <a href="#fnref:Clarke" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:CookReckhow2">
-      <p>Stephen A. Cook and Robert A. Reckhow, <a href="https://www.cs.toronto.edu/~sacook/homepage/cook_reckhow.pdf"><em>The Relative Efficiency of Propositional Proof Systems</em></a>, 1979&nbsp;<a href="#fnref:CookReckhow2" class="reversefootnote">&#8617;</a></p>
+      <p>Stephen A. Cook and Robert A. Reckhow, <a href="https://www.cs.toronto.edu/~sacook/homepage/cook_reckhow.pdf"><em>The Relative Efficiency of Propositional Proof Systems</em></a>, 1979 <a href="#fnref:CookReckhow2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:AI">
-      <p>For an introduction, see Patrick Cousot, <a href="http://www.di.ens.fr/~cousot/COUSOTpapers/publications.www/Cousot-LNCS2000-lv-sb.pdf"><em>Abstract Interpretation Based Formal Methods and Future Challenges</em></a>, 2001. For a fascinating, readable overview of the general theory of abstraction and refinement, see David A. Schmidt, <a href="http://citeseer.ist.psu.edu/viewdoc/download?doi=10.1.1.16.4564&amp;rep=rep1&amp;type=pdf"><em>Binary Relations for Abstraction and Refinement</em></a>, 1999.&nbsp;<a href="#fnref:AI" class="reversefootnote">&#8617;</a></p>
+      <p>For an introduction, see Patrick Cousot, <a href="http://www.di.ens.fr/~cousot/COUSOTpapers/publications.www/Cousot-LNCS2000-lv-sb.pdf"><em>Abstract Interpretation Based Formal Methods and Future Challenges</em></a>, 2001. For a fascinating, readable overview of the general theory of abstraction and refinement, see David A. Schmidt, <a href="http://citeseer.ist.psu.edu/viewdoc/download?doi=10.1.1.16.4564&amp;rep=rep1&amp;type=pdf"><em>Binary Relations for Abstraction and Refinement</em></a>, 1999. <a href="#fnref:AI" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:typesai">
-      <p>Type system experts may wish to see the following two papers: Patrick Cousot, <a href="https://www.irif.univ-paris-diderot.fr/~mellies/mpri/mpri-ens/articles/cousot-types-as-abstract-interpretations.pdf"><em>Types as Abstract Interpretations</em></a>, 1997 and Roberta Gori, Giorgio Levi, <a href="http://link.springer.com/chapter/10.1007%2F3-540-47813-2_16"><em>An experiment in type inference and verification by abstract interpretation</em></a>, 2002. These papers are well beyond my understanding.&nbsp;<a href="#fnref:typesai" class="reversefootnote">&#8617;</a></p>
+      <p>Type system experts may wish to see the following two papers: Patrick Cousot, <a href="https://www.irif.univ-paris-diderot.fr/~mellies/mpri/mpri-ens/articles/cousot-types-as-abstract-interpretations.pdf"><em>Types as Abstract Interpretations</em></a>, 1997 and Roberta Gori, Giorgio Levi, <a href="http://link.springer.com/chapter/10.1007%2F3-540-47813-2_16"><em>An experiment in type inference and verification by abstract interpretation</em></a>, 2002. These papers are well beyond my understanding. <a href="#fnref:typesai" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Girard">
-      <p>For a thorough overview, see Jean-Yves Girard, <a href="http://www.paultaylor.eu/stable/prot.pdf"><em>Proofs and Types</em></a>, 1989&nbsp;<a href="#fnref:Girard" class="reversefootnote">&#8617;</a></p>
+      <p>For a thorough overview, see Jean-Yves Girard, <a href="http://www.paultaylor.eu/stable/prot.pdf"><em>Proofs and Types</em></a>, 1989 <a href="#fnref:Girard" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:LeroyTalk">
-      <p>Xavier Leroy, <a href="http://video.upmc.fr/differe.php?collec=S_C_colloquium_lip6_2012&amp;video=19"><em>Desperately seeking software perfection</em></a>, October 20, 2015&nbsp;<a href="#fnref:LeroyTalk" class="reversefootnote">&#8617;</a></p>
+      <p>Xavier Leroy, <a href="http://video.upmc.fr/differe.php?collec=S_C_colloquium_lip6_2012&amp;video=19"><em>Desperately seeking software perfection</em></a>, October 20, 2015 <a href="#fnref:LeroyTalk" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:NSB">
-      <p>F. P. Brooks, <em>No Silver Bullet: Essence and Accidents of Software Engineering</em>, 1986&nbsp;<a href="#fnref:NSB" class="reversefootnote">&#8617;</a></p>
+      <p>F. P. Brooks, <em>No Silver Bullet: Essence and Accidents of Software Engineering</em>, 1986 <a href="#fnref:NSB" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:NSB2">
-      <p>Actually, Brooks wrote, “There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity.” Given that three decades have passed without an order-of-magnitude increase in productivity even taking all developments combined, and given Brooks’s later treatment of his informal prediction as a law of nature, I’ve allowed myself to paraphrase for simplification.&nbsp;<a href="#fnref:NSB2" class="reversefootnote">&#8617;</a></p>
+      <p>Actually, Brooks wrote, “There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity.” Given that three decades have passed without an order-of-magnitude increase in productivity even taking all developments combined, and given Brooks’s later treatment of his informal prediction as a law of nature, I’ve allowed myself to paraphrase for simplification. <a href="#fnref:NSB2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:NSBR">
-      <p>F. P. Brooks, <em>No Silver Bullet, Refired</em>, <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959"><em>The Mythical Man-Month, Essays on Software Engineering, Anniversary Edition</em></a>, Addison-Wesley 1995, p.213&nbsp;<a href="#fnref:NSBR" class="reversefootnote">&#8617;</a></p>
+      <p>F. P. Brooks, <em>No Silver Bullet, Refired</em>, <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959"><em>The Mythical Man-Month, Essays on Software Engineering, Anniversary Edition</em></a>, Addison-Wesley 1995, p.213 <a href="#fnref:NSBR" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:Yuan">
-      <p>Ding Yuan et al., <a href="https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf"><em>Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems</em></a>, 2014&nbsp;<a href="#fnref:Yuan" class="reversefootnote">&#8617;</a></p>
+      <p>Ding Yuan et al., <a href="https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf"><em>Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems</em></a>, 2014 <a href="#fnref:Yuan" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:HartmanisPhysics">
-      <p>Juris Hartmanis, <a href="http://dl.acm.org/citation.cfm?id=707851"><em>Some Observations About the Nature of Computer Science</em></a>, 1993&nbsp;<a href="#fnref:HartmanisPhysics" class="reversefootnote">&#8617;</a></p>
+      <p>Juris Hartmanis, <a href="http://dl.acm.org/citation.cfm?id=707851"><em>Some Observations About the Nature of Computer Science</em></a>, 1993 <a href="#fnref:HartmanisPhysics" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -1035,6 +1030,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
 <!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
 
 <script type="text/javascript" src="/js/bigfoot.min.js"></script>
 

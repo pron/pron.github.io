@@ -441,12 +441,11 @@
 
 <p>Your first objection may be that unlike my original English description of the algorithm, in this one you <em>can</em> tell that the algorithm is imperative because it contains the expression $x’ = x - y$ , which looks like an imperative assignment. It is not. All it means is that the variable, i.e. the <em>name</em>, $x$ will refer to the value $x - y$ in the next program step. If you look at a pure functional implementation of the algorithm, you see that the same happens there:</p>
 
-<div class="language-ocaml centered highlighter-rouge"><pre class="highlight"><code><span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="kt">int</span><span class="p">)</span> <span class="p">=</span>
-	<span class="k">if</span> <span class="n">x</span> <span class="p">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span>
-	<span class="k">if</span> <span class="n">x</span> <span class="p">&gt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">-</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">else</span>
-	<span class="k">if</span> <span class="n">x</span> <span class="p">&lt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">-</span><span class="n">x</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-ocaml centered highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="nc">Int</span><span class="o">,</span> <span class="n">y</span><span class="o">:</span><span class="kt">int</span><span class="p">)</span> <span class="o">=</span>
+	<span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span>
+	<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="o">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">else</span>
+	<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="k">then</span> <span class="n">gcd</span><span class="p">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>The variables <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> stand for different values at different times in the program’s execution, yet no imperative assignment is involved.</p>
 
@@ -862,7 +861,7 @@
 
 <p>So, even though we don’t tell our “algorithm” where to start — the initial condition is $x \in Nat$ — it somehow knows that it must start at 0 because that’s the only way it will get to 100 at step 10.</p>
 
-<p>While this may be fine for describing a behavior, it is not how we normally think of an algorithm (although this sort of nondeterminism — called “angelic”nondeterminism<sup id="fnref:angelic"><a href="#fn:angelic" class="footnote">21</a></sup>, as it helps the algorithm do the “right thing” — is frequently used in theoretical computer science to study complexity classes; in fact, NP problems are precisely those that can be solved in polynomial time with the help of angelic nondeterminism). When we think of algorithms we assume that it’s not a process that’s allowed to use information from the future.</p>
+<p>While this may be fine for describing a behavior, it is not how we normally think of an algorithm (although this sort of nondeterminism — called “angelic” nondeterminism<sup id="fnref:angelic"><a href="#fn:angelic" class="footnote">21</a></sup>, as it helps the algorithm do the “right thing” — is frequently used in theoretical computer science to study complexity classes; in fact, NP problems are precisely those that can be solved in polynomial time with the help of angelic nondeterminism). When we think of algorithms we assume that it’s not a process that’s allowed to use information from the future.</p>
 
 <p>We could get rid of nondeterminism altogether, but nondeterminism is what gives specifications their power, as it allows us to to say exactly what we know or what we care about, and leave out things we don’t know or details we don’t care about. Also, there are kinds of nondeterminism that fit perfectly with our notion of algorithms, such as nondeterministic input, or nondeterministic scheduling by the OS.</p>
 
@@ -1233,7 +1232,7 @@ TypeOK \defeq & \land x \in Int \\
 
 <p>To see how programming languages obscure important similarities and highlight less important detail — necessary only for technical reasons — let’s consider the following C/Java examples, adapted from <em>Computation and State Machines</em> (the paper from which the above quote was taken), for computing the factorial:</p>
 
-<div class="language-java centered highlighter-rouge"><pre class="highlight"><code><span class="n">fact1</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span> <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<div class="language-java centered highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fact1</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span> <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
                    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">*</span><span class="n">i</span><span class="o">;</span>
                <span class="k">return</span> <span class="n">f</span><span class="o">;</span> <span class="o">}</span>
@@ -1244,8 +1243,7 @@ TypeOK \defeq & \land x \in Int \\
                <span class="k">return</span> <span class="n">f</span><span class="o">;</span> <span class="o">}</span>
 
 <span class="n">fact3</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact3</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span> <span class="o">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Most programmers will say that <code class="highlighter-rouge">fact1</code> and <code class="highlighter-rouge">fact2</code> are similar, because they’re both iterative or imperative, whereas <code class="highlighter-rouge">fact3</code> is recursive or “functional”. However, those are just similarities or differences in the style of <em>expressing</em> computations; they don’t mean that the computations thus expressed are different. It is actually <code class="highlighter-rouge">fact2</code> that differs most from the other two, and it yields the same result only because multiplication is commutative. We could see that by replacing multiplication with a non-commutative operation like subtraction; the first and third program would give the same result, while the second would give a different one.</p>
 
@@ -1722,12 +1720,11 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>The following is a somewhat unidiomatic implementation of the familiar <code class="highlighter-rouge">map</code> function in Standard ML (I’m not using pattern-matching to make the code more readable to those not familiar with the construct). The function takes as parameters a function, <code class="highlighter-rouge">f</code>, and a list, <code class="highlighter-rouge">ls</code>, and returns a list of element, each of which is the result of applying <code class="highlighter-rouge">f</code> to the corresponding element in the input argument <code class="highlighter-rouge">ls</code>.</p>
 
-<div class="language-ocaml centered highlighter-rouge"><pre class="highlight"><code><span class="k">fun</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="p">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="p">,</span> <span class="n">ls</span><span class="p">:</span> <span class="k">'</span><span class="n">a</span> <span class="kt">list</span><span class="o">):</span> <span class="k">'</span><span class="n">b</span> <span class="kt">list</span>
-	<span class="k">if</span> <span class="n">l</span> <span class="p">=</span> <span class="n">nil</span>
+<div class="language-ocaml centered highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="o">:</span> <span class="k">'</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="o">,</span> <span class="n">ls</span><span class="o">:</span> <span class="k">'</span><span class="n">a</span> <span class="kt">list</span><span class="p">)</span><span class="o">:</span> <span class="k">'</span><span class="n">b</span> <span class="kt">list</span>
+	<span class="k">if</span> <span class="n">l</span> <span class="o">=</span> <span class="n">nil</span>
 		<span class="k">then</span> <span class="n">nil</span>
-		<span class="k">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">hd</span> <span class="n">ls</span><span class="o">))</span> <span class="p">::</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tl</span> <span class="n">ls</span><span class="o">))</span>
-</code></pre>
-</div>
+		<span class="k">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">hd</span> <span class="n">ls</span><span class="p">))</span> <span class="o">::</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tl</span> <span class="n">ls</span><span class="p">))</span>
+</code></pre></div></div>
 
 <p>This subroutine is recursive: at each recursive step the variable <code class="highlighter-rouge">ls</code> refers to the tail of <code class="highlighter-rouge">ls</code> in the previous recursive step, and the output elements are accumulated on the stack, later to be assembled into a list data structure back to front.</p>
 
@@ -1751,13 +1748,12 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 
 <p>Suppose, however, that the program were written in (again, unidiomatic) Haskell, like so:</p>
 
-<div class="language-haskell centered highlighter-rouge"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">b</span>
+<div class="language-haskell centered highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">b</span>
 <span class="n">map</span> <span class="n">f</span> <span class="n">ls</span> <span class="o">=</span>
 	<span class="kr">if</span> <span class="n">null</span> <span class="n">ls</span>
 		<span class="kr">then</span> <span class="kt">[]</span>
 		<span class="kr">else</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="n">head</span> <span class="n">ls</span><span class="p">))</span> <span class="o">:</span> <span class="p">(</span><span class="n">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">tail</span> <span class="n">ls</span><span class="p">))</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Functions in Hakell do not mean the same thing as they do in ML, because the language provides further guarantees (asuming they’re not circumvented with an escape hatch — a possibility we will choose to ignore in to show a somewhat different specification). Because Haskell enforces purity, it guarantees that, while <code class="highlighter-rouge">f</code> may throw an exception or not terminate, it behaves a little more like an actual function in the sense that if it returns a value, it will always return the same value for a given argument. This guarantee reduces the nondeterminism in our specification. To describe this expected behavior, we will introduce a function, $fn$, that will allow us to limit the algorithm’s behavior. $fn$ is determined in the first step and then never changes, and is used to represent <code class="highlighter-rouge">f</code>’s function-like behavior, and ensures that <em>if</em> the algorithm terminates, it will yield the equal output elements for equal input elements.</p>
 
@@ -1974,10 +1970,9 @@ SpecX \land SpecY&\equiv\;& (InitX \land \Box[NextX]_x \land \WF_x(NextX)) \land
 <blockquote>
   <p>Consider <em>N</em> processes numbered from 0 through N − 1 in which each process <em>i</em> executes</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>x[i] := 1
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x[i] := 1
 y[i] := x[(i - 1) mod N]
-</code></pre>
-  </div>
+</code></pre></div>  </div>
 
   <p>and stops, where each <code class="highlighter-rouge">x[i]</code> initially equals 0. (The reads and writes of each <code class="highlighter-rouge">x[i]</code> are assumed to be atomic.) This algorithm satisfies the following property: after every process has stopped, <code class="highlighter-rouge">y[i]</code>  equals 1 for at least one process <em>i</em>. It is easy to see that the algorithm satisfies this property; the last process <em>i</em> to write <code class="highlighter-rouge">y[i]</code> must set it to 1. But that process doesn’t set <code class="highlighter-rouge">y[i]</code> to 1 because it was the last process to write <code class="highlighter-rouge">y</code>. What a process does depends only on the current state, not on what processes wrote before it. The algorithm satisfies this property because it maintains an inductive invariant. Do you know what that invariant is? If not, then you do not completely understand why the algorithm satisfies this property.</p>
 </blockquote>
@@ -2113,91 +2108,91 @@ y[i] := x[(i - 1) mod N]
 <div class="footnotes">
   <ol>
     <li id="fn:turing">
-      <p>Reproduced in F. L. Morris and C. B. Jones in <a href="https://pdfs.semanticscholar.org/dfd7/34b2de2cbcce6ac07e909011b0ed6ba32b01.pdf"><em>An Early Program Proof by Alan Turing</em></a>, 1984. The original, with multiple significant printing errors, <a href="http://www.turingarchive.org/browse.php/b/8">is in the Turing Archive</a>.&nbsp;<a href="#fnref:turing" class="reversefootnote">&#8617;</a></p>
+      <p>Reproduced in F. L. Morris and C. B. Jones in <a href="https://pdfs.semanticscholar.org/dfd7/34b2de2cbcce6ac07e909011b0ed6ba32b01.pdf"><em>An Early Program Proof by Alan Turing</em></a>, 1984. The original, with multiple significant printing errors, <a href="http://www.turingarchive.org/browse.php/b/8">is in the Turing Archive</a>. <a href="#fnref:turing" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:endian">
-      <p>This was in part Turing’s own fault, who lost his audience when he wrote numbers on the blackboard in reverse, as he’d been used to when programming the Manchester computer.&nbsp;<a href="#fnref:endian" class="reversefootnote">&#8617;</a></p>
+      <p>This was in part Turing’s own fault, who lost his audience when he wrote numbers on the blackboard in reverse, as he’d been used to when programming the Manchester computer. <a href="#fnref:endian" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:state">
-      <p>If you are a functional programmer, please don’t confuse “program state”, with what’s know as “state”, or “mutable state” in functional programming. I hope to make the distinction clear later.&nbsp;<a href="#fnref:state" class="reversefootnote">&#8617;</a></p>
+      <p>If you are a functional programmer, please don’t confuse “program state”, with what’s know as “state”, or “mutable state” in functional programming. I hope to make the distinction clear later. <a href="#fnref:state" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:modelchecking">
-      <p>See part 2 for a brief explanation of what a model checker is.&nbsp;<a href="#fnref:modelchecking" class="reversefootnote">&#8617;</a></p>
+      <p>See part 2 for a brief explanation of what a model checker is. <a href="#fnref:modelchecking" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:pnueli-tl">
-      <p>Amir Pnueli, <a href="http://fi.ort.edu.uy/innovaportal/file/20124/1/49-pnueli_temporal_logic_of_programs.pdf"><em>The Temporal Logic of Programs</em></a>, 1977&nbsp;<a href="#fnref:pnueli-tl" class="reversefootnote">&#8617;</a></p>
+      <p>Amir Pnueli, <a href="http://fi.ort.edu.uy/innovaportal/file/20124/1/49-pnueli_temporal_logic_of_programs.pdf"><em>The Temporal Logic of Programs</em></a>, 1977 <a href="#fnref:pnueli-tl" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:nontemp">
-      <p>From <a href="https://research.microsoft.com/en-us/um/people/lamport/pubs/lamport-actions.pdf"><em>The Temporal Logic of Actions</em></a>.&nbsp;<a href="#fnref:nontemp" class="reversefootnote">&#8617;</a></p>
+      <p>From <a href="https://research.microsoft.com/en-us/um/people/lamport/pubs/lamport-actions.pdf"><em>The Temporal Logic of Actions</em></a>. <a href="#fnref:nontemp" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:langsem">
-      <p>The claim that the language semantics is preserved across different compiler versions is not sufficient to resolve the issue, as it just means that equivalence under the details of the published semantics is the crucial one, but that level of detail in the semantics may be arbitrary, and we have no a priori reason to prefer that equivalence over others.&nbsp;<a href="#fnref:langsem" class="reversefootnote">&#8617;</a></p>
+      <p>The claim that the language semantics is preserved across different compiler versions is not sufficient to resolve the issue, as it just means that equivalence under the details of the published semantics is the crucial one, but that level of detail in the semantics may be arbitrary, and we have no a priori reason to prefer that equivalence over others. <a href="#fnref:langsem" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:algorithm-works">
-      <p>One may object and say that some minimal level of detail is required or an algorithm for finding the greatest element in a list could be “find the greatest element in the list.” However, insisting on any minimal level of detail would get us into even greater trouble, because we do accept “find the greatest element in the list” as a description of sufficient detail if it appears as a step in some larger algorithm.&nbsp;<a href="#fnref:algorithm-works" class="reversefootnote">&#8617;</a></p>
+      <p>One may object and say that some minimal level of detail is required or an algorithm for finding the greatest element in a list could be “find the greatest element in the list.” However, insisting on any minimal level of detail would get us into even greater trouble, because we do accept “find the greatest element in the list” as a description of sufficient detail if it appears as a step in some larger algorithm. <a href="#fnref:algorithm-works" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:no-difference">
-      <p>By which I mean that there is no mechanical syntactic rule that can tell us — or even hint — whether a TLA specifications specifies a pure computation or one with side-effects.&nbsp;<a href="#fnref:no-difference" class="reversefootnote">&#8617;</a></p>
+      <p>By which I mean that there is no mechanical syntactic rule that can tell us — or even hint — whether a TLA specifications specifies a pure computation or one with side-effects. <a href="#fnref:no-difference" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:kay-monads">
-      <p>On this paper <a href="https://youtu.be/fhOHn9TClXY?t=20m26s">Alan Kay remarked</a>, “you don’t need monads”.&nbsp;<a href="#fnref:kay-monads" class="reversefootnote">&#8617;</a></p>
+      <p>On this paper <a href="https://youtu.be/fhOHn9TClXY?t=20m26s">Alan Kay remarked</a>, “you don’t need monads”. <a href="#fnref:kay-monads" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:representation">
-      <p>This is <em>not</em> true for programs written in any programming language, where it is generally hard to represent exactly the same concept in different languages. A BASIC subroutine is something quite different from a Haskell function. In TLA, we can choose to represent both as the same mathematical object or choose to model their precise differences.&nbsp;<a href="#fnref:representation" class="reversefootnote">&#8617;</a></p>
+      <p>This is <em>not</em> true for programs written in any programming language, where it is generally hard to represent exactly the same concept in different languages. A BASIC subroutine is something quite different from a Haskell function. In TLA, we can choose to represent both as the same mathematical object or choose to model their precise differences. <a href="#fnref:representation" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:similarity">
-      <p>We will briefly discuss equivalence in the process calculi in part 4.&nbsp;<a href="#fnref:similarity" class="reversefootnote">&#8617;</a></p>
+      <p>We will briefly discuss equivalence in the process calculi in part 4. <a href="#fnref:similarity" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:infinite-behavior">
-      <p>Just as differential equations normally specify functions over an infinite duration of time.&nbsp;<a href="#fnref:infinite-behavior" class="reversefootnote">&#8617;</a></p>
+      <p>Just as differential equations normally specify functions over an infinite duration of time. <a href="#fnref:infinite-behavior" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:metric">
-      <p>The same could also be done by using a metric space where the distance between two behaviors is $1/n$ when the earliest state in which they differ is the n-th one&nbsp;<a href="#fnref:metric" class="reversefootnote">&#8617;</a></p>
+      <p>The same could also be done by using a metric space where the distance between two behaviors is $1/n$ when the earliest state in which they differ is the n-th one <a href="#fnref:metric" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ctlstar">
-      <p>The temporal logic <a href="https://en.wikipedia.org/wiki/CTL*">CTL*</a>, however, is a superset of both, and can express anything either logic can.&nbsp;<a href="#fnref:ctlstar" class="reversefootnote">&#8617;</a></p>
+      <p>The temporal logic <a href="https://en.wikipedia.org/wiki/CTL*">CTL*</a>, however, is a superset of both, and can express anything either logic can. <a href="#fnref:ctlstar" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ltl">
-      <p>See Moshe Vardi, <a href="https://link.springer.com/chapter/10.1007%2F3-540-45319-9_1"><em>Branching vs. Linear Time: Final Showdown</em></a>, 2002&nbsp;<a href="#fnref:ltl" class="reversefootnote">&#8617;</a></p>
+      <p>See Moshe Vardi, <a href="https://link.springer.com/chapter/10.1007%2F3-540-45319-9_1"><em>Branching vs. Linear Time: Final Showdown</em></a>, 2002 <a href="#fnref:ltl" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:boolean-lt">
-      <p>Assuming, of course, that the relation $\lt$ is indeed defined on the values of $x$ and $y$.&nbsp;<a href="#fnref:boolean-lt" class="reversefootnote">&#8617;</a></p>
+      <p>Assuming, of course, that the relation $\lt$ is indeed defined on the values of $x$ and $y$. <a href="#fnref:boolean-lt" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:done">
-      <p>Although this is rarely if ever done in practice. Usually we declare a boolean variable called $done$ and specify termination as $\Diamond done$.&nbsp;<a href="#fnref:done" class="reversefootnote">&#8617;</a></p>
+      <p>Although this is rarely if ever done in practice. Usually we declare a boolean variable called $done$ and specify termination as $\Diamond done$. <a href="#fnref:done" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:TLC1">
-      <p>Note that the TLA<sup>+</sup> <em>tooling</em>, like the model checker TLC, may not be equally accommodating to the equivalent ways of writing the actions in the examples above, and may strongly prefer the simpler forms over the more complicated ones.&nbsp;<a href="#fnref:TLC1" class="reversefootnote">&#8617;</a></p>
+      <p>Note that the TLA<sup>+</sup> <em>tooling</em>, like the model checker TLC, may not be equally accommodating to the equivalent ways of writing the actions in the examples above, and may strongly prefer the simpler forms over the more complicated ones. <a href="#fnref:TLC1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:d-operator">
-      <p>Again, this is not quite correct in TLA<sup>+</sup>. To correct it, we’d need to say $x’ \in Real \land d(x) = 10$.&nbsp;<a href="#fnref:d-operator" class="reversefootnote">&#8617;</a></p>
+      <p>Again, this is not quite correct in TLA<sup>+</sup>. To correct it, we’d need to say $x’ \in Real \land d(x) = 10$. <a href="#fnref:d-operator" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:angelic">
-      <p>The term was coined by Tony Hoare.&nbsp;<a href="#fnref:angelic" class="reversefootnote">&#8617;</a></p>
+      <p>The term was coined by Tony Hoare. <a href="#fnref:angelic" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:fairness-closed">
-      <p>To see why this is a necessary condition, consider our running example with $\land \Box(t = 10 \implies x = 100) \land \WF_t(t’ = t + 1)$.&nbsp;<a href="#fnref:fairness-closed" class="reversefootnote">&#8617;</a></p>
+      <p>To see why this is a necessary condition, consider our running example with $\land \Box(t = 10 \implies x = 100) \land \WF_t(t’ = t + 1)$. <a href="#fnref:fairness-closed" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:mc1">
-      <p>Or even temporal formulas at all, as the model checker supports checking specifications given as two separate $Init$ and $Next$ formulas, as well as verify safety invariants given only as $P$ instead of $\Box P$, so there’s even no need to know about $\Box$ and $[]_e$.&nbsp;<a href="#fnref:mc1" class="reversefootnote">&#8617;</a></p>
+      <p>Or even temporal formulas at all, as the model checker supports checking specifications given as two separate $Init$ and $Next$ formulas, as well as verify safety invariants given only as $P$ instead of $\Box P$, so there’s even no need to know about $\Box$ and $[]_e$. <a href="#fnref:mc1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:rabinovich">
-      <p>An ω-language is definable in TLA if and only if it is stuttering closed and definable in monadic second order logic.&nbsp;<a href="#fnref:rabinovich" class="reversefootnote">&#8617;</a></p>
+      <p>An ω-language is definable in TLA if and only if it is stuttering closed and definable in monadic second order logic. <a href="#fnref:rabinovich" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:nd-types">
-      <p>For example, in formalisms based on type theory, types express nondeterminism. $e : Int$, is the static assertion that the expression $e$ can be any integer, and we don’t know or don’t care which.&nbsp;<a href="#fnref:nd-types" class="reversefootnote">&#8617;</a></p>
+      <p>For example, in formalisms based on type theory, types express nondeterminism. $e : Int$, is the static assertion that the expression $e$ can be any integer, and we don’t know or don’t care which. <a href="#fnref:nd-types" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:lc1">
-      <p>The syntax may be a little unpleasant, as we’d need to encode lambda expressions as tuples or records.&nbsp;<a href="#fnref:lc1" class="reversefootnote">&#8617;</a></p>
+      <p>The syntax may be a little unpleasant, as we’d need to encode lambda expressions as tuples or records. <a href="#fnref:lc1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:or-liveness">
-      <p>This is because each program could specify — as we’ve seen in the previous section — that it is to be scheduled by a fair scheduler, whereas our intent is the exact opposite. Nevertheless, a specification that handles that case, too, is just a little more complicated. Consider it an exercise, and I’ll post the solution in part 4.&nbsp;<a href="#fnref:or-liveness" class="reversefootnote">&#8617;</a></p>
+      <p>This is because each program could specify — as we’ve seen in the previous section — that it is to be scheduled by a fair scheduler, whereas our intent is the exact opposite. Nevertheless, a specification that handles that case, too, is just a little more complicated. Consider it an exercise, and I’ll post the solution in part 4. <a href="#fnref:or-liveness" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:gtla">
-      <p>An extended version of TLA that is equally expressive but with a proof system that is complete for all TLA formulas can be found in Stephan Merz, <a href="https://members.loria.fr/SMerz/papers/gtla.html"><em>A More Complete TLA</em></a>, 1999. An encoding of the TLA* logic introduced in that paper in Isabelle/HOL can be found <a href="https://www.isa-afp.org/entries/TLA.shtml">here</a>.&nbsp;<a href="#fnref:gtla" class="reversefootnote">&#8617;</a></p>
+      <p>An extended version of TLA that is equally expressive but with a proof system that is complete for all TLA formulas can be found in Stephan Merz, <a href="https://members.loria.fr/SMerz/papers/gtla.html"><em>A More Complete TLA</em></a>, 1999. An encoding of the TLA* logic introduced in that paper in Isabelle/HOL can be found <a href="https://www.isa-afp.org/entries/TLA.shtml">here</a>. <a href="#fnref:gtla" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:equational">
-      <p>There’s also <em>equational reasoning</em> which uses mathematical (or <em>denotational</em>) semantics to assign a certain abstract mathematical object to each expression in the program, and then uses substitution and equality as with algebraic equations. Speaking of equational reasoning in TLA is irrelevant as TLA is not a programming language but a logic. All logical statements can be understood as algebraic equations — and inequalities — over a boolean algebra. Unlike a programming language, the semantics of a logic are so simple that it makes sense to point out equational reasoning. It becomes subsumed in all forms of logical reasoning.&nbsp;<a href="#fnref:equational" class="reversefootnote">&#8617;</a></p>
+      <p>There’s also <em>equational reasoning</em> which uses mathematical (or <em>denotational</em>) semantics to assign a certain abstract mathematical object to each expression in the program, and then uses substitution and equality as with algebraic equations. Speaking of equational reasoning in TLA is irrelevant as TLA is not a programming language but a logic. All logical statements can be understood as algebraic equations — and inequalities — over a boolean algebra. Unlike a programming language, the semantics of a logic are so simple that it makes sense to point out equational reasoning. It becomes subsumed in all forms of logical reasoning. <a href="#fnref:equational" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -2303,6 +2298,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
 <!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
 
 <script type="text/javascript" src="/js/bigfoot.min.js"></script>
 

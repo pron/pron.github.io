@@ -757,13 +757,15 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>Speaking of <script type="math/tex">\CHOOSE\!</script>, because we now know that all values in TLA<sup>+</sup> are sets, and because the relations $\in$ and $=$ are defined on <em>all</em> sets, we should revisit our definition of “undefined”, because we can now have an undefined value used in an expression yet still know <em>something</em> about the expression’s value. For example, <script type="math/tex">\CHOOSE x : \FALSE\!</script> is undefined, which means it is some unknowable value. But as that value is a set, then, say, <script type="math/tex">10 \in (\CHOOSE x : \FALSE\!)</script> must be either <script type="math/tex">\TRUE\!</script> or <script type="math/tex">\FALSE\!</script> (and so, similarly, <script type="math/tex">\IF 3 \in (\CHOOSE x : \FALSE\!) \;\THEN 3 \;\ELSE 5</script> must be either 3 or 5). In such cases I will also say that the expression is undefined even though it is known to be in some set, because the logic does not let us determine its precise value.</p>
 
-<p>We can use <script type="math/tex">\CONSTANT\!</script> and the definitions we’ve just learned as follows:
-<script type="math/tex">% <![CDATA[
+<p>We can use <script type="math/tex">\CONSTANT\!</script> and the definitions we’ve just learned as follows:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
 &\CONSTANTS S, \_ \preceq \_\\
 &\ASSUME Poset(S, \preceq)
 \end{alignat} %]]></script>
-We can now think of $S$ as a type parameter that has a partial order relation defined on it, similar to a typeclass in some functional programming languages, or interfaces in object-oriented ones.</p>
+
+<p>We can now think of $S$ as a type parameter that has a partial order relation defined on it, similar to a typeclass in some functional programming languages, or interfaces in object-oriented ones.</p>
 
 <h3 id="some-important-sets">Some Important Sets</h3>
 
@@ -1529,100 +1531,100 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
 <div class="footnotes">
   <ol>
     <li id="fn:standard">
-      <p>While there are several set theories, ZFC is considered “standard”, whereas there are many type theories that differ from each other either in subtle or profound ways, none of which has become standard.&nbsp;<a href="#fnref:standard" class="reversefootnote">&#8617;</a></p>
+      <p>While there are several set theories, ZFC is considered “standard”, whereas there are many type theories that differ from each other either in subtle or profound ways, none of which has become standard. <a href="#fnref:standard" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:gonthier">
-      <p><a href="https://en.wikipedia.org/wiki/Georges_Gonthier">George Gonthier</a> is a leading practitioner in formal mathematics and one of the Coq veterans who helped design the TLA<sup>+</sup> proof language.&nbsp;<a href="#fnref:gonthier" class="reversefootnote">&#8617;</a></p>
+      <p><a href="https://en.wikipedia.org/wiki/Georges_Gonthier">George Gonthier</a> is a leading practitioner in formal mathematics and one of the Coq veterans who helped design the TLA<sup>+</sup> proof language. <a href="#fnref:gonthier" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:hardy">
-      <p>G.H. Hardy, <a href="https://www.math.ualberta.ca/mss/misc/A%20Mathematician%27s%20Apology.pdf"><em>A Mathematician’s Apology</em></a>, 1940&nbsp;<a href="#fnref:hardy" class="reversefootnote">&#8617;</a></p>
+      <p>G.H. Hardy, <a href="https://www.math.ualberta.ca/mss/misc/A%20Mathematician%27s%20Apology.pdf"><em>A Mathematician’s Apology</em></a>, 1940 <a href="#fnref:hardy" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:hardy2">
-      <p>Then again, Hardy took pride in his own “useless” field of number theory because, he believed, it would never have any “warlike” uses.&nbsp;<a href="#fnref:hardy2" class="reversefootnote">&#8617;</a></p>
+      <p>Then again, Hardy took pride in his own “useless” field of number theory because, he believed, it would never have any “warlike” uses. <a href="#fnref:hardy2" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:set-theory">
-      <p>I’ve seen some online discussions where working programmers discuss the foundation of logic and mathematics with the same opinionated vigor they argue over Haskell vs. Python, and I just want to say this: If you think the choice of a mathematical foundation can significantly affect the way you specify and reason about real, physically realizable systems, then you misunderstand something basic about the whole subject of mathematical foundations. All foundations must agree on any physically observable prediction, and no foundation provides magic proof techniques that make it superior to others, certainly as far as the work of us programmers is concerned.&nbsp;<a href="#fnref:set-theory" class="reversefootnote">&#8617;</a></p>
+      <p>I’ve seen some online discussions where working programmers discuss the foundation of logic and mathematics with the same opinionated vigor they argue over Haskell vs. Python, and I just want to say this: If you think the choice of a mathematical foundation can significantly affect the way you specify and reason about real, physically realizable systems, then you misunderstand something basic about the whole subject of mathematical foundations. All foundations must agree on any physically observable prediction, and no foundation provides magic proof techniques that make it superior to others, certainly as far as the work of us programmers is concerned. <a href="#fnref:set-theory" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:formalism">
-      <p>Not to be confused with <a href="https://en.wikipedia.org/wiki/Formalism_(philosophy_of_mathematics)">Formalism</a>, a <a href="https://en.wikipedia.org/wiki/Finitism">finitist</a> philosophy of mathematics.&nbsp;<a href="#fnref:formalism" class="reversefootnote">&#8617;</a></p>
+      <p>Not to be confused with <a href="https://en.wikipedia.org/wiki/Formalism_(philosophy_of_mathematics)">Formalism</a>, a <a href="https://en.wikipedia.org/wiki/Finitism">finitist</a> philosophy of mathematics. <a href="#fnref:formalism" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:function-relation">
-      <p>A function is just a relation with one implicit arity, so <code class="highlighter-rouge">*</code>, which is a 2-ary function, could also be given as a 3-ary relation, <code class="highlighter-rouge">multiplies(a,b,c)</code>, that says whether <code class="highlighter-rouge">c</code> is the result of multiplying <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>&nbsp;<a href="#fnref:function-relation" class="reversefootnote">&#8617;</a></p>
+      <p>A function is just a relation with one implicit arity, so <code class="highlighter-rouge">*</code>, which is a 2-ary function, could also be given as a 3-ary relation, <code class="highlighter-rouge">multiplies(a,b,c)</code>, that says whether <code class="highlighter-rouge">c</code> is the result of multiplying <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> <a href="#fnref:function-relation" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:non-standard">
-      <p>That would be impossible, due to the physical limitations of computation.&nbsp;<a href="#fnref:non-standard" class="reversefootnote">&#8617;</a></p>
+      <p>That would be impossible, due to the physical limitations of computation. <a href="#fnref:non-standard" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:logical-constants">
-      <p>Later we’ll see that <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script> are also ordinary values in TLA<sup>+</sup>.&nbsp;<a href="#fnref:logical-constants" class="reversefootnote">&#8617;</a></p>
+      <p>Later we’ll see that <script type="math/tex">\TRUE\!</script> and <script type="math/tex">\FALSE\!</script> are also ordinary values in TLA<sup>+</sup>. <a href="#fnref:logical-constants" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ASCII">
-      <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv$, <code class="highlighter-rouge">-&gt;</code> for $\to$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto$, <code class="highlighter-rouge">==</code> for $\triangleq$, <code class="highlighter-rouge">\A</code> for $\forall$, <code class="highlighter-rouge">\E</code> for $\exists$, <code class="highlighter-rouge">[]</code> for $\Box$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond$, <code class="highlighter-rouge">&lt;&lt;</code> for $\langle$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle$,  <code class="highlighter-rouge">\o</code> for $\circ$ etc.. $\LaTeX$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall$ or <code class="highlighter-rouge">\neg</code> for $\neg$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful.&nbsp;<a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
+      <p>When writing TLA<sup>+</sup> specifications, you would enter the text in ASCII using special shortcuts, like <code class="highlighter-rouge">\/</code> for $\lor$, <code class="highlighter-rouge">/\</code> for $\land$, <code class="highlighter-rouge">~</code> for $\neg$, <code class="highlighter-rouge">=&gt;</code> for $\Rightarrow$, <code class="highlighter-rouge">&lt;=&gt;</code> for $\equiv$, <code class="highlighter-rouge">-&gt;</code> for $\to$, <code class="highlighter-rouge">|-&gt;</code> for $\mapsto$, <code class="highlighter-rouge">==</code> for $\triangleq$, <code class="highlighter-rouge">\A</code> for $\forall$, <code class="highlighter-rouge">\E</code> for $\exists$, <code class="highlighter-rouge">[]</code> for $\Box$, <code class="highlighter-rouge">&lt;&gt;</code> for $\Diamond$, <code class="highlighter-rouge">&lt;&lt;</code> for $\langle$, <code class="highlighter-rouge">&gt;&gt;</code> for $\rangle$,  <code class="highlighter-rouge">\o</code> for $\circ$ etc.. $\LaTeX$ notation is used for other symbols, like <code class="highlighter-rouge">\cup</code> for $\cup$ , and you can also use it for the symbols with more convenient shortcuts if you like (e.g. <code class="highlighter-rouge">\forall</code> for $\forall$ or <code class="highlighter-rouge">\neg</code> for $\neg$). The pretty printer preserves alignments, which, as we’ve seen, may be meaningful. <a href="#fnref:ASCII" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:some">
-      <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name.&nbsp;<a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
+      <p>Isabelle/HOL named its Hilbert’s epsilon operator SOME, which I think is a much better, less confusing name. <a href="#fnref:some" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:if-def">
-      <p>See <em>Specifying Systems</em>, p. 298.&nbsp;<a href="#fnref:if-def" class="reversefootnote">&#8617;</a></p>
+      <p>See <em>Specifying Systems</em>, p. 298. <a href="#fnref:if-def" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:lambda">
-      <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later.&nbsp;<a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
+      <p>Note that <script type="math/tex">\LAMBDA\!</script> is <em>not</em> a function but an operator. We’ll see anonymous functions later. <a href="#fnref:lambda" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:substitution">
-      <p>For more on this, see Lamport’s <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf">Substitution: Syntactic versus Semantic</a>&nbsp;<a href="#fnref:substitution" class="reversefootnote">&#8617;</a></p>
+      <p>For more on this, see Lamport’s <a href="http://lamport.azurewebsites.net/pubs/substitution.pdf">Substitution: Syntactic versus Semantic</a> <a href="#fnref:substitution" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:class">
-      <p>If you’re wondering what the model of a FOL+ZFC formula is, as the models of FOL formulas are always second-order objects, and yet sets are already our first-order object, then that model is called a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)">class</a>. Many classes, like the universe of ZFC (i.e., the model of the formula $x = x$), are not formal sets, meaning they cannot be constructed by the axioms of ZFC. A class that is not a (formal) set is called a <em>proper class</em>.&nbsp;<a href="#fnref:class" class="reversefootnote">&#8617;</a></p>
+      <p>If you’re wondering what the model of a FOL+ZFC formula is, as the models of FOL formulas are always second-order objects, and yet sets are already our first-order object, then that model is called a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)">class</a>. Many classes, like the universe of ZFC (i.e., the model of the formula $x = x$), are not formal sets, meaning they cannot be constructed by the axioms of ZFC. A class that is not a (formal) set is called a <em>proper class</em>. <a href="#fnref:class" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:paradox">
-      <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by the facts that a set cannot contain elements of different order (so $\set{1, \set{2, 3}}$ is not a valid set), i.e. different types.&nbsp;<a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
+      <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by the facts that a set cannot contain elements of different order (so $\set{1, \set{2, 3}}$ is not a valid set), i.e. different types. <a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ambig">
-      <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning.&nbsp;<a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
+      <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning. <a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:cdot">
-      <p>Actually, the $\cdot$ operator is already taken in TLA<sup>+</sup> (for action composition), so you’d need to choose a different operator.&nbsp;<a href="#fnref:cdot" class="reversefootnote">&#8617;</a></p>
+      <p>Actually, the $\cdot$ operator is already taken in TLA<sup>+</sup> (for action composition), so you’d need to choose a different operator. <a href="#fnref:cdot" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tlc-finite">
-      <p>Provided that evaluating the expression does not require enumerating an infinite set, but TLC allows overriding set definitions so that you may refer to infinite sets in your specification, but evaluate them on finite subsets.&nbsp;<a href="#fnref:tlc-finite" class="reversefootnote">&#8617;</a></p>
+      <p>Provided that evaluating the expression does not require enumerating an infinite set, but TLC allows overriding set definitions so that you may refer to infinite sets in your specification, but evaluate them on finite subsets. <a href="#fnref:tlc-finite" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:interpret-boolean">
-      <p>The identification of the members of <script type="math/tex">\BOOLEAN\!</script> with the logical truth values is convenient, but also introduces some subtleties. They are discussed in section 16.1.3 <em>Interpretation of Boolean Operators</em> of <em>Specifying Systems</em> (p. 296).&nbsp;<a href="#fnref:interpret-boolean" class="reversefootnote">&#8617;</a></p>
+      <p>The identification of the members of <script type="math/tex">\BOOLEAN\!</script> with the logical truth values is convenient, but also introduces some subtleties. They are discussed in section 16.1.3 <em>Interpretation of Boolean Operators</em> of <em>Specifying Systems</em> (p. 296). <a href="#fnref:interpret-boolean" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:div">
-      <p>While it doesn’t matter in practice — as it has no bad consequences — the definition allows us to deduce that $0/0$ is some indeterminate real number, as there are many numbers $c$ that satisfy the equation on the left-hand side. If that bothers you, it can be fixed by defining division as $ChooseOne(Real,\; \LAMBDA c : a = b*c)$. Also, the second rule in the definition of <script type="math/tex">\CHOOSE\!</script> (right-uniqueness) allows us to deduce that $1/0 = 2/0$. If that bothers you, there is a somewhat more complex definition that makes such a deduction impossible.&nbsp;<a href="#fnref:div" class="reversefootnote">&#8617;</a></p>
+      <p>While it doesn’t matter in practice — as it has no bad consequences — the definition allows us to deduce that $0/0$ is some indeterminate real number, as there are many numbers $c$ that satisfy the equation on the left-hand side. If that bothers you, it can be fixed by defining division as $ChooseOne(Real,\; \LAMBDA c : a = b*c)$. Also, the second rule in the definition of <script type="math/tex">\CHOOSE\!</script> (right-uniqueness) allows us to deduce that $1/0 = 2/0$. If that bothers you, there is a somewhat more complex definition that makes such a deduction impossible. <a href="#fnref:div" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tlc-nonsense">
-      <p>Attempting to evaluate the expression in the TLC model checker results in an error.&nbsp;<a href="#fnref:tlc-nonsense" class="reversefootnote">&#8617;</a></p>
+      <p>Attempting to evaluate the expression in the TLC model checker results in an error. <a href="#fnref:tlc-nonsense" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:typed-untyped">
-      <p>Lamport and Paulson’s <a href="http://lamport.azurewebsites.net/pubs/lamport-types.pdf"><em>Should Your Specification Language Be Typed?</em></a> and Lamport’s <a href="/assets/lamport-types-not-harmless.pdf"><em>Types Are Not Harmless</em></a>.&nbsp;<a href="#fnref:typed-untyped" class="reversefootnote">&#8617;</a></p>
+      <p>Lamport and Paulson’s <a href="http://lamport.azurewebsites.net/pubs/lamport-types.pdf"><em>Should Your Specification Language Be Typed?</em></a> and Lamport’s <a href="/assets/lamport-types-not-harmless.pdf"><em>Types Are Not Harmless</em></a>. <a href="#fnref:typed-untyped" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:not-pairs">
-      <p>And so $\seq{-1, 1} \in [x \in Int \mapsto x^2]$ is undefined rather than <script type="math/tex">\TRUE\!</script>.&nbsp;<a href="#fnref:not-pairs" class="reversefootnote">&#8617;</a></p>
+      <p>And so $\seq{-1, 1} \in [x \in Int \mapsto x^2]$ is undefined rather than <script type="math/tex">\TRUE\!</script>. <a href="#fnref:not-pairs" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:square-brackets">
-      <p>In deviation from familiar notation, the square brackets are necessary in the concrete TLA<sup>+</sup> syntax to settle parsing ambiguities that may arise due to the other use of the $\to$ symbol in the <script type="math/tex">\CASE\!</script> construct. In addition, square brackets are used in all forms of function definition and application (except for tuple definition, where angled brackets are used), so they serve as a visual queue that helps identify the use of functions in TLA<sup>+</sup> expressions.&nbsp;<a href="#fnref:square-brackets" class="reversefootnote">&#8617;</a></p>
+      <p>In deviation from familiar notation, the square brackets are necessary in the concrete TLA<sup>+</sup> syntax to settle parsing ambiguities that may arise due to the other use of the $\to$ symbol in the <script type="math/tex">\CASE\!</script> construct. In addition, square brackets are used in all forms of function definition and application (except for tuple definition, where angled brackets are used), so they serve as a visual queue that helps identify the use of functions in TLA<sup>+</sup> expressions. <a href="#fnref:square-brackets" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:calculus">
-      <p>If we wanted to do actual calculus, we’d be less sloppy, and define continuity and differentiability, so we could assert that a limit or a derivative actually exists (as our $Limit$ and $Derivative$ operators are undefined if the function is dicontinuous or not differentiable at point $a$). To see how that’s done, see page 22 of Leslie Lamport’s <a href="http://lamport.azurewebsites.net/pubs/proof.pdf"><em>How to Write a 21st Century Proof</em></a>.&nbsp;<a href="#fnref:calculus" class="reversefootnote">&#8617;</a></p>
+      <p>If we wanted to do actual calculus, we’d be less sloppy, and define continuity and differentiability, so we could assert that a limit or a derivative actually exists (as our $Limit$ and $Derivative$ operators are undefined if the function is dicontinuous or not differentiable at point $a$). To see how that’s done, see page 22 of Leslie Lamport’s <a href="http://lamport.azurewebsites.net/pubs/proof.pdf"><em>How to Write a 21st Century Proof</em></a>. <a href="#fnref:calculus" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tlaps-recursive">
-      <p>This is not as big a limitation as it may sound, as recursive operators can usually be expressed as non-recursive operators with a recursive function defined in a <script type="math/tex">\LET\!</script> clause.&nbsp;<a href="#fnref:tlaps-recursive" class="reversefootnote">&#8617;</a></p>
+      <p>This is not as big a limitation as it may sound, as recursive operators can usually be expressed as non-recursive operators with a recursive function defined in a <script type="math/tex">\LET\!</script> clause. <a href="#fnref:tlaps-recursive" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:listasseq">
-      <p>There are other, shorter ways of writing $ListAsSeq$, but I wanted to showcase some more TLA<sup>+</sup> features.&nbsp;<a href="#fnref:listasseq" class="reversefootnote">&#8617;</a></p>
+      <p>There are other, shorter ways of writing $ListAsSeq$, but I wanted to showcase some more TLA<sup>+</sup> features. <a href="#fnref:listasseq" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:kleene">
-      <p>And we could then define <a href="https://en.wikipedia.org/wiki/Kleene%27s_T_predicate">Kleene’s T predicate</a>.&nbsp;<a href="#fnref:kleene" class="reversefootnote">&#8617;</a></p>
+      <p>And we could then define <a href="https://en.wikipedia.org/wiki/Kleene%27s_T_predicate">Kleene’s T predicate</a>. <a href="#fnref:kleene" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:tlaps-paper">
-      <p>Kaustuv Chaudhuri, Damien Doligez, Leslie Lamport, Stephan Merz, <a href="https://members.loria.fr/SMerz/papers/keappa2008.pdf"><em>A TLA<sup>+</sup> Proof System</em></a>, 2008&nbsp;<a href="#fnref:tlaps-paper" class="reversefootnote">&#8617;</a></p>
+      <p>Kaustuv Chaudhuri, Damien Doligez, Leslie Lamport, Stephan Merz, <a href="https://members.loria.fr/SMerz/papers/keappa2008.pdf"><em>A TLA<sup>+</sup> Proof System</em></a>, 2008 <a href="#fnref:tlaps-paper" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:GCD">
-      <p>The theorems are later used in the book to prove the correctness of Euclid’s algorithm for computing the GCD. We will talk about Euclid’s algorithm in part 3.&nbsp;<a href="#fnref:GCD" class="reversefootnote">&#8617;</a></p>
+      <p>The theorems are later used in the book to prove the correctness of Euclid’s algorithm for computing the GCD. We will talk about Euclid’s algorithm in part 3. <a href="#fnref:GCD" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:contra">
-      <p>Note to all pedantic intuitionists: I wrote <em>of</em> contradiction; not <em>by</em> contradiction.&nbsp;<a href="#fnref:contra" class="reversefootnote">&#8617;</a></p>
+      <p>Note to all pedantic intuitionists: I wrote <em>of</em> contradiction; not <em>by</em> contradiction. <a href="#fnref:contra" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -1728,6 +1730,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
 <!--<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>-->
+
 
 <script type="text/javascript" src="/js/bigfoot.min.js"></script>
 
