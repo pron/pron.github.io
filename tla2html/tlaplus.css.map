@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,qEAAqE;ACErE,UAGC;EAFC,WAAW,EAAE,WAAW;EACxB,GAAG,EAAE,6BAA6B;AAGpC,WAAY;EACV,WAAW,EAAG,yBAAyB;EACvC,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAK,IAAI;EAClB,KAAK,EAAE,IAAI;;AAGb,SAAU;EACT,SAAS,EAAE,GAAG;EACd,WAAW,EAAE,KAAK;EAClB,aAAa,EAAE,KAAK",
+"sources": ["../../src/main/sass/_settings.scss","../../src/main/sass/tlaplus.scss"],
+"names": [],
+"file": "tlaplus.css"
+}

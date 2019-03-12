@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="tlaplus.css">
+    <script type="text/javascript" charset="utf-8" src="teavm/runtime.js"></script>
+    <script type="text/javascript" charset="utf-8" src="teavm/classes.js"></script>
+  </head>
+  <body onload="main()">
+    <!-- TODO: add HTML content -->
+    <tlaplus><pre>
+------------------------------- MODULE Bar -------------------------------
+\* Comment replacement in A->U:
+
+A == x /\ y /\ z /\ w
+(*a1234ssasass*) /\ k
+(*a12*)(*a*)(*c*)/\ a \* foo
+(*a123*)         /\ k
+(*a*)(*a*)       /\ a
+
+B == x /\ y /\ z /\ w (* asasvjhsad
+a1234ssasassas*) /\ k (* saiork
+kinda*)          /\ t
+
+\* "Accidental comment anchoring" in A->U:
+Foo(a, b) == /\ a \/ b
+          \* /\ a => b
+             /\ b => a
+=============================================================================
+</pre></tlaplus>
+    <i>HELLO</i>
+    <tlaplus><pre>
+------------------------------- MODULE Bar -------------------------------
+\* Comment replacement in U->A
+
+A ≜ abcdefgd ∧ defjhfkjkh
+(*a∧b∧c∧d∧e*)∧ k
+=============================================================================
+</pre></tlaplus>
+  </body>
+</html>

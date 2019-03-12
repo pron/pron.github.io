@@ -1,0 +1,17 @@
+/* This file contains all the constants for colors and font styles */
+@font-face {
+  font-family: TlaplusFont;
+  src: url(fonts/DejaVuSansMono.ttf); }
+tlaplus pre {
+  font-family: "TlaplusFont", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #333; }
+
+p, ul, ol {
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-bottom: 1.5em; }
+
+/*# sourceMappingURL=tlaplus.css.map */
