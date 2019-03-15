@@ -11,7 +11,6 @@ import org.teavm.jso.dom.xml.NodeList;
 
 import tla2html.TLAHTML;
 import tla2sany.st.SyntaxTreeConstants;
-import tla2unicode.TLAUnicode;
 
 public class Client {
     public static void main(String[] args) throws Exception {
@@ -23,7 +22,6 @@ public class Client {
             Node text = pre.getFirstChild();
             String content = text.getNodeValue();
 
-            StringWriter sw = new StringWriter();
 
             // Without this, the array isn't initialized in TeaVM
             System.out.println("SyntaxNodeImage: " + SyntaxTreeConstants.SyntaxNodeImage);
@@ -31,9 +29,8 @@ public class Client {
             
             System.out.println("content:");
             System.out.println(content);
-            TLAHTML.foo(new StringReader(content), sw, System.err, false);
 
-            String result = TLAUnicode.convert(true, content);
+            String result = TLAHTML.foo(content, System.err);
 
             pre.delete();
 
