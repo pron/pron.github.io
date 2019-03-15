@@ -1,32 +1,49 @@
 package tla2html;
 
+import java.io.StringReader;
+import java.io.StringWriter;
+
 import org.teavm.jso.dom.html.HTMLDocument;
 import org.teavm.jso.dom.html.HTMLElement;
 import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.Node;
 import org.teavm.jso.dom.xml.NodeList;
 
+import tla2html.TLAHTML;
+import tla2sany.st.SyntaxTreeConstants;
 import tla2unicode.TLAUnicode;
-import tla2unicode.Unicode;
 
 public class Client {
-    public static void main(String[] args) {
-//        String result = TLAUnicode.convert(false, "A /\\ B => C");
+    public static void main(String[] args) throws Exception {
         HTMLDocument document = HTMLDocument.current();
         NodeList<Element> tags = document.getElementsByTagName("tlaplus");
         for (int i=0; i<tags.getLength(); i++) {
-            Node node = tags.get(i).getFirstChild().getFirstChild();
-            String content = node.getNodeValue();
+            Element node = tags.get(i);
+            Node pre = node.getFirstChild();
+            Node text = pre.getFirstChild();
+            String content = text.getNodeValue();
 
-            System.out.println("TLAPLUS " + i);
+            StringWriter sw = new StringWriter();
+
+            // Without this, the array isn't initialized in TeaVM
+            System.out.println("SyntaxNodeImage: " + SyntaxTreeConstants.SyntaxNodeImage);
+            System.out.println("length:" + SyntaxTreeConstants.SyntaxNodeImage.length);
+            
+            System.out.println("content:");
             System.out.println(content);
+            TLAHTML.foo(new StringReader(content), sw, System.err, false);
 
             String result = TLAUnicode.convert(true, content);
 
-            node.setNodeValue(result);
+            pre.delete();
+
+            Node pre1 = document.createElement("pre");
+            pre1.appendChild(document.createTextNode(result));
+            node.appendChild(pre1);
+
+            // HTMLElement wrapper = document.createElement("div");
+            // wrapper.setInnerHTML("<i>" + result + "</i>");
+            // node.appendChild(wrapper);
         }
-        // HTMLElement div = document.createElement("div");
-        // div.appendChild(document.createTextNode("TeaVM generated element: " + result));
-        // document.getBody().appendChild(div);
     }
 }
