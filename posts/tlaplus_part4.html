@@ -322,7 +322,7 @@
 
 <p>The first (and only first) line in a module may be (and often is) $\EXTENDS M1, M2, \ldots$ where $M1, M2,\ldots$ are modules. It imports all exported symbols from those modules as if they were all defined in the the extending module.</p>
 
-<p>A module can be <em>instantiated</em> once or multiple times within another module. Every <em>declaration</em> — constant or variable, i.e. a free ordinary or temporal variable — in the instantiated module is treated as a parameter and must be assigned in a <script type="math/tex">\WITH\!</script> clause:</p>
+<p>A module can be <em>instantiated</em> once or multiple times within another module, and the instance can be assigned a name with a definition. Every <em>declaration</em> — constant or variable, i.e. a free ordinary or temporal variable — in the instantiated module is treated as a parameter and must be assigned in a <script type="math/tex">\WITH\!</script> clause:</p>
 
 <script type="math/tex; mode=display">MyFoo \triangleq \INSTANCE Foo \;\WITH d_1 \leftarrow e_1, \ldots, d_n \leftarrow e_n</script>
 
@@ -354,7 +354,7 @@
 
 <p>Because module names can only be mentioned in a <script type="math/tex">\MODULE\!</script>, <script type="math/tex">\EXTENDS\!</script>, or <script type="math/tex">\INSTANCE\!</script> clause, and nothing but a module name can appear in those constructs, there is no possibility of confusing module names with other names (definitions, declarations), so TLA<sup>+</sup> allows using the same name for a module and for a definition or a declaration.</p>
 
-<p>Modules are not first-class objects in TLA<sup>+</sup> in the sense that they cannot be passed as arguments to operators like ML modules or objects in object-oriented programming languages. However, the pattern,</p>
+<p>Modules are not first-class objects in TLA<sup>+</sup> in the sense that they cannot be passed as arguments to operators like <a href="https://en.wikipedia.org/wiki/ML_(programming_language)#Modules">modules in the programming language ML</a> or objects in object-oriented programming languages. However, the pattern,</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -369,7 +369,7 @@
 
 <p>is very much analogous to (the illegal) $MyM2 \defeq \INSTANCE  M2(M1)$, presuming that the “signatures” of $M1$ and $M2$ match, namely that $M1$ exports the names required by $M2$’s declarations.</p>
 
-<p>In fact, module instances — like operator arity we saw in part 2 and TLA “levels” we saw in part 3 — are another case where TLA<sup>+</sup> uses something similar to inferred types at the syntax level. The language tracks which operators (top-level operators or in <script type="math/tex">\LET\!/\IN\!</script> blocks) are defined as module instances and which aren’t, and it is a syntax error to use either when the other is needed.</p>
+<p>In fact, module instances — like operator arity we saw in part 2 and TLA “levels” we saw in part 3 — are another case where TLA<sup>+</sup> uses something similar to inferred types at the syntax level. The language tracks which definitions (top-level or in <script type="math/tex">\LET\!/\IN\!</script> blocks) are module instances, and it is a syntax error to use either when the other is needed. Moreover, not only does the syntax track whether or not a symbol refers to a module instance, if it does it tracks <em>which</em> module, and so symbol resolution is never ambiguous (unlike the case in most untyped programming languages). It is fair to say that TLA<sup>+</sup>’s module system is actually typed in a manner similar to modules in ML.</p>
 
 <p>Modules can be used to abstract away encoding (“implementation”) details of mathematical objects. Here’s a (very) contrived example that abstractly defines vectors without specifying any particular encoding:</p>
 
