@@ -768,7 +768,7 @@
 
 <p>It is also possible to define a temporal <script type="math/tex">\CHOOSE\!</script> operator in the same vein, but Lamport writes that he did not add it to TLA<sup>+</sup> because it is not necessary for writing specifications.</p>
 
-<p>Note that the four expression levels form a hierarchy. A constant predicate (level-0) is a degenerate form of a state predicate (level-1), which is a degenerate form of an action (level-2), one that states that if the predicate holds in the current state then any next state is possible, which is a degenerate form of a temporal formula (level-3).</p>
+<p>Note that the four expression levels form a hierarchy. A constant predicate (level-0) is a degenerate form of a state predicate (level-1), which is a degenerate form of an action (level-2), one that states that if the predicate holds in the current state then any next state is possible, which is a degenerate form of a temporal formula (level-3). TLA<sup>+</sup> enforces levels at the syntax level and applying operations to expressions with a level for which they are not defined is a syntax error; this is the second kind of property TLA<sup>+</sup> enforces at the syntax level similarly to typed languages (the first was the enforcement of operator arity we saw in part 2).</p>
 
 <p>Also note that the operators $’$ and $\Box$ (and so $\Diamond$, too) are different from the “ordinary” logical operators we saw in part 2. If the value of the variable $x$ is 3 at some point in time, then $x’$ is <em>not</em> the same as $3’$ (which, 3 being constant, is equal to 3). Similarly, if the value of $A$ is <script type="math/tex">\TRUE\!</script> at some point in time, then $\Box A$ is <em>not</em> the same as <script type="math/tex">\Box \TRUE\!</script>. This is a feature (called <em>referential opacity</em>) of modal logic, and, in fact of a larger class of logics that modal logics belong to, called <a href="https://en.wikipedia.org/wiki/Intensional_logic">intensional logic</a>. Intensional logics have great expressive power – i.e., they can <em>say</em> more things about their universe of discourse than ordinary, non-intensional (or <em>extensional</em>) logics can – in our case, being able to talk about systems at various points, of our choosing, in their behavior over time – but this power comes at the cost of certain inferences not being available (as we’ll see in the chapter, <a href="#invariants-and-proofs"><em>Invariants and Proofs</em></a>).</p>
 
@@ -1382,7 +1382,7 @@ TypeOK \defeq & \land x \in Int \\
 &SpecY &\defeq InitY \land \Box[NextY]_y \land \WF_y(NextY)
 \end{alignat} %]]></script>
 
-<p>What does the specification $SpecX \land SpecY​$ mean? Well, let’s write it down, and do some basic manipulations on the formula:</p>
+<p>What does the specification $SpecX \land SpecY$ mean? Well, let’s write it down, and do some basic manipulations on the formula:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}

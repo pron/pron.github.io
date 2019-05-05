@@ -369,6 +369,8 @@
 
 <p>is very much analogous to (the illegal) $MyM2 \defeq \INSTANCE  M2(M1)$, presuming that the “signatures” of $M1$ and $M2$ match, namely that $M1$ exports the names required by $M2$’s declarations.</p>
 
+<p>In fact, module instances — like operator arity we saw in part 2 and TLA “levels” we saw in part 3 — are another case where TLA<sup>+</sup> uses something similar to inferred types at the syntax level. The language tracks which operators (top-level operators or in <script type="math/tex">\LET\!/\IN\!</script> blocks) are defined as module instances and which aren’t, and it is a syntax error to use either when the other is needed.</p>
+
 <p>Modules can be used to abstract away encoding (“implementation”) details of mathematical objects. Here’s a (very) contrived example that abstractly defines vectors without specifying any particular encoding:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
@@ -1178,7 +1180,7 @@
 &Spec &\defeq \;& Init \land \Box[Next]_{\seq{vars, h}}
 \end{alignat} %]]></script>
 
-<p>And here it is with an added prophecy variable, $p​$:</p>
+<p>And here it is with an added prophecy variable, $p$:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -1850,7 +1852,7 @@
 
 <script type="math/tex; mode=display">D[t, x0, x1, x2 \in Real] \defeq x2 + x * x1 + f[t] + (\IF switchOn\;\THEN k*x0\;\ELSE 0)</script>
 
-<p>We then define an operator, $Integrate(t, D, t0, \seq{x_0, \ldots, x_n-1})​$ whose value is the value at time $t​$ of the tuple $\seq{x, \dot x, \ldots, \overset{\scriptscriptstyle (n-1)}{x}}​$, the time-derivatives of $x​$ that form the solution to the ordinary differential equation $D[t, x, \dot x, \ldots,\overset{\scriptscriptstyle (n-1)}{x}] = 0​$, and $\seq{x_0, \ldots, x_n-1}​$ are the values of those derivatives at time $t0​$. You can find the definition of $Integrate​$ on page 178 of <a href="https://www.microsoft.com/en-us/research/publication/specifying-systems-the-tla-language-and-tools-for-hardware-and-software-engineers/"><em>Specifying Systems</em></a>. The partial specification (showing only the continuous part) of our hybrid system, where $v​$ stands for the particle velocity $\dot{x}​$, is:</p>
+<p>We then define an operator, $Integrate(t, D, t0, \seq{x_0, \ldots, x_n-1})$ whose value is the value at time $t$ of the tuple $\seq{x, \dot x, \ldots, \overset{\scriptscriptstyle (n-1)}{x}}$, the time-derivatives of $x$ that form the solution to the ordinary differential equation $D[t, x, \dot x, \ldots,\overset{\scriptscriptstyle (n-1)}{x}] = 0$, and $\seq{x_0, \ldots, x_n-1}$ are the values of those derivatives at time $t0$. You can find the definition of $Integrate$ on page 178 of <a href="https://www.microsoft.com/en-us/research/publication/specifying-systems-the-tla-language-and-tools-for-hardware-and-software-engineers/"><em>Specifying Systems</em></a>. The partial specification (showing only the continuous part) of our hybrid system, where $v$ stands for the particle velocity $\dot{x}$, is:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
