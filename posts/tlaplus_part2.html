@@ -543,12 +543,13 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope, and overloading an operator name with another of a different arity is not allowed.</p>
 
-<p>Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:
-<script type="math/tex">% <![CDATA[
+<p>Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
 &x \defeq 3\\
 &Foo(x) \defeq x + 1
-\end{align} %]]></script></p>
+\end{align} %]]></script>
 
 <p>and neither is this:</p>
 
