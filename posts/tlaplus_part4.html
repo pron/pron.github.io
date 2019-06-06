@@ -454,7 +454,7 @@
 &\INSTANCE M \;\WITH C \leftarrow x, D \leftarrow y, F \leftarrow Prime
 \end{alignat} %]]></script>
 
-<p>The meaning of the theorem would be $(x = y) \implies (x’ = y’)$ which is false, and we cannot allow a theorem to become false when we substitute its free variables.</p>
+<p>The meaning of the theorem would be $(x = y) \implies (x’ = y’)$ which is false, and we cannot allow a theorem to become false when we substitute its free variables, so that instantiation would be a syntax error.</p>
 
 <p>An operator $F$ is said to be <em>Leibniz</em> (<em>substitutive</em>) iff $e = f \implies F(e) = F(f)$ (similarly for operators of higher arity). All builtin TLA<sup>+</sup> operators are Leibniz except for prime and the temporal operators, and all constant-level user-defined operators are Leibniz.</p>
 
