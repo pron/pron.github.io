@@ -488,7 +488,7 @@
 
 <h3 id="definitions">Definitions</h3>
 
-<p>The definition is the main building-block in TLA<sup>+</sup> (in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4). When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL (interpreted over, say, the real numbers) like so:</p>
+<p>The definition is the main building-block in TLA<sup>+</sup> — in fact it is almost the only one, the only other being the module, which we’ll learn about in part 4. When writing definitions informally, mathematicians use many different hopefully-intuitive-but-ill-specified notations. On the other hand, the minimalistic language of first-order logic only allows us to write definitions in the form of axioms, which can be cumbersome. For example, the absolute value function ($|\cdot|$) would be defined in FOL, interpreted over, say, the real numbers, like so:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -543,7 +543,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>TLA<sup>+</sup> does not let you name variables (or definitions) that are already bound in scope, and overloading an operator name with another of a different arity is not allowed.</p>
 
-<p>Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose their scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
+<p>Name bindings are introduced by top-level definitions or declarations (by declarations I mean the <script type="math/tex">\CONSTANT\!</script> and <script type="math/tex">\VARIABLE\!</script> constructs we’ll see later), whose binding extends until the end of the module in which they are defined, by parameters of an operator, whose scope extends until the end of the operator definition, by definitions in <script type="math/tex">\LET\!</script> constructs, which extends to the end of the expression in the <script type="math/tex">\IN\!</script> clause, and by quantified variables, whose binding extends to the end of the quantifier’s scope, as explained above. So this is not allowed:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align}
@@ -568,27 +568,27 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &x \defeq 3
 \end{align} %]]></script>
 
-<p><script type="math/tex">\CHOOSE\!</script> (and the quantifiers, too) allows to use as its bound variable the name that is currently being defined, so we can, and often do, write $x \defeq\CHOOSE x : P(x)$, although there is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is identical to $x \defeq\CHOOSE z : P(z)$.</p>
+<p>Unless an operator is recursive, in which case its name is introduced to the scope with the <script type="math/tex">\RECURSIVE\!</script> declaration, a name being defined on the left-hand of a definition is not yet in scope inside the definition body. This is why we can, and often do, write $x \defeq \CHOOSE x : P(x)$. There is no significance to the use of the same variable name on both the left- and right-hand sides of the definition, which is equivalent to $x \defeq \CHOOSE z : P(z)$.</p>
 
 <p>The values of the logic are the objects of its structure. As we’ll see momentarily, the data logic — the language used to describe the static data of algorithms — in TLA<sup>+</sup> is a set theory, and so the values of the logic are all sets. Operators are not themselves values, and we cannot quantify over them. For example, we cannot write:</p>
 
 <script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
 
-<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">15</a></sup>; from a practical point of view they work similarly to hygienic macros, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
+<p>Operators work by syntactic substitution<sup id="fnref:substitution"><a href="#fn:substitution" class="footnote">15</a></sup>; from a practical point of view they behave similarly to how hygienic macros work in a programming language, but they must evaluate to a value. We, therefore, cannot define the following operator, as the <script type="math/tex">\LAMBDA\!</script> expression is an operator, not a value:</p>
 
 <script type="math/tex; mode=display">Add(x) \defeq \LAMBDA y : x + y</script>
 
-<p>This could, however, be easily achieved with functions, as we’ll see later.</p>
+<p>This could, however, be easily achieved with functions — which <em>are</em> values in the logic — as we’ll see later.</p>
 
-<p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn later, as well as in the <a href="#proofs">proof language</a>.</p>
+<p>From a logic point-of-view, operators are second-order objects, or objects of the meta-language. TLA<sup>+</sup> allows treating them as free variables denoting second-order objects using the <script type="math/tex">\CONSTANT\!</script> construct we’ll learn in the next section, as well as in the <a href="#proofs">proof language</a>. So while the above expression that uses quantifiers over operators is illegal, but its intent <em>can</em> be expressed in TLA<sup>+</sup>, as we’ll see shortly.</p>
 
-<p>Even though TLA<sup>+</sup> is untyped — as we’ll see shortly — its syntax enforces more than just the well-formedness of its first-order logic (when rejecting ill-formed expressions such as $A \land \land B$). TLA<sup>+</sup> also syntactically enforces operator arity, and it is a syntax error to use an operator with a different number of arguments from its definition. In parts 3 and 4 we will see some more properties that are enforced by the TLA<sup>+</sup> syntax.</p>
+<p>Even though TLA<sup>+</sup> is considered untyped, its syntax enforces more than just the well-formedness of its first-order logic (when rejecting ill-formed expressions such as $A \land \land B$). TLA<sup>+</sup> also syntactically enforces operator arity, and it is a syntax error to use an operator with a different number of arguments from its definition. In parts 3 and 4 we will see some more properties that are enforced by the TLA<sup>+</sup> syntax, and that is essentially done through a mechanism of type inference.</p>
 
 <h3 id="free-and-uninterpreted-variables-constant">Free and Uninterpreted Variables: CONSTANT</h3>
 
-<p>Values or operators can be declared but not specified as a definition (with $\defeq$); instead, their meaning can be specified with the use of axioms. Such symbols that are not directly defined in terms of others but are given axioms that determine how they interact are often called in logic <em>uninterpreted symbols</em>. In part 4 we’ll see how those declarations can also be seen as an input or parameters when we learn of modules and module instantiation.</p>
+<p>Values or operators can be <em>declared</em> without being <em>defined</em> (with $\defeq$); instead, their meaning can be specified with the use of axioms. Symbols that are not directly defined in terms of others but are given axioms that determine how they interact are often called in logic <em>uninterpreted symbols</em>. In part 4 we’ll see how those declarations can also be seen as an input or parameters when we learn of modules and module instantiation.</p>
 
-<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>, although <script type="math/tex">\ASSUME\!</script> is much more common in TLA<sup>+</sup>, as it is treated slightly differently by the model checker TLC). For example, assuming $P$ and $Q$ are some predicates, we can write:</p>
+<p>Free variables/uninterpreted symbols are declared in TLA<sup>+</sup> with the keyword <script type="math/tex">\CONSTANT\!</script> (or its synonym <script type="math/tex">\CONSTANTS\!</script>), and assumptions about them — i.e. formulas that are axiomatically asserted to be true — are introduced with the keyword <script type="math/tex">\ASSUME\!</script> (or its synonym <script type="math/tex">\AXIOM\!</script>). For example, if $P$ and $Q$ are some predicates, we can write:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -597,7 +597,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\ASSUME Q(B)
 \end{alignat} %]]></script>
 
-<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>).</p>
+<p>Assumptions can also be named ($\ASSUME A1 \defeq …$) so that they can be referred to in proofs, where they’re treated as axioms. In fact, the keyword <script type="math/tex">\AXIOM\!</script> is synonymous with <script type="math/tex">\ASSUME\!</script> (with the minor difference that the model checker TLC checks assumptions declared with <script type="math/tex">\ASSUME\!</script> but not with <script type="math/tex">\AXIOM\!</script>, which is why  <script type="math/tex">\ASSUME\!</script> is more common in TLA<sup>+</sup> specifications).</p>
 
 <p>From a formal logic perspective, constants are just free variables. That $P(A)$ and $Q(B)$ is <em>all</em> we know about $A$ and $B$. If we use $A$ in a theorem, we must therefore prove the theorem for <em>any</em> value $A$ such that $P(A)$. In addition, the value of $Q(A)$ or $F(A)$ (for any operator $F$ that is not just defined in terms of $P$) — i.e. that of any expression whose value cannot be determined from our axioms about $A$ — is undefined, in the exact same sense explained in the section about <script type="math/tex">\CHOOSE\!</script>.</p>
 
@@ -618,7 +618,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 &\THEOREM (C = D) \implies (F(C) = F(D))
 \end{alignat} %]]></script>
 
-<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula (which we cannot write in TLA<sup>+</sup>):</p>
+<p>This theorem treats $F$ as <em>any</em> operator, i.e. as a free variable, which is equivalent to the quantified second-order formula that we cannot write in TLA<sup>+</sup>:</p>
 
 <script type="math/tex; mode=display">\A C, D, F : (C = D) \implies (F(C) = F(D))</script>
 
@@ -634,7 +634,7 @@ Foo(a, b) \defeq &\;\LET &x\defeq\IF a \leq b \;\THEN a\;\ELSE b\\
 
 <p>Constants are one way in which TLA<sup>+</sup> allows us to state second-order propositions even though it is a first-order logic. We’ll say a more about that in the section on proofs.</p>
 
-<p>The name <em>constant</em> simply means that the declared value/operator is not a temporal one that changes over time when specifying a dynamic system. We’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>, but it is important to keep in mind that temporal variables may change <em>during</em> an execution while constants may not, but constants <em>do change between different executions</em>.</p>
+<p>The name <em>constant</em> simply means that the declared value/operator is not a temporal one that changes over time when specifying a dynamic system. We’ll learn about temporal variables in part 3, when we learn how to write algorithms in TLA<sup>+</sup>, but it is important to keep in mind that temporal variables may change <em>during</em> an execution of an algorithm while constants may not, but constants <em>do change between different executions</em>.</p>
 
 <h2 id="sets">Sets</h2>
 
@@ -1587,7 +1587,7 @@ List \defeq InductiveDataType(&\set{\text{EMPTY}}, \\&\LAMBDA List : [value : S,
       <p>If you’re wondering what the model of a FOL+ZFC formula is, as the models of FOL formulas are always second-order objects, and yet sets are already our first-order object, then that model is called a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)">class</a>. Many classes, like the universe of ZFC (i.e., the model of the formula $x = x$), are not formal sets, meaning they cannot be constructed by the axioms of ZFC. A class that is not a (formal) set is called a <em>proper class</em>. <a href="#fnref:class" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:paradox">
-      <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by the facts that a set cannot contain elements of different order (so $\set{1, \set{2, 3}}$ is not a valid set), i.e. different types. <a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
+      <p>These set construction rules is how ZFC avoids <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell’s paradox</a>. In HOL, Russell’s paradox is avoided by not allowing a set to contain elements of different orders, i.e. different types (so $\set{1, \set{2, 3}}$ is not a valid set). <a href="#fnref:paradox" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:ambig">
       <p>You may have noticed there is an ambiguity regarding the meaning of the expression $\set{x \in A : x \in B}$. If you think about it, it could be understood to mean $A \cap B$ (if the axiom of separation is used) or as some subset of <script type="math/tex">\set{\TRUE,\FALSE\!}</script> (if the axiom of replacement is used). TLA<sup>+</sup> chooses the first, more useful meaning. <a href="#fnref:ambig" class="reversefootnote">&#8617;</a></p>
