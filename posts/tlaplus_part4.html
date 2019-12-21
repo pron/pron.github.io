@@ -590,7 +590,7 @@
   <p>After writing down a list of properties, it is very hard to figure out what one has written. It is hard to decide what additional properties are and are not implied by the list. As a result, it becomes impossible to tell whether a specification says all that it should about a system. With perseverance, one can write an axiomatic specification of a simple queue and convince oneself that it is correct. The task is hopeless for systems with any significant degree of complexity.</p>
 </blockquote>
 
-<p>What works in practice — at least for engineers who are not logicians — is specifying by example. We write a specification of a particular, simple, implementation of a stack, and say that a stack is anything that exposes the same behavior. This approach is called <em>model-based</em> specification. In order for it to work, we need to hide the implementation details of the model because other implementations are not required to mimic those; hiding information is a cornerstone of abstraction.</p>
+<p>What works in practice — at least for engineers who are not logicians — is specifying by example. We write a specification of a particular, simple, implementation of a stack, and say that a stack is anything that exposes the same behavior. This approach is called <em>model-based</em> specification. In order for it to work, we need to hide the implementation details of the model because other implementations are not required to mimic those; hiding information is a cornerstone of abstraction.<sup id="fnref:model-pbt"><a href="#fn:model-pbt" class="footnote">3</a></sup></p>
 
 <p>Here is a model-based specification of a stack (this time we will use algorithms):
 <script type="math/tex">% <![CDATA[
@@ -641,7 +641,7 @@
 
 <p>The system part, $M$, of the conjoined specification is insufficient as an open system specification because the correctness of $E \land M$ depends on the behavior of $E$ as well; $M$ by itself would assert that the system can behave correctly no matter what the environment does, in other words, it would take $E$ as $\TRUE$, meaning full nondeterminism that allows any sort of interaction with the system. Sometimes, this may be acceptable, as with our stack example above. But sometimes we’d want to specify a library or a system that only guarantees correct behavior if external components — be they other systems or other parts of the program — interact with it in a certain way. We would like to specify just what the system expects or assumes of the environment in order to function correctly rather than the system plus the environment as a whole. Such specifications are also called <em>rely-guarantee</em> or <em>assume-guarantee</em>, signifying the contract that under so and so assumptions, the system can make such and such guarantees. Such a contract requires that the system behave correctly only if the environment acts as expected.</p>
 
-<p>We could use $E \implies M$ as the contract<sup id="fnref:proposition"><a href="#fn:proposition" class="footnote">3</a></sup>. However, the contract $E \implies M$ is too lenient on the system. Consider a server that receives requests in the form of even numbers, and returns their value divided by two. If the request does not contain an even number, the system makes no guarantees on the outcome. We could specify $E$ and $M$ like so (in this specification the system does not necessarily respond to every – or even any – request, but that’s good enough for this example):</p>
+<p>We could use $E \implies M$ as the contract<sup id="fnref:proposition"><a href="#fn:proposition" class="footnote">4</a></sup>. However, the contract $E \implies M$ is too lenient on the system. Consider a server that receives requests in the form of even numbers, and returns their value divided by two. If the request does not contain an even number, the system makes no guarantees on the outcome. We could specify $E$ and $M$ like so (in this specification the system does not necessarily respond to every – or even any – request, but that’s good enough for this example):</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -665,7 +665,7 @@
 
 <p>Mathematical theories sometimes involve cumbersome constructions whose intent is just to show they are theoretically possible, and at the same time unnecessary. Turing machines are an example of that. Once their universality has been established with some tedious constructions, that construction need not be repeated, and computer scientists are free to refer to Python programs as Turing machines without writing a Python compiler to TM. We will follow a similar route. I will show how TLA<sup>+</sup> can support compositions that emulate programming language constructs only to later show why they are unnecessary.</p>
 
-<p>Ever since structured programming became popular, subroutines have been the primary form of decomposing programs in all mainstream programming languages and in almost all programming languages in general<sup id="fnref:turing-subroutines"><a href="#fn:turing-subroutines" class="footnote">4</a></sup>. We can write specifications as a composition of subroutines by writing some definitions that express the meaning of a subroutine. Those constructs — in particular, the $Subroutine$ operator — are far more complex than anything you’re ever likely to  encounter in a real TLA<sup>+</sup> specification, but their importance lies only in showing that such compositions <em>can</em> be expressed.</p>
+<p>Ever since structured programming became popular, subroutines have been the primary form of decomposing programs in all mainstream programming languages and in almost all programming languages in general<sup id="fnref:turing-subroutines"><a href="#fn:turing-subroutines" class="footnote">5</a></sup>. We can write specifications as a composition of subroutines by writing some definitions that express the meaning of a subroutine. Those constructs — in particular, the $Subroutine$ operator — are far more complex than anything you’re ever likely to  encounter in a real TLA<sup>+</sup> specification, but their importance lies only in showing that such compositions <em>can</em> be expressed.</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
@@ -748,7 +748,7 @@
 
 <p>where $F_a$ and $F_b$ are formulas specifying the two components, $w$ is a tuple of variables used in the composition, $F$ is an operator that defines the composition, and $C_a$ and $C_b$ are constants (one reason constants may be necessary is that $\land$ is commutative, and the composition used — e.g. $a;b$ — may not be).</p>
 
-<p>This ability means that, at least in principle, we should be able to extract from a program, written in some programming language, a TLA formula that specifies it exactly, by direct transformation on the syntax. The TLA formula — or rather, its simple semantics — would then constitute a semantics for the program. This translation from program to a logic formula in some program logic is called the <a href="http://www.chargueraud.org/research/2010/cfml/main.pdf">characteristic formula</a> approach<sup id="fnref:tla-compile"><a href="#fn:tla-compile" class="footnote">5</a></sup>.</p>
+<p>This ability means that, at least in principle, we should be able to extract from a program, written in some programming language, a TLA formula that specifies it exactly, by direct transformation on the syntax. The TLA formula — or rather, its simple semantics — would then constitute a semantics for the program. This translation from program to a logic formula in some program logic is called the <a href="http://www.chargueraud.org/research/2010/cfml/main.pdf">characteristic formula</a> approach<sup id="fnref:tla-compile"><a href="#fn:tla-compile" class="footnote">6</a></sup>.</p>
 
 <p>However, given the need for the constants $C_a$ and $C_b$, I am not certain that such a translation would be regarded as <em>compositional</em> by programming-language theorists, as the term $a$ may be represented in two different programs as $F({C_a}_1, F_a)$ and $F({C_a}_2, F_a)$, i.e., with two different constants. Without the constants, the target logic would need to have the same mechanisms of composing terms (sequence, parallel, function application, rule etc.) as that of the language, while TLA can be universal. Because of its applicability to both sequential and interactive or concurrent algorithms, and because of its ability to easily express rich abstraction/refinement and equivalence relations, TLA can be a particularly suitable logic for this approach.</p>
 
@@ -771,7 +771,7 @@
 
 <p>Now $AntiFairness$ states that its operand $Spec$ must hold <em>as long as</em> the alternator would eventually execute another step of $Spec$ (by setting $s$ to $Spec$’s index; either 0 or 1 in our case). The above formula can be read as, “as long as $s$ will eventually be equal to $x$, $Spec$ must hold.”</p>
 
-<p>To understand why simple logical conjunction is a universal mechanism of composition<sup id="fnref:det-comp"><a href="#fn:det-comp" class="footnote">6</a></sup>, like many things in TLA, it is helpful to think of nondeterminism. The specification of a component imposes certain constraints on the behavior of the system. But a component also interacts with its environment — the user, the network, the operating system or other components — on which the component generally imposes no constraints (except, possibly, as requirement for its correct behavior, as we’ve seen when discussing <a href="#open-system-specifications">open system specifications</a>). To the component, the environment appears nondeterministic. The composition of multiple components is, therefore, the intersection of the constraints imposed by all components, or, in logic terms, the conjunction of the formulas describing them. A conjunction of formulas — an intersection of their behavior — represents the combined constraints imposed by them, and forms a decrease in the total nondeterminism of the specification, as we specify the behavior of more of its parts. This observation becomes obvious and precise when we learn, in the next chapter, that there is a partial-order relation on TLA specifications defined by their nondeterminism — where “bigger” is more abstract or less deterministic — and, in fact, they form a boolean lattice (almost). The least deterministic (“biggest”) specification that still determines both $A$ and $B$ (i.e., “smaller” than both $A$ and $B$) is their <em>meet</em>, $A \land B$. This is just a semantic way of expressing this simple deduction:</p>
+<p>To understand why simple logical conjunction is a universal mechanism of composition<sup id="fnref:det-comp"><a href="#fn:det-comp" class="footnote">7</a></sup>, like many things in TLA, it is helpful to think of nondeterminism. The specification of a component imposes certain constraints on the behavior of the system. But a component also interacts with its environment — the user, the network, the operating system or other components — on which the component generally imposes no constraints (except, possibly, as requirement for its correct behavior, as we’ve seen when discussing <a href="#open-system-specifications">open system specifications</a>). To the component, the environment appears nondeterministic. The composition of multiple components is, therefore, the intersection of the constraints imposed by all components, or, in logic terms, the conjunction of the formulas describing them. A conjunction of formulas — an intersection of their behavior — represents the combined constraints imposed by them, and forms a decrease in the total nondeterminism of the specification, as we specify the behavior of more of its parts. This observation becomes obvious and precise when we learn, in the next chapter, that there is a partial-order relation on TLA specifications defined by their nondeterminism — where “bigger” is more abstract or less deterministic — and, in fact, they form a boolean lattice (almost). The least deterministic (“biggest”) specification that still determines both $A$ and $B$ (i.e., “smaller” than both $A$ and $B$) is their <em>meet</em>, $A \land B$. This is just a semantic way of expressing this simple deduction:</p>
 
 <script type="math/tex; mode=display">Spec \implies A, Spec \implies B \vdash Spec \implies A \land B</script>
 
@@ -781,7 +781,7 @@
 
 <h3 id="equality-and-equivalence">Equality and Equivalence</h3>
 
-<p>In every mathematical theory that defines some object, an equality relation is of the utmost importance, as you don’t really define an object uniquely unless you also say when two descriptions in your theory refer to the same one. The objects TLA is concerned with are discrete dynamical systems, and so we must define when two of them are equal. As we’ve learned, a TLA in formula specifies a set of behaviors. Two algorithms are equivalent, then, iff their respective sets of behaviors are equal<sup id="fnref:machine-closed"><a href="#fn:machine-closed" class="footnote">7</a></sup>. At the logic (i.e. syntax) level, two formulas denote the same set of behaviors iff they are <em>logically</em> equivalent (i.e., one is true iff the other is true), which is denoted by the simple logical connective $\equiv$ , called “if-and-only-if” or “equivalent”.</p>
+<p>In every mathematical theory that defines some object, an equality relation is of the utmost importance, as you don’t really define an object uniquely unless you also say when two descriptions in your theory refer to the same one. The objects TLA is concerned with are discrete dynamical systems, and so we must define when two of them are equal. As we’ve learned, a TLA in formula specifies a set of behaviors. Two algorithms are equivalent, then, iff their respective sets of behaviors are equal<sup id="fnref:machine-closed"><a href="#fn:machine-closed" class="footnote">8</a></sup>. At the logic (i.e. syntax) level, two formulas denote the same set of behaviors iff they are <em>logically</em> equivalent (i.e., one is true iff the other is true), which is denoted by the simple logical connective $\equiv$ , called “if-and-only-if” or “equivalent”.</p>
 
 <p>TLA’s equality is a very strong form of equivalence. We might sometimes care about weaker forms of equivalence. For example, we can give different significance to different parts of the algorithm’s state. We can say that an algorithm’s behavior is a sequence of states, where each state is a pair of <em>visible</em> state and <em>hidden</em> state, and that two algorithms are equivalent if the set of <em>observable</em> behaviors they denote — when only the observable part of the state is taken into account — are the same. You can think of this as a <em>projection</em> of behavior along some dimension that only captures the observable state.</p>
 
@@ -805,7 +805,7 @@
 
 <p>but the entailment doesn’t work in the other direction (consider the case <script type="math/tex">F(x) = \TRUE\!</script>).</p>
 
-<p>We might care about even weaker forms of equivalence. A common form of weak equivalence, relevant for sequential programs and is central in the theory of pure functional programs is <em>extensional</em> equality, which says that two programs are equivalent if they produce (or “reduce to”, in PL-theory parlance) equal outputs for equal inputs. It is an equivalence that mimics the notion of equality of functions<sup id="fnref:fp"><a href="#fn:fp" class="footnote">8</a></sup>. If we treat computations as behaviors, as we do in TLA, the functional form of extensional equality compares just the initial (input) and final (output) states by hiding all intermediate states.</p>
+<p>We might care about even weaker forms of equivalence. A common form of weak equivalence, relevant for sequential programs and is central in the theory of pure functional programs is <em>extensional</em> equality, which says that two programs are equivalent if they produce (or “reduce to”, in PL-theory parlance) equal outputs for equal inputs. It is an equivalence that mimics the notion of equality of functions<sup id="fnref:fp"><a href="#fn:fp" class="footnote">9</a></sup>. If we treat computations as behaviors, as we do in TLA, the functional form of extensional equality compares just the initial (input) and final (output) states by hiding all intermediate states.</p>
 
 <p>First I’ll show how this can be done by changing the original specifications a bit; later I’ll show how this can be done without any changes.</p>
 
@@ -905,23 +905,7 @@
 <p>These two algorithms are clearly not equal, but they are also equivalent in a very clear sense. Here are their respective state diagrams (every state also leads to itself because of stuttering invariance):</p>
 
 <div class="centered">
-<div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-0eb9c351920412d915d001065621c8b7" width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00">
-<title>graphviz-0eb9c351920412d915d001065621c8b7</title>
-<desc>
-    digraph {
-      rankdir=LR;
-      a -&gt; b
-      a -&gt; a
-      b -&gt; b
-      b -&gt; a
-    }
-</desc>
-
+<div class="diagrams graphviz"><svg width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 58)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-58 148,-58 148,4 -4,4" />
@@ -963,25 +947,7 @@
 </g>
 </g>
 </svg>
-</div> <div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-195af7d7abab407f394a7080f3714d32" width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00">
-<title>graphviz-195af7d7abab407f394a7080f3714d32</title>
-<desc>
-    digraph {
-      rankdir=LR;
-      a[label=&quot;0&quot;]
-      b[label=&quot;1&quot;]
-      a -&gt; b
-      a -&gt; a
-      b -&gt; b
-      b -&gt; a
-    }
-</desc>
-
+</div> <div class="diagrams graphviz"><svg width="152pt" height="62pt" viewBox="0.00 0.00 152.00 62.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 58)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-58 148,-58 148,4 -4,4" />
@@ -1109,7 +1075,7 @@
 
 <p>An algorithm, algorithm property, or any discrete system $A$, is an <em>implementation</em> or a <em>refinement</em> of a system $B$ iff the set of behaviors of $A$ is a subset of that of $B$. In which case we say that $B$ is an abstraction of $A$; sometimes people also call $B$ a <em>specification</em> of $A$, but I will not use that word as it may be confusing.</p>
 
-<p>The abstraction/refinement relation in TLA defines a partial order on the universe of behaviors. Indeed that universe forms a bounded <a href="https://en.wikipedia.org/wiki/Lattice_(order)">lattice</a>, with refinement being set inclusion. Syntactically, the bottom element is <script type="math/tex">\FALSE\!</script>, top is <script type="math/tex">\TRUE\!</script>, and the join and meet are just $\lor$ and $\land$ respectively. In short, it forms a <a href="https://en.wikipedia.org/wiki/Boolean_algebra_(structure)">boolean algebra</a><sup id="fnref:boolean"><a href="#fn:boolean" class="footnote">9</a></sup>.</p>
+<p>The abstraction/refinement relation in TLA defines a partial order on the universe of behaviors. Indeed that universe forms a bounded <a href="https://en.wikipedia.org/wiki/Lattice_(order)">lattice</a>, with refinement being set inclusion. Syntactically, the bottom element is <script type="math/tex">\FALSE\!</script>, top is <script type="math/tex">\TRUE\!</script>, and the join and meet are just $\lor$ and $\land$ respectively. In short, it forms a <a href="https://en.wikipedia.org/wiki/Boolean_algebra_(structure)">boolean algebra</a><sup id="fnref:boolean"><a href="#fn:boolean" class="footnote">10</a></sup>.</p>
 
 <p>The refinement relation, $A$ implements $B$ (or $A$’s set of behaviors is a subset of $B$’s) is represented by simple logical implication, $\implies$. Even if little in the previous paragraph made sense to you, you can appreciate that $\implies$ is a “less than” order relation in boolean algebra: look at <a href="https://en.wikipedia.org/wiki/Material_conditional#Truth_table">its truth table</a> with 0 as false and 1 as true, and see that it is the same as $\leq$.</p>
 
@@ -1245,22 +1211,7 @@
 <p>In a programming language one usually doesn’t mention the program’s state, only the actions it performs. If we want to reason about algorithms in a pseudo-programming language like a process algebra, we also need notions of equivalence and order, but things may get complicated when we don’t wish to mention state. Comparing traces of events alone (I will not call them actions to not confuse with TLA actions) for equality or inclusion yields an imprecise equivalence. For example, the following two state machines share the same set of action traces, $\set{a \to b, a \to c}$, and yet are clearly very different:</p>
 
 <div class="centered">
-<div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-5bf5b9798cfeeea080dea52f3603f98f" width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00">
-<title>graphviz-5bf5b9798cfeeea080dea52f3603f98f</title>
-<desc>
-    digraph {
-      node [label=&quot;&quot;]
-      A -&gt; B[label=&quot;a&quot;]
-      B -&gt; C[label=&quot;b&quot;]
-      B -&gt; D[label=&quot;c&quot;]
-    }
-</desc>
-
+<div class="diagrams graphviz"><svg width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 212)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-212 130,-212 130,4 -4,4" />
@@ -1307,24 +1258,7 @@
 </g>
 </g>
 </svg>
-</div> <div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-14409dd279faa5533672a0ac8a0a1bc4" width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00">
-<title>graphviz-14409dd279faa5533672a0ac8a0a1bc4</title>
-<desc>
-
-    digraph {
-      node [label=&quot;&quot;]
-      A -&gt; B[label=&quot;a&quot;]
-      A -&gt; C[label=&quot;a&quot;]
-      C -&gt; D[label=&quot;c&quot;]
-      B -&gt; E[label=&quot;b&quot;]
-    }
-</desc>
-
+</div> <div class="diagrams graphviz"><svg width="134pt" height="216pt" viewBox="0.00 0.00 134.00 216.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 212)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-212 130,-212 130,4 -4,4" />
@@ -1395,24 +1329,7 @@
 <p>Consider the following three state machines:</p>
 
 <div class="centered">
-<div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-7117998575ff3530a0684d2cbfb49c8c" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
-<title>graphviz-7117998575ff3530a0684d2cbfb49c8c</title>
-<desc>
-    digraph {
-      label=&quot;M1&quot;;
-      rankdir=BT;
-      A -&gt; B[label=&quot;a&quot;];
-      A -&gt; C[label=&quot;b&quot;];
-      B -&gt; D[label=&quot;c&quot;];
-      C -&gt; D[label=&quot;d&quot;];
-    }
-</desc>
-
+<div class="diagrams graphviz"><svg width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
@@ -1471,27 +1388,7 @@
 </g>
 </g>
 </svg>
-</div> <div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-353b3a0fb03e64cbb361b8dfacc06291" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
-<title>graphviz-353b3a0fb03e64cbb361b8dfacc06291</title>
-<desc>
-
-    digraph {
-      label=&quot;M2&quot;;
-      rankdir=BT;
-      D1[label=&lt;D&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;1&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
-      D2[label=&lt;D&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;2&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
-      A -&gt; B[label=&quot;a&quot;];
-      A -&gt; C[label=&quot;b&quot;];
-      B -&gt; D2[label=&quot;c&quot;];
-      C -&gt; D1[label=&quot;d&quot;];
-    }
-</desc>
-
+</div> <div class="diagrams graphviz"><svg width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
@@ -1558,27 +1455,7 @@
 </g>
 </g>
 </svg>
-</div> <div class="graphviz-wrapper">
-
-<!-- Generated by graphviz version 2.40.1 (20161225.0304)
- -->
-<!-- Title: %3 Pages: 1 -->
-<svg role="img" aria-label="graphviz-93f33a776df94c2035294e9015e056b6" width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00">
-<title>graphviz-93f33a776df94c2035294e9015e056b6</title>
-<desc>
-
-    digraph {
-      label=&quot;M3&quot;;
-      rankdir=BT;
-      A1[label=&lt;A&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;1&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
-      A2[label=&lt;A&lt;SUB&gt;&lt;FONT POINT-SIZE=&quot;8&quot;&gt;2&lt;/FONT&gt;&lt;/SUB&gt;&gt;];
-      A1 -&gt; B[label=&quot;a&quot;];
-      A2 -&gt; C[label=&quot;b&quot;];
-      B -&gt; D[label=&quot;c&quot;];
-      C -&gt; D[label=&quot;d&quot;];
-    }
-</desc>
-
+</div> <div class="diagrams graphviz"><svg width="134pt" height="238pt" viewBox="0.00 0.00 134.00 238.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 234)">
 <title>%3</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-234 130,-234 130,4 -4,4" />
@@ -1664,17 +1541,17 @@
 
 <p><img src="/img/algorithms_and_functions.png" alt="Programs, Algorithms and Functions" width="75%" /></p>
 
-<p>The reason Yanofsky needs to define programs structurally (or intensionally), and only then algorithms as a quotient of programs with respect to structural equivalence, rather than extensionally, by how they behave, is due to the original sin of those approaches that view programs (or algorithms) as denoting functions rather than discrete dynamical processes<sup id="fnref:sin"><a href="#fn:sin" class="footnote">10</a></sup>.</p>
+<p>The reason Yanofsky needs to define programs structurally (or intensionally), and only then algorithms as a quotient of programs with respect to structural equivalence, rather than extensionally, by how they behave, is due to the original sin of those approaches that view programs (or algorithms) as denoting functions rather than discrete dynamical processes<sup id="fnref:sin"><a href="#fn:sin" class="footnote">11</a></sup>.</p>
 
 <p>A similarly structural approach, but one that does create an order relation on programs, is Ralph-Johan Back’s refinement calculus and Joakim von Wright’s refinement algebra. The idea behind <a href="https://en.wikipedia.org/wiki/Refinement_calculus">refinement calculus</a> is defining some transformations that make a program more refined or abstract. <a href="http://www.sciencedirect.com/science/article/pii/S0167642304000127">Refinement algebra</a> is surprisingly similar to the ideas we’ve seen in TLA, only expressed as an algebra rather than a logic, and it does not extend to concurrent algorithms. Back and von Wright wrote <a href="http://lara.epfl.ch/w/_media/sav08:backwright98refinementcalculus.pdf">a book</a> together about their approach that is freely available online. Refinement algebra/calculus is similar in some ways to TLA (sometimes very similar), but is less universal and more complicated; on the other hand, it can — at least in principle — be applied directly to programs written in a programming language. This is another example of how much expressive power a simple formalism like TLA can gain by giving up on attempting to directly talk about programming languages.</p>
 
 <h3 id="types">Types</h3>
 
-<p>Typed programming languages have not one but two notions of implementation order: subtypes and type inhabitants (instances). A type is an abstraction of both its subtypes as well as its concrete instances; conversely a subtype is a refinement of its supertypes, and a value is a refinement of its type. While we can create any hierarchy of abstraction relations using subtypes, we cannot directly show that one <em>program</em> — a type inhabitant — implements another, even in formalisms with dependent types; a program is a leaf in the order relation<sup id="fnref:PRL"><a href="#fn:PRL" class="footnote">11</a></sup>. If our types are rich enough, we can simulate such a relation by writing our algorithm at the type level, only then it is no longer a program but a type. Equivalence in those formalisms is also complicated.</p>
+<p>Typed programming languages have not one but two notions of implementation order: subtypes and type inhabitants (instances). A type is an abstraction of both its subtypes as well as its concrete instances; conversely a subtype is a refinement of its supertypes, and a value is a refinement of its type. While we can create any hierarchy of abstraction relations using subtypes, we cannot directly show that one <em>program</em> — a type inhabitant — implements another, even in formalisms with dependent types; a program is a leaf in the order relation<sup id="fnref:PRL"><a href="#fn:PRL" class="footnote">12</a></sup>. If our types are rich enough, we can simulate such a relation by writing our algorithm at the type level, only then it is no longer a program but a type. Equivalence in those formalisms is also complicated.</p>
 
 <p>TLA makes no such distinctions between types (properties) and their inhabitants (algorithms). Both are just formulas  — or, semantically, sets of behaviors — and are part of the same abstraction/refinement partial lattice, that of implication (or set inclusion). There are just different levels of detail.</p>
 
-<p>The semantics of TLA is too simple to allow making any useful distinction between <a href="https://en.wikipedia.org/wiki/Denotational_semantics"><em>denotation</em></a><sup id="fnref:denotation"><a href="#fn:denotation" class="footnote">12</a></sup> and <a href="https://en.wikipedia.org/wiki/Operational_semantics"><em>operation</em></a> — an interesting distinction in the theory of programming languages — but as we’ve seen, it is a simple matter to hide any detail we deem irrelevant for the sake of a particular abstraction/refinement relation and choose the precise level of detail for the sake of comparisons, one of which may correspond exactly to the level of detail provided by your programming language of choice, be it SQL, Java, assembly, or digital circuits.</p>
+<p>The semantics of TLA is too simple to allow making any useful distinction between <a href="https://en.wikipedia.org/wiki/Denotational_semantics"><em>denotation</em></a><sup id="fnref:denotation"><a href="#fn:denotation" class="footnote">13</a></sup> and <a href="https://en.wikipedia.org/wiki/Operational_semantics"><em>operation</em></a> — an interesting distinction in the theory of programming languages — but as we’ve seen, it is a simple matter to hide any detail we deem irrelevant for the sake of a particular abstraction/refinement relation and choose the precise level of detail for the sake of comparisons, one of which may correspond exactly to the level of detail provided by your programming language of choice, be it SQL, Java, assembly, or digital circuits.</p>
 
 <p>Of course, types are normally used for the more difficult task of specifying an actual runnable program, and they can potentially be used for some advanced techniques such as proof-carrying code. The distinction between types and their inhabitant programs is necessitated by the need to ensure programs are sufficiently detailed to be compilable to efficient executables. Types also have benefits beyond specification (for which, I believe, other approaches such as contracts are more appropriate) such as assisting with tooling, maintenance and code organization.</p>
 
@@ -1684,7 +1561,7 @@
 
 <p>If $\mathcal{P} = \seq{P, \preceq}$ and $\mathcal{Q} = \seq{Q, \sqsubseteq}$ are posets (partially ordered sets), and <script type="math/tex">f_* : P \to Q</script>, <script type="math/tex">f^* : Q \to P</script>, are functions, then the pair <script type="math/tex">\seq{f_*, f^*}</script> is a <em>Galois connection</em> if for all <script type="math/tex">p \in P, q \in Q</script>:  <script type="math/tex">f_*(p) \sqsubseteq q</script> iff <script type="math/tex">p \preceq f^*(q)</script>. <script type="math/tex">f_*</script> is then called the lower, or left, adjoint (of the connection), and <script type="math/tex">f^*</script> the upper, or right, adjoint. <script type="math/tex">f_*</script> and <script type="math/tex">f^*</script> uniquely determine each other; setting one forces the other.</p>
 
-<p>In the context of TLA, if we have a refinement mapping such that $F \implies \overline{G}$, we can call that mapping, when seen as a function on complete behaviors, $f$. We then we take $P$ and $Q$ to be the <em>powersets</em><sup id="fnref:notsets"><a href="#fn:notsets" class="footnote">13</a></sup> of the behaviors of $F$ and $G$ respectively, and define <script type="math/tex">f_*</script> as a function on sets, such that it applies $f$ element-wise to every behavior in the a set. <script type="math/tex">f_*</script> is then a function from $P$ to $Q$, mapping the elements of $P$  — subsets of the behaviors of $F$ — to elements of $Q$ — subsets of $G$’s behaviors. We define <script type="math/tex">f^*</script> to be the preimage of $f$. We get a Galois connection if we take the partial orders on both posets as just set inclusion.</p>
+<p>In the context of TLA, if we have a refinement mapping such that $F \implies \overline{G}$, we can call that mapping, when seen as a function on complete behaviors, $f$. We then we take $P$ and $Q$ to be the <em>powersets</em><sup id="fnref:notsets"><a href="#fn:notsets" class="footnote">14</a></sup> of the behaviors of $F$ and $G$ respectively, and define <script type="math/tex">f_*</script> as a function on sets, such that it applies $f$ element-wise to every behavior in the a set. <script type="math/tex">f_*</script> is then a function from $P$ to $Q$, mapping the elements of $P$  — subsets of the behaviors of $F$ — to elements of $Q$ — subsets of $G$’s behaviors. We define <script type="math/tex">f^*</script> to be the preimage of $f$. We get a Galois connection if we take the partial orders on both posets as just set inclusion.</p>
 
 <p>Galois connections serve as the basis for <a href="https://en.wikipedia.org/wiki/Abstract_interpretation">abstract interpretation</a>, a central concept in the theory of program analysis, developed by Patrick and Radhia Cousot in the 1970s. In TLA terms, abstract interpretation is a process by which the more abstract specification, $G$, is automatically generated from the more concrete one, $F$. Abstract interpretation places different kinds of programs semantics on a spectrum of abstraction, from behaviors to functional denotational semantics. Many ideas in program analysis, including type checking, model checking and deductive proofs can all be viewed as forms of abstract interpretation. In TLA<sup>+</sup> this idea is made explicit and formally manipulable, though less general.</p>
 
@@ -1751,7 +1628,7 @@
 
 <p>But this is both overkill and cannot be checked by the TLC model checker. More importantly, the proposition is a very mundane, reasonable one about algorithm correctness, and it stands to reason that a good formalism would allow us to directly specify it as a formula.</p>
 
-<p>As it turns out, this is easy. Because tautologically $\A A : (A \implies B) \implies (A \implies C)$ is equivalent to $B \implies C$<sup id="fnref:implies-order"><a href="#fn:implies-order" class="footnote">14</a></sup>, the above is equivalent to the much simpler, first-order proposition:</p>
+<p>As it turns out, this is easy. Because tautologically $\A A : (A \implies B) \implies (A \implies C)$ is equivalent to $B \implies C$<sup id="fnref:implies-order"><a href="#fn:implies-order" class="footnote">15</a></sup>, the above is equivalent to the much simpler, first-order proposition:</p>
 
 <script type="math/tex; mode=display">F \land Q \implies P</script>
 
@@ -1916,7 +1793,7 @@
 
 <p>By “co-universe”, he’s referring to pure-FP’s way of modeling infinite data streams and infinite computations. Clearly, “this entire co-universe” is not really “out there”, but very much deep inside his chosen formalism, one that chooses (for historical and aesthetic reasons) computable functions as the fundamental building blocks of computation. The notion of co-data or co-computation, doesn’t really provide any fundamental insight into nonterminating computations, but only into their description in that specific formalism. Bartosz Milewski — a physicist, no less! — also repeats this sentiment in his lectures on category theory in the context of functional programming, <a href="https://youtu.be/p54Hd7AmVFU?t=33m56s">saying</a>, “time is really hard to describe in mathematics”. But mathematics has no difficulty whatsoever in expressing time or “open-ended” discrete systems any more that it finds it difficult to describe open-ended continuous systems. As should now be clear, computations of all kinds are easily and elegantly, expressed in mathematics as infinite sequences of states. The difficulty arrises only when using specific formalisms that explicitly choose to <em>disregard</em> time. Whether or not that is a useful simplification is a separate discussion, but the difficulty is not with mathematics.</p>
 
-<p>Formalisms are important, but their importance cannot be properly appreciated if one does not distinguish between insights a formalism provides into its own operation and the far more valuable insights a formalism offers that help discover features of reality. An ideological, almost religious, adherence to specific formalisms, seems to have been common among some logicians almost hundred years ago, long before it became common among programmers; that ideological perspective was no more conducive to understanding mathematics back then as it is for understanding computation now<sup id="fnref:common-sense"><a href="#fn:common-sense" class="footnote">15</a></sup>. In this sense, the Whorfian syndrome is a form of an ideological conviction that blinds more than it enlightens.</p>
+<p>Formalisms are important, but their importance cannot be properly appreciated if one does not distinguish between insights a formalism provides into its own operation and the far more valuable insights a formalism offers that help discover features of reality. An ideological, almost religious, adherence to specific formalisms, seems to have been common among some logicians almost hundred years ago, long before it became common among programmers; that ideological perspective was no more conducive to understanding mathematics back then as it is for understanding computation now<sup id="fnref:common-sense"><a href="#fn:common-sense" class="footnote">16</a></sup>. In this sense, the Whorfian syndrome is a form of an ideological conviction that blinds more than it enlightens.</p>
 
 <p>But the Whorfian syndrome has another component, one that cannot be avoided even by choosing a very general, relatively simple, mathematical framework such as TLA for reasoning about computation. <em>All</em> formalisms are merely <em>descriptions</em> of computations. Computation is neither a “thing” nor a “cothing”; it isn’t an infinite sequence of states, either, but a discrete dynamical system that we can choose to describe and denote in many different formalisms, picking the one that is most convenient for the task at hand. Whichever language we choose to describe reality, we run the risk of confusing the description with reality. Understanding abstraction, and how it also relates a description of reality to reality helps, but it also takes practice.</p>
 
@@ -1949,6 +1826,9 @@
     </li>
     <li id="fn:encoding">
       <p>The model checker TLC does break the encapsulation, and $v.x$ would mean 4.5. However, that’s an implementation detail of the checker. The encoding is hidden from the proof system. <a href="#fnref:encoding" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:model-pbt">
+      <p>Unsurprisingly, for verification techniques like property-based randomized testing, model-based specifications <a href="https://youtu.be/zvRAyq5wj38?t=2093">are the most effective</a>. <a href="#fnref:model-pbt" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:proposition">
       <p>Because we’ve normally seen implication used in propositions, I will repeat the distinction I mentioned in part 2. By $E \implies M$ we do not mean the proposition $\vdash E \implies M$, i.e. that the environment implements the machine specification, but that the specification of the contract is itself is $E \implies M$. To explain the difference consider the logical formula over the integers $(x &gt; 0) \implies (x &gt; 2)$. This formula is not <em>valid</em>, i.e. $\nvdash (x &gt; 0) \implies (x &gt; 2)$ . But it does describe — or, its model is — all numbers that are either negative or greater than 2, or formally $\vdash ((x &gt; 0) \implies (x &gt; 2)) \implies (x &lt; 0 \lor x &gt; 2)$. <a href="#fnref:proposition" class="reversefootnote">&#8617;</a></p>
