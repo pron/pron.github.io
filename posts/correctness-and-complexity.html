@@ -207,7 +207,6 @@
 <p><em>I was very happy to speak at <a href="http://curry-on.org/2016/#program">Curry On</a> once again. Last year, following our work with Quasar, I spoke on <a href="http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/">continuations vs. monads</a>. This year I gave a talk about computational complexity results in software verification, a subject I became interested in while formally specifying and verifying our upcoming revamped version of Galaxy.</em></p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dWdy_AngDp0" frameborder="0" allowfullscreen="" style="margin:0px auto;display:block"></iframe>
-
 <p><em>What follows is an extended version of the talk (embedded above), containing some additional proofs and results I didn’t have time to cover, complete with footnotes, for those wishing to study the topics further. Reading time: ~45 mins.</em></p>
 
 <hr />
@@ -661,7 +660,7 @@ p3:        else x := x + 1
 
 <p>The number of concrete types can be greater than the number of types directly spelled out, as programs can have generic types in polymorphic functions, which, in the abstract program, become functions taking a concrete type instance and returning another: just as a concrete function may take the value <code class="highlighter-rouge">3</code> and return the value <code class="highlighter-rouge">5</code>, an abstract function may take the abstract value <code class="highlighter-rouge">Integer</code> and return the value <code class="highlighter-rouge">[Integer]</code> (list of integer). I’ll note that the subject of the abstraction created by types is only discussed here in very broad strokes.</p>
 
-<p>So, using nothing by our result of bounded halting, namely $O(|S|)$ and an understanding of abstract interpretation, we can immediately obtain bounds for type-inference algorithms (the algorithm would be $\Omega(\text{# concrete types})$) because type <em>inference</em> requires solving a constraint problem which may be harder).</p>
+<p>So, using nothing but our result of bounded halting, namely $O(|S|)$ and an understanding of abstract interpretation, we can immediately obtain bounds for type-inference algorithms (the algorithm would be $\Omega(\text{# concrete types})$) because type <em>inference</em> requires solving a constraint problem which may be harder).</p>
 
 <p>In a programming language without dependent types (and if you don’t know what they are then it’s not too important), that number is relatively small and is a finite-state machine. The types express properties of FSMs, and so the properties we can prove are not the result of a Turing-complete program, but of a FSM, hence there is no contradiction with Rice’s theorem.</p>
 
