@@ -997,16 +997,18 @@
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&\WF_e(A) &\defeq \;& \Diamond \Box \ENABLED \seq{A}_e \implies \Box\Diamond \seq{A}_e\\
-&&\equiv & \Box(\Box \ENABLED\seq{A}_e \implies \Diamond\seq{A}_e)
+&\WF_e(A) &\defeq \;& \Box(\Box \ENABLED\seq{A}_e \implies \Diamond\seq{A}_e)\\
+&&\equiv & \Diamond \Box \ENABLED \seq{A}_e \implies \Box\Diamond \seq{A}_e\\
+&&\equiv & (\Box \Diamond \neg \ENABLED \seq{A}_e) \lor \Box \Diamond\seq{A}_e\\
 \end{alignat} %]]></script>
 
 <p>Strong fairness requires $\seq{A}_e$ to occur infinitely often if $\ENABLED \seq{A}_e$ is true infinitely often, although it need not remain enabled constantly:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{alignat}{1}
-&\SF_e(A) &\defeq \;& \Box \Diamond \ENABLED \seq{A}_e \implies \Box\Diamond \seq{A}_e\\
-&&\equiv & \Box(\Diamond \ENABLED \seq{A}_e \implies \Diamond\seq{A}_e)
+&\SF_e(A) &\defeq \;& \Box(\Box \Diamond \ENABLED \seq{A}_e \implies \Diamond\seq{A}_e)\\
+&&\equiv & \Box \Diamond \ENABLED \seq{A}_e \implies \Box\Diamond \seq{A}_e\\
+&&\equiv & (\Diamond \Box \neg \ENABLED \seq{A}_e) \lor \Box \Diamond\seq{A}_e\\
 \end{alignat} %]]></script>
 
 <p>Strong fairness implies weak fairness, i.e., $\SF_e(A) \implies \WF_e(A)$.</p>
