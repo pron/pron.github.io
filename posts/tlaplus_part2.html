@@ -516,11 +516,9 @@
 
 <script type="math/tex; mode=display">a \preceq b \defeq a \% b = 0</script>
 
-<p>We can also use symbolic names for operator arguments:</p>
+<p>Unlike some other languages, TLA<sup>+</sup> only allows defining symbolic operators from a predetermined list of symbols, whose arity, position (prefix/infix/postfix), and precedence is fixed. We can use symbolic names for operator arguments, as in this example for an infix operator:</p>
 
 <script type="math/tex; mode=display">Foo(x, y, \_ \prec \_) \defeq \IF x \prec y \;\THEN x \;\ELSE y</script>
-
-<p>(any 2-ary operator can be passed in place of $\prec$, not just ones defined as symbolic operators).</p>
 
 <p>Recursive operators are also allowed:</p>
 
