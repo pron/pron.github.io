@@ -1181,7 +1181,7 @@ step[x \in Real] \defeq \IF x < 0 \;\THEN 0 \;\ELSE 1 %]]></script>
 &\rlap{InductiveDataType(base, Cons(\_)) \defeq }\\
 &\phantom{XX}& \rlap{\LET upToSize[n \in Nat] \defeq} \\
 &&\phantom{XX}& \IF n = 0 \;&\THEN base \\
-&&&&\ELSE Cons(UpToSize[n-1])\cup upToSize[n-1]\\
+&&&&\ELSE Cons(upToSize[n-1])\cup upToSize[n-1]\\
 &&\rlap{\IN \UNION \set{upToSize[n] : n \in Nat}}
 \end{alignat} %]]></script>
 
