@@ -1,0 +1,23 @@
+---
+permalink: atom.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+{% set posts = collections.post | newest %}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <link href="{{ site.url }}/atom.xml" rel="self" />
+  <link href="{{ site.url }}/" />
+  <id>{{ site.url }}/</id>
+  <updated>{{ posts[0].date.toISOString() }}</updated>
+  <author><name>Ron Pressler</name></author>
+  {% for post in posts %}
+  <entry>
+    <title>{{ post.data.title | xmlEscape | safe }}</title>
+    <link href="{{ site.url }}{{ post.data.canonical }}" />
+    <id>{{ site.url }}{{ post.data.canonical }}</id>
+    <updated>{{ post.date.toISOString() }}</updated>
+    <summary type="html">{{ post.data.description | xmlEscape | safe }}</summary>
+  </entry>
+  {% endfor %}
+</feed>

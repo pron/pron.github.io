@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Eleventy">
+  <link rel="canonical" href="{{ site.url }}{{ canonical or page.url }}">
+
+  <title>{{ title or site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32.png">
+  <link rel="icon" type="image/x-icon" href="/fav/favicon.ico">
+  <link rel="shortcut icon" type="image/png" href="/fav/favicon-16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/fav/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/fav/favicon-152.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/fav/favicon-72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/fav/favicon-114.png">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="/fav/favicon-144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/bigfoot.css">
+  <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="ATOM Feed">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="{{ site.twitter }}">
+  <meta name="twitter:title" content="{{ title or site.title }}">
+  {% if description %}<meta name="twitter:description" content="{{ description }}">{% endif %}
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="{% if isPost %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ title or site.title }}">
+  {% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
+  <meta property="og:url" content="{{ site.url }}{{ canonical or page.url }}">
+  <meta property="og:image" content="{{ site.image }}">
+  {% if isPost %}<meta property="article:published_time" content="{{ published }}">{% endif %}
+  {% if isPost %}{% for tag in tags %}{% if tag != "post" %}<meta property="article:tag" content="{{ tag }}">{% endif %}{% endfor %}{% endif %}
+</head>
+
+<body>
+  <div id="wrap">
+    <nav id="nav">
+      {% if toc %}<div id="nav-toc"></div>{% endif %}
+      <div id="nav-list">
+        <a href="/">Home</a>
+        <a href="/about" title="About">About</a>
+        <a href="/computation-logic-algebra" title="Finite of Sense and Infinite of Thought: A History of Computation, Logic and Algebra">Finite of Sense and Infinite of Thought:<br>A History of Computation, Logic and Algebra</a>
+        <a href="/tlaplus" title="TLA+ in Practice and Theory">TLA<sup>+</sup> in Practice and Theory</a>
+      </div>
+      <footer></footer>
+    </nav>
+
+    <a id="nav-menu">
+      <div id="menu"></div>
+    </a>
+
+    <header id="header" class="parent justify-spaceBetween">
+      <div class="inner w100 relative">
+        <span class="f-left">
+          <a href="/"><h1><span>press</span>ron</h1></a>
+        </span>
+      </div>
+    </header>
+
+    <div id="container">
+      <main>
+        {{ content | safe }}
+      </main>
+
+      {% if listingPage %}
+      <div class="pagination">
+        {% if listingPage == 1 %}<span class="page-item">&laquo;</span>{% else %}<a href="/" class="page-item">&laquo;</a>{% endif %}
+        {% if listingPage == 1 %}<span class="page-item">1</span>{% else %}<a href="/" class="page-item">1</a>{% endif %}
+        {% if listingPage == 2 %}<span class="page-item">2</span>{% else %}<a href="/page2/" class="page-item">2</a>{% endif %}
+        {% if listingPage == 2 %}<span class="page-item">&raquo;</span>{% else %}<a href="/page2/" class="page-item">&raquo;</a>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <footer></footer>
+
+    <script src="/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', '{{ site.analyticsId }}', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    {% if toc %}
+    <script src="/js/toc.js"></script>
+    <script>
+      $(function () {
+        $('#nav-toc').toc();
+      });
+    </script>
+    {% endif %}
+
+    {% if mathjax %}
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showMathMenu: false,
+        jax: ["input/TeX", "output/CommonHTML"],
+        extensions: ["tex2jax.js", "AssistiveMML.js"],
+        TeX: { extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"] },
+        tex2jax: {
+          inlineMath: [['$', '$']],
+          displayMath: [['$$', '$$']],
+          processEscapes: true,
+          balanceBraces: true
+        },
+        showMathMenuMSIE: false,
+        menuSettings: { inTabOrder: false, zoom: "None" },
+        'HTML-CSS': { availableFonts: [], webFont: 'TeX' }
+      });
+
+      MathJax.Hub.Register.MessageHook("Math Processing Error", function (message) {
+        console.log(message);
+      });
+      MathJax.Hub.Register.MessageHook("TeX Jax - parse error", function (message) {
+        console.log(message);
+      });
+
+      (function () {
+        var extensions = MathJax.Extension;
+        var mathMenu;
+        var mathZoom;
+        MathJax.Hub.Register.StartupHook("End Typeset", function () {
+          mathMenu = extensions.MathMenu;
+          mathZoom = extensions.MathZoom;
+          extensions.MathMenu = extensions.MathZoom = {};
+        });
+        MathJax.Hub.Queue(function () {
+          if (mathMenu) extensions.MathMenu = mathMenu;
+          else delete extensions.MathMenu;
+          if (mathZoom) extensions.MathZoom = mathZoom;
+          else delete extensions.MathZoom;
+        });
+      })();
+    </script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"></script>
+    {% endif %}
+
+    {% if bigfoot %}
+    <script src="/js/bigfoot.min.js"></script>
+    <script>
+      $.bigfoot({
+        activateCallback: function($popover, $button) {
+          if (MathJax && !$button.data('mathjax-processed')) {
+            var contentWrapper = $popover.find('.bigfoot-footnote__content')[0];
+            MathJax.Hub.Queue(['Typeset', MathJax.Hub, contentWrapper]);
+            MathJax.Hub.Queue(function () {
+              $button.attr('data-bigfoot-footnote', contentWrapper.innerHTML);
+              $button.data('mathjax-processed', true);
+            });
+          }
+        }
+      });
+    </script>
+    {% endif %}
+  </div>
+</body>
+</html>

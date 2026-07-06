@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+permalink: page2/index.html
+canonical: /page2/
+title: Ron Pressler
+listingPage: 2
+---
+<ul id="posts" class="content-listing">
+{% for post in collections.post | newest | limit(8, 8) %}
+  <li class="post">
+    <h2><a href="{{ post.data.canonical }}">{{ post.data.titleHtml | safe }}</a></h2>
+    <time datetime="{{ post.data.published }}" class="by-line"><i>{{ post.date | readableDate }}</i></time>
+    <p>{{ post.data.description }}</p>
+  </li>
+{% endfor %}
+</ul>
